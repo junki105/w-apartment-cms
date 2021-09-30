@@ -1,0 +1,109 @@
+
+
+.company {
+  background: #e5e5e5;
+  .content {
+    width: 900px;
+  }
+  .sec-hero {
+    background-image: url(../../images/bg_company.png);
+    background-size: cover;
+    height: 100vh;
+    .content {
+      height: 50vh;
+      &:last-child {
+        color: white;
+      }
+    }
+  }
+  &-table {
+    padding-top: 160px;
+    h1 {
+      font-size: 32px;
+      letter-spacing: 0.05em;      
+      @include font-ud(demibold);
+      text-align: center;
+    }
+    table {
+      margin-top: 50px;
+      width: 100%;
+      tr {
+        td {
+          font-size: 13px;
+          letter-spacing: 0.15em;          
+          @include font-tbud(regular);
+          padding: 18px 0 16px;
+          border-top: 1px solid #d1bab8;
+          border-bottom: 1px solid #d1bab8;
+          &:first-child {
+            min-width: 135px;
+          }
+          &:last-child {
+            width: 100%;
+            padding-right: 70px;
+          }
+          a {
+            color: #1B224C;
+          }
+        }
+        &:nth-child(3) {
+          td:first-child {
+            vertical-align: top;
+          }
+        }
+      }
+    }
+  }
+  &-member {
+    margin-top: 160px;
+    padding-bottom: 156px;
+    h1 {
+      font-size: 32px;
+      letter-spacing: 0.05em;      
+      @include font-ud(demibold);
+      text-align: center;
+    }
+    &-content {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 55px;
+    }
+    &-wrap {
+      width: 240px;
+      img {
+        width: 100%;
+        height: 172px;
+        object-fit: cover;
+      }
+      .member-info {
+        margin-top: 18px;
+        background-image: url(../../images/member_border.png);
+        background-position-x: left;
+        height: 286px;
+        padding-left: 16px;
+        h2 {
+          font-size: 13px;
+          letter-spacing: 0.1em;          
+          @include font-ud(medium);
+        }
+        h3 {
+          font-size: 22px;
+          letter-spacing: 0.1em;          
+          font-family: 'felix';
+          font-weight: normal;
+          margin-top: 7px;
+        }
+        p {        
+          font-family: 'felix';
+          font-weight: normal;
+          font-size: 13px;
+          letter-spacing: 0.1em;
+          line-height: 28px;
+          margin-top: 35px;        
+        }
+      }
+    }
+  }
+}
+
+

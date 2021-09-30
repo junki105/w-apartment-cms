@@ -1,0 +1,45 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the footer of the site/application.
+// -----------------------------------------------------------------------------
+
+.footer {
+  background-color: $white;
+  padding: 81px 0;
+  position: relative;
+  &-content {
+    width: 800px;
+    margin: auto;
+    border-radius: 8px;
+    background: #e4ecf0;
+    padding-top: 37px;
+    h1 {
+      text-align: center;
+      font-size: 26px;
+      letter-spacing: 0.05em;
+      @include font-din(demibold);
+    }
+    .link-group {
+      text-align: center;
+    }
+    .address {
+      font-family: Yu Gothic;
+      font-size: 16px;
+      font-weight: bold;
+      background: #506285;
+      color: $white;
+      text-align: center;
+      padding: 18px 0 8px;
+      span {
+        font-size: 36px;
+        line-height: 50px;
+        &:first-child {
+          margin: 0 20px;
+        }
+        &:last-child {
+          font-size: 16px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

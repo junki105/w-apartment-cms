@@ -1,0 +1,122 @@
+// -----------------------------------------------------------------------------
+// This file contains styles that are specific to the home page.
+// -----------------------------------------------------------------------------
+
+.feature-header {
+  .slide-number {
+    left: 29px!important;
+    font-size: 16px!important;
+  }
+}
+
+.feature {
+  background-image: url(../../images/bg_feature.png);
+  &-hero {
+    height: 100vh;
+    h2 {
+      font-size: 22px;
+      letter-spacing: 0.1em;
+      font-family: 'felix';
+      margin-top: 76px;
+    }
+    iframe {
+      width: 560px;
+      height: 315px;
+      background-color: black;   
+      margin: auto;
+      margin-top: 17px;
+    }
+  }
+  &-list {
+    text-align: center;
+    padding: 35px 0 0 0;
+    h1 {
+      font-size: 35px;
+      letter-spacing: 0.05em;
+      @include font-din(demibold);
+    }
+    article {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      width: 840px;
+      margin: auto;
+      position: relative;
+      div {
+        width: 50%;
+        text-align: left;
+      }
+      .article-left {
+        padding-right: 32px;
+        padding-top: 70px;
+        border-right: 1px solid #00000050;
+        h2 {
+          font-size: 13px;
+          color: #506285;
+          @include font-tbud(bold);
+        }
+        img {
+          width: 368px;
+          height: 232px;
+          object-fit: cover;          
+          margin-top: 32px;
+          float: right;
+        }
+      }
+      .article-right {
+        padding-left: 32px;
+        padding-top: 70px;
+        h2 {
+          font-size: 22px;
+          letter-spacing: 0.1em;
+          line-height: 36px;
+          font-family: 'felix';
+        }
+        p {
+          font-size: 13px;
+          letter-spacing: 0.1em;
+          line-height: 28px;          
+          font-family: felix;
+          margin-top: 24px;
+        }
+        .sec-link-btn {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          margin-top: 0;
+          margin-right: 0;
+        }
+      }
+      &:nth-child(2) {
+        margin-top: 70px;
+        .article-left {
+          padding-top: 0;
+        }
+        .article-right {
+          padding-top: 0;
+        }
+      }
+      &:last-child {
+        .article-left {
+          padding-bottom: 70px;
+        }
+        .article-right {
+          padding-bottom: 70px;
+          .sec-link-btn {
+            bottom: 70px;
+          }
+        }
+      }
+    }
+  }
+  &-flow {
+    padding: 153px 0 160px;
+    background-image: unset;
+    h2 {
+      font-size: 32px;
+      letter-spacing: 0.05em;
+      font-family: 'felix';
+      text-align: center;   
+    }
+  }
+}

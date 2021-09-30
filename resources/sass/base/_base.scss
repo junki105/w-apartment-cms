@@ -1,0 +1,20 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: $black;
+}
+
+a:hover {
+  opacity: .9;
+}
+
+.content {
+  width: 920px;
+  margin: auto;
+}

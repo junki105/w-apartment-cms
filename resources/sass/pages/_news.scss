@@ -1,0 +1,105 @@
+.news-header {
+  .slide-number {
+    left: 36px!important;
+    font-size: 16px!important;
+  }
+}
+.news-page {
+  background-image: url(../../images/bg_top_news.png);
+  .content {
+    width: 640px;
+    text-align: left;
+    padding-bottom: 87px;
+    .news-ttl {
+      font-weight: normal;
+      font-size: 22px;
+      letter-spacing: 0.1em;
+      line-height: 36px;
+      font-family: 'felix';      
+      text-align: left;
+    }
+    .news-date {
+      font-size: 11px;
+      letter-spacing: 0.15em;      
+      @include font-din(regular);
+      margin-top: 100px;
+    }
+    .news-info {
+      font-family: 'felix';
+      h1 {
+        font-weight: normal;
+        font-size: 22px;
+        letter-spacing: 0.1em;
+        line-height: 36px;
+        margin-top: 58px;
+      }
+      p {
+        font-weight: normal;
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        line-height: 28px;        
+        margin-top: 30px;
+      }
+      h2 {
+        font-size: 22px;
+        letter-spacing: 0.1em;
+        line-height: 36px;
+        @include font-ud(demibold);    
+        margin-top: 58px;    
+      }
+      blockquote {
+        border-radius: 8px;
+        background: #f8f8f8;
+        padding: 30px;
+        margin-top: 50px;
+      }
+      img {
+        width: 400px;
+        margin: auto;
+        margin-top: 80px;        
+      }
+      ul, ol {
+        margin-top: 65px;
+        margin-left: 30px;
+        li {
+          font-size: 13px;
+          letter-spacing: 0.1em;
+          line-height: 28px;
+          font-weight: normal;
+          font-family: 'felix';
+        }
+      }
+      ol {
+        list-style-type: decimal;
+        li::marker {
+          @include font-ud(demibold);
+        }
+      }
+      ul {
+        list-style: none;
+        li {
+          position: relative;
+          &::before {
+            content: '';
+            position: absolute;
+            width: 11px;
+            height: 11px;
+            top: 8px;
+            left: -22px;
+            border-radius: 50%;
+            background: #4c92d9;
+          }
+        }
+      }
+      a {
+        text-decoration: underline;
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        line-height: 28px;
+        @include font-ud(medium);        
+        margin-top: 60px;
+        display: inline-flex;
+      }
+    }
+  }
+}
