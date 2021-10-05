@@ -12,10 +12,6 @@
 */
 
 Route::get('/', function () {
-<<<<<<< HEAD
-    return view('welcome');
-});
-=======
     return view('index');
 });
 
@@ -35,4 +31,3 @@ Route::view('/document-request/done/', 'document-request-done');
 Route::view('/contact', 'contact');
 Route::view('/contact/done/', 'contact-done');
 Route::view('/company-profile', 'company-profile');
->>>>>>> 7040de147b83a0b70fb5e99575a823ccfdedb05b
