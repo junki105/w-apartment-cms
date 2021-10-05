@@ -31,3 +31,5 @@ Route::view('/document-request/done/', 'document-request-done');
 Route::view('/contact', 'contact');
 Route::view('/contact/done/', 'contact-done');
 Route::view('/company-profile', 'company-profile');
+
+Route::get('/admin','AdminController@index');
