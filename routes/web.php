@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+  return view('index');
 });
 
 Route::view('/news', 'news');
@@ -33,3 +33,12 @@ Route::view('/contact/done/', 'contact-done');
 Route::view('/company-profile', 'company-profile');
 
 Route::get('/admin','AdminController@index');
+
+Route::group(['prefix' => 'admin'], function () {
+  //News Backend Routes
+  Route::get('/news', ['uses' => 'Admin\NewsController@index', 'as' => 'admin.news.list']);
+  Route::get('/news/create', ['uses' => 'Admin\NewsController@create', 'as' => 'admin.news.create']);
+  Route::post('/news/store', ['uses' => 'Admin\NewsController@store', 'as' => 'admin.news.store']);
+
+
+});
