@@ -88,61 +88,23 @@
         <h1>NEWS一覧</h1>
         <div class="news-list-content">
           <table>
-            <tr>
-              <td>2021.01.01</td>
-              <td><a href="{{ url('/news/1') }}"><span>お知らせのタイトルテキストテキストテキストテキストテキストテキストテキスト</span></a></td>
-            </tr>
-            <tr>
-              <td>2021.01.01</td>
-              <td><a href="{{ url('/news/1') }}"><span>お知らせのタイトルテキストテキストテキストテキストテキストテキストテキスト</span></a></td>
-            </tr>
-            <tr>
-              <td>2021.01.01</td>
-              <td><a href="{{ url('/news/1') }}"><span>お知らせのタイトルテキストテキストテキストテキストテキストテキストテキスト</span></a></td>
-            </tr>
-            <tr>
-              <td>2021.01.01</td>
-              <td><a href="{{ url('/news/1') }}"><span>お知らせのタイトルテキストテキストテキストテキストテキストテキストテキスト</span></a></td>
-            </tr>
-            <tr>
-              <td>2021.01.01</td>
-              <td><a href="{{ url('/news/1') }}"><span>お知らせのタイトルテキストテキストテキストテキストテキストテキストテキスト</span></a></td>
-            </tr>
-            <tr>
-              <td>2021.01.01</td>
-              <td><a href="{{ url('/news/1') }}"><span>お知らせのタイトルテキストテキストテキストテキストテキストテキストテキスト</span></a></td>
-            </tr>
-            <tr>
-              <td>2021.01.01</td>
-              <td><a href="{{ url('/news/1') }}"><span>お知らせのタイトルテキストテキストテキストテキストテキストテキストテキスト</span></a></td>
-            </tr>
-            <tr>
-              <td>2021.01.01</td>
-              <td><a href="{{ url('/news/1') }}"><span>お知らせのタイトルテキストテキストテキストテキストテキストテキストテキスト</span></a></td>
-            </tr>
-            <tr>
-              <td>2021.01.01</td>
-              <td><a href="{{ url('/news/1') }}"><span>お知らせのタイトルテキストテキストテキストテキストテキストテキストテキスト</span></a></td>
-            </tr>
-            <tr>
-              <td>2021.01.01</td>
-              <td><a href="{{ url('/news/1') }}"><span>お知らせのタイトルテキストテキストテキストテキストテキストテキストテキスト</span></a></td>
-            </tr>
+            @foreach ($posts as $post)
+                <tr>
+                  <td>{{substr($post->created_at,0,10)}}</td>
+                  <td><a href='{{url('/news/'.$post->id)}}'><span>{{$post->title}}</span></a></td>
+                <tr>
+            @endforeach
           </table>
+
           <div class="article-pagination">
-            <ul>
-              <li class="last-prev"><a href="">＜ 最初</a></li>
-              <li class="prev"><a href="" class="btn">前の10件へ</a></li>
-              <li class="page-num">1/3</li>
-              <li class="next active"><a href="" class="btn">次の10件へ</a></li>
-              <li class="last-next"><a href="">最後 ＞</a></li>
-            </ul>
+            {!! $posts->links('pagination') !!}
           </div>
         </div>
       </section>
 
       <footer class="footer">
         <div class="footer-content">
+            {{$posts->links()}}
           <h1>W-apartment</h1>
           <div class="link-group">
             <a href="{{ url('/document-request') }}" class="btn hover-spacing-btn">資料請求<img src="{{ URL::asset('images/ico_triangle.png') }}" alt=""></a>

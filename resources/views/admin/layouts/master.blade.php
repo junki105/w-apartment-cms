@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <head>
     @include('admin.layouts.head')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -26,7 +27,7 @@
     <footer class="main-footer">
       <!-- To the right -->
       <div class="float-right d-none d-sm-inline">
-        
+
       </div>
       <!-- Default to the left -->
       <strong>Copyright &copy; 2014-2021 <a href="https://w-apartment.com">W-apartment</a>.</strong> All rights reserved.
@@ -36,7 +37,7 @@
 
   <!-- REQUIRED SCRIPTS -->
 
-  @include('admin.layouts.jsfiles') 
+  @include('admin.layouts.jsfiles')
 
 </body>
 </html>

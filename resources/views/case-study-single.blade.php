@@ -93,8 +93,8 @@
           </div>
           <div class="works-date">2021.01.01</div>
         </div>
-        <figure>
-          <img src="{{ URL::asset('images/works_single.png') }}" alt="">
+        <figure id="firstview">
+          <img id="" src="{{ URL::asset('images/works_single.png') }}" alt="">
         </figure>
         <div class="works-content">
           <h2>お名前：S.N様</h2>
@@ -116,7 +116,7 @@
       </section>
       <section class="content works-list-sec">
         <article class="article">
-          <div class="article-left">
+          <div class="article-left" id="instruction_bg">
             <img src="{{ URL::asset('images/works_single.png') }}" alt="">
           </div>
           <div class="article-right">
@@ -126,7 +126,7 @@
           </div>
         </article>
         <article class="article">
-          <div class="article-left">
+          <div class="article-left" id="post_introduction_bg">
             <img src="{{ URL::asset('images/works_single.png') }}" alt="">
           </div>
           <div class="article-right">
@@ -136,7 +136,7 @@
           </div>
         </article>
         <article class="article">
-          <div class="article-left">
+          <div class="article-left" id="eyecatch_image">
             <img src="{{ URL::asset('images/works_single.png') }}" alt="">
           </div>
           <div class="article-right">
@@ -169,4 +169,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js" integrity="sha512-gSf3NCgs6wWEdztl1e6vUqtRP884ONnCNzCpomdoQ0xXsk06lrxJsR7jX5yM/qAGkPGsps+4bLV5IEjhOZX+gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ URL::asset('js/common.js') }}" async defer></script>
   </body>
+  <script>
+    $(document).ready(function() {
+      let result = <?php echo json_encode($result)?>;
+      console.log(result);
+      $('#firstview').html('<img src="'+result.firstview_url+'"/>');
+      $('#instruction_bg').html('<img src="'+result.instruction_bg_url+'"/>');
+      $('#post_introduction_bg').html('<img src="'+result.post_introduction_url+'"/>');
+      $('#eyecatch_image').html('<img src="'+result.eyecatch_image_url+'"/>');
+      
+    });
+  </script>
 </html>

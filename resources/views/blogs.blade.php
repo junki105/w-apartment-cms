@@ -27,8 +27,8 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <header class="header minimal-header">
-      <h1 class="logo"><a href="{{ url('/') }}"><img src="{{ URL::asset('images/logo_white.png') }}" alt=""></a></h1>
+    <header class="header works-header">
+      <h1 class="logo"><a href="{{ url('/') }}"><img src="{{ URL::asset('images/logo.png') }}" alt=""></a></h1>
       <div class="header-aside">
         <div class="menu-btn" id="menu_btn">
           <div></div>
@@ -36,13 +36,13 @@
           <div></div>
         </div>
         <div class="line"></div>
-        <div id="num" class="slide-number"></div>
+        <div id="num" class="slide-number">BLOG</div>
       </div>
       <div class="header-aside">
-        <a href="" class="login-btn"><img src="{{ URL::asset('images/ico_login_white.png') }}" alt=""></a>
+        <a href="" class="login-btn"><img src="{{ URL::asset('images/ico_login.png') }}" alt=""></a>
         <div class="header-aside-txt">
           <span class="btn">説明会情報</span>
-          <img src="{{ URL::asset('images/side_link_white.png') }}" alt="">
+          <img src="{{ URL::asset('images/side_link.png') }}" alt="">
           <span class="btn">資料請求</span>
         </div>
         <div class="copyright">
@@ -52,7 +52,7 @@
       </div>
       <a href="#list" id="moveDown" class="btn scroll-btn">
         SCROLL
-        <img src="{{ URL::asset('images/ico_arrow_down_brown.png') }}" alt="">
+        <img src="{{ URL::asset('images/ico_arrow_down.png') }}" alt="">
       </a>
       <div class="site-menu" id="site_menu">
         <div class="site-menu-left">
@@ -82,76 +82,45 @@
           </div>
         </div>
       </div>
-      <div class="minimal-header-content">
-        <h1>MINIMAL</h1>
-        <button class="btn">動画埋め込み</button>
-      </div>
     </header>
-    <main class="container minimal">
-      <header class="header feature-header minimal-origin-header">
-        <h1 class="logo"><a href="{{ url('/') }}"><img src="{{ URL::asset('images/logo.png') }}" alt=""></a></h1>
-        <div class="header-aside">
-          <div class="menu-btn" id="menu_btn">
-            <div></div>
-            <div></div>
-            <div></div>
+    <main class="container works-list blog-list">
+      <section class="content sec-hero">
+        <div class="blog-list-ttl">
+          <h1>ブログ</h1>
+          <div class="category-group">
+            <a href="{{ url('/blogs') }}" class="active">新着</a>
+            <span></span>
+            <a href="{{url('/blogs/recommend')}}">おすすめ</a>
+            @foreach ($categories as $category)
+              <span></span>
+              <a href='{{url('/blogs/category/'.$category->id)}}' id="{{$category->id}}">{{$category->name}}</a>
+            @endforeach
           </div>
-          <div class="line"></div>
-          <div id="num" class="slide-number">MINIMAL</div>
-        </div>
-        <div class="header-aside">
-          <a href="" class="login-btn"><img src="{{ URL::asset('images/ico_login.png') }}" alt=""></a>
-          <div class="header-aside-txt">
-            <span class="btn">説明会情報</span>
-            <img src="{{ URL::asset('images/side_link.png') }}" alt="">
-            <span class="btn">資料請求</span>
-          </div>
-          <div class="copyright">
-            © W-APARTMENT
-          </div>
-          <div class="line"></div>
-        </div>
-        <a href="#" id="moveDown" class="btn scroll-btn">
-          SCROLL
-          <img src="{{ URL::asset('images/ico_arrow_down.png') }}" alt="">
-        </a>
-      </header>
-      <section class="content minimal-content">
-        <h1>MINIMAL</h1>
-        <div class="minimal-wrap">
-          <h2>圧倒的なデザイン</h2>
-          <p>ショルダーコピーショルダーコピーショルダーコピー<br>
-            ショルダーコピーショルダーコピー<br>
-            ショルダーコピーショルダーコピーショルダーコピーショルダーコピー</p>
-          <div id="ow_images">
-            <div class="img-content">
-              <img src="{{ URL::asset('images/work01.png') }}" alt="">
-            </div>
-            <div class="img-content">
-              <img src="{{ URL::asset('images/works_single.png') }}" alt="">
-            </div>
-            <div class="img-content">
-              <img src="{{ URL::asset('images/work01.png') }}" alt="">
-            </div>
-          </div>
-         
         </div>
       </section>
-      <section class="content gallery-content">
-        <h1>GALLERY</h1>
-        <div class="gallery-wrap">
-          
+      <section class="content search-result">
+        <h1>新着一覧</h1>
+        <div class="result-content">
+          @foreach ($blogs as $blog)
+            <article>
+              <div class="article-left">
+                <h2>{{$blog->title}}</h2>
+                <img src="{{ URL::asset($blog->featured_image_url) }}" alt="">
+              </div>
+              <div class="article-right">
+                  <div class="article-date">{{$blog->created_at}}</div>
+                  <div class="investment article-blog-category">{{$blog->category}}</div>
+                  <p>{{$blog->content}}
+                  </p>
+                  <a href='{{url('/blogs/'.$blog->id)}}' class="btn sec-link-btn"><img src="{{ URL::asset('images/ico_arrow-right.png') }}" alt=""></a>
+              </div>
+            </article>
+          @endforeach
+        </div>
+        <div class="article-pagination">
+          {!! $blogs->links('pagination') !!}
         </div>
       </section>
-      <section class="content voice-content">
-        <h1>OWNER’S VOICE</h1>
-        <div class="voice-wrap">
-          <iframe src="" frameborder="0"></iframe>
-        </div>
-      </section>
-      <!-- <section class="official-content">
-        <h1>Minimal Official Site</h1>
-      </section> -->
       <footer class="footer">
         <div class="footer-content">
           <h1>W-apartment</h1>
@@ -168,23 +137,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js" integrity="sha512-gSf3NCgs6wWEdztl1e6vUqtRP884ONnCNzCpomdoQ0xXsk06lrxJsR7jX5yM/qAGkPGsps+4bLV5IEjhOZX+gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ URL::asset('js/common.js') }}" async defer></script>
-    <script>
-      $(document).ready(function() {
-        house = <?php echo json_encode($house)?>;
-        var ow_image_urls=house.ow_image_urls
-        var ow_image_array = ow_image_urls.split(',');
-        var gallery_image_array = house.gallery_image_urls.split(',');
-        let ow_section = ''
-        ow_image_array.map(ow_img=>{
-          ow_section += '<div class="img-content">'+'<img src="'+ow_img+'" alt=""></div>';
-        })
-        $('#ow_images').html(ow_section);
-        let gallery_section = '';
-        gallery_image_array.map(ga_img=>{
-          gallery_section += '<div class="img-content">'+'<img src="'+ga_img+'" alt=""></div>';
-        });
-        $('.gallery-wrap').html(gallery_section);
-      });
-    </script>
   </body>
 </html>

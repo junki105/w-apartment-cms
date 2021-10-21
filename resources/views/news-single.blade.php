@@ -85,27 +85,10 @@
     </header>
     <main class="container news-page">
       <section class="content news-content sec-hero">
-        <h1 class="news-ttl">タイトルテキストテキストテキストテキストテキス</h1>
-        <div class="news-date">2019-01-01</div>
+        <h1 class="news-ttl">{{ $post->title ?? '' }}</h1>
+        <div class="news-date">{{$post->created_at??''}}</div>
         <div class="news-info">
-          <h1>見出し1</h1>
-          <p>本文テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
-          <h2>見出し2</h2>
-          <p>本文テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
-          <blockquote>
-            引用文テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト            
-          </blockquote>
-          <img src="{{ URL::asset('images/news01.png') }}" alt="">
-          <ol>
-            <li>リストリストリストリストリスト</li>
-            <li>リストリストリストリストリストリストリストリストリストリスト</li>
-          </ol>
-          <ul>
-            <li>リストリストリストリストリスト</li>
-            <li>リストリストリストリストリスト</li>
-            <li>リストリストリストリストリスト</li>
-          </ul>
-          <a href="">テキストリンクテキストリンク</a>
+            {!!$post->content??''!!}
         </div>
       </section>
 
