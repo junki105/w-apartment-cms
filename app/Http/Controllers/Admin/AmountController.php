@@ -35,14 +35,13 @@ class AmountController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $max_order = Amount::max('order_index');
         $amount = new Amount;
         $amount->type = $request->type_input;
         $amount->order_index = $max_order + 1;
         $amount->save();
         $amounts = Amount::all();
-        return redirect('/admin/results/area/create');
+        return redirect('/admin/results/amount/create');
         //
     }
 

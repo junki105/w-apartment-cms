@@ -15,34 +15,10 @@ class HousingController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->public_status!=null){
-            if($request->search_word !=null){
-                $housings = Housing::where([
-                            ["title","LIKE","%$request->search_word%"],
-                            ['public_status','=',$request->public_status]
-                        ])->paginate(5);
-                $row_count = Housing::where([
-                            ["title","LIKE","%$request->search_word%"],
-                            ['public_status','=',$request->public_status]
-                        ])->count();
-            }
-            else{
-                $housings = Housing::where('public_status',"=",$request->public_status)->latest()->paginate(5);
-                $row_count = Housing::where('public_status',"=",$request->public_status)->count();
-            }
-        }
-        else{
-            if($request->search_word !=null){
-                $housings = Housing::where("title","LIKE","%$request->search_word%")
-                        ->paginate(5);
-                $row_count = Housing::where("title","LIKE","%$request->search_word%")
-                       ->count();
-            }
-            else{
-                $housings = Housing::latest()->paginate(5);
-                $row_count = Housing::count();
-            }
-        }
+       
+        $housings = Housing::latest()->paginate(5);
+        $row_count = Housing::count();
+  
         return view('admin.housing.list',compact('housings','row_count'));
     }
 
@@ -79,6 +55,9 @@ class HousingController extends Controller
                    $video_url = '/uploads/housings/videos/'.$name;//If image saved success, image_url is assigned
                 }
             }
+            else{
+                $video_url = 'https://assets.codepen.io/6093409/river.mp4';
+            }
             if($voice_file = $request->file('voice_file')){
                 $name = time().time().'.'.$voice_file->getClientOriginalExtension();
                 $target_path = public_path('/uploads/housings/voices/');
@@ -86,12 +65,18 @@ class HousingController extends Controller
                    $voice_url = '/uploads/housings/voices/'.$name;//If image saved success, image_url is assigned
                 }
             }
+            else{
+                $voice_url = 'https://assets.codepen.io/6093409/river.mp4';
+            }
             if($featured_image_file = $request->file('featured_image')){
                 $name = time().time().'.'.$featured_image_file->getClientOriginalExtension();
                 $target_path = public_path('/uploads/housings/featured-images');
                 if($featured_image_file->move($target_path, $name)) {
                    $featured_image_url = '/uploads/housings/featured-images/'.$name;//If image saved success, image_url is assigned
                 }
+            }
+            else{
+                $featured_image_url = '/images/lineup01.png';
             }
             $ow_image_urls = array();
             if($request->hasFile('ow_images'))
@@ -104,6 +89,9 @@ class HousingController extends Controller
                     array_push($ow_image_urls,'/uploads/housings/ow-images/'.$name);
                 }
              }
+             else{
+                array_push($ow_image_urls,'images/works_single.png');
+             }
              $gallery_image_urls = array();
              if($request->hasFile('gallery_images'))
              {
@@ -114,7 +102,9 @@ class HousingController extends Controller
                     array_push($gallery_image_urls,'/uploads/housings/gallery-images/'.$name);
                 }
              }
-
+             else{
+                array_push($gallery_image_urls,'images/top_support.png');
+             }
             $ow_urls = implode(',',$ow_image_urls);
             $gallery_urls = implode(',',$gallery_image_urls);
             $housing = new Housing;
@@ -235,7 +225,6 @@ class HousingController extends Controller
         else{
             $gallery_urls = $housing->gallery_image_urls;
         }
-        $housing = new Housing;
         $housing->title = $request->title;
         $housing->public_status = $request->public_status?:'0';
         $housing->video_url = $video_url;
@@ -246,7 +235,8 @@ class HousingController extends Controller
         $housing->ow_image_urls = $ow_urls;
         $housing->gallery_image_urls = $gallery_urls;
         $housing->save();
-        return response()->json(['success'=>true,'id'=>$housing->id]);
+        $url = url('/house/'.$housing->id);
+        return response()->json(['success'=>true,'id'=>$housing->id,'url'=>$url]);
     }
 
     /**
@@ -258,13 +248,14 @@ class HousingController extends Controller
     public function destroy($id)
     {
         //
+        Housing::find($id)->delete();
+        return response()->json(['success'=>true]);
     }
     public function search(Request $request){
         $posts;
         $row_count;
-        dd($request);
-        if($request->public_status!=null){
-            if($request->search_word !=null){
+        if($request->public_status!="null"){
+            if($request->search_word !="null"){
                 $posts = Housing::where([
                             ["title","LIKE","%$request->search_word%"],
                             ['public_status','=',$request->public_status]
@@ -273,6 +264,10 @@ class HousingController extends Controller
                             ["title","LIKE","%$request->search_word%"],
                             ['public_status','=',$request->public_status]
                         ])->count();
+                $housings = Housing::where([
+                    ["title","LIKE","%$request->search_word%"],
+                    ['public_status','=',$request->public_status]
+                ])->paginate(5);
             }
             else{
                 $housings = Housing::where('public_status',"=",$request->public_status)->latest()->paginate(5);
@@ -280,7 +275,7 @@ class HousingController extends Controller
             }
         }
         else{
-            if($request->search_word !=null){
+            if($request->search_word !="null"){
                 $housings = Housing::where("title","LIKE","%$request->search_word%")->paginate(5);
                 $row_count = Housing::where("title","LIKE","%$request->search_word%")->count();
             }
@@ -290,42 +285,5 @@ class HousingController extends Controller
             }
         }
         return view('admin.housing.pagination_data',compact('housings','row_count'));
-            //$search_word = $request->get("search_word");
-            //$public_status = $request->get("public_status");
-        // if($request->public_status!=null){
-        //     if($request->search_word !=null){
-        //         $housings = Housing::where([
-        //                     ["title","LIKE","%$request->search_word%"],
-        //                     ['public_status','=',$request->public_status]
-        //                 ])->orwhere([
-        //                     ["content","LIKE","%$request->search_word%"],
-        //                     ['public_status','=',$request->public_status]
-        //                 ])->paginate(5);
-        //         $count = Housing::where([
-        //                     ["title","LIKE","%$request->search_word%"],
-        //                     ['public_status','=',$request->public_status]
-        //                 ])->orwhere([
-        //                     ["content","LIKE","%$request->search_word%"],
-        //                     ['public_status','=',$request->public_status]
-        //                 ])->count();
-        //     }
-        //     else{
-        //         $housings = Housing::where('public_status',"=",$request->public_status)->latest()->paginate(5);
-        //         $count = Housing::where('public_status',"=",$request->public_status)->count();
-        //     }
-        // }
-        // else{
-        //     if($request->search_word !=null){
-        //         $housings = Housing::where("title","LIKE","%$request->search_word%")
-        //                 ->orwhere("content","LIKE","%$request->search_word%")->paginate(5);
-        //         $count = Housing::where("title","LIKE","%$request->search_word%")
-        //                 ->orwhere("content","LIKE","%$request->search_word%")->count();
-        //     }
-        //     else{
-        //         $housings = Housing::latest()->paginate(5);
-        //         $count = Housing::count();
-        //     }
-        // }
-        //return view('admin.housing.list',compact('housings','count'));
     }
 }

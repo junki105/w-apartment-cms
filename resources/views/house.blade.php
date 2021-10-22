@@ -91,60 +91,17 @@
           ショルダーコピーショルダーコピーショルダーコピーショルダーコピー
         </p>
         <div class="lineup-content">
-          <a href="{{ url('/house/1') }}" class="lineup-article">
-            <div class="lineup-article-img">
-              <img src="{{ URL::asset('images/lineup01.png') }}" alt="">
-            </div>
-            <div class="lineup-info">
-              <h2>Minimal</h2>
-              <div>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</div>
-            </div>
-          </a>
-          <a href="{{ url('/house/1') }}" class="lineup-article">
-            <div class="lineup-article-img">
-              <img src="{{ URL::asset('images/lineup01.png') }}" alt="">
-            </div>
-            <div class="lineup-info">
-              <h2>Minimal</h2>
-              <div>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</div>
-            </div>
-          </a>
-          <a href="{{ url('/house/1') }}" class="lineup-article">
-            <div class="lineup-article-img">
-              <img src="{{ URL::asset('images/lineup01.png') }}" alt="">
-            </div>
-            <div class="lineup-info">
-              <h2>Minimal</h2>
-              <div>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</div>
-            </div>
-          </a>
-          <a href="{{ url('/house/1') }}" class="lineup-article">
-            <div class="lineup-article-img">
-              <img src="{{ URL::asset('images/lineup01.png') }}" alt="">
-            </div>
-            <div class="lineup-info">
-              <h2>Minimal</h2>
-              <div>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</div>
-            </div>
-          </a>
-          <a href="{{ url('/house/1') }}" class="lineup-article">
-            <div class="lineup-article-img">
-              <img src="{{ URL::asset('images/lineup01.png') }}" alt="">
-            </div>
-            <div class="lineup-info">
-              <h2>Minimal</h2>
-              <div>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</div>
-            </div>
-          </a>
-          <a href="{{ url('/house/1') }}" class="lineup-article">
-            <div class="lineup-article-img">
-              <img src="{{ URL::asset('images/lineup01.png') }}" alt="">
-            </div>
-            <div class="lineup-info">
-              <h2>Minimal</h2>
-              <div>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</div>
-            </div>
-          </a>
+          @foreach ($houses as $house)
+            <a href="/house/{{$house->id}}" class="lineup-article">
+              <div class="lineup-article-img">
+                <img src="{{ $house->featured_image_url }}" alt="">
+              </div>
+              <div class="lineup-info">
+                <h2>{{$house->title}}</h2>
+                <div>{{$house->book}}</div>
+              </div>
+            </a>
+          @endforeach
         </div>
       </section>
       <footer class="footer">

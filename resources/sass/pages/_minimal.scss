@@ -1,8 +1,6 @@
 .minimal-header {
   display: flex;
   justify-content: space-between;
-  background-image: url(../../images/bg_minimal.png);
-  background-size: cover;
   .slide-number {
     left: 28px!important;
     font-size: 16px!important;
@@ -108,6 +106,9 @@
         &:nth-child(3) {
           margin-top: -73px;
           justify-content: flex-end;
+          img {
+            width: 368px;
+          }
         }
         &:nth-child(4) {
           margin-top: 40px;
@@ -130,7 +131,7 @@
       line-height: 48px;
       text-align: center;
     }
-    .gallery-wrap {
+    .gallery-wrap-content {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;

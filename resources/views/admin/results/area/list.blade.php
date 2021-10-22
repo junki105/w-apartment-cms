@@ -14,11 +14,11 @@ table td.sorter {cursor: move;}
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <p>Do You Really Want to Delete This ?</p>
+                    <p>本当に削除しますか？</p>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
                     <span id= 'deleteButton'></span>
                 </div>
 
@@ -35,7 +35,7 @@ table td.sorter {cursor: move;}
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
                             <li class="breadcrumb-item active">地域</li>
                         </ol>
                     </div><!-- /.col -->
@@ -107,7 +107,7 @@ table td.sorter {cursor: move;}
                             </tbody>
                         </table>
                         <div style="height: 200px; width:inherit;display: flex;justify-content: center;align-items: center;">
-                            <div>Data not exist.</div>
+                            <div>データがありません。</div>
                         </div>
                     @endif
                 </div>
@@ -194,7 +194,7 @@ table td.sorter {cursor: move;}
     //             if(data.success){
     //                 // let area = data.area;
     //                 // $('#alert').css('display','block');
-    //                 // $('#notify_string').html('Create Success');
+    //                 // $('#notify_string').html('追加しました。');
     //                 // $('#area_table').append('<tr class="row" style="cursor:move;" id="'+area.id+
     //                 //     '">'+'<td class="col-sm-1 sorter"><i class="fa fa-arrows-alt"></i></td>'
     //                 //     +'<td class="col-sm-2">'+area.id+'</td><td class="col-sm-3">'+
@@ -224,7 +224,7 @@ table td.sorter {cursor: move;}
         console.log('dlkjfs')
         delete_id = $(this).data("id");
         $('#deleteModal').modal();
-        $('#deleteButton').html('<a class="btn btn-danger">Delete</a>');
+        $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
     });
     $('#deleteButton').click(function(e){
         $.ajaxSetup({

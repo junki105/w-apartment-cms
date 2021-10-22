@@ -9,11 +9,11 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <p>Do You Really Want to Delete This ?</p>
+                    <p>本当に削除しますか？</p>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
                     <span id= 'deleteButton'></span>
                 </div>
 
@@ -30,13 +30,13 @@
                     </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
                         <li class="breadcrumb-item active">お知らせ新規追加</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
             <div class="mt-4 mb-2" id="url_string" style="display: none">
-                <span class="font-weight-bold mr-2 h6">リンク:
+                <span class="mr-2 font-weight-bold h6">リンク:
                     <span id="created_url"></span>
                 </span>
                 <a id="link_url" class="btn btn-sm btn-default">表示</a>
@@ -49,12 +49,12 @@
     <div class="container-fluid">
         <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
             <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>Create Success!</strong>
+            <strong>追加しました。</strong>
         </div>
         <div class="card">
             <div class="card-header">
                 <div class="form-group row">
-                    <input type="text" class="col-sm-3 form-control ml-1" name="category_name_input" id="category_name_input">
+                    <input type="text" class="ml-1 col-sm-3 form-control" name="category_name_input" id="category_name_input">
                     <button id="categoryAdd" class="btn btn-sm">新規作成</button>
                 </div>
             <div class="card-body col-8">
@@ -64,7 +64,7 @@
                             <tr class="row">
                                 <th class="col-sm-2">ID</th>
                                 <th class="col-sm-4">カテゴリ</th>
-                                <th class="col-sm-6 float-right"></th>
+                                <th class="float-right col-sm-6"></th>
                             </tr>
                         </thead>
                         <tbody id="category_table">
@@ -75,11 +75,11 @@
                                     <td class="col-sm-6">
                                         <div class="float-sm-right">
                                             <button class="btn btn-info btn-sm editCategory" type="button" data-id="{{$category->id}}">
-                                                <i class="fa fa-pencil-alt ml-1 mr-1"></i>
+                                                <i class="ml-1 mr-1 fa fa-pencil-alt"></i>
                                                 編集
                                             </button>
                                             <button  class="btn btn-danger btn-sm deleteCategory" id="deleteCategory" data-id="{{$category->id}}">
-                                                <i class="fa fa-trash ml-1 mr-1"></i>削除
+                                                <i class="ml-1 mr-1 fa fa-trash"></i>削除
                                             </button>
                                         </div>
                                     </td>
@@ -93,19 +93,19 @@
                     <tr class="row">
                         <th class="col-sm-2">ID</th>
                         <th class="col-sm-4">カテゴリ</th>
-                        <th class="col-sm-4 float-right"></th>
+                        <th class="float-right col-sm-4"></th>
                     </tr>
                     </thead>
                     <tbody>
                     </tbody>
                 </table>
                 <div style="height: 200px; width:inherit;display: flex;justify-content: center;align-items: center;">
-                    <div>Data not exist.</div>
+                    <div>データがありません。</div>
                 </div>
                 @endif
             </div>
             <div class="card-footer">
-                <div class="card-tools float-right d-inline-flex"></div>
+                <div class="float-right card-tools d-inline-flex"></div>
             </div>
         </div>
     </div>
@@ -139,9 +139,9 @@
                                 current_category.id+'</td><td class="col-sm-4">'+data.name+
                                 '</td><td class="col-sm-6">'+'<div class="float-sm-right">'+
                                 '<button class="btn btn-info btn-sm editCategory" type="button" data-id="'+
-                                current_category.id+'"'+'>'+'<i class="fa fa-pencil-alt ml-1 mr-1"></i>編集</button>'+
+                                current_category.id+'"'+'>'+'<i class="ml-1 mr-1 fa fa-pencil-alt"></i>編集</button>'+
                                 '<button  class="btn btn-danger btn-sm deleteCategory" id="deleteCategory" data-id="'+
-                                current_category.id+'"'+'>'+'<i class="fa fa-trash ml-1 mr-1"></i>削除</button>'+
+                                current_category.id+'"'+'>'+'<i class="ml-1 mr-1 fa fa-trash"></i>削除</button>'+
                                 '</div></td>'
                             );
                             $('#category_name_input').val('');
@@ -170,9 +170,9 @@
                         '">'+'<td class="col-sm-2">'+category.id+'</td><td class="col-sm-4">'+
                         data.name+'</td><td class="col-sm-6">'+'<div class="float-sm-right">'+
                         '<button class="btn btn-info btn-sm editCategory" type="button" data-id="'+
-                        category.id+'"'+'>'+'<i class="fa fa-pencil-alt ml-1 mr-1"></i>編集</button>'+
+                        category.id+'"'+'>'+'<i class="ml-1 mr-1 fa fa-pencil-alt"></i>編集</button>'+
                         '<button  class="btn btn-danger btn-sm deleteCategory" id="deleteCategory" data-id="'+
-                        category.id+'"'+'>'+'<i class="fa fa-trash ml-1 mr-1"></i>削除</button>'+
+                        category.id+'"'+'>'+'<i class="ml-1 mr-1 fa fa-trash"></i>削除</button>'+
                         '</div></td>'+'</td></tr>');
                     $('#category_name_input').val('');
                 },
@@ -188,7 +188,7 @@
         delete_id = $(this).data("id");
         console.log(delete_id);
         $('#deleteModal').modal();
-        $('#deleteButton').html('<a class="btn btn-danger">Delete</a>');
+        $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
     });
     $('#deleteButton').click(function(e){
         $.ajaxSetup({

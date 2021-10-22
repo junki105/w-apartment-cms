@@ -11,4 +11,8 @@ class HouseController extends Controller
         $house = Housing::find($id);
         return view('house-single',compact('house'));
     }
+    public function list(){
+        $houses = Housing::latest()->paginate(6);
+        return view('house',compact('houses'));
+    }
 }

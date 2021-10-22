@@ -16,12 +16,6 @@ class NewsController extends Controller
      */
     public function index()
     {
-        // $page_name = 'News';
-        // if (Auth::user()->type === 1 || Auth::user()->hasRole('Editor')) {
-        //     $news = Post::with(['creator'])->orderBy('id', 'DESC')->get();
-        // } else {
-        //     $news = Post::with(['creator'])->where('created_by', Auth::user()->id)->orderBy('id', 'DESC')->get();
-        // }
         $posts = Post::latest()->paginate(5);
         $count = Post::count();
         return view('admin.news.show',compact('posts','count'));
@@ -39,42 +33,10 @@ class NewsController extends Controller
     public function show(Request $request)
     {
         $search_word = $request->search_word;
-        // $state = $request->state;
-        // if($search_word!=null){
-        //     if($state!=null){
-        //         $posts = Post::where("title","LIKE","%$request->search_word%")
-        //                     ->orwhere("content","LIKE","%$request->search_word%")
-        //                     ->where('state','=',$state)->paginate(5);
-        //         $count = Post::where("title","LIKE","%$request->search_word%")
-        //                     ->orwhere("content","LIKE","%$request->search_word%")
-        //                     ->where('state','=',$state)->count();
-        //         return view('admin.news.pagination_data',compact('posts','count'));
-
-        //     }
-        //     else{
-        //         $posts = Post::where("title","LIKE","%$request->search_word%")
-        //                     ->orwhere("content","LIKE","%$request->search_word%")->paginate(5);
-        //         $count = $posts = Post::where("title","LIKE","%$request->search_word%")
-        //                     ->orwhere("content","LIKE","%$request->search_word%")->count();
-        //         return view('admin.news.pagination_data',compact('posts','count'));
-        //     }
-        // }
-        // else{
-        //     if($state!=null){
-        //         $posts = Post::where('state','=',$state)->paginate(5);
-        //         $count = Post::where('state','=',$state)->count();
-        //         return view('admin.news.pagination_data',compact('posts','count'));
-        //     }
-        //     else{
-        //         $posts = Post::latest()->paginate(5);
-        //         $count = Post::count();
-        //         return view('admin.news.pagination_data',compact('posts','count'));
-        //     }
-        // }
         $posts;
         $count;
-        if($request->state!=null){
-            if($request->search_word !=null){
+        if($request->state!="null"){
+            if($request->search_word !="null"){
                 $posts = Post::where([
                             ["title","LIKE","%$request->search_word%"],
                             ['state','=',$request->state]
@@ -96,7 +58,7 @@ class NewsController extends Controller
             }
         }
         else{
-            if($request->search_word !=null){
+            if($request->search_word !="null"){
                 $posts = Post::where("title","LIKE","%$request->search_word%")
                         ->orwhere("content","LIKE","%$request->search_word%")->paginate(5);
                 $count = Post::where("title","LIKE","%$request->search_word%")
@@ -121,9 +83,6 @@ class NewsController extends Controller
             'title' => 'required',
             'content' => 'required',
         ]);
-         request()->validate([
-            'upload-image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-         ]);
         $news = new Post;
         $news->title = $request->title;
         $news->content = $request->content;
@@ -134,6 +93,9 @@ class NewsController extends Controller
             if($file->move($target_path, $name)) {
                $news->image_url = '/uploads/'.$name;//If image saved success, image_url is assigned
             }
+        }
+        else{
+            $news->image_url = '/images/lineup01.png';
         }
         $news->save();
         $url = url('/news/'.$news->id);

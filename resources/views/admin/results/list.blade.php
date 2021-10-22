@@ -44,7 +44,7 @@
         </div><!-- /.col -->
         <div class="col-sm-7">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
             <li class="breadcrumb-item active">施工実績一覧</li>
           </ol>
         </div><!-- /.col -->
@@ -62,11 +62,11 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <p>Do You Really Want to Delete This ?</p>
+                    <p>本当に削除しますか？</p>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
                     <span id= 'deleteButton'></span>
                 </div>
 
@@ -76,7 +76,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <div class="p-0.2"><strong>検索<strong></div>
+                <div><strong>検索<strong></div>
             </div>
             <div class="card-body">
                 <div class="form-group row">
@@ -210,7 +210,7 @@
                     </tbody>
                 </table>
                 <div style="height: 200px; width:inherit;display: flex;justify-content: center;align-items: center;">
-                    <div>Data not exist.</div>
+                    <div>データがありません。</div>
                 </div>
                 @endif
             </div>
@@ -229,7 +229,7 @@
         $('.deleteResult').click(function(e){
             delete_id = $(this).data("id");
             $('#deleteModal').modal();
-            $('#deleteButton').html('<a class="btn btn-danger">Delete</a>');
+            $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
         });
         $('#deleteButton').click(function(e){
             $.ajaxSetup({

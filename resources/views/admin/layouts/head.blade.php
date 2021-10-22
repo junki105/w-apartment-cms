@@ -14,7 +14,7 @@
 <!-- include summernote css/js-->
 <link href="{{ asset('vendor/summernote/summernote-bs4.min.css') }}" rel="stylesheet">
 <script src="{{ asset('vendor/summernote/summernote-bs4.min.js') }}"></script>
-<script src="{{ asset('vendor/jquery/RowSorter.js') }}"></script>
+<script src="{{ asset('js/RowSorter.js') }}"></script>
 <style>
   body {
     font-family: Yu Gothic;

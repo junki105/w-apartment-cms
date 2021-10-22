@@ -81,7 +81,7 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
             <li class="breadcrumb-item active">お知らせ新規追加</li>
           </ol>
         </div><!-- /.col -->
@@ -107,7 +107,7 @@
     <div class="container-fluid">
         <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
             <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>Create Success!</strong>
+            <strong>追加しました。</strong>
         </div>
         <form id="resultsform" action="javascript:void(0)" enctype="multipart/form-data">
         @csrf

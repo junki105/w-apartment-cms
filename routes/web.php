@@ -24,7 +24,6 @@ Route::get('/', function () {
 Route::view('/philosophy', 'philosophy');
 Route::view('/case-study', 'case-study');
 Route::view('/feature', 'feature');
-Route::view('/house', 'house');
 Route::view('/document-request', 'document-request');
 Route::view('/document-request/done/', 'document-request-done');
 Route::view('/contact', 'contact');
@@ -54,7 +53,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('blogs/update/{id}','Admin\BlogController@update');
     Route::resource('/housing','Admin\HousingController');
     Route::post('/housing/update/{id}','Admin\HousingController@update');
-    Route::get('/housing/search','Admin\HousingController@search');
+    Route::get('/housing_search','Admin\HousingController@search');
     Route::post('/blogs/category/add','Admin\BlogController@categoryAdd');
     Route::delete('/blogs/category/delete/{id}','Admin\BlogController@categoryDelete');
     Route::post('/blogs/category/update/{id}','Admin\BlogController@categoryUpdate');
@@ -69,4 +68,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('/results/amount','Admin\AmountController');
 });
 Route::get('/house/{id}','HouseController@show_house');
+Route::get('/house', 'HouseController@list');
+
 Route::get('/case-study/{id}','ResultController@show');

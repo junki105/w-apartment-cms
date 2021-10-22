@@ -15,7 +15,7 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item active"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active"><a href="{{ url('/') }}">Home</a></li>
             <li class="breadcrumb-item active"><a href='admin/results/housetype'>間取り/</li>
             <li class="breadcrumb-item">間取り編集</li>
           </ol>
@@ -90,7 +90,7 @@
             contentType:false,
             processData:false,
             success: function (data) {
-                $('#notify_string').html('Update Success');
+                $('#notify_string').html('更新しました。');
                 $('#alert').css('display','block');
             },
             error: function (data) {

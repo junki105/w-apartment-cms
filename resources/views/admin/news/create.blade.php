@@ -39,13 +39,13 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
             <li class="breadcrumb-item active">お知らせ新規追加</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
       <div class="mt-4 mb-2" id="url_string" style="display: none">
-        <span class="font-weight-bold mr-2 h6">リンク:
+        <span class="mr-2 font-weight-bold h6">リンク:
             <span id="created_url">
             </span>
         </span>
@@ -90,8 +90,8 @@
                 </div>
                 <div class="card-body">
                   <div class="form-group d-flex justify-content-between align-content-end">
-                    <label class="font-weight-normal mb-0 text-sm mt-1">公開状態</label>
-                    <select name="state" id="state" class="form-control col-3 form-control-sm p-1">
+                    <label class="mt-1 mb-0 text-sm font-weight-normal">公開状態</label>
+                    <select name="state" id="state" class="p-1 form-control col-3 form-control-sm">
                       <option value="1">公開</option>
                       <option value="0">非公開</option>
                     </select>
@@ -159,15 +159,13 @@
       }
       else{
         $('#title').css('border-color','');
-        validation = true;
       }
       if($('#summernote').summernote('code')==='<p><br></p>') {
         $('.note-editor').css('border-color','red');
-        validation=false;
+        validation = false;
       }
       else{
         $('.note-editor').css('border-color','');
-        validation = true
       }
       if(validation){
         $('#title').css('border-color','');
@@ -190,8 +188,8 @@
             processData:false,
             success: function (data) {
               if(data.success){
-                $('#notify_string').html('Update Success');
-                $('#alert').css('display','block');
+                $('#notify_string').html('更新しました。');
+                $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
                 var current_date = new Date();
                 var current_year = String(current_date.getFullYear());
                 var current_month = current_date.getMonth() + 1;
@@ -207,39 +205,43 @@
             }
           });
         }
-      else{
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        else{
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+          });
+          e.preventDefault();
+          var formData = new FormData(this);
+          type = 'post';
+          $.ajax({
+            type: type,
+            url: '/admin/news',
+            data: formData,
+            cache:false,
+            contentType:false,
+            processData:false,
+            success: function (data) {
+              if(data.success){
+                  $('#notify_string').html('追加しました。');
+                  $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
+                  $('#created_url').html(data.url);
+                  $('#url_string').css('display','block');
+                  $('#link_url').attr('href',data.url).css('display','inline');
+                  $('#post_save').html('更新');
+                  update_flag = true;
+                  current_id = data.id
+              }
+            },
+            error: function (data) {
+              console.log('Error:', data);
             }
-        });
-        e.preventDefault();
-        var formData = new FormData(this);
-        type = 'post';
-        $.ajax({
-          type: type,
-          url: '/admin/news',
-          data: formData,
-          cache:false,
-          contentType:false,
-          processData:false,
-          success: function (data) {
-            if(data.success){
-                $('#notify_string').html('Create Success');
-                $('#alert').css('display','block');
-                $('#created_url').html(data.url);
-                $('#url_string').css('display','block');
-                $('#link_url').attr('href',data.url).css('display','inline');
-                $('#save').html('更新');
-                update_flag = true;
-                current_id = data.id
-            }
-          },
-          error: function (data) {
-            console.log('Error:', data);
-          }
-        });
+          });
+        }
       }
+      else{
+        $('#notify_string').html('入力内容でエラーがあります。');
+        $('#alert').css({'display':'block','border-left-color':'red','color':'red'});
       }
     });
   });

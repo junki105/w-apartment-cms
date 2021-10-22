@@ -81,7 +81,7 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
             <li class="breadcrumb-item active">施工実績登録</li>
           </ol>
         </div><!-- /.col -->
@@ -387,7 +387,7 @@
           success: function (data) {
             console.log(data);
             if(data.success){
-              $('#notify_string').html('Update Success');
+              $('#notify_string').html('更新しました。');
               $('#alert').css('display','block');
               // $('#created_url').html('http://localhost:8000/results/'+data.id);
               // $('#url_string').css('display','block');
@@ -419,7 +419,7 @@
           success: function (data) {
             console.log(data);
             if(data.success){
-              $('#notify_string').html('Create Success');
+              $('#notify_string').html('追加しました。');
               $('#alert').css('display','block');
               $('#created_url').html(data.url);
               $('#url_string').css('display','block');

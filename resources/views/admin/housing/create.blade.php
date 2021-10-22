@@ -99,13 +99,13 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
             <li class="breadcrumb-item active">商品住宅新規追加</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
       <div class="mt-4 mb-2" id="url_string" style="display: none">
-        <span class="font-weight-bold mr-2 h6">リンク:
+        <span class="mr-2 font-weight-bold h6">リンク:
             <span id="created_url">
             </span>
         </span>
@@ -145,49 +145,49 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">動画（ファーストビュー）</label>
-                        <div class="custom-file col-sm-7 ml-1">
-                            <input type="file" class="custom-file-input" id="video_file" name="video_file">
+                        <div class="ml-1 custom-file col-sm-7">
+                            <input type="file" class="custom-file-input" accept="video/*" id="video_file" name="video_file">
                             <label class="custom-file-label" id="video_file_url" for="video_file">動画をアップロード</label>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="ow_image" class="col-sm-4 col-form-label">画像（圧倒的なデザイン）
-                            济3枚までアップロード可能</label>
-                        <div class="dropzone-wrapper col-sm-7 ml-1">
+                        <label for="ow_image" class="col-sm-4 col-form-label">画像（圧倒的なデザイン）<br>
+                        <small>※3枚までアップロード可能</small></label>
+                        <div class="ml-1 dropzone-wrapper col-sm-7">
                             <div class="dropzone-desc">
                               <i class="fa fa-cloud-upload-alt"></i>
                               <span id="ow_image_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
                               <button id="ow_image_upload_button">ファイルを選捉</button>
                             </div>
-                            <input type="file" name="ow_images[]" id="ow_dropzone" class="dropzone" multiple="multiple">
+                            <input type="file" name="ow_images[]" id="ow_dropzone" class="dropzone" accept="image/*" multiple="multiple">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="book" class="col-sm-4 col-form-label">本文（圧倒的なデザイン）</label>
-                        <textarea rows="4" id="book" name="book" class="col-sm-7 form-control ml-1" ></textarea>
+                        <textarea rows="4" id="book" name="book" class="ml-1 col-sm-7 form-control" ></textarea>
                     </div>
                     <div class="form-group row">
-                        <label for="gallery_image_upload" class="col-sm-4 col-form-label">画像(GALLERY)
-                            ※制限なし</label>
-                        <div class="dropzone-wrapper col-sm-7 ml-1">
+                        <label for="gallery_image_upload" class="col-sm-4 col-form-label">画像(GALLERY)<br>
+                            <small>※制限なし</small></label>
+                        <div class="ml-1 dropzone-wrapper col-sm-7">
                             <div class="dropzone-desc">
                               <i class="fa fa-cloud-upload-alt"></i>
                               <span id="gallery_image_url">画像をドラッグ&ドロップまたは</span>
                               <button id="gallery_image_upload_button">ファイルを選捉</button>
                             </div>
-                            <input type="file" name="gallery_images[]" class="dropzone" id="gallery_dropzone" multiple>
+                            <input type="file" name="gallery_images[]" class="dropzone" accept="image/*" id="gallery_dropzone" multiple>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">動画（ファーストビュー）</label>
-                        <div class="custom-file col-sm-7 ml-1">
-                            <input type="file" class="custom-file-input" id="voice_file" name="voice_file">
+                        <div class="ml-1 custom-file col-sm-7">
+                            <input type="file" class="custom-file-input" id="voice_file" accept="video/*" name="voice_file">
                             <label class="custom-file-label" id="voice_file_url" for="voice_file">動画をアップロード</label>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="url_input" class="col-sm-4 col-form-label">URL</label>
-                        <input type="text" class="col-sm-7 form-control ml-1" name="url_input" id="url_input">
+                        <input type="text" class="ml-1 col-sm-7 form-control" name="url_input" id="url_input">
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -200,8 +200,8 @@
               </div>
               <div class="card-body">
                 <div class="form-group d-flex justify-content-between align-content-end">
-                  <label class="font-weight-normal mb-0 text-sm mt-1">公開状態</label>
-                  <select name="public_status" id="public_status" class="form-control col-3 form-control-sm p-1">
+                  <label class="mt-1 mb-0 text-sm font-weight-normal">公開状態</label>
+                  <select name="public_status" id="public_status" class="p-1 form-control col-3 form-control-sm">
                     <option value="1">公開</option>
                     <option value="0">非公開</option>
                   </select>
@@ -219,7 +219,7 @@
             </div>
             <div class="card-body">
                 <label for="featured_image" id="preview">アイキャッチ画像を設定</label>
-                <input type="file" name ="featured_image" id="featured_image">
+                <input type="file" name ="featured_image" id="featured_image" accept="image/*">
             </div>
             </div>
           </div>
@@ -229,7 +229,6 @@
     </div><!-- /.container-fluid -->
   </div>
   <!-- /.content -->
-</div>
 </div>
 <script>
   $(document).ready(function() {
@@ -270,67 +269,95 @@
     $("#featured_image").change(function () {
       imagePreview(this);
     });
-    $('#title').change(function(event){
-        title = event.target.value;
-    })
     $('#housingform').on('submit',function(e){
-      $('#alert').css('display','none');
+      let validation_flag = true;
+      $('#alert').css('display','none');      
       e.preventDefault();
-      if(update_flag){
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-        var formData = new FormData(this);
-        $.ajax({
-          type: 'POST',
-          url: '/admin/housing/update/'+current_id,
-          data: formData,
-          cache:false,
-          contentType:false,
-          processData:false,
-          success: function (data) {
-            if(data.success){
-              $('#notify_string').html('Update Success');
-              $('#alert').css('display','block');
-            }
-          },
-          error: function (data) {
-            console.log('Error:', data);
-          }
-        });
+      if($('#title').val()==='')
+      {
+        $('#title').css('border-color','red');
+        validation_flag = false;
       }
       else{
-        $.ajaxSetup({
-          headers: {
+        $('#title').css('border-color','');
+      }
+      if($('#book').val()===''){
+        $('#book').css('border-color','red')
+        validation_flag = false;
+      }
+      else{
+        $('#book').css('border-color','');
+      }
+      if($('#url_input').val()===''){
+        $('#url_input').css('border-color','red');
+        validation_flag = false;
+      }
+      else{
+        $('#url_input').css('border-color','');
+      }
+      if(validation_flag){
+        if(update_flag){
+          $.ajaxSetup({
+            headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-        var formData = new FormData(this);
-        $.ajax({
-          type: 'POST',
-          url: '/admin/housing',
-          data: formData,
-          cache:false,
-          contentType:false,
-          processData:false,
-          success: function (data) {
-            if(data.success){
-              $('#notify_string').html('Update Success');
-              $('#alert').css('display','block');
-              $('#created_url').html(data.url);
-              $('#url_string').css('display','block');
-              $('#link_url').attr('href',data.url).css('display','inline');
-              $('#save').html('更新');
-              update_flag = true;
-              current_id = data.id
             }
-          },
-          error: function (data) {
-            console.log('Error:', data);
-          }
-        });
+          });
+          var formData = new FormData(this);
+          $.ajax({
+            type: 'POST',
+            url: '/admin/housing/update/'+current_id,
+            data: formData,
+            cache:false,
+            contentType:false,
+            processData:false,
+            success: function (data) {
+              if(data.success){
+                $('#notify_string').html('更新しました。');
+                $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
+              }
+            },
+            error: function (data) {
+              console.log('Error:', data);
+            }
+          });
+        }
+        else{
+          $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          var formData = new FormData(this);
+          $.ajax({
+            type: 'POST',
+            url: '/admin/housing',
+            data: formData,
+            cache:false,
+            contentType:false,
+            processData:false,
+            success: function (data) {
+              if(data.success){
+                $('#notify_string').html('追加しました。');
+                $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
+                $('#created_url').html(data.url);
+                $('#url_string').css('display','block');
+                $('#link_url').attr('href',data.url).css('display','inline');
+                $('#save').html('更新');
+                update_flag = true;
+                current_id = data.id
+              }
+            },
+            error: function (data) {
+              console.log('Error:', data);
+            }
+          });
+        }
+      }
+      else{
+        $('#notify_string').html('入力内容でエラーがあります。');
+        $('#alert').css('display','block');
+        $('#alert').css('border-left-color','red');
+        $('#alert').css('color','red');
       }
     });
     $("#ow_dropzone").change(function() {

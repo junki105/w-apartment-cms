@@ -14,11 +14,11 @@ table td.sorter {cursor: move;}
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <p>Do You Really Want to Delete This ?</p>
+                    <p>本当に削除しますか？</p>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
                     <span id= 'deleteButton'></span>
                 </div>
 
@@ -35,13 +35,13 @@ table td.sorter {cursor: move;}
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
                             <li class="breadcrumb-item active">金額</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
                 <div class="mt-4 mb-2" id="url_string" style="display: none">
-                    <span class="font-weight-bold mr-2 h6">リンク:
+                    <span class="mr-2 font-weight-bold h6">リンク:
                         <span id="created_url"></span>
                     </span>
                     <a id="link_url" class="btn btn-sm btn-default">表示</a>
@@ -61,13 +61,14 @@ table td.sorter {cursor: move;}
             </div>
             <div class="card">
                 <div class="card-header">
-                <form action="url(/admin/results/amount)" id="form" method="POST">
-                    @csrf
-                    <div class="form-group row">
-                        <input type="text" class="col-sm-3 form-control ml-1 mr-3" name="type_input" id="type_input">
-                        <button id="areaAdd" type="submit" class="btn btn-md" style="border:1px solid;">新規作成</button>
-                    </div>
-                </form>
+                    <form action="/admin/results/amount" id="form" method="POST">
+                        @csrf
+                        <div class="form-group row">
+                            <input type="text" class="ml-1 mr-3 col-sm-3 form-control" name="type_input" id="type_input">
+                            <button id="areaAdd" type="submit" class="btn btn-md" style="border:1px solid;">新規作成</button>
+                        </div>
+                    </form>
+                </div>
                 <div class="card-body col-8">
                     @if(count($amounts)>0)
                         <table class="table table-striped table-sm" id="dnd" attr-sample="thetable">
@@ -76,7 +77,7 @@ table td.sorter {cursor: move;}
                                 <th class="col-sm-1"></th>
                                 <th class="col-sm-2">ID</th>
                                 <th class="col-sm-3">金額</th>
-                                <th class="col-sm-6 float-right"></th>
+                                <th class="float-right col-sm-6"></th>
                             </tr>
                             </thead>
                             <tbody id="amount_table">
@@ -89,11 +90,11 @@ table td.sorter {cursor: move;}
                                             <div class="float-sm-right">
                                             <a href='/admin/results/amount/{{$amount->id}}/edit'>
                                                     <button class="btn btn-info btn-sm editAmount" type="button" data-id="{{$amount->id}}">
-                                                        <i class="fa fa-pencil-alt ml-1 mr-1"></i>編集
+                                                        <i class="ml-1 mr-1 fa fa-pencil-alt"></i>編集
                                                     </button>
                                                 </a>
                                                 <button  class="btn btn-danger btn-sm deleteamount"  data-id="{{$amount->id}}">
-                                                    <i class="fa fa-trash ml-1 mr-1"></i>削除
+                                                    <i class="ml-1 mr-1 fa fa-trash"></i>削除
                                                 </button>
                                             </div>
                                         </td>
@@ -108,20 +109,20 @@ table td.sorter {cursor: move;}
                             <th class="col-sm-1"></th>
                             <th class="col-sm-2">ID</th>
                             <th class="col-sm-3">金額</th>
-                            <th class="col-sm-6 float-right"></th>
+                            <th class="float-right col-sm-6"></th>
                         </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
                     <div style="height: 200px; width:inherit;display: flex;justify-content: center;align-items: center;">
-                        <div>Data not exist.</div>
+                        <div>データがありません。</div>
                     </div>
                     @endif
                 </div>
                 <div class="card-footer">
                     <label for="ordersave">項目の順番はドラッグ&ドロップで変更可能です</label>
-                    <button id="ordersave" name="ordersave" class="btn btn-sm ml-3" style="border:1px solid;">並び替えを保存</button>
+                    <button id="ordersave" name="ordersave" class="ml-3 btn btn-sm" style="border:1px solid;">並び替えを保存</button>
                 </div>
             </div>
         </div>
@@ -133,16 +134,16 @@ table td.sorter {cursor: move;}
   $(document).ready(function() {
     let delete_id;
     let current_amount;
-    // $('#form').on('submit',function(e){
-    //     let new_name = $('#type_input').val();
-    //     if(new_name === ''){
-    //         $('#type_input').css('border-color','red');
-    //         $('#alert').css('display','block');
-    //         $('#notify_string').css('color','red');
-    //         $('#notify_string').html('Failed');
-    //         e.preventDefault();
-    //     }
-    // });
+    $('#form').on('submit',function(e){
+        let new_name = $('#type_input').val();
+        if(new_name === ''){
+            $('#type_input').css('border-color','red');
+            $('#alert').css('display','block');
+            $('#notify_string').css('color','red');
+            $('#notify_string').html('Failed');
+            e.preventDefault();
+        }
+    });
     var table = document.getElementById("dnd");
     RowSorter('table[attr-sample=thetable]', {
         handler: 'td.sorter',
@@ -158,7 +159,6 @@ table td.sorter {cursor: move;}
     $('#ordersave').click(function(){
         let table_data = $('#amount_table');
         let rows_data = table_data[0].children;
-        console.log(rows_data);
         let rows_array = Array.from(rows_data);
         let order = {}
         const order_list = rows_array.map(row=>{
@@ -188,7 +188,7 @@ table td.sorter {cursor: move;}
     $('.deleteamount').click(function(e){
         delete_id = $(this).data("id");
         $('#deleteModal').modal();
-        $('#deleteButton').html('<a class="btn btn-danger">Delete</a>');
+        $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
     });
     $('#deleteButton').click(function(e){
         $.ajaxSetup({
@@ -203,7 +203,6 @@ table td.sorter {cursor: move;}
                 $('.deleteamount').each(function(){
                     var id = $(this).data("id");
                     if(id===delete_id){
-                        console.log('sdfs');
                         $(this).parents("tr").remove();
                     }
                 })

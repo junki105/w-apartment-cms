@@ -40,13 +40,13 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
             <li class="breadcrumb-item active">お知らせ新規追加</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
       <div class="mt-4 mb-2 d-flex align-items-center">
-        <span class="mr-2"><span class="font-weight-bold mr-2 h6">リンク:<span id="url_string"></span>
+        <span class="mr-2"><span class="mr-2 font-weight-bold h6">リンク:<span id="url_string"></span>
         <a id="post_url" class="btn btn-sm btn-default">表示</a>
       </div>
     </div><!-- /.container-fluid -->
@@ -58,7 +58,7 @@
     <div class="container-fluid">
         <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
             <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>Create Success!</strong>
+            <strong>更新しました。</strong>
         </div>
       <form id="postform" action="javascript:void(0)" enctype="multipart/form-data">
         @csrf
@@ -83,8 +83,8 @@
               </div>
               <div class="card-body">
                 <div class="form-group d-flex justify-content-between align-content-end">
-                  <label class="font-weight-normal mb-0 text-sm mt-1">公開状態</label>
-                  <select name="state" id="state" class="form-control col-3 form-control-sm p-1">
+                  <label class="mt-1 mb-0 text-sm font-weight-normal">公開状態</label>
+                  <select name="state" id="state" class="p-1 form-control col-3 form-control-sm">
                     <option value="1">公開</option>
                     <option value="0">非公開</option>
                   </select>
@@ -126,8 +126,8 @@
     $('#state').val(post.state);
     var created_at = post.created_at.substr(0,10);
     var updated_at = post.updated_at.substr(0,10);
-    $('#post_url').attr('href','http://localhost:8000/news/'+post.id);
-    $('#url_string').html('http://localhost:8000/news/'+post.id);
+    $('#post_url').attr('href',url);
+    $('#url_string').html(url);
     $('#created_at').html(created_at);
     $('#updated_at').html(updated_at);
     $('#state').val(post.state);

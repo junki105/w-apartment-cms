@@ -3366,8 +3366,6 @@ a:hover {
 .minimal-header {
   display: flex;
   justify-content: space-between;
-  background-image: url(/images/bg_minimal.png?c4cea5c21e6d2b765cdaf2ef79f8e661);
-  background-size: cover;
 }
 
 .minimal-header .slide-number {
@@ -3496,6 +3494,10 @@ a:hover {
   justify-content: flex-end;
 }
 
+.minimal-content .minimal-wrap .img-content:nth-child(3) img {
+  width: 368px;
+}
+
 .minimal-content .minimal-wrap .img-content:nth-child(4) {
   margin-top: 40px;
   justify-content: flex-start;
@@ -3518,14 +3520,14 @@ a:hover {
   text-align: center;
 }
 
-.minimal .gallery-content .gallery-wrap {
+.minimal .gallery-content .gallery-wrap-content {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 120px;
 }
 
-.minimal .gallery-content .gallery-wrap img {
+.minimal .gallery-content .gallery-wrap-content img {
   width: 214px;
   height: 214px;
   -o-object-fit: cover;

@@ -3,31 +3,29 @@
 @section('content')
 
 <style>
+#upload-image {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+  display: none;
+}
 
-  #upload-image {
-    opacity: 0;
-    position: absolute;
-    z-index: -1;
-    display: none;
-  }
+#preview {
+  cursor: pointer;
+  width: 100%;
+  height: 150px;
+  background-color: rgb(156, 150, 150);
+  color: #333;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  #preview {
-    cursor: pointer;
-    width: 100%;
-    height: 150px;
-    background-color: rgb(156, 150, 150);
-    color: #333;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
+#preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 </style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -38,13 +36,13 @@
           <h4 class="m-0"><strong>お知らせ一覧</strong></h4>
         </div>
         <div class="col-sm-3">
-            <a href="url(/admin/news/create)">
-                <Button class="btn btn-primary">新規追加</Button>
-            </a>
+          <a href="/admin/news/create" class="btn btn-primary">
+            新規追加
+          </a>
         </div><!-- /.col -->
         <div class="col-sm-7">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
             <li class="breadcrumb-item active">お知らせ一覧</li>
           </ol>
         </div><!-- /.col -->
@@ -56,147 +54,109 @@
   <!-- Main content -->
   <div class="content">
     <div id="deleteModal" class="modal fade" role='dialog'>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                    <p>Do You Really Want to Delete This ?</p>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <span id= 'deleteButton'></span>
-                </div>
-
-            </div>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          </div>
+          <div class="modal-body">
+            <p>本当に削除しますか？</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+            <span id='deleteButton'></span>
+          </div>
         </div>
+      </div>
     </div>
     <div class="container-fluid">
-        <div class="card">
-            <div class="card-header">
-                <div class="p-0.2">検索</div>
-            </div>
-            <div class="card-body">
-                <form id="search_form" action="javascript:void(0)">
-                    <div class="form-group row">
-                        <label for="search_word" class="col-sm-2 col-form-label">フリーワード</label>
-                        <input type="text" class="col-sm-4 form-control ml-1" name="search_word" id="search_word">
-                    </div>
-                    <div class="form-group row">
-                        <label for="check_type" class="col-sm-2 col-form-label">公開状態</label>
-                        <div class="form-check form-check-inline  ml-1" name="check_type">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="state"  value="1">
-                            <label class="form-check-label" for="inlineCheckbox1">公開</label>
-                        </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="state" value="0">
-                            <label class="form-check-label" for="inlineCheckbox2">非公開</label>
-                          </div>
-                    </div>
-                    <div class="form-group row ">
-                        <div class=" mx-auto">
-                        <button class="btn btn-block btn-primary px-5 pl-2 pr-4"  type="submit">
-                            検索
-                            <i class="fa fa-search ml-2 mr-3 "></i>
-                        </button>
-                        </div>
-                    </div>
-                  </form>
-            </div>
+      <div class="card">
+        <div class="card-header">
+          <strong>検索</strong>
         </div>
-        <div class="card" id="table_card">
+        <div class="card-body">
+          <form id="search_form" action="javascript:void(0)">
+            <div class="form-group row">
+              <label for="search_word" class="col-sm-2 col-form-label">フリーワード</label>
+              <input type="text" class="ml-1 col-sm-4 form-control" name="search_word" id="search_word">
+            </div>
+            <div class="form-group row">
+              <label for="check_type" class="col-sm-2 col-form-label">公開状態</label>
+              <div class="ml-1 form-check form-check-inline" name="check_type">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="state" value="1">
+                <label class="form-check-label" for="inlineCheckbox1">公開</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="state" value="0">
+                <label class="form-check-label" for="inlineCheckbox2">非公開</label>
+              </div>
+            </div>
+            <div class="form-group row ">
+              <div class="mx-auto ">
+                <button class="px-5 pl-2 pr-4 btn btn-block btn-primary" type="submit">
+                  検索
+                  <i class="ml-2 mr-3 fa fa-search "></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="card" id="table_card">
         @include('admin.news.pagination_data')
-        </div>
+      </div>
 
     </div>
   </div>
 </div>
 <script>
-  $(document).ready(function() {
-    function fetch_data(page,search_word,state)
-    {
-        $.ajax({
-            url:"/admin/news/show?page="+page+"&search_word="+search_word+"&state="+state,
-            method:"GET",
-            success:function(data){
-                $('#table_card').html(data);
-            },
-            error:function(err){
-                console.log(err);
-            }
-        })
+$(document).ready(function() {
+  function fetch_data(page, search_word, state) {
+    if (search_word === undefined || search_word === '') {
+      search_word = null;
     }
-    let delete_id;
-    let count = <?php echo json_encode($count)?>;
-    let search_word = null;
-    let state = null;
-    $('.deletePost').click(function(e){
-        delete_id = $(this).data("id");
-        $('#deleteModal').modal();
-        $('#deleteButton').html('<a class="btn btn-danger">Delete</a>');
-    });
-    $('#deleteButton').click(function(e){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: "DELETE",
-            url: "/admin/news"+'/'+delete_id,
-            success: function (data) {
-                $('.deletePost').each(function(){
-                    var id = $(this).data("id");
-                    if(id===delete_id){
-                        $(this).parents("tr").remove();
-                    }
-                })
-                $('#deleteModal').modal("hide");
-                count--;
-                $('.count').html(count);
-            },
-            error: function (data) {
-                console.log('Error:', data);
-            }
-        })
-    });
-    $('.viewPost').click(function(e){
-        var id = $(this).data("id");
-        $.ajax({
-            type: "GET",
-            url: "/news"+'/'+id,
-        });
+    if (state === undefined || state === '') {
+      state = null;
+    }
+    $.ajax({
+      url: "/admin/news/show?page=" + page + "&search_word=" + search_word + "&state=" + state,
+      method: "GET",
+      success: function(data) {
+        $('#table_card').html(data);
+      },
+      error: function(err) {
+        console.log(err);
+      }
     })
-        // $('.editPost').click(function(e){
-        //     var id = $(this).data("id");
-        //     $.ajax({
-        //         type: "GET",
-        //         url: "/admin/news/update/"+id,
-        //     });
-        // })
-    $('.form-check-input').click(function(){
-        $('.form-check-input').not(this).prop('checked',false);
-    })
-    $('#search_form').on('submit',function(){
-        let formData = new FormData(this);
-        search_word = formData.get('search_word');
-        state = formData.get('state');
-        page = 1;
-        fetch_data(page,search_word,state);
-       
-    })
-    $(document).on('click', '.pagination a', function(event){
-        event.preventDefault(); 
-        var test=$(this).attr('href');
-        var page = $(this).attr('href').split('page=')[1];
-        fetch_data(page,search_word,state);
+  }
+  let search_word = null;
+  let state = null;
+  $('.viewPost').click(function(e) {
+    var id = $(this).data("id");
+    $.ajax({
+      type: "GET",
+      url: "/news" + '/' + id,
     });
-
-    });
+  })
+  $('.form-check-input').click(function() {
+    $('.form-check-input').not(this).prop('checked', false);
+  })
+  $('#search_form').on('submit', function() {
+    let formData = new FormData(this);
+    search_word = formData.get('search_word');
+    state = formData.get('state');
+    page = 1;
+    fetch_data(page, search_word, state);
+  })
+  $(document).on('click', '.pagination a', function(event) {
+    event.preventDefault();
+    var test = $(this).attr('href');
+    var page = $(this).attr('href').split('page=')[1];
+    fetch_data(page, search_word, state);
+  });
+});
+let delete_id = 0;
+let count = 0;
 </script>
 
 @endsection
-
-

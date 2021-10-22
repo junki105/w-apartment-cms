@@ -22,6 +22,19 @@
         h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
       })(document);
     </script>
+    <style>
+      #background-video {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+      }
+    </style>
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -36,7 +49,7 @@
           <div></div>
         </div>
         <div class="line"></div>
-        <div id="num" class="slide-number"></div>
+        <div id="num" class="slide-number">{{$house->title}}</div>
       </div>
       <div class="header-aside">
         <a href="" class="login-btn"><img src="{{ URL::asset('images/ico_login_white.png') }}" alt=""></a>
@@ -84,8 +97,10 @@
       </div>
       <div class="minimal-header-content">
         <h1>MINIMAL</h1>
-        <button class="btn">動画埋め込み</button>
       </div>
+      <video id="background-video" autoplay loop muted poster="https://assets.codepen.io/6093409/river.jpg">
+        <source src="{{$house->video_url}}" type="video/mp4">
+      </video>
     </header>
     <main class="container minimal">
       <header class="header feature-header minimal-origin-header">
@@ -111,42 +126,31 @@
           </div>
           <div class="line"></div>
         </div>
-        <a href="#" id="moveDown" class="btn scroll-btn">
-          SCROLL
-          <img src="{{ URL::asset('images/ico_arrow_down.png') }}" alt="">
-        </a>
       </header>
       <section class="content minimal-content">
-        <h1>MINIMAL</h1>
+        <h1>{{$house->title}}</h1>
         <div class="minimal-wrap">
           <h2>圧倒的なデザイン</h2>
-          <p>ショルダーコピーショルダーコピーショルダーコピー<br>
-            ショルダーコピーショルダーコピー<br>
-            ショルダーコピーショルダーコピーショルダーコピーショルダーコピー</p>
-          <div id="ow_images">
+          <p>{{$house->book}}</p>
+          @foreach (explode(',' , $house->ow_image_urls) as $ow_url)
             <div class="img-content">
-              <img src="{{ URL::asset('images/work01.png') }}" alt="">
+              <img src="/{{ $ow_url }}" alt="">
             </div>
-            <div class="img-content">
-              <img src="{{ URL::asset('images/works_single.png') }}" alt="">
-            </div>
-            <div class="img-content">
-              <img src="{{ URL::asset('images/work01.png') }}" alt="">
-            </div>
-          </div>
-         
+          @endforeach
         </div>
       </section>
       <section class="content gallery-content">
         <h1>GALLERY</h1>
-        <div class="gallery-wrap">
-          
+        <div class="gallery-wrap-content">
+          @foreach (explode(',' , $house->gallery_image_urls) as $gallery_url)
+            <img src="/{{ $gallery_url }}" alt="">
+          @endforeach
         </div>
       </section>
       <section class="content voice-content">
         <h1>OWNER’S VOICE</h1>
         <div class="voice-wrap">
-          <iframe src="" frameborder="0"></iframe>
+          <iframe src="{{ $house->voice_url }}" frameborder="0"></iframe>
         </div>
       </section>
       <!-- <section class="official-content">

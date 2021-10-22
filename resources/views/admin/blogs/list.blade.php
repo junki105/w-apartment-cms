@@ -44,7 +44,7 @@
         </div><!-- /.col -->
         <div class="col-sm-7">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
             <li class="breadcrumb-item active">ブログ一覧</li>
           </ol>
         </div><!-- /.col -->
@@ -62,11 +62,11 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <p>Do You Really Want to Delete This ?</p>
+                    <p>本当に削除しますか？</p>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
                     <span id= 'deleteButton'></span>
                 </div>
 
@@ -76,21 +76,21 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <div class="p-0.2">検索</div>
+                <strong>検索</strong>
             </div>
             <div class="card-body">
                 <div class="form-group row">
                     <label for="search_word" class="col-sm-2 col-form-label">フリーワード</label>
-                    <input type="text" class="col-sm-4 form-control ml-1" name="search_word" id="search_word">
+                    <input type="text" class="ml-1 col-sm-4 form-control" name="search_word" id="search_word">
                 </div>
                 <div class="form-group row">
                     <label for="author_name" class="col-sm-2 col-form-label">著者名</label>
-                    <input type="text" class="col-sm-4 form-control ml-1" name="author_name" id="author_name">
+                    <input type="text" class="ml-1 col-sm-4 form-control" name="author_name" id="author_name">
                 </div>
                 <div class="form-group row">
                     <label for="check_type" class="col-sm-2 col-form-label">カテゴリ</label>
                     @foreach ($categories as $category)
-                    <div class="form-check form-check-inline  ml-1" name="check_type">
+                    <div class="ml-1 form-check form-check-inline" name="check_type">
                         <input class="category_check" type="checkbox" id="{{$category->id}}" name="category"  value="{{$category->id}}">
                         <label class="form-check-label">{{$category->name}}</label>
                     </div>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="form-group row">
                     <label for="check_type" class="col-sm-2 col-form-label">公開状態</label>
-                    <div class="form-check form-check-inline  ml-1" name="check_type">
+                    <div class="ml-1 form-check form-check-inline" name="check_type">
                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="public_status"  value="1">
                         <label class="form-check-label" for="inlineCheckbox1">公開</label>
                     </div>
@@ -109,15 +109,15 @@
                 </div>
                 <div class="form-group row">
                 <label for="recommended_flag" class="col-sm-2 col-form-label">おすすめ</label>
-                    <div class="form-check form-check-inline  ml-1" name="recommended_flag">
+                    <div class="ml-1 form-check form-check-inline" name="recommended_flag">
                         <input  type="checkbox" class="recommended_flag" id="inlineCheckbox" name="recommended_flag"  value="true">
                     </div>
                 </div>
                 <div class="form-group row ">
-                    <div class=" mx-auto">
-                    <button class="btn btn-block btn-primary px-5 pl-2 pr-4" id="searchButton">
+                    <div class="mx-auto ">
+                    <button class="px-5 pl-2 pr-4 btn btn-block btn-primary" id="searchButton">
                         検索
-                        <i class="fa fa-search ml-2 mr-3 "></i>
+                        <i class="ml-2 mr-3 fa fa-search "></i>
                     </button>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
             <div class="card-header">
                 <h6 class="card-title">お知らせ一覧</h6>
 
-                <div class="card-tools float-right d-inline-flex"><span class="mt-1 mr-2">全<span class="count">{{$count}}</span>件</span>{{$blogs->links()}}</div>
+                <div class="float-right card-tools d-inline-flex"><span class="mt-1 mr-2">全<span class="count">{{$count}}</span>件</span>{{$blogs->links()}}</div>
             </div>
             <div class="card-body">
                 @if(count($blogs)>0)
@@ -139,7 +139,7 @@
                             <th class="col-sm-2">著者名</th>
                             <th class="col-sm-2">カテゴリ</th>
                             <th class="col-sm-2">公開状能</th>
-                            <th class="col-sm-3 float-right"></th>カテゴリ
+                            <th class="float-right col-sm-3"></th>カテゴリ
                         </tr>
                         </thead>
                         <tbody id="blogrows">
@@ -166,12 +166,12 @@
                                             </a>
                                             <a href="/admin/blogs/{{$blog->id}}/edit" class="mr-2">
                                                 <button class="btn btn-info btn-sm editBlog" type="button" data-id="{{$blog->id}}">
-                                                    <i class="fa fa-pencil-alt ml-1 mr-1"></i>
+                                                    <i class="ml-1 mr-1 fa fa-pencil-alt"></i>
                                                     編集
                                                 </button>
                                             </a>
                                             <button  class="btn btn-danger btn-sm deleteBlog" id="deleteBlog" data-id="{{$blog->id}}">
-                                                <i class="fa fa-trash ml-1 mr-1"></i>削除
+                                                <i class="ml-1 mr-1 fa fa-trash"></i>削除
                                             </button>
                                         </div>
                                     </td>
@@ -186,19 +186,19 @@
                         <th class="col-sm-1">ID</th>
                         <th class="col-sm-3">タイトル</th>
                         <th class="col-sm-4">公開状能</th>
-                        <th class="col-sm-4 float-right"></th>
+                        <th class="float-right col-sm-4"></th>
                     </tr>
                     </thead>
                     <tbody>
                     </tbody>
                 </table>
                 <div style="height: 200px; width:inherit;display: flex;justify-content: center;align-items: center;">
-                    <div>Data not exist.</div>
+                    <div>データがありません。</div>
                 </div>
                 @endif
             </div>
             <div class="card-footer">
-                <div class="card-tools float-right d-inline-flex"><span class="m-2">全<span class="count">{{$count}}</span>件</span>{{$blogs->links()}}</div>
+                <div class="float-right card-tools d-inline-flex"><span class="m-2">全<span class="count">{{$count}}</span>件</span>{{$blogs->links()}}</div>
             </div>
         </div>
     </div>
@@ -211,7 +211,7 @@
         $('.deleteBlog').click(function(e){
             delete_id = $(this).data("id");
             $('#deleteModal').modal();
-            $('#deleteButton').html('<a class="btn btn-danger">Delete</a>');
+            $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
         });
         $('#deleteButton').click(function(e){
             $.ajaxSetup({
