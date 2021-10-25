@@ -15,7 +15,6 @@ table td.sorter {cursor: move;}
                 </div>
                 <div class="modal-body">
                     <p>本当に削除しますか？</p>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
@@ -61,7 +60,7 @@ table td.sorter {cursor: move;}
             </div>
             <div class="card">
                 <div class="card-header">
-                    <form action="/admin/results/amount" id="form" method="POST">
+                    <form action="/admin/results_amount" id="form" method="POST">
                         @csrf
                         <div class="form-group row">
                             <input type="text" class="ml-1 mr-3 col-sm-3 form-control" name="type_input" id="type_input">
@@ -88,7 +87,7 @@ table td.sorter {cursor: move;}
                                         <td class="col-sm-3" id="td{{$amount->id}}">{{$amount->type}}</td>
                                         <td class="col-sm-6">
                                             <div class="float-sm-right">
-                                            <a href='/admin/results/amount/{{$amount->id}}/edit'>
+                                            <a href='/admin/results_amount/{{$amount->id}}/edit'>
                                                     <button class="btn btn-info btn-sm editAmount" type="button" data-id="{{$amount->id}}">
                                                         <i class="ml-1 mr-1 fa fa-pencil-alt"></i>編集
                                                     </button>
@@ -137,10 +136,10 @@ table td.sorter {cursor: move;}
     $('#form').on('submit',function(e){
         let new_name = $('#type_input').val();
         if(new_name === ''){
-            $('#type_input').css('border-color','red');
+            $('#notify_string').html('入力内容でエラーがあります。');
             $('#alert').css('display','block');
-            $('#notify_string').css('color','red');
-            $('#notify_string').html('Failed');
+            $('#alert').css('border-left-color','red');
+            $('#alert').css('color','red');
             e.preventDefault();
         }
     });
@@ -172,12 +171,12 @@ table td.sorter {cursor: move;}
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
             type:'post',
-            url:'/admin/results/amount/update/order',
+            url:'/admin/results_amount/update/order',
             data:{
                 order_list : order_list
             },
             success:function(data){
-                $('#notify_string').html('Order Success');
+                $('#notify_string').html('項目の順番を更新しました。');
                 $('#alert').css('display','block');
             }
             ,error:function(error){
@@ -198,7 +197,7 @@ table td.sorter {cursor: move;}
         });
         $.ajax({
             type: "DELETE",
-            url: "/admin/results/amount"+'/'+delete_id,
+            url: "/admin/results_amount"+'/'+delete_id,
             success: function (data) {
                 $('.deleteamount').each(function(){
                     var id = $(this).data("id");

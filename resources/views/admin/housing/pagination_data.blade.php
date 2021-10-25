@@ -76,8 +76,7 @@
                 編集
               </button>
             </a>
-            <button class="btn btn-danger btn-sm deleteHousing"
-              data-id="{{$housing->id}}" onclick="deleteHousing({{$housing->id}})">
+            <button class="btn btn-danger btn-sm deleteHousing" data-id="{{$housing->id}}" onclick="deleteHousing({{$housing->id}})">
               <i class="ml-1 mr-1 fa fa-trash"></i>削除
             </button>
           </div>

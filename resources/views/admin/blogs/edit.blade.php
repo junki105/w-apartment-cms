@@ -230,6 +230,7 @@
 </div>
 <script>
   $(document).ready(function() {
+    let validation_flag = true;
     $('#summernote').summernote({
       height: 450,
     });
@@ -257,10 +258,39 @@
     $("#featured_image").change(function () {
       imagePreview(this);
     });
-    $('#title').change(function(event){
-        title = event.target.value;
-    })
     $('#blogform').on('submit',function(e){
+      $('#alert').css('display','none');
+      if($('#title').val()==='')
+      {
+        $('#title').css('border-color','red');
+        validation_flag = false;
+      }
+      else{
+        $('#title').css('border-color','');
+      }
+      if($('#author_name').val()===''){
+        $('#author_name').css('border-color','red')
+        validation_flag = false;
+      }
+      else{
+        $('#author_name').css('border-color','');
+      }
+      if($('#author_profile').val()===''){
+        $('#author_profile').css('border-color','red');
+
+        validation_flag = false;
+      }
+      else{
+        $('#author_profile').css('border-color','');
+      }
+      if($('#summernote').summernote('code')==='<p><br></p>') {
+        $('.note-editor').css('border-color','red');
+        validation_flag=false;
+      }
+      else{
+        $('.note-editor').css('border-color','');
+      }
+      if(validation_flag){
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -268,9 +298,6 @@
         });
         e.preventDefault();
         var formData = new FormData(this);
-        for(let v of formData){
-          console.log(v);
-        }
         $.ajax({
             type: "POST",
             url: '/admin/blogs/update/'+blog_id,
@@ -280,7 +307,9 @@
             processData:false,
             success: function (data) {
                 if(data.success){
-                    $('#alert').css('display','block');
+                  console.log(data.success);
+                  $('#notify_string').html('更新しました。');
+                  $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
                     var current_date = new Date();
                     var current_year = String(current_date.getFullYear());
                     var current_month = current_date.getMonth() + 1;
@@ -295,6 +324,13 @@
                     console.log('Error:', data);
                 }
         });
+      }
+      else{
+        $('#notify_string').html('入力内容でエラーがあります。');
+        $('#alert').css('display','block');
+        $('#alert').css('border-left-color','red');
+        $('#alert').css('color','red');
+      }
     })
     function readFile(input) {
     if (input.files && input.files[0]) {

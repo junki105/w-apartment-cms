@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,6 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
-        //
         $posts=Post::paginate(10);
         return view('news',compact('posts'))->with('i', ($request->input('page', 1) - 1) *10);
     }

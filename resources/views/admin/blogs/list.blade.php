@@ -44,7 +44,7 @@
         </div><!-- /.col -->
         <div class="col-sm-7">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item active">ブログ一覧</li>
           </ol>
         </div><!-- /.col -->
@@ -55,28 +55,11 @@
 
   <!-- Main content -->
   <div class="content">
-    <div id="deleteModal" class="modal fade" role='dialog'>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                    <p>本当に削除しますか？</p>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-                    <span id= 'deleteButton'></span>
-                </div>
-
-            </div>
-        </div>
-    </div>
+    @include('admin.layouts.modal_delete')
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <strong>検索</strong>
+                <div class="p-0.2">検索</div>
             </div>
             <div class="card-body">
                 <div class="form-group row">
@@ -87,7 +70,7 @@
                     <label for="author_name" class="col-sm-2 col-form-label">著者名</label>
                     <input type="text" class="ml-1 col-sm-4 form-control" name="author_name" id="author_name">
                 </div>
-                <div class="form-group row">
+                <div class="form-group row" id="category">
                     <label for="check_type" class="col-sm-2 col-form-label">カテゴリ</label>
                     @foreach ($categories as $category)
                     <div class="ml-1 form-check form-check-inline" name="check_type">
@@ -123,178 +106,86 @@
                 </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-header">
-                <h6 class="card-title">お知らせ一覧</h6>
-
-                <div class="float-right card-tools d-inline-flex"><span class="mt-1 mr-2">全<span class="count">{{$count}}</span>件</span>{{$blogs->links()}}</div>
-            </div>
-            <div class="card-body">
-                @if(count($blogs)>0)
-                    <table class="table table-striped">
-                        <thead>
-                        <tr class="row">
-                            <th class="col-sm-1">ID</th>
-                            <th class="col-sm-2">タイトル</th>
-                            <th class="col-sm-2">著者名</th>
-                            <th class="col-sm-2">カテゴリ</th>
-                            <th class="col-sm-2">公開状能</th>
-                            <th class="float-right col-sm-3"></th>カテゴリ
-                        </tr>
-                        </thead>
-                        <tbody id="blogrows">
-                            @foreach ($blogs as $blog)
-                                <tr class="row" id="{{$blog->id}}">
-                                    <td class="col-sm-1">{{$blog->id}}</td>
-                                    <td class="col-sm-2">{{$blog->title}}</td>
-                                    <td class="col-sm-2">{{$blog->author_name}}</td>
-                                    <td class="col-sm-2">dff</td>
-                                    <td class="col-sm-2">
-                                    @if($blog->public_status=='0')
-                                        非公開
-                                    @else
-                                        公開
-                                    @endif
-                                    </td>
-                                    <td class="col-sm-3">
-                                        <div class="float-sm-right">
-                                            <a href="/blogs/{{$blog->id}}" class="mr-2">
-                                                <button class="btn btn-primary btn-sm viewBlog" data-id="{{$blog->id}}"  type="button">
-                                                    <i class="fa fa-external-link-alt"></i>
-                                                    表示
-                                                </button>
-                                            </a>
-                                            <a href="/admin/blogs/{{$blog->id}}/edit" class="mr-2">
-                                                <button class="btn btn-info btn-sm editBlog" type="button" data-id="{{$blog->id}}">
-                                                    <i class="ml-1 mr-1 fa fa-pencil-alt"></i>
-                                                    編集
-                                                </button>
-                                            </a>
-                                            <button  class="btn btn-danger btn-sm deleteBlog" id="deleteBlog" data-id="{{$blog->id}}">
-                                                <i class="ml-1 mr-1 fa fa-trash"></i>削除
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @else
-                <table class="table table-striped">
-                    <thead>
-                    <tr class="row">
-                        <th class="col-sm-1">ID</th>
-                        <th class="col-sm-3">タイトル</th>
-                        <th class="col-sm-4">公開状能</th>
-                        <th class="float-right col-sm-4"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <div style="height: 200px; width:inherit;display: flex;justify-content: center;align-items: center;">
-                    <div>データがありません。</div>
-                </div>
-                @endif
-            </div>
-            <div class="card-footer">
-                <div class="float-right card-tools d-inline-flex"><span class="m-2">全<span class="count">{{$count}}</span>件</span>{{$blogs->links()}}</div>
-            </div>
+        <div class="card" id="table_card">
+        @include('admin.blogs.pagination_data')
         </div>
     </div>
   </div>
 </div>
 <script>
-  $(document).ready(function() {
-        let delete_id;
-        let count = <?php echo json_encode($count)?>;
-        $('.deleteBlog').click(function(e){
-            delete_id = $(this).data("id");
-            $('#deleteModal').modal();
-            $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
+
+$(document).ready(function() {
+    let delete_id;
+    let page = 1;
+    let count = <?php echo json_encode($count)?>;
+    let search_word,author_name;
+    let category_query='';
+    let public_status,recommended_flag;
+    function fetch_data(page,search_word,author_name,category_query,public_status,recommended_flag)
+    {
+        let url = "/admin/blogs/search?page="+page;
+        url=url+"&search_word=";
+        ( typeof(search_word) ==='undefined'||search_word==='' ) ?  url=url+null : url=url+search_word;
+        url=url+"&author_name=";
+        ( typeof(author_name) ==='undefined'||author_name==='' ) ?  url=url+null : url=url+author_name;
+        url=url+"&public_status=";
+        ( typeof(public_status) ==='undefined'||public_status==='' ) ? url=url+null : url+=public_status;
+        url=url+"&category_query=";
+        ( typeof(category_query) ==='undefined'||category_query==='' ) ? url=url+null : url+=category_query;
+        url=url+"&recommended_flag=";
+        ( typeof(recommended_flag) ==='undefined'||recommended_flag==='' ) ? url=url+null : url+=recommended_flag;
+        $.ajax({
+            url: url,
+            method:"GET",
+            success:function(data){
+                $('#table_card').html(data);
+                },
+            error:function(err){
+                console.log(err);
+                }
+        })
+    }
+    $('.viewBlog').click(function(e){
+        var id = $(this).data("id");
+        $.ajax({
+            type: "GET",
+            url: "/news"+'/'+id,
         });
-        $('#deleteButton').click(function(e){
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: "DELETE",
-                url: "/admin/blogs"+'/'+delete_id,
-                success: function (data) {
-                    $('.deleteBlog').each(function(){
-                        var id = $(this).data("id");
-                        if(id===delete_id){
-                            $(this).parents("tr").remove();
-                        }
-                    })
-                    $('#deleteModal').modal("hide");
-                    count--;
-                    $('.count').html(count);
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                }
-            })
+    })
+    $('.editBlog').click(function(e){
+        var id = $(this).data("id");
+        $.ajax({
+            type: "GET",
+            url: "/admin/blogs/edit/"+id,
         });
-        $('.viewBlog').click(function(e){
-            var id = $(this).data("id");
-            $.ajax({
-                type: "GET",
-                url: "/news"+'/'+id,
-            });
-        })
-        $('.editBlog').click(function(e){
-            var id = $(this).data("id");
-            $.ajax({
-                type: "GET",
-                url: "/admin/blogs/edit/"+id,
-            });
-        })
-        var index =0;
-        $('#searchButton').click(function(e){
-            let search_word = $('#search_word').val();
-            let author_name = $('#author_name').val();
-            var category_array = [];
-            $('.category_check:checked').each(function () {
-                category_array[index++] = $(this).val();
-            });  
-            let public_status = ''
-            $('.form-check-input:checked').each(function(){
-                public_status = $(this).val();
-            }); 
-            recommended_flag = '';
-            $('.recommended_flag:checked').each(function(){
-                recommended_flag = $(this).val();
-            });
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: "POST",
-                url: "/admin/blogs/search",
-                data:{
-                    search_word:search_word,
-                    author_name:author_name,
-                    category_array:category_array,
-                    public_status:public_status,
-                    recommended_flag:recommended_flag
-                },
-                success: function (data) {
-                    console.log(data)
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                }
-            })
-        })
-        $('.form-check-input').click(function(){
-            $('.form-check-input').not(this).prop('checked',false);
-        })
+    })
+    $('#searchButton').click(function(e){
+        var index = 0;
+        search_word = $('#search_word').val();
+        author_name = $('#author_name').val();
+        var selected = new Array();
+        $("#category input[type=checkbox]:checked").each(function () {
+            selected.push(this.value);
+        });
+        category_query = selected.toString();        
+        $('.form-check-input:checked').each(function(){
+            public_status = $(this).val();
+        }); 
+        $('.recommended_flag:checked').each(function(){
+            recommended_flag = $(this).val();
+        });
+        page = 1;
+        fetch_data(page,search_word,author_name,category_query,public_status,recommended_flag)
+    })
+    $('.form-check-input').click(function(){
+        $('.form-check-input').not(this).prop('checked',false);
+    })
+    $(document).on('click', '.pagination a', function(event){
+        event.preventDefault(); 
+        var page = $(this).attr('href').split('page=')[1];
+        fetch_data(page,search_word,author_name,category_query,public_status,recommended_flag);
     });
+});
 </script>
 
 @endsection

@@ -331,6 +331,7 @@
   $(document).ready(function() {
     let current_id;
     let update_flag = false;
+    let validation_flag = true;
     var current_date = new Date();
     var current_year = String(current_date.getFullYear());
     var current_month = current_date.getMonth() + 1;
@@ -367,72 +368,146 @@
       imagePreview(this);
     });
     $('#resultsform').on('submit',function(e){
+      let validation_flag = true;
       $('#alert').css('display','none');
-      if(update_flag){
-        $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-        e.preventDefault();
-        var formData = new FormData(this);
-        type = 'post';
-        $.ajax({
-          type: type,
-          url: '/admin/results/update/'+current_id,
-          data: formData,
-          cache:false,
-          contentType:false,
-          processData:false,
-          success: function (data) {
-            console.log(data);
-            if(data.success){
-              $('#notify_string').html('更新しました。');
-              $('#alert').css('display','block');
-              // $('#created_url').html('http://localhost:8000/results/'+data.id);
-              // $('#url_string').css('display','block');
-              // $('#link_url').attr('href','http://localhost:8000/blogs/'+data.id).css('display','inline');
-              update_flag = true;
-            }
-          },
-          error: function (data) {
-            console.log('Error:', data);
-          }
-        });
+      if($('#title').val()==='')
+      {
+        $('#title').css('border-color','red');
+        validation_flag = false;
       }
       else{
-        $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-        e.preventDefault();
-        var formData = new FormData(this);
-        type = 'post';
-        $.ajax({
-          type: type,
-          url: '/admin/results',
-          data: formData,
-          cache:false,
-          contentType:false,
-          processData:false,
-          success: function (data) {
-            console.log(data);
-            if(data.success){
-              $('#notify_string').html('追加しました。');
-              $('#alert').css('display','block');
-              $('#created_url').html(data.url);
-              $('#url_string').css('display','block');
-              $('#link_url').attr('href',data.url).css('display','inline');
-              update_flag = true;
-              current_id = data.id;
-              $('#save').html('更新');
+        $('#title').css('border-color','');
+      }
+      if($('#instructor_name').val()===''){
+        $('#instructor_name').css('border-color','red')
+        validation_flag = false;
+      }
+      else{
+        $('#instructor_name').css('border-color','');
+      }
+      if($('#instruction_summary').val()===''){
+        $('#instruction_summary').css('border-color','red');
+        validation_flag = false;
+      }
+      else{
+        $('#instruction_summary').css('border-color','');
+      }
+      if($('#instruction_effects').val()===''){
+        $('#instruction_effects').css('border-color','red');
+        validation_flag = false;
+      }
+      else{
+        $('#instruction_effects').css('border-color','');
+      }
+      if($('#instruction_details').val()===''){
+        $('#instruction_details').css('border-color','red');
+        validation_flag = false;
+      }
+      else{
+        $('#instruction_details').css('border-color','');
+      }
+      if($('#choosing_reason').val()===''){
+        $('#choosing_reason').css('border-color','red');
+        validation_flag = false;
+      }
+      else{
+        $('#choosing_reason').css('border-color','');
+      }
+      if($('#post_introduction_details').val()===''){
+        $('#post_introduction_details').css('border-color','red');
+        validation_flag = false;
+      }
+      else{
+        $('#post_introduction_details').css('border-color','');
+      }
+      if($('#future_outlook_details').val()===''){
+        $('#future_outlook_details').css('border-color','red');
+        validation_flag = false;
+      }
+      else{
+        $('#future_outlook_details').css('border-color','');
+      }
+      if($('#url').val()===''){
+        $('#url').css('border-color','red');
+        validation_flag = false;
+      }
+      else{
+        $('#url').css('border-color','');
+      }
+      if(validation_flag){
+        if(update_flag){
+          $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-          },
-          error: function (data) {
-            console.log('Error:', data);
-          }
-        });
+          });
+          e.preventDefault();
+          var formData = new FormData(this);
+          type = 'post';
+          $.ajax({
+            type: type,
+            url: '/admin/results/update/'+current_id,
+            data: formData,
+            cache:false,
+            contentType:false,
+            processData:false,
+            success: function (data) {
+              console.log(data);
+              if(data.success){
+                $('#notify_string').html('更新しました。');
+                $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
+                // $('#created_url').html('http://localhost:8000/results/'+data.id);
+                // $('#url_string').css('display','block');
+                // $('#link_url').attr('href','http://localhost:8000/blogs/'+data.id).css('display','inline');
+                update_flag = true;
+              }
+            },
+            error: function (data) {
+              console.log('Error:', data);
+            }
+          });
+        }
+        else{
+          $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          e.preventDefault();
+          var formData = new FormData(this);
+          type = 'post';
+          $.ajax({
+            type: type,
+            url: '/admin/results',
+            data: formData,
+            cache:false,
+            contentType:false,
+            processData:false,
+            success: function (data) {
+              console.log(data);
+              if(data.success){
+                $('#notify_string').html('追加しました。');
+                $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
+                $('#created_url').html(data.url);
+                $('#url_string').css('display','block');
+                $('#link_url').attr('href',data.url).css('display','inline');
+                $('#save').html('更新');
+                update_flag = true;
+                current_id = data.id;
+                $('#save').html('更新');
+              }
+            },
+            error: function (data) {
+              console.log('Error:', data);
+            }
+          });
+        }
+      }
+      else{
+        $('#notify_string').html('入力内容でエラーがあります。');
+        $('#alert').css('display','block');
+        $('#alert').css('border-left-color','red');
+        $('#alert').css('color','red');
       }
     })
     $("#firstview_dropzone").change(function() {

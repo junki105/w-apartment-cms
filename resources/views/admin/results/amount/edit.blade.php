@@ -16,7 +16,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active"><a href="{{ url('/') }}">Home</a></li>
-            <li class="breadcrumb-item active"><a href='admin/results/amount'>地域/</li>
+            <li class="breadcrumb-item active"><a href='admin/results_amount'>地域/</li>
             <li class="breadcrumb-item">金額編集</li>
           </ol>
         </div><!-- /.col -->
@@ -84,7 +84,7 @@
                 'X-HTTP-Method-Override': 'PATCH'
             },
             type:"POST",
-            url: '/admin/results/amount/'+current_amount.id,
+            url: '/admin/results_amount/'+current_amount.id,
             data: formdata,
             cache:false,
             contentType:false,
