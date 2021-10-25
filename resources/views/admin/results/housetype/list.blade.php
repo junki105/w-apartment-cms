@@ -50,7 +50,7 @@ table td.sorter {cursor: move;}
             </div>
             <div class="card">
                 <div class="card-header">
-                    <form action="/admin/results/houseType" id="form" method="POST">
+                    <form action="/admin/results_housetype" id="form" method="POST">
                             @csrf
                         <div class="form-group row">
                             <input type="text" class="ml-1 mr-3 col-sm-3 form-control" name="new_type" id="new_type">
@@ -77,7 +77,7 @@ table td.sorter {cursor: move;}
                                         <td class="col-sm-3" id="td{{$housetype->id}}">{{$housetype->type}}</td>
                                         <td class="col-sm-6">
                                             <div class="float-sm-right">
-                                                <a href='/admin/results/housetype/{{$housetype->id}}/edit'>
+                                                <a href='/admin/results_housetype/{{$housetype->id}}/edit'>
                                                     <button class="btn btn-info btn-sm editHousetype" type="button" data-id="{{$housetype->id}}">
                                                         <i class="ml-1 mr-1 fa fa-pencil-alt"></i>編集
                                                     </button>
@@ -126,10 +126,10 @@ table td.sorter {cursor: move;}
     $('#form').on('submit',function(e){
         let new_name = $('#new_type').val();
         if(new_name === ''){
-            $('#new_type').css('border-color','red');
+            $('#notify_string').html('入力内容でエラーがあります。');
             $('#alert').css('display','block');
-            $('#notify_string').css('color','red');
-            $('#notify_string').html('Failed');
+            $('#alert').css('border-left-color','red');
+            $('#alert').css('color','red');
             e.preventDefault();
         }
     });
@@ -161,12 +161,12 @@ table td.sorter {cursor: move;}
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
             type:'post',
-            url:'/admin/results/housetype/update/order',
+            url:'/admin/results_housetype/update/order',
             data:{
                 order_list : order_list
             },
             success:function(data){
-                $('#notify_string').html('Order Success');
+                $('#notify_string').html('項目の順番を更新しました。');
                 $('#alert').css('display','block');            }
             ,error:function(error){
                 console.log(error);
@@ -186,7 +186,7 @@ table td.sorter {cursor: move;}
         });
         $.ajax({
             type: "DELETE",
-            url: "/admin/results/housetype"+'/'+delete_id,
+            url: "/admin/results_housetype"+'/'+delete_id,
             success: function (data) {
                 $('.deleteHousetype').each(function(){
                     var id = $(this).data("id");

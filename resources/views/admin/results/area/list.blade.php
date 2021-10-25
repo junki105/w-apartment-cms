@@ -52,7 +52,7 @@ table td.sorter {cursor: move;}
             </div>
             <div class="cards">
                 <div class="card-header">
-                    <form action="/admin/results/area" id="form" method="POST">
+                    <form action="/admin/results_area" id="form" method="POST">
                     @csrf
                     <div class="form-group row">
                         <input type="text" class="col-sm-3 form-control ml-1 mr-3" name="name_input" id="name_input">
@@ -79,7 +79,7 @@ table td.sorter {cursor: move;}
                                         <td class="col-sm-3" id="td{{$area->id}}">{{$area->name}}</td>
                                         <td class="col-sm-6">
                                             <div class="float-sm-right">
-                                                <a href='/admin/results/area/{{$area->id}}/edit'>
+                                                <a href='/admin/results_area/{{$area->id}}/edit'>
                                                     <button class="btn btn-info btn-sm editArea" type="button" data-id="{{$area->id}}">
                                                         <i class="fa fa-pencil-alt ml-1 mr-1"></i>編集
                                                     </button>
@@ -156,12 +156,12 @@ table td.sorter {cursor: move;}
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
             type:'post',
-            url:'/admin/results/area/update/order',
+            url:'/admin/results_area/update/order',
             data:{
                 order_list : order_list
             },
             success:function(data){
-                $('#notify_string').html('Order Success');
+                $('#notify_string').html('項目の順番を更新しました。');
                 $('#alert').css('display','block');            }
             ,error:function(error){
                 console.log(error);
@@ -171,57 +171,14 @@ table td.sorter {cursor: move;}
     $('#form').on('submit',function(e){
         let new_name = $('#name_input').val();
         if(new_name === ''){
-            $('#name_input').css('border-color','red');
+            $('#notify_string').html('入力内容でエラーがあります。');
             $('#alert').css('display','block');
-            $('#notify_string').css('color','red');
-            $('#notify_string').html('Failed');
+            $('#alert').css('border-left-color','red');
+            $('#alert').css('color','red');
             e.preventDefault();
         }
     });
-    //     let new_name = $('#name_input').val();
-    //     if(new_name!==''){
-    //         $('#name_input').css('border-color','');
-    //         $.ajax({
-    //             headers: {
-    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //             },
-    //         type:'post',
-    //         url:'/admin/results/area',
-    //         data:{
-    //             new_name : new_name
-    //         },
-    //         success: function (data) {
-    //             if(data.success){
-    //                 // let area = data.area;
-    //                 // $('#alert').css('display','block');
-    //                 // $('#notify_string').html('追加しました。');
-    //                 // $('#area_table').append('<tr class="row" style="cursor:move;" id="'+area.id+
-    //                 //     '">'+'<td class="col-sm-1 sorter"><i class="fa fa-arrows-alt"></i></td>'
-    //                 //     +'<td class="col-sm-2">'+area.id+'</td><td class="col-sm-3">'+
-    //                 //     area.name+'</td><td class="col-sm-6">'+
-    //                 //     '<div class="float-sm-right">'+'<a href="/admin/results/area/'+area.id+'/edit">'
-    //                 //     +'<button class="btn btn-info btn-sm editArea"'+'>'
-    //                 //     +'<i class="fa fa-pencil-alt ml-1 mr-1"></i>編集'+'</a>'+
-    //                 //     '<button  class="btn btn-danger btn-sm deleteArea" data-id="'+
-    //                 //     area.id+'"'+'>'+'<i class="fa fa-trash ml-1 mr-1"></i>削除</button>'+
-    //                 //     '</div></td>'+'</tr>');
-    //                 // $('#name_input').val('');
-    //             }
-    //             else{
-
-    //             }
-    //         },
-    //         error: function (data) {
-    //             console.log('Error:', data);
-    //         }
-    //     })
-    //     }
-    //     else{
-    //         $('#name_input').css('border-color','red');
-    //     }
-    // });
     $('.deleteArea').click(function(e){
-        console.log('dlkjfs')
         delete_id = $(this).data("id");
         $('#deleteModal').modal();
         $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
@@ -234,7 +191,7 @@ table td.sorter {cursor: move;}
         });
         $.ajax({
             type: "DELETE",
-            url: "/admin/results/area"+'/'+delete_id,
+            url: "/admin/results_area"+'/'+delete_id,
             success: function (data) {
                 $('.deleteArea').each(function(){
                     var id = $(this).data("id");

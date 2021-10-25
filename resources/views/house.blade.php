@@ -39,7 +39,7 @@
         <div id="num" class="slide-number">LINEUP</div>
       </div>
       <div class="header-aside">
-        <a href="" class="login-btn"><img src="{{ URL::asset('images/ico_login.png') }}" alt=""></a>
+        <a href="{{'/admin'}}" class="login-btn"><img src="{{ URL::asset('images/ico_login.png') }}" alt=""></a>
         <div class="header-aside-txt">
           <span class="btn">説明会情報</span>
           <img src="{{ URL::asset('images/side_link.png') }}" alt="">

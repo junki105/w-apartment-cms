@@ -238,4 +238,82 @@ class ResultController extends Controller
         Result::find($id)->delete();
         return response()->json(['success'=>true]);
     }
+    public function search(Request $request){
+        $results = null;
+        $count = 0;
+        $areas = [];
+        $amounts = [];
+        $housetypes = [];
+        if($request->areas_query!="null"){
+            $areas = explode(',',$request->areas_query);
+        }
+        if($request->amounts_query!="null"){
+            $amounts = explode(',',$request->amounts_query);
+        }
+        if($request->housetypes_query!="null"){
+            $housetypes = explode(',',$request->housetypes_query);
+        }
+        if( $request->search_word!="null" ){
+            $results = Result::where("title","LIKE","%$request->search_word%");
+        }
+        if( $request->instructor_name!="null" ){
+            if( $results == null ) {
+                $results = Result::where('instructor_name',"LIKE","%$request->instructor_name%");
+            }
+            else{
+                $results = $results->where('instructor_name',"LIKE","%$request->instructor_name%");
+            }
+        }
+        if(count($areas)>0){
+            if($results == null){
+                $results = Result::whereIn('area_id',$areas);
+            }
+            else{
+                $results = $results->whereIn('area_id',$areas);
+            }
+        }
+        if(count($amounts)>0){
+            if($results == null){
+                $results = Result::whereIn('amount_id',$amounts);
+            }
+            else{
+                $results = $results->whereIn('amount_id',$amounts);
+            }
+        }
+        if(count($housetypes)>0){
+            if($results == null){
+                $results = Result::whereIn('housetype_id',$housetypes);
+            }
+            else{
+                $results = $results->whereIn('housetype_id',$housetypes);
+            }
+        }
+        if($request->public_status!="null"){
+            if( $results == null ){
+                $results = Result::where('public_status',"=",$request->public_status);
+            }
+            else{
+                $results = $results->where('public_status',"=",$request->public_status);
+            }
+        }
+        if( $results == null ){
+            $count = Result::count();
+            $results = Result::join('areas','results.area_id','=','areas.id')
+                    ->join('amounts','results.amount_id','=','amounts.id')
+                    ->join('house_types','results.housetype_id','=','house_types.id')
+                    ->select('results.id','areas.name','house_types.type','amounts.type','results.title','results.public_status')
+                    ->paginate(5);
+        }
+        else{
+            $count = $results->count();
+            $results = $results->join('areas','results.area_id','=','areas.id')
+                    ->join('amounts','results.amount_id','=','amounts.id')
+                    ->join('house_types','results.housetype_id','=','house_types.id')
+                    ->select('results.id','areas.name','house_types.type','amounts.type','results.title','results.public_status')
+                    ->paginate(5);
+        }
+        // $Results = Result::latest()->paginate(5);
+        // $categories = Category::all();s
+        return view('admin.results.pagination_data',compact('results','count'));
+    }
 }

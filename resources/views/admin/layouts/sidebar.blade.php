@@ -1,13 +1,13 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a href="{{url('/')}}" class="brand-link text-center">
+  <a href="{{url('/')}}" class="text-center brand-link">
     <span class="brand-text font-weight-light">W-apartment</span>
   </a>
 
   <!-- Sidebar -->
   <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex justify-content-center">
+    <div class="pb-3 mt-3 mb-3 user-panel d-flex justify-content-center">
       <div class="info">
         <a href="#" class="d-block">管理者A様</a>
       </div>
@@ -43,7 +43,7 @@
         </li>
         <li class="{{(request()->is('admin/results*'))?'nav-item menu-is-opening menu-open':'nav-item'}}">
           <a href="#" class="{{(request()->is('admin/results*'))?'nav-link active':'nav-link'}}">
-            <i class="nav-icon far fa-fw fa-file"></i>
+            <i class="nav-icon far fa-fw fa fa-signal"></i>
             <p>
               施工実績
               <i class="right fas fa-angle-left"></i>
@@ -63,19 +63,19 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{url('/admin/results/area/create')}}" class="{{(request()->is('admin/results/area/create'))?'nav-link active':'nav-link'}}">
+              <a href="{{url('/admin/results_area/create')}}" class="{{(request()->is('admin/results_area/create'))?'nav-link active':'nav-link'}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>地域</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{url('/admin/results/amount/create')}}" class="{{(request()->is('admin/results/amount/create'))?'nav-link active':'nav-link'}}">
+              <a href="{{url('/admin/results_amount/create')}}" class="{{(request()->is('admin/results_amount/create'))?'nav-link active':'nav-link'}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>金額</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{url('/admin/results/housetype/create')}}" class="{{(request()->is('admin/results/housetype/create'))?'nav-link active':'nav-link'}}">
+              <a href="{{url('/admin/results_housetype/create')}}" class="{{(request()->is('admin/results_housetype/create'))?'nav-link active':'nav-link'}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>間取り</p>
               </a>
@@ -107,7 +107,7 @@
         </li>
         <li class="{{(request()->is('admin/blogs*'))?'nav-item menu-is-opening menu-open':'nav-item'}}">
             <a href="#" class="{{(request()->is('admin/blogs*'))?'nav-link active':'nav-link'}}">
-              <i class="nav-icon far fa-fw fa fa-clipboard-list"></i>
+              <i class="nav-icon far fa-fw fa fa-pen-nib"></i>
               <p>
                 ブログ
                 <i class="right fas fa-angle-left"></i>
@@ -121,13 +121,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{url('/admin/blogs/show')}}" class="{{(request()->is('admin/blogs/show'))?'nav-link active':'nav-link'}}">
+                <a href="{{url('/admin/blogs')}}" class="{{(request()->is('admin/blogs/list'))?'nav-link active':'nav-link'}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>ブログ一覧</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{url('/admin/blogs/category')}}" class="{{(request()->is('admin/blogs/category'))?'nav-link active':'nav-link'}}">
+                <a href="{{url('/admin/blogs_category')}}" class="{{(request()->is('admin/blogs_category*'))?'nav-link active':'nav-link'}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>カテゴリ</p>
                 </a>

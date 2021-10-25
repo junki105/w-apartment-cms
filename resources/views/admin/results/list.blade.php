@@ -44,7 +44,7 @@
         </div><!-- /.col -->
         <div class="col-sm-7">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item active">施工実績一覧</li>
           </ol>
         </div><!-- /.col -->
@@ -55,28 +55,11 @@
 
   <!-- Main content -->
   <div class="content">
-    <div id="deleteModal" class="modal fade" role='dialog'>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                    <p>本当に削除しますか？</p>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-                    <span id= 'deleteButton'></span>
-                </div>
-
-            </div>
-        </div>
-    </div>
+  @include('admin.layouts.modal_delete')
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <div><strong>検索<strong></div>
+                <div class="p-0.2"><strong>検索</strong></div>
             </div>
             <div class="card-body">
                 <div class="form-group row">
@@ -84,10 +67,10 @@
                     <input type="text" class="col-sm-4 form-control ml-1" name="search_word" id="search_word">
                 </div>
                 <div class="form-group row">
-                    <label for="author_name" class="col-sm-2 col-form-label">著者名</label>
-                    <input type="text" class="col-sm-4 form-control ml-1" name="author_name" id="author_name">
+                    <label for="instructor_name" class="col-sm-2 col-form-label">著者名</label>
+                    <input type="text" class="col-sm-4 form-control ml-1" name="instructor_name" id="instructor_name">
                 </div>
-                <div class="form-group row">
+                <div class="form-group row" id="areas">
                     <label for="areas_check" class="col-sm-2 col-form-label">地域</label>
                     @foreach ($areas as $area)
                     <div class="form-check form-check-inline  ml-1" name="areas_check">
@@ -96,7 +79,7 @@
                     </div>
                     @endforeach
                 </div>
-                <div class="form-group row">
+                <div class="form-group row" id="amounts">
                     <label for="amounts_check" class="col-sm-2 col-form-label">金額</label>
                     @foreach ($amounts as $amount)
                     <div class="form-check form-check-inline  ml-1" name="amounts_check">
@@ -105,7 +88,7 @@
                     </div>
                     @endforeach
                 </div>
-                <div class="form-group row">
+                <div class="form-group row" id="housetypes">
                     <label for="housetypes_check" class="col-sm-2 col-form-label">間取り</label>
                     @foreach ($housetypes as $housetype)
                     <div class="form-check form-check-inline  ml-1" name="housetypes_check">
@@ -135,127 +118,49 @@
                 </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-header">
-                <h6 class="card-title">お知らせ一覧</h6>
-
-                <div class="card-tools float-right d-inline-flex"><span class="mt-1 mr-2">全<span class="count">{{$count}}</span>件</span>{{$results->links()}}</div>
-            </div>
-            <div class="card-body">
-                @if(count($results)>0)
-                    <table class="table table-striped">
-                        <thead>
-                        <tr class="row">
-                            <th class="col-sm-1">ID</th>
-                            <th class="col-sm-2">タイトル</th>
-                            <th class="col-sm-1">地域</th>
-                            <th class="col-sm-2">金額</th>
-                            <th class="col-sm-1">間取り</th>
-                            <th class="col-sm-2">公開状態</th>
-                            <th class="col-sm-3 float-right">カテゴリ</th>
-                        </tr>
-                        </thead>
-                        <tbody id="resultrows">
-                            @foreach ($results as $result)
-                                <tr class="row" id="{{$result->id}}">
-                                    <td class="col-sm-1">{{$result->id}}</td>
-                                    <td class="col-sm-2">{{$result->title}}</td>
-                                    <td class="col-sm-1">{{$result->name}}</td>
-                                    <td class="col-sm-2">{{$result->type}}</td>
-                                    <td class="col-sm-1">{{$result->type}}</td>
-                                    <td class="col-sm-2">
-                                        @if($result->public_status=='0')
-                                            非公開
-                                        @else
-                                            公開
-                                        @endif
-                                    </td>
-                                    <td class="col-sm-3">
-                                        <div class="float-sm-right">
-                                            <a href="/case-study/{{$result->id}}" class="mr-2">
-                                                <button class="btn btn-primary btn-sm viewResult" data-id="{{$result->id}}"  type="button">
-                                                    <i class="fa fa-external-link-alt"></i>
-                                                    表示
-                                                </button>
-                                            </a>
-                                            <a href="url(s.area.edit)" class="mr-2">
-                                                <button class="btn btn-info btn-sm editResult" type="button" data-id="{{$result->id}}">
-                                                    <i class="fa fa-pencil-alt ml-1 mr-1"></i>
-                                                    編集
-                                                </button>
-                                            </a>
-                                            <button  class="btn btn-danger btn-sm deleteResult" id="deleteresult" data-id="{{$result->id}}">
-                                                <i class="fa fa-trash ml-1 mr-1"></i>削除
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @else
-                <table class="table table-striped">
-                    <thead>
-                    <tr class="row">
-                        <th class="col-sm-1">ID</th>
-                        <th class="col-sm-2">タイトル</th>
-                        <th class="col-sm-1">地域</th>
-                        <th class="col-sm-2">金額</th>
-                        <th class="col-sm-1">間取り</th>
-                        <th class="col-sm-2">公開状態</th>
-                        <th class="col-sm-3 float-right">カテゴリ</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <div style="height: 200px; width:inherit;display: flex;justify-content: center;align-items: center;">
-                    <div>データがありません。</div>
-                </div>
-                @endif
-            </div>
-            <div class="card-footer">
-                <div class="card-tools float-right d-inline-flex"><span class="m-2">全<span class="count">{{$count}}</span>件</span>{{$results->links()}}</div>
-            </div>
+        <div class="card" id="table_card">
+            @include('admin.results.pagination');
         </div>
     </div>
   </div>
 </div>
 <script>
   $(document).ready(function() {
-      
-        let delete_id;
-        let count = <?php echo json_encode($count)?>;
-        $('.deleteResult').click(function(e){
-            delete_id = $(this).data("id");
-            $('#deleteModal').modal();
-            $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
-        });
-        $('#deleteButton').click(function(e){
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: "DELETE",
-                url: "/admin/results"+'/'+delete_id,
-                success: function (data) {
-                    $('.deleteResult').each(function(){
-                        var id = $(this).data("id");
-                        if(id===delete_id){
-                            $(this).parents("tr").remove();
-                        }
-                    })
-                    $('#deleteModal').modal("hide");
-                    count--;
-                    $('.count').html(count);
+    let delete_id;
+    let areas_query;
+    let amounts_query;
+    let housetypes_query;
+    let public_status;
+    let instructor_name = '';
+    let search_word = '';
+    function fetch_data(page,search_word,instructor_name,areas_query,amounts_query,housetypes_query,public_status)
+    {
+        let url = "/admin/search_results?page="+page;
+        url=url+"&search_word=";
+        ( typeof(search_word) ==='undefined'||search_word==='' ) ?  url=url+null : url=url+search_word;
+        url=url+"&instructor_name=";
+        ( typeof(instructor_name) === 'undefined' || instructor_name === '' ) ? url=url+null : url+=instructor_name;
+        url=url+"&public_status=";
+        ( typeof(public_status) ==='undefined'||public_status==='' ) ? url=url+null : url+=public_status;
+        url=url+"&areas_query=";
+        ( areas_query === '' || typeof(areas_query) === 'undefined')? url+=null : url+=areas_query;
+        url=url+"&amounts_query=";
+        ( amounts_query === '' || typeof(amounts_query) === 'undefined')? url+=null : url+=amounts_query;
+        url=url+"&housetypes_query=";
+        ( housetypes_query === '' || typeof(housetypes_query) === 'undefined')? url+=null : url+=housetypes_query;
+        console.log(url);
+        $.ajax({
+            url:url,
+            method:"GET",
+            success:function(data){
+                $('#table_card').html(data);
                 },
-                error: function (data) {
-                    console.log('Error:', data);
+            error:function(err){
+                console.log(err);
                 }
-            })
-        });
+        })
+    }
+    let count = <?php echo json_encode($count)?>;
         $('.viewBlog').click(function(e){
             var id = $(this).data("id");
             $.ajax({
@@ -272,48 +177,44 @@
         })
         var index =0;
         $('#searchButton').click(function(e){
-            console.log('sdlfsdf');
-            let search_word = $('#search_word').val();
-            let author_name = $('#author_name').val();
-            var category_array = [];
-            $('.category_check:checked').each(function () {
-                category_array[index++] = $(this).val();
-            });  
-            let public_status = ''
+            
+            var index = 0;
+            search_word = $('#search_word').val();
+            instructor_name = $('#instructor_name').val();
+            var selected = new Array();
+            $("#areas input[type=checkbox]:checked").each(function () {
+                selected.push(this.value);
+            });
+            areas_query = selected.toString(); 
+            let selected_amounts = new Array();
+            $("#amounts input[type=checkbox]:checked").each(function(){
+                selected_amounts.push(this.value)
+            })
+            amounts_query = selected_amounts.toString();
+            let selected_housetypes = new Array();
+            $('#housetypes input[type=checkbox]:checked').each(function(){
+                selected_housetypes.push(this.value);
+            })   
+            housetypes_query = selected_housetypes.toString();
             $('.form-check-input:checked').each(function(){
                 public_status = $(this).val();
             }); 
-            recommended_flag = '';
-            $('.recommended_flag:checked').each(function(){
-                recommended_flag = $(this).val();
-            });
-            console.log(recommended_flag);
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: "POST",
-                url: "/admin/blogs/search",
-                data:{
-                    search_word:search_word,
-                    author_name:author_name,
-                    category_array:category_array,
-                    public_status:public_status,
-                    recommended_flag:recommended_flag
-                },
-                success: function (data) {
-                    console.log(data)
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                }
-            })
-        })
+            // console.log(category_array);
+            // if(category_array.length>0){
+            //     category = category_array.toString();
+            // }
+            // console.log(category)
+            page = 1;
+        fetch_data(page,search_word,instructor_name,areas_query,amounts_query,housetypes_query,public_status);
+        })  
         $('.form-check-input').click(function(){
             $('.form-check-input').not(this).prop('checked',false);
         })
+        $(document).on('click', '.pagination a', function(event){
+        event.preventDefault(); 
+        var page = $(this).attr('href').split('page=')[1];
+        fetch_data(page,search_word,instructor_name,areas_query,amounts_query,housetypes_query,public_status);
+    });
     });
 </script>
 

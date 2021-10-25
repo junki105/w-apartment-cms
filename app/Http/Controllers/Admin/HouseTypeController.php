@@ -37,13 +37,12 @@ class HouseTypeController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $max_order = HouseType::max('order_index');
         $housetype = new HouseType;
         $housetype->type = $request->new_type;
         $housetype->order_index = $max_order + 1;
         $housetype->save();
-        return redirect('/admin/results/housetype/create');
+        return redirect('/admin/results_housetype/create');
 
     }
 

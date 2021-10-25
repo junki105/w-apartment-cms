@@ -12,11 +12,26 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        
+        $blogs = Blog::latest()->paginate(5);
+        $count = Blog::count();
+        $categories = Category::all();
+        return view('admin.blogs.list',compact(['blogs','count','categories']));
     }
-
+    public function updateOrder(Request $request){
+        $datas = $request->order_list;
+        foreach ($datas as $data){
+            $id = $data["id"];
+            $row = Category::find($id);
+            $order_index = $data["order_index"];
+            $row->order_index = $order_index;
+            $row->save();
+        }
+        return response()->json(['success'=>true]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -95,83 +110,78 @@ class BlogController extends Controller
     }
     public function search(Request $request)
     {
-        $search_word = $request->search_word?:'';
-        $author_name = $request->author_name?:'';
-        $public_status = $request->public_status?:'';
-        $category_array = $request->category_array ?:array();
-        $public_status = $request->public_status?:'';
-        $recommended_flag = $request->recommended_flag?:'';
-        $blogs = Blog::where("title","LIKE","%$search_word%")
-                        ->orwhere("content","LIKE","%$search_word%")
-                        ->where('author_name',"=",$author_name)
-                        ->whereIn('category',$category_array)
-                        ->where('recommended_flag',"=",$recommended_flag)
-                        ->paginate(5);
-        $count = Blog::where("title","LIKE","%$search_word%")
-                        ->orwhere("content","LIKE","%$search_word%")
-                        ->where('author_name',"=",$author_name)
-                        ->whereIn('category',$category_array)
-                        ->where('recommended_flag',"=",$recommended_flag)
-                        ->count();
+        $blogs = null;
+        $count = 0;
+        $category_lists = [];
+        if($request->category_query!="null"){
+            $category_lists = explode(',',$request->category_query);
+        }
+        if( $request->search_word!="null" ){
+            $blogs = Blog::where("title","LIKE","%$request->search_word%");
+        }
+        if( $request->author_name!="null" ){
+            if( $blogs == null ) {
+                $blogs = Blog::where('author_name',"LIKE","%$request->author_name%");
+            }
+            else{
+                $blogs = $blogs->where('author_name',"LIKE","%$request->author_name%");
+            }
+        }
+        if(count($category_lists)>0){
+            if($blogs == null){
+                $blogs = Blog::whereIn('category',$category_lists);
+            }
+            else{
+                $blogs = $blogs->whereIn('category',$category_lists);
+            }
+        }
+        if( $request->recommended_flag!="null" ){
+            if( $blogs == null ) {
+                $blogs = Blog::where('recommended_flag',"=",$request->recommended_flag);
+            }
+            else{
+                $blogs = $blogs->where('recommended_flag',"=",$request->recommended_flag);
+            }
+        }
+        
+        if($request->public_status!="null"){
+            if( $blogs == null ){
+                $blogs = Blog::where('public_status',"=",$request->public_status);
+            }
+            else{
+                $blogs = $blogs->where('public_status',"=",$request->public_status);
+            }
+        }
+        if( $blogs == null ){
+            $count = Blog::count();
+            $blogs = Blog::latest()->paginate(5);
+        }
+        else{
+            $count = $blogs->count();
+            $blogs = $blogs->latest()->paginate(5);
+        }
+        // $blogs = Blog::latest()->paginate(5);
         $categories = Category::all();
-            //                 ])->count();
-        // $blogs = DB::table('blogs')->when($search_word,function($query,$search_word){
-        //                                     return $query->where('title',"LIKE","%$search_word%")
-        //                                                 ->orwhere('content',"LIKE","%$search_word%");
-        //                                 })->when($author_name,function($query,$author_name){
-        //                                     return $query->where('author_name',"LIKE","%$author_name%");
-        //                                 })->when($public_status,function($query,$public_status){
-        //                                     return $query->where('public_status','=',$public_status);
-        //                                 })->paginate(5);
-        // if($request->public_status!=null){
-        //     if($request->search_word !=null){
-        //         $blogs = Blog::where([
-        //                     ["title","LIKE","%$request->search_word%"],
-        //                     ['public_status','=',$request->public_status]
-        //                 ])->orwhere([
-        //                     ["content","LIKE","%$request->search_word%"],
-        //                     ['public_status','=',$request->public_status]
-        //                 ])->paginate(5);
-        //         $count = Blog::where([
-        //                     ["title","LIKE","%$request->search_word%"],
-        //                     ['public_status','=',$request->public_status]
-        //                 ])->orwhere([
-        //                     ["content","LIKE","%$request->search_word%"],
-        //                     ['public_status','=',$request->public_status]
-        //                 ])->count();
-        //     }
-        //     else{
-        //         $blogs = Blog::where('public_status',"=",$request->public_status)->latest()->paginate(5);
-        //         $count = Blog::where('public_status',"=",$request->public_status)->count();
-        //     }
-        // }
-        // else{
-        //     if($request->search_word !=null){
-        //         $blogs = Blog::where("title","LIKE","%$request->search_word%")
-        //                 ->orwhere("content","LIKE","%$request->search_word%")->paginate(5);
-        //         $count = Blog::where("title","LIKE","%$request->search_word%")
-        //                 ->orwhere("content","LIKE","%$request->search_word%")->count();
-        //     }
-        //     else{
-        //         $blogs = Blog::latest()->paginate(5);
-        //         $count = Blog::count();
-        //     }
-        // }
-        return response()->json(['success'=>true,'blogs'=>$blogs,'categories'=>$categories,'count'=>$count]);
+        return view('admin.blogs.pagination_data',compact('blogs','categories','count'));
     }
-    public function category(){
-        $categories = Category::all();
+    public function category(Request $request){
+        $categories = Category::orderBy('order_index','ASC')->get();
         return view('admin.blogs.category',compact('categories'));
     }
     public function categoryAdd(Request $request){
+        $this->validate($request,[
+            'name_input'=>'required'
+        ]);
         $category  = new Category;
-        $category->name = $request->new_category_name;
+        $max_order = Category::max('order_index');
+        $category->order_index = $max_order + 1;
+        $category->name = $request->name_input;
         $category->save();
-        return response()->json(['success'=>true,'category'=>$category]);
+        return redirect('/admin/blogs_category');
     }
     public function categoryUpdate(Request $request,$id){
         $category = Category::find($id);
-        $category->name = $request->new_category_name;
+        $category->name = $request->name;
         $category->save();
         return response()->json(['success'=>true,'name'=>$category->name]);
     }
@@ -179,7 +189,11 @@ class BlogController extends Controller
         Category::find($id)->delete();
         return response()->json(['success'=>true]);
     }
-    /**
+    public function categoryEdit(Request $request,$id){
+        $category = Category::where('id',$id)->first();
+        return view('admin.blogs.category-edit',compact('category'));
+    }
+        /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -248,7 +262,6 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        //
         Blog::find($id)->delete();
         return response()->json(['success'=>true]);
     }

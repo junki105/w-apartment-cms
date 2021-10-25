@@ -1,40 +1,27 @@
 @extends('admin.layouts.master')
 
 @section('content')
-<style>
-  input:focus {
-  outline-width: 1px;
-  outline-style: dashed;
-  outline-color: red;
-}
-</style>
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong id="notify_string"></strong>
-    </div>
   <div class="content-header">
     <div class="container-fluid">
+      <!-- Content Header (Page header) -->
+      <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong id="notify_string"></strong>
+      </div>
       <div class="mb-2 row">
         <div class="col-sm-6">
-          <h4 class="m-0"><strong>地域編集</strong></h4>
+          <h4 class="m-0"><strong>カテゴリ編集</strong></h4>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item active"><a href="{{ url('/') }}">Home</a></li>
-            <li class="breadcrumb-item active"><a href='admin/results_area'>地域</li>
-            <li class="breadcrumb-item">地域編集</li>
+            <li class="breadcrumb-item active"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active"><a href='admin/results_amount'>カテゴリ</a></li>
+            <li class="breadcrumb-item">カテゴリ編集</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
-      <div class="mt-4 mb-2" id="url_string" style="display: none">
-        <span class="font-weight-bold mr-2 h6">リンク:
-            <span id="created_url">
-            </span>
-        </span>
-        <a id="link_url" class="btn btn-sm btn-default">表示</a>
-      </div>
+      
     </div><!-- /.container-fluid -->
   </div>
   <!-- /.content-header -->
@@ -45,13 +32,13 @@
           <div class="col-sm-8">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title"><strong>地域編集</strong></h5>
+                    <h5 class="card-title"><strong>カテゴリ編集</strong></h5>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="form-group row">
-                        <label for="area" class="col-sm-3 col-form-label">地域</label>
-                        <input type="text" class="col-sm-7 form-control ml-1" name="area" value="{{$area->name}}" id="area">
+                        <label for="category" class="col-sm-3 col-form-label"><strong>カテゴリ名</strong></label>
+                        <input type="text" class="col-sm-7 form-control ml-1" name="category" value="{{$category->name}}" id="category">
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -79,37 +66,35 @@
 <script>
   $(document).ready(function() {
     $('#save').click(function(e){
-        let name = $('#area').val();
-        if(name!==''){
-          const current_area =<?php echo json_encode($area);?>;
+        let name = $('#category').val();
+        console.log(name);
+        if(name === ''){
+          $('#notify_string').html('入力内容でエラーがあります。');
+          $('#alert').css({'display':'block','border-left-color':'red','color':'red'});
+        }
+        else{
+          const current_category =<?php echo json_encode($category);?>;
           let formdata = new FormData();
           formdata.append('name',name);
-          $('#alert').css('display','none');
           $.ajax({
               headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                  'X-HTTP-Method-Override': 'PATCH'
-              },
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
               type:"POST",
-              url: '/admin/results_area/'+current_area.id,
+              url: '/admin/blogs/category/update/'+current_category.id,
               data: formdata,
               cache:false,
               contentType:false,
               processData:false,
               success: function (data) {
                   $('#notify_string').html('更新しました。');
-                  $('#alert').css('display','block');
+                  $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
               },
               error: function (data) {
-                  $('#notify_string').html('Update Failed');
-                  $('#alert').css('display','block');
               }
           });
         }
-        else{
-          console.log('df');
-          $('#area').css('border-color','#dc3545');
-        }
+        
     });
 });
 </script>

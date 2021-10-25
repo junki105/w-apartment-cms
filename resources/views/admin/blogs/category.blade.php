@@ -1,25 +1,13 @@
 @extends('admin.layouts.master')
 
 @section('content')
+<style>
+    table.sorting-table {cursor: move;}
+    table tr.sorting-row td {background-color: #8b8;}
+    table td.sorter {cursor: move;}
+</style>
 <div class="content">
-    <div id="deleteModal" class="modal fade" role='dialog'>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                    <p>本当に削除しますか？</p>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-                    <span id= 'deleteButton'></span>
-                </div>
-
-            </div>
-        </div>
-    </div>
+    @include('admin.layouts.modal_delete')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
@@ -30,17 +18,11 @@
                     </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Home/</a></li>
                         <li class="breadcrumb-item active">お知らせ新規追加</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
-            <div class="mt-4 mb-2" id="url_string" style="display: none">
-                <span class="mr-2 font-weight-bold h6">リンク:
-                    <span id="created_url"></span>
-                </span>
-                <a id="link_url" class="btn btn-sm btn-default">表示</a>
-            </div>
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
@@ -49,37 +31,45 @@
     <div class="container-fluid">
         <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
             <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>追加しました。</strong>
+            <strong id="notify_string"></strong>
         </div>
-        <div class="card">
+        <div class="card col-8">
             <div class="card-header">
-                <div class="form-group row">
-                    <input type="text" class="ml-1 col-sm-3 form-control" name="category_name_input" id="category_name_input">
-                    <button id="categoryAdd" class="btn btn-sm">新規作成</button>
-                </div>
-            <div class="card-body col-8">
+                <form action="/admin/blogs/categoryAdd" id="form" method="POST">
+                    @csrf
+                    <div class="form-group mb-0 row">
+                        <input type="text" class="col-sm-3 form-control ml-1 mr-3" name="name_input" id="name_input">
+                        <button type="submit" class="btn btn-md" style="border:1px solid;">新規作成</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-body">
                 @if(count($categories)>0)
-                    <table class="table table-striped">
+                    <table class="table table-striped table-sm" id="dnd" attr-sample="thetable">
                         <thead>
                             <tr class="row">
+                                <th class="col-sm-1"></th>
                                 <th class="col-sm-2">ID</th>
-                                <th class="col-sm-4">カテゴリ</th>
-                                <th class="float-right col-sm-6"></th>
+                                <th class="col-sm-3">カテゴリ</th>
+                                <th class="col-sm-6 float-right"></th>
                             </tr>
                         </thead>
                         <tbody id="category_table">
                             @foreach ($categories as $category)
                                 <tr class="row" id="{{$category->id}}">
+                                    <td class="col-sm-1 sorter"><i class="fa fa-arrows-alt"></i></td>
                                     <td class="col-sm-2">{{$category->id}}</td>
-                                    <td class="col-sm-4" id="td{{$category->id}}">{{$category->name}}</td>
+                                    <td class="col-sm-3" id="td{{$category->id}}">{{$category->name}}</td>
                                     <td class="col-sm-6">
                                         <div class="float-sm-right">
-                                            <button class="btn btn-info btn-sm editCategory" type="button" data-id="{{$category->id}}">
-                                                <i class="ml-1 mr-1 fa fa-pencil-alt"></i>
-                                                編集
-                                            </button>
-                                            <button  class="btn btn-danger btn-sm deleteCategory" id="deleteCategory" data-id="{{$category->id}}">
-                                                <i class="ml-1 mr-1 fa fa-trash"></i>削除
+                                            <a href='/admin/blogs_category/{{$category->id}}/edit'>
+                                                    <button class="btn btn-info btn-sm editCategory" type="button" data-id="{{$category->id}}">
+                                                        <i class="fa fa-pencil-alt ml-1 mr-1"></i>編集
+                                                    </button>
+                                            </a>
+                                            <button  class="btn btn-danger btn-sm deleteCategory"  data-id="{{$category->id}}">
+                                                    <i class="fa fa-trash ml-1 mr-1"></i>削除
+                                                
                                             </button>
                                         </div>
                                     </td>
@@ -91,9 +81,10 @@
                 <table class="table table-striped">
                     <thead>
                     <tr class="row">
+                        <th class="col-sm-1"></th>
                         <th class="col-sm-2">ID</th>
-                        <th class="col-sm-4">カテゴリ</th>
-                        <th class="float-right col-sm-4"></th>
+                        <th class="col-sm-3">カテゴリ</th>
+                        <th class="col-sm-6 float-right"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -105,7 +96,8 @@
                 @endif
             </div>
             <div class="card-footer">
-                <div class="float-right card-tools d-inline-flex"></div>
+                <label for="ordersave">項目の順番はドラッグ&ドロップで変更可能です</label>
+                <button id="ordersave" name="ordersave" class="ml-3 btn btn-sm" style="border:1px solid;">並び替えを保存</button>
             </div>
         </div>
     </div>
@@ -118,72 +110,6 @@
     let delete_id;
     let update_flag = false;
     let current_category;
-    $('#categoryAdd').click(function(){
-        let new_category_name = $('#category_name_input').val();
-        if(new_category_name!==''){
-            if(update_flag){
-                $.ajax({
-                    headers:{
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type:'POST',
-                    url:'/admin/blogs/category/update/'+current_category.id,
-                    data:{
-                        new_category_name : new_category_name
-                    },
-                    success:function(data){
-                        console.log(data);
-                        if(data.success){
-                            $('#alert').css('display','block');
-                            $('#'+current_category.id).html('<td class="col-sm-2">'+
-                                current_category.id+'</td><td class="col-sm-4">'+data.name+
-                                '</td><td class="col-sm-6">'+'<div class="float-sm-right">'+
-                                '<button class="btn btn-info btn-sm editCategory" type="button" data-id="'+
-                                current_category.id+'"'+'>'+'<i class="ml-1 mr-1 fa fa-pencil-alt"></i>編集</button>'+
-                                '<button  class="btn btn-danger btn-sm deleteCategory" id="deleteCategory" data-id="'+
-                                current_category.id+'"'+'>'+'<i class="ml-1 mr-1 fa fa-trash"></i>削除</button>'+
-                                '</div></td>'
-                            );
-                            $('#category_name_input').val('');
-                            update_flag = false;
-                            $('#categoryAdd').html('新規作成');
-                        }
-                    }
-                })
-            }
-            else{
-                $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type:'post',
-                url:'/admin/blogs/category/add',
-                data:{
-                    new_category_name : new_category_name
-                },
-                success: function (data) {
-                    if(data.success){
-                        $('#alert').css('display','block');
-                    }
-                    let category = data.category;
-                    $('#category_table').append('<tr class="row" id="'+category.id+
-                        '">'+'<td class="col-sm-2">'+category.id+'</td><td class="col-sm-4">'+
-                        data.name+'</td><td class="col-sm-6">'+'<div class="float-sm-right">'+
-                        '<button class="btn btn-info btn-sm editCategory" type="button" data-id="'+
-                        category.id+'"'+'>'+'<i class="ml-1 mr-1 fa fa-pencil-alt"></i>編集</button>'+
-                        '<button  class="btn btn-danger btn-sm deleteCategory" id="deleteCategory" data-id="'+
-                        category.id+'"'+'>'+'<i class="ml-1 mr-1 fa fa-trash"></i>削除</button>'+
-                        '</div></td>'+'</td></tr>');
-                    $('#category_name_input').val('');
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                }
-            })
-            }
-            
-        }
-    });
     $('.deleteCategory').click(function(e){
         delete_id = $(this).data("id");
         console.log(delete_id);
@@ -213,15 +139,57 @@
             }
         })
     });
-    $('.editCategory').click(function(e){
-        edit_id = $(this).data("id");
-        const categories = <?php echo json_encode($categories)?>;
-        current_category = categories.find(category=>{
-            return category.id === edit_id;
+    $('#form').on('submit',function(e){
+        let new_name = $('#name_input').val();
+        if(new_name === ''){
+            $('#notify_string').html('入力内容でエラーがあります。');
+            $('#alert').css('display','block');
+            $('#alert').css('border-left-color','red');
+            $('#alert').css('color','red');s
+            e.preventDefault();
+        }
+    });
+    var table = document.getElementById("dnd");
+    RowSorter('table[attr-sample=thetable]', {
+        handler: 'td.sorter',
+        onDragStart: function(tbody, row, index)
+        {
+        
+        },
+        onDrop: function(tbody, row, new_index, old_index)
+        {
+        
+        }
+    });
+    $('#ordersave').click(function(){
+        let table_data = $('#category_table');
+        let rows_data = table_data[0].children;
+        let rows_array = Array.from(rows_data);
+        let order = {}
+        const order_list = rows_array.map(row=>{
+            return {
+                id : Number(row.id),
+                order_index : row.rowIndex
+            }
         })
-        $('#category_name_input').val(current_category.name);
-        update_flag = true;
-        $('#categoryAdd').html('更新');
+        console.log(order_list);
+        $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+            type:'post',
+            url:'/admin/blogs_category/update/order',
+            data:{
+                order_list : order_list
+            },
+            success:function(data){
+                $('#notify_string').html('項目の順番を更新しました。');
+                $('#alert').css('display','block');
+            }
+            ,error:function(error){
+                console.log(error);
+            }
+        })
     });
 });
 </script>
