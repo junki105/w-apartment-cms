@@ -1,15 +1,15 @@
 @extends('admin.layouts.master')
 
 @section('content')
-@include('admin.layouts.modal_delete')
+@include
 <div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong id="notify_string"></strong>
+  </div>
   <div class="content-header">
     <div class="container-fluid">
-      <!-- Content Header (Page header) -->
-      <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong id="notify_string"></strong>
-      </div>
       <div class="mb-2 row">
         <div class="col-sm-6">
           <h4 class="m-0"><strong>カテゴリ編集</strong></h4>
@@ -42,7 +42,7 @@
                         <input type="text" class="col-sm-7 form-control ml-1" name="category" value="{{$category->name}}" id="category">
                     </div>
                 </div>
-                <!-- /.card-body -->
+                <!-- /.card-body -->s
             </div>
         </div>
         <div class="col-sm-4">
@@ -52,7 +52,7 @@
               </div>
               <div class="card-body">
                 <div class=" d-flexs">
-                    <button class="btn btn-danger" id="category_delete" style="background-color:white;color:red;border:none">削除する</button>
+                    <button class="btn btn-danger" id="category_delete">削除する</button>
                     <button  name='save' id='save' class="btn btn-sm btn-primary float-sm-right">更新</button>
                 </div>
               </div>
@@ -66,28 +66,7 @@
 </div>
 <script>
   $(document).ready(function() {
-    const current_category =<?php echo json_encode($category);?>;
-    $('#category_delete').click(function(e){
-      $('#deleteModal').modal();
-      $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
-    })
-    $('#deleteButton').click(function(e){
-      $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-      $.ajax({
-        type: "DELETE",
-        url: "/admin/blogs/category/delete"+'/'+current_category.id,
-        success: function (data) {
-            window.location = ('/admin/blogs_category');
-        },
-        error: function (data) {
-            console.log('Error:', data);
-        }
-      })
-    });
+    var category = 
     $('#save').click(function(e){
         let name = $('#category').val();
         console.log(name);
@@ -116,7 +95,34 @@
               }
           });
         }
-        
+    });
+    $('#category_delete').click(function(e){
+        delete_id = $(this).data("id");
+        $('#deleteModal').modal();
+        $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
+    });
+    $('#deleteButton').click(function(e){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "DELETE",
+            url: "/admin/blogs/category/delete"+'/'+delete_id,
+            success: function (data) {
+                $('.deleteCategory').each(function(){
+                    var id = $(this).data("id");
+                    if(id===delete_id){
+                        $(this).parents("tr").remove();
+                    }
+                })
+                $('#deleteModal').modal("hide");
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        })
     });
 });
 </script>

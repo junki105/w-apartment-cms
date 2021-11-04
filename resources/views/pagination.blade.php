@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <ul>
+    <ul class="pagination">
         {{-- Previous Page Link --}}
         <li class="last-prev"><a href="{{ \Request::url() }}">＜ 最初</a></li>
         @if ($paginator->onFirstPage())

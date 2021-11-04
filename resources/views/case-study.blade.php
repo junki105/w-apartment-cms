@@ -100,155 +100,39 @@
               <div>間取り</div>
             </div>
             <div class="search-list">
-              <div class="region-part">
-                <label class="radio-container">大阪市内
-                  <input type="radio" checked="checked" name="radio">
-                  <span class="checkmark"></span>
-                </label>
-                <label class="radio-container">大阪府全域
-                  <input type="radio" name="radio">
-                  <span class="checkmark"></span>
-                </label>
-                <label class="radio-container">兵庫県
-                  <input type="radio" name="radio">
-                  <span class="checkmark"></span>
-                </label>
-                <label class="radio-container">京都府
-                  <input type="radio" name="radio">
-                  <span class="checkmark"></span>
-                </label>
+              <div class="region-part" id="areas">
+                @foreach ($areas as $area)
+                  <label class="radio-container">{{$area->name}}
+                    <input type="radio" name="area" value="{{$area->id}}">
+                    <span class="checkmark"></span>
+                  </label>
+                @endforeach
               </div>
-              <div class="budget-part">
-                <label class="radio-container">〜3000万円
-                  <input type="radio" checked="checked" name="radio">
-                  <span class="checkmark"></span>
-                </label>
-                <label class="radio-container">3001〜5000万円
-                  <input type="radio" name="radio">
-                  <span class="checkmark"></span>
-                </label>
-                <label class="radio-container">5001〜1億円
-                  <input type="radio" name="radio">
-                  <span class="checkmark"></span>
-                </label>
-                <label class="radio-container">1億円〜
-                  <input type="radio" name="radio">
-                  <span class="checkmark"></span>
-                </label>
+              <div class="budget-part" id="amounts">
+                @foreach ($amounts as $amount)
+                  <label class="radio-container">{{$amount->type}}
+                    <input type="radio"  name="amount" value="{{$amount->id}}">
+                    <span class="checkmark"></span>
+                  </label>
+                @endforeach
               </div>
-              <div class="plan-part">
-                <label class="radio-container">1LDK
-                  <input type="radio" checked="checked" name="radio">
-                  <span class="checkmark"></span>
-                </label>
-                <label class="radio-container">2LDK
-                  <input type="radio" name="radio">
-                  <span class="checkmark"></span>
-                </label>
-                <label class="radio-container">3LDK
-                  <input type="radio" name="radio">
-                  <span class="checkmark"></span>
-                </label>
-                <label class="radio-container">その他
-                  <input type="radio" name="radio">
-                  <span class="checkmark"></span>
-                </label>
+              <div class="plan-part" id="housetypes">
+                @foreach ($housetypes as $housetype)
+                  <label class="radio-container">{{$housetype->type}}
+                    <input type="radio" name="housetype" value="{{$housetype->id}}">
+                    <span class="checkmark"></span>
+                  </label>
+                @endforeach
               </div>
             </div>
             <div class="btn-container">
-              <button type="submit" class="btn hover-spacing-btn">選択して事例を見る</a>
+              <button id="searchButton" class="btn hover-spacing-btn">選択して事例を見る</a>
             </div>
           </form>
         </div>
       </section>
       <section class="content search-result">
-        <h1>新着一覧</h1>
-        <div class="result-content">
-          <article>
-             <div class="article-left">
-               <h2>大阪府内の一等地に</h2>
-               <img src="{{ URL::asset('images/feature01.png') }}" alt="">
-             </div>
-             <div class="article-right">
-                <div class="article-date">2021.01.01</div>
-                <div class="investment">投資用物件</div>
-                <p>ショルダーコピーショルダーコピーショルダーコピー<br>
-                ショルダーコピーショルダーコピー<br>
-                ショルダーコピーショルダーコピーショルダーコピーショルダーコピー
-                </p>
-                <a href="{{ url('/case-study/1') }}" class="btn sec-link-btn"><img src="{{ URL::asset('images/ico_arrow-right.png') }}" alt=""></a>
-             </div>
-          </article>
-          <article>
-             <div class="article-left">
-               <h2>大阪府内の一等地に</h2>
-               <img src="{{ URL::asset('images/feature01.png') }}" alt="">
-             </div>
-             <div class="article-right">
-                <div class="article-date">2021.01.01</div>
-                <div class="investment">投資用物件</div>
-                <p>ショルダーコピーショルダーコピーショルダーコピー<br>
-                ショルダーコピーショルダーコピー<br>
-                ショルダーコピーショルダーコピーショルダーコピーショルダーコピー
-                </p>
-                <a href="{{ url('/case-study/1') }}" class="btn sec-link-btn"><img src="{{ URL::asset('images/ico_arrow-right.png') }}" alt=""></a>
-             </div>
-          </article>
-          <article>
-             <div class="article-left">
-               <h2>大阪府内の一等地に</h2>
-               <img src="{{ URL::asset('images/feature01.png') }}" alt="">
-             </div>
-             <div class="article-right">
-                <div class="article-date">2021.01.01</div>
-                <div class="investment">投資用物件</div>
-                <p>ショルダーコピーショルダーコピーショルダーコピー<br>
-                ショルダーコピーショルダーコピー<br>
-                ショルダーコピーショルダーコピーショルダーコピーショルダーコピー
-                </p>
-                <a href="{{ url('/case-study/1') }}" class="btn sec-link-btn"><img src="{{ URL::asset('images/ico_arrow-right.png') }}" alt=""></a>
-             </div>
-          </article>
-          <article>
-             <div class="article-left">
-               <h2>大阪府内の一等地に</h2>
-               <img src="{{ URL::asset('images/feature01.png') }}" alt="">
-             </div>
-             <div class="article-right">
-                <div class="article-date">2021.01.01</div>
-                <div class="investment">投資用物件</div>
-                <p>ショルダーコピーショルダーコピーショルダーコピー<br>
-                ショルダーコピーショルダーコピー<br>
-                ショルダーコピーショルダーコピーショルダーコピーショルダーコピー
-                </p>
-                <a href="{{ url('/case-study/1') }}" class="btn sec-link-btn"><img src="{{ URL::asset('images/ico_arrow-right.png') }}" alt=""></a>
-             </div>
-          </article>
-          <article>
-             <div class="article-left">
-               <h2>大阪府内の一等地に</h2>
-               <img src="{{ URL::asset('images/feature01.png') }}" alt="">
-             </div>
-             <div class="article-right">
-                <div class="article-date">2021.01.01</div>
-                <div class="investment">投資用物件</div>
-                <p>ショルダーコピーショルダーコピーショルダーコピー<br>
-                ショルダーコピーショルダーコピー<br>
-                ショルダーコピーショルダーコピーショルダーコピーショルダーコピー
-                </p>
-                <a href="{{ url('/case-study/1') }}" class="btn sec-link-btn"><img src="{{ URL::asset('images/ico_arrow-right.png') }}" alt=""></a>
-             </div>
-          </article>
-        </div>
-        <div class="article-pagination">
-          <ul>
-            <li class="last-prev"><a href="">＜ 最初</a></li>
-            <li class="prev"><a href="" class="btn">前の10件へ</a></li>
-            <li class="page-num">1/3</li>
-            <li class="next active"><a href="" class="btn">次の10件へ</a></li>
-            <li class="last-next"><a href="">最後 ＞</a></li>
-          </ul>
-        </div>
+        @include ('pagination_data')
       </section>
       <footer class="footer">
         <div class="footer-content">
@@ -266,5 +150,47 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js" integrity="sha512-gSf3NCgs6wWEdztl1e6vUqtRP884ONnCNzCpomdoQ0xXsk06lrxJsR7jX5yM/qAGkPGsps+4bLV5IEjhOZX+gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ URL::asset('js/common.js') }}" async defer></script>
+    <script>
+      function fetch_data(page,area,amount,housetype)
+      {
+        let url = "/case-study?page="+page;
+        url=url+"&area=";
+        ( typeof(area) ==='undefined'||area==='' ) ?  url=url+null : url=url+area;
+        url=url+"&amount=";
+        ( typeof(amount) === 'undefined' || amount === '' ) ? url=url+null : url+=amount;
+        url=url+"&housetype=";
+        ( typeof(housetype) ==='undefined'||housetype==='' ) ? url=url+null : url+=housetype;
+        console.log(url);
+        $.ajax({
+            url:url,
+            method:"GET",
+            success:function(data){
+              $('.content search-result').html(data);
+            },
+            error:function(err){
+              console.log(err);
+            }
+        })
+      }
+      $('#searchButton').click(function(e){      
+        var index = 0;
+        $("#areas input[type=radio]:checked").each(function () {
+          console.log(this.value)
+        });
+        $("#amounts input[type=radio]:checked").each(function(){
+          console.log(this.value)
+        })
+        $('#housetypes input[type=radio]:checked').each(function(){
+          console.log(this.value)
+        });
+        page = 1;
+        fetch_data(page,area,amount,housetype);
+      })  
+      $(document).on('click', 'a .btn', function(event){
+        event.preventDefault(); 
+        var page = $(this).attr('href').split('page=')[1];
+        fetch_data(page,area,amount,housetype);
+      });
+    <script>
   </body>
 </html>

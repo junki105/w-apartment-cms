@@ -112,7 +112,6 @@
     let current_category;
     $('.deleteCategory').click(function(e){
         delete_id = $(this).data("id");
-        console.log(delete_id);
         $('#deleteModal').modal();
         $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
     });
@@ -172,7 +171,6 @@
                 order_index : row.rowIndex
             }
         })
-        console.log(order_list);
         $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

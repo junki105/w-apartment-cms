@@ -1,6 +1,8 @@
 @extends('admin.layouts.master')
 
 @section('content')
+@include('admin.layouts.modal_delete')
+
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
@@ -57,7 +59,7 @@
               </div>
               <div class="card-body">
                 <div class=" d-flexs">
-                    <label style="color:red">削除する</label>
+                    <button id="delete_amount" style="background-color:white;color:red;border:none" class="btn btn-sm btn-danger">削除する</label>
                     <button  name='save' id='save' class="btn btn-sm btn-primary float-sm-right">更新</button>
                 </div>
               </div>
@@ -71,6 +73,28 @@
 </div>
 <script>
   $(document).ready(function() {
+    const current_amount =<?php echo json_encode($amount);?>;
+    $('#delete_amount').click(function(e){
+        $('#deleteModal').modal();
+        $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
+    });
+    $('#deleteButton').click(function(e){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "DELETE",
+            url: "/admin/results_amount"+'/'+current_amount.id,
+            success: function (data) {
+                window.location=("/admin/results_amount/create")
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        })
+    });
     $('#save').click(function(e){
         let type = $('#amount').val();
         console.log(type);

@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 //Route::view('/news', 'news');
 Route::view('/philosophy', 'philosophy');
-Route::view('/case-study', 'case-study');
+Route::get('/case-study', 'ResultController@search');
 Route::get('/case-study/{id}','ResultController@show');
 Route::view('/feature', 'feature');
 Route::view('/document-request', 'document-request');

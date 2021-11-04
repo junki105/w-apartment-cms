@@ -81,7 +81,7 @@
                                         編集
                                     </button>
                                 </a>
-                                <button  class="btn btn-danger btn-sm deleteResult" id="deleteresult" data-id="{{$result->id}}">
+                                <button  class="btn btn-danger btn-sm deleteResult" onClick="deleteResult({{$result->id}})" id="deleteresult" data-id="{{$result->id}}">
                                     <i class="fa fa-trash ml-1 mr-1"></i>削除
                                 </button>
                             </div>
