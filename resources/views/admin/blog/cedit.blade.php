@@ -82,7 +82,7 @@
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
               type:"POST",
-              url: '/admin/blogs/category/update/'+current_category.id,
+              url: '/admin/blog/category/update/'+current_category.id,
               data: formdata,
               cache:false,
               contentType:false,
@@ -109,7 +109,7 @@
         });
         $.ajax({
             type: "DELETE",
-            url: "/admin/blogs/category/delete"+'/'+delete_id,
+            url: "/admin/blog/category/delete"+'/'+delete_id,
             success: function (data) {
                 $('.deleteCategory').each(function(){
                     var id = $(this).data("id");

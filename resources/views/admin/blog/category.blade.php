@@ -18,8 +18,8 @@
                     </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home/</a></li>
-                        <li class="breadcrumb-item active">お知らせ新規追加</li>
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">カテゴリ</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -35,10 +35,10 @@
         </div>
         <div class="card col-8">
             <div class="card-header">
-                <form action="/admin/blogs/categoryAdd" id="form" method="POST">
+                <form action="/admin/blog/categoryAdd" id="form" method="POST">
                     @csrf
-                    <div class="form-group mb-0 row">
-                        <input type="text" class="col-sm-3 form-control ml-1 mr-3" name="name_input" id="name_input">
+                    <div class="mb-0 form-group row">
+                        <input type="text" class="ml-1 mr-3 col-sm-3 form-control" name="name_input" id="name_input">
                         <button type="submit" class="btn btn-md" style="border:1px solid;">新規作成</button>
                     </div>
                 </form>
@@ -51,7 +51,7 @@
                                 <th class="col-sm-1"></th>
                                 <th class="col-sm-2">ID</th>
                                 <th class="col-sm-3">カテゴリ</th>
-                                <th class="col-sm-6 float-right"></th>
+                                <th class="float-right col-sm-6"></th>
                             </tr>
                         </thead>
                         <tbody id="category_table">
@@ -62,13 +62,13 @@
                                     <td class="col-sm-3" id="td{{$category->id}}">{{$category->name}}</td>
                                     <td class="col-sm-6">
                                         <div class="float-sm-right">
-                                            <a href='/admin/blogs_category/{{$category->id}}/edit'>
+                                            <a href='/admin/blog_category/{{$category->id}}/edit'>
                                                     <button class="btn btn-info btn-sm editCategory" type="button" data-id="{{$category->id}}">
-                                                        <i class="fa fa-pencil-alt ml-1 mr-1"></i>編集
+                                                        <i class="ml-1 mr-1 fa fa-pencil-alt"></i>編集
                                                     </button>
                                             </a>
                                             <button  class="btn btn-danger btn-sm deleteCategory"  data-id="{{$category->id}}">
-                                                    <i class="fa fa-trash ml-1 mr-1"></i>削除
+                                                    <i class="ml-1 mr-1 fa fa-trash"></i>削除
                                                 
                                             </button>
                                         </div>
@@ -84,7 +84,7 @@
                         <th class="col-sm-1"></th>
                         <th class="col-sm-2">ID</th>
                         <th class="col-sm-3">カテゴリ</th>
-                        <th class="col-sm-6 float-right"></th>
+                        <th class="float-right col-sm-6"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -123,7 +123,7 @@
         });
         $.ajax({
             type: "DELETE",
-            url: "/admin/blogs/category/delete"+'/'+delete_id,
+            url: "/admin/blog/category/delete"+'/'+delete_id,
             success: function (data) {
                 $('.deleteCategory').each(function(){
                     var id = $(this).data("id");
@@ -176,7 +176,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
             type:'post',
-            url:'/admin/blogs_category/update/order',
+            url:'/admin/blog_category/update/order',
             data:{
                 order_list : order_list
             },

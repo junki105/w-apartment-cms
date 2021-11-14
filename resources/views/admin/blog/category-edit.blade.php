@@ -39,7 +39,7 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <label for="category" class="col-sm-3 col-form-label"><strong>カテゴリ名</strong></label>
-                        <input type="text" class="col-sm-7 form-control ml-1" name="category" value="{{$category->name}}" id="category">
+                        <input type="text" class="ml-1 col-sm-7 form-control" name="category" value="{{$category->name}}" id="category">
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -79,9 +79,9 @@
       });
       $.ajax({
         type: "DELETE",
-        url: "/admin/blogs/category/delete"+'/'+current_category.id,
+        url: "/admin/blog/category/delete"+'/'+current_category.id,
         success: function (data) {
-            window.location = ('/admin/blogs_category');
+            window.location = ('/admin/blog_category');
         },
         error: function (data) {
             console.log('Error:', data);
@@ -103,7 +103,7 @@
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
               type:"POST",
-              url: '/admin/blogs/category/update/'+current_category.id,
+              url: '/admin/blog/category/update/'+current_category.id,
               data: formdata,
               cache:false,
               contentType:false,

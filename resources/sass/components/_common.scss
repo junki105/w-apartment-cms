@@ -42,6 +42,37 @@
   }
 }
 
+@media (max-width: 1250px) {
+  .sec-hero {
+    h1 {
+      font-size: 32rem;
+    }
+    p {
+      font-size: 13rem;
+      margin-top: 15rem;
+      line-height: 28rem;
+    }
+  }
+  
+}
+
+@media (max-width: 750px) {
+  .sec-hero {
+    padding-top: 163px;
+    h1 {
+      font-size: 28px;
+      line-height: 48px;
+    }
+    p {
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      margin-top: 15px;
+      line-height: 28px;
+    }
+  }
+  
+}
+
 .container {
   width: 100%;
   height: 100vh;

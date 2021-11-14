@@ -16,28 +16,29 @@ use App\Http\Controllers\ContentsArrController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FrontBlogController;
 use App\Http\Controllers\ResultController;
+
 Route::get('/', function () {
   return view('index');
-});
+})->name('top');
 
 //Route::view('/news', 'news');
 Route::view('/philosophy', 'philosophy');
 Route::get('/case-study', 'ResultController@search');
 Route::get('/case-study/{id}','ResultController@show');
-Route::view('/feature', 'feature');
-Route::view('/document-request', 'document-request');
-Route::view('/document-request/done/', 'document-request-done');
-Route::view('/contact', 'contact');
-Route::view('/contact/done/', 'contact-done');
-Route::view('/company-profile', 'company-profile');
+Route::view('/feature', 'feature')->name('feature');
+Route::view('/document-request', 'document-request')->name('document-request');
+Route::view('/document-request/done/', 'document-request-done')->name('document-request-done');
+Route::view('/contact', 'contact')->name('contact');
+Route::view('/contact/done/', 'contact-done')->name('contact-done');
+Route::view('/company-profile', 'company-profile')->name('company');
 Route::get('/news','NewsController@index');
 Route::get('/news/{id}','NewsController@show');
 Route::get('/house/{id}','HouseController@show_house');
-Route::get('/house', 'HouseController@list');
+Route::get('/house', 'HouseController@list')->name('house');
 
-Route::group(['prefix'=>'blogs'],function(){
+Route::group(['prefix'=>'blog'],function() {
   Route::get('/{id}','FrontBlogController@show');
-  Route::get('/','FrontBlogController@index');
+  Route::get('/','FrontBlogController@index')->name('blog');
   Route::get('/category/{id}','FrontBlogController@category');
   Route::get('/recommend','FrontBlogController@recommend');
 });
@@ -56,15 +57,15 @@ Route::group(['prefix' => 'admin'], function () {
   Route::delete('/news/{id}',['uses'=>'Admin\NewsController@destroy','as'=>'admin.news']);
   Route::get('news/edit/{id}',['uses'=>'Admin\NewsController@edit']);
 
-  //Blogs Backend Routes
-  Route::get('/blogs/search','Admin\BlogController@search');
-  Route::post('/blogs/update/{id}','Admin\BlogController@update');
-  Route::get('/blogs_category','Admin\BlogController@category');
-  Route::post('/blogs_category/update/order','Admin\BlogController@updateOrder');
-  Route::get('/blogs_category/{id}/edit','Admin\BlogController@categoryEdit');
-  Route::post('/blogs/categoryAdd','Admin\BlogController@categoryAdd');
-  Route::delete('/blogs/category/delete/{id}','Admin\BlogController@categoryDelete');
-  Route::post('/blogs/category/update/{id}','Admin\BlogController@categoryUpdate');
+  //blog Backend Routes
+  Route::get('/blog/search','Admin\BlogController@search');
+  Route::post('/blog/update/{id}','Admin\BlogController@update');
+  Route::get('/blog_category','Admin\BlogController@category');
+  Route::post('/blog_category/update/order','Admin\BlogController@updateOrder');
+  Route::get('/blog_category/{id}/edit','Admin\BlogController@categoryEdit');
+  Route::post('/blog/categoryAdd','Admin\BlogController@categoryAdd');
+  Route::delete('/blog/category/delete/{id}','Admin\BlogController@categoryDelete');
+  Route::post('/blog/category/update/{id}','Admin\BlogController@categoryUpdate');
 
   //House Backend Routes
   Route::resource('/housing','Admin\HousingController');
@@ -78,7 +79,7 @@ Route::group(['prefix' => 'admin'], function () {
   Route::post('/results_housetype/update/order','Admin\HouseTypeController@updateOrder');
   Route::get('/search_results','Admin\ResultController@search');
   Route::get('/results/list','Admin\ResultController@index');
-  Route::resource('/blogs', 'Admin\BlogController');
+  Route::resource('/blog', 'Admin\BlogController');
   Route::resource('/results_housetype','Admin\HouseTypeController');
   Route::resource('/results_amount','Admin\AmountController');
   Route::resource('/results_area','Admin\AreaController');

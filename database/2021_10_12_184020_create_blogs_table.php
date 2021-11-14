@@ -20,10 +20,10 @@ class CreateBlogsTable extends Migration
             $table->string('public_status');
             $table->string('featured_image_url');
             $table->boolean('recommended_flag');
-            $table->string('author_name');
-            $table->longText('author_profile');
+            $table->string('author_name')->nullable();
+            $table->longText('author_profile')->nullable();
             $table->string('author_image_url');
-            $table->integer('category');
+            $table->integer('category')->nullable();
             $table->timestamps();
         });
     }

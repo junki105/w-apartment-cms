@@ -410,9 +410,9 @@
             success: function (data) {
                 if(data.success){
                     $('#alert').css('display','block');
-                    // $('#created_url').html('http://localhost:8000/blogs/'+data.id);
+                    // $('#created_url').html('http://localhost:8000/blog/'+data.id);
                     // $('#url_string').css('display','block');
-                    // $('#link_url').attr('href','http://localhost:8000/blogs/'+data.id).css('display','inline');
+                    // $('#link_url').attr('href','http://localhost:8000/blog/'+data.id).css('display','inline');
                 }
                 },
                 error: function (data) {
