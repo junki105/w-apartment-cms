@@ -89,6 +89,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    @include font-ud(regular);   
     li {
       a {
         font-size: 13px;
@@ -122,6 +125,83 @@
       }  
     }
   }
+}
+
+@media (max-width: 1250px) {
+  .article-pagination {
+    margin: 48rem 0;
+    ul {
+      font-size: 13rem; 
+      li {
+        a {
+          font-size: 13rem;        
+        }
+        &.prev, &.next {
+          a {
+            width: 160rem;
+            height: 40rem;
+            border-radius: 4rem;
+          }
+          margin: 0 40rem;
+        }
+        &.active {
+          a {
+            width: 160rem;
+            height: 40rem;
+            border-radius: 4rem;
+          }
+        }
+        &.page-num {
+          margin: 0 16rem;
+        }  
+      }
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  .article-pagination {
+    margin: 40px 0;
+    ul {
+      font-size: 13px;
+      li {
+        a {
+          font-size: 13px;         
+        }
+        &.last-prev, &.last-next {
+          display: none;
+        }
+        &.prev, &.next {
+          a {
+            width: 80px;
+            height: 40px;
+            border-radius: 4px;
+          }
+          button {
+            width: 80px;
+            height: 40px;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+          }
+          margin: 0;
+        }
+        &.active {
+          a {
+            width: 80px;
+            height: 40px;
+            border-radius: 4px;
+            background: #506285;
+            &:hover {
+              background: #4c92d9;
+            }           
+          }
+        }
+        &.page-num {
+          margin: 0 36px;
+        }  
+      }
+    }
+  }  
 }
 
 .menu-open {
