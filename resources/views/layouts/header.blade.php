@@ -47,6 +47,13 @@
         <title>W-Apartment - 会社概要</title>
         @break
 
+      @case('case-study')
+        <title>W-Apartment - 事例</title>
+        @break
+
+      @case('case-study-single')
+        <title>W-Apartment - 事例 - </title>
+        @break
       @default
         <title>W-apartment</title>
     @endswitch
@@ -103,6 +110,14 @@
       @case('company')
         <header class="header request-header">
         @break
+      
+      @case('case-study')
+        <header class="header works-header">
+        @break
+      
+      @case('case-study-single')
+        <header class="header works-header">
+        @break
 
       @default
         <header class="header">
@@ -147,6 +162,14 @@
               
             @case('company')
               COMPANY
+              @break
+
+            @case('case-study')
+              WORKS
+              @break
+              
+            @case('case-study-single')
+              WORKS
               @break
 
             @default

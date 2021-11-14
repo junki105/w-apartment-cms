@@ -12,7 +12,7 @@ class ResultController extends Controller
     //
     public function show($id){
         $result = Result::find($id);
-        return view('case-study-single',compact('result'));
+        return view('case-study-single', compact('result'));
     }
     public function search(Request $request){
         $results = null;
@@ -45,6 +45,6 @@ class ResultController extends Controller
             $count = $results->count();
             $results = $results->latest()->paginate(5);
         }
-        return view('case-study',compact('amounts','areas','housetypes','results'));
+        return view('case-study', compact('amounts','areas','housetypes','results'));
     }
 }

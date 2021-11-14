@@ -23,8 +23,8 @@ Route::get('/', function () {
 
 //Route::view('/news', 'news');
 Route::view('/philosophy', 'philosophy');
-Route::get('/case-study', 'ResultController@search');
-Route::get('/case-study/{id}','ResultController@show');
+Route::get('/case-study', 'ResultController@search')->name('case-study');
+Route::get('/case-study/{id}','ResultController@show')->name('case-study-single');
 Route::view('/feature', 'feature')->name('feature');
 Route::view('/document-request', 'document-request')->name('document-request');
 Route::view('/document-request/done/', 'document-request-done')->name('document-request-done');
