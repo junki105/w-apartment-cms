@@ -15,10 +15,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.min.css" integrity="sha512-q54FvbV+gGBn+NvgaD4gpJ7w4wrO00DgW7Rx503PIhrf0CuMwLOwbS+bXgOBFSob+6GVy1HDPfaRLJ8w2jiS4g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         @break
 
-      @case('blog')
-        <title>W-Apartment - ブログ</title>
-        @break
-
       @case('feature')
         <title>W-Apartment - 特徴</title>
         @break
@@ -54,6 +50,35 @@
       @case('case-study-single')
         <title>W-Apartment - 事例 - </title>
         @break
+
+      @case('blog')
+        <title>W-Apartment - ブログ</title>
+        @break
+
+      @case('blog-single')
+        <title>W-Apartment - ブログ - </title>
+        @break
+
+      @case('blog-recommend')
+        <title>W-Apartment - ブログ - おすすめ記事</title>
+        @break
+
+      @case('blog-single')
+        <title>W-Apartment - ブログ - </title>
+        @break
+
+      @case('philosophy')
+        <title>W-Apartment - 理念</title>
+        @break
+
+      @case('news')
+        <title>W-Apartment - News</title>
+        @break
+
+      @case('news-single')
+        <title>W-Apartment - News - </title>
+        @break
+
       @default
         <title>W-apartment</title>
     @endswitch
@@ -79,9 +104,6 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     @switch(request()->route()->getName())
-      @case('blog')
-        <header class="header works-header">
-        @break
 
       @case('feature')
         <header class="header feature-header">
@@ -119,6 +141,34 @@
         <header class="header works-header">
         @break
 
+      @case('blog')
+        <header class="header works-header">
+        @break
+        
+      @case('blog-single')
+        <header class="header works-header">
+        @break
+        
+      @case('blog-category')
+        <header class="header works-header">
+        @break
+      
+      @case('blog-recommend')
+        <header class="header works-header">
+        @break
+
+      @case('philosophy')
+        <header class="header about-header">
+        @break
+
+      @case('news')
+        <header class="header news-header">
+        @break
+
+      @case('news-single')
+        <header class="header news-header">
+        @break
+
       @default
         <header class="header">
     @endswitch
@@ -132,10 +182,6 @@
         <div class="line"></div>
         <div id="num" class="slide-number">
           @switch(request()->route()->getName())
-            @case('blog')
-              BLOG
-              @break
-
             @case('feature')
               FEATURE
               @break
@@ -170,6 +216,34 @@
               
             @case('case-study-single')
               WORKS
+              @break
+
+            @case('blog')
+              BLOG
+              @break
+
+            @case('blog-single')
+              BLOG
+              @break
+
+            @case('blog-category')
+              BLOG
+              @break
+
+            @case('blog-recommend')
+              BLOG
+              @break
+
+            @case('philosophy')
+              ABOUT
+              @break
+
+            @case('news')
+              NEWS
+              @break
+
+            @case('news-single')
+              NEWS
               @break
 
             @default

@@ -9,7 +9,7 @@
         <a href="{{url('/blog/recommend')}}">おすすめ</a>
         @foreach ($categories as $category)
           <span></span>
-          <a href='{{url('/blog/category/'.$category->id)}}' id="{{$category->id}}">{{$category->name}}</a>
+          <a href="{{url('/blog/category/'.$category->id)}}" id="{{$category->id}}">{{$category->name}}</a>
         @endforeach
       </div>
     </div>
@@ -28,7 +28,7 @@
               <div class="investment article-blog-category">{{$blog->category}}</div>
               <p>{{$blog->content}}
               </p>
-              <a href='{{url('/blog/'.$blog->id)}}' class="btn sec-link-btn"><img src="{{ URL::asset('images/ico_arrow-right.png') }}" alt=""></a>
+              <a href="{{url('/blog/'.$blog->id)}}" class="btn sec-link-btn"><img src="{{ URL::asset('images/ico_arrow-right.png') }}" alt=""></a>
           </div>
         </article>
       @endforeach

@@ -22,7 +22,7 @@ Route::get('/', function () {
 })->name('top');
 
 //Route::view('/news', 'news');
-Route::view('/philosophy', 'philosophy');
+Route::view('/philosophy', 'philosophy')->name('philosophy');
 Route::get('/case-study', 'ResultController@search')->name('case-study');
 Route::get('/case-study/{id}','ResultController@show')->name('case-study-single');
 Route::view('/feature', 'feature')->name('feature');
@@ -31,16 +31,16 @@ Route::view('/document-request/done/', 'document-request-done')->name('document-
 Route::view('/contact', 'contact')->name('contact');
 Route::view('/contact/done/', 'contact-done')->name('contact-done');
 Route::view('/company-profile', 'company-profile')->name('company');
-Route::get('/news','NewsController@index');
-Route::get('/news/{id}','NewsController@show');
-Route::get('/house/{id}','HouseController@show_house');
+Route::get('/news','NewsController@index')->name('news');
+Route::get('/news/{id}','NewsController@show')->name('news-single');
+Route::get('/house/{id}','HouseController@show_house')->name('house-single');
 Route::get('/house', 'HouseController@list')->name('house');
 
 Route::group(['prefix'=>'blog'],function() {
-  Route::get('/{id}','FrontBlogController@show');
+  Route::get('/{id}','FrontBlogController@show')->name('blog-single');
   Route::get('/','FrontBlogController@index')->name('blog');
-  Route::get('/category/{id}','FrontBlogController@category');
-  Route::get('/recommend','FrontBlogController@recommend');
+  Route::get('/category/{id}','FrontBlogController@category')->name('blog-category');
+  Route::get('/recommend','FrontBlogController@recommend')->name('blog-recommend');
 });
 
 Route::group(['prefix' => 'admin'], function () {

@@ -106,6 +106,12 @@
           border-radius: 4px;
           background: #f8f8f8;
         }
+        button {
+          width: 160px;
+          height: 40px;
+          border-radius: 4px;
+          background-color: #f8f8f8;
+        }
         margin: 0 40px;
       }
       &.active {
@@ -138,6 +144,11 @@
         }
         &.prev, &.next {
           a {
+            width: 160rem;
+            height: 40rem;
+            border-radius: 4rem;
+          }
+          button {
             width: 160rem;
             height: 40rem;
             border-radius: 4rem;
