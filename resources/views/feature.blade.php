@@ -6,7 +6,9 @@
       ショルダーコピーショルダーコピー<br>
       ショルダーコピーショルダーコピーショルダーコピーショルダーコピー</p>
     <h2>１分でわかる「〇〇〇〇〇」</h2>
-    <iframe src="" frameborder="0"></iframe>
+    <video class="feature-video" controls muted poster="https://assets.codepen.io/6093409/river.jpg">
+      <source src="https://assets.codepen.io/6093409/river.mp4" type="video/mp4">
+    </video>
   </section>
   <section class="content feature-list" id="list">
     <h1>特 徴</h1>

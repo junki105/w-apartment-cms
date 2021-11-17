@@ -6012,9 +6012,9 @@ a:hover {
   margin-top: 76px;
 }
 
-.feature-hero iframe {
+.feature-hero .feature-video {
   width: 560px;
-  height: 315px;
+  height: auto;
   background-color: black;
   margin: auto;
   margin-top: 17px;
@@ -6145,9 +6145,9 @@ a:hover {
     margin-top: 76rem;
   }
 
-  .feature-hero iframe {
+  .feature-hero .feature-video {
     width: 560rem;
-    height: 315rem;
+    height: auto;
     margin-top: 17rem;
   }
 
@@ -6231,7 +6231,7 @@ a:hover {
     margin-top: 71px;
   }
 
-  .feature-hero iframe {
+  .feature-hero .feature-video {
     width: 255px;
     height: auto;
     margin-top: 13px;

@@ -19,9 +19,9 @@
       font-family: 'felix';
       margin-top: 76px;
     }
-    iframe {
+    .feature-video {
       width: 560px;
-      height: 315px;
+      height: auto;
       background-color: black;   
       margin: auto;
       margin-top: 17px;
@@ -131,9 +131,9 @@
         font-size: 22rem;
         margin-top: 76rem;
       }
-      iframe {
+      .feature-video {
         width: 560rem;
-        height: 315rem;
+        height: auto;
         margin-top: 17rem;
       }
     }
@@ -210,7 +210,7 @@
         line-height: 36px;
         margin-top: 71px;
       }
-      iframe {
+      .feature-video {
         width: 255px;
         height: auto;
         margin-top: 13px;

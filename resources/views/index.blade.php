@@ -262,7 +262,7 @@
         <h2 class="sec-ttl">ブログ</h2>
         <div class="blog-content">
           <div class="blog-wrap">
-            <img src="{{ URL::asset('images/top_blog.png') }}" alt="">
+            <a href=""><img src="{{ URL::asset('images/top_blog.png') }}" alt=""></a>
             <div class="blog-inner">
               <div class="blog-info">
                 <a href="{{ url('/blog/recommend') }}" class="blog-category btn">カテゴリ</a>
@@ -272,7 +272,7 @@
             </div>
           </div>
           <div class="blog-wrap">
-            <img src="{{ URL::asset('images/top_blog.png') }}" alt="">
+            <a href=""><img src="{{ URL::asset('images/top_blog.png') }}" alt=""></a>
             <div class="blog-inner">
               <div class="blog-info">
                 <a href="{{ url('/blog/recommend') }}" class="blog-category btn">カテゴリ</a>
@@ -282,7 +282,7 @@
             </div>
           </div>
           <div class="blog-wrap">
-            <img src="{{ URL::asset('images/top_blog.png') }}" alt="">
+            <a href=""><img src="{{ URL::asset('images/top_blog.png') }}" alt=""></a>
             <div class="blog-inner">
               <div class="blog-info">
                 <a href="{{ url('/blog/recommend') }}" class="blog-category btn">カテゴリ</a>
@@ -292,7 +292,7 @@
             </div>
           </div>
           <div class="blog-wrap">
-            <img src="{{ URL::asset('images/top_blog.png') }}" alt="">
+            <a href=""><img src="{{ URL::asset('images/top_blog.png') }}" alt=""></a>
             <div class="blog-inner">
               <div class="blog-info">
                 <a href="{{ url('/blog/recommend') }}" class="blog-category btn">カテゴリ</a>
@@ -302,7 +302,7 @@
             </div>
           </div>
           <div class="blog-wrap">
-            <img src="{{ URL::asset('images/top_blog.png') }}" alt="">
+            <a href=""><img src="{{ URL::asset('images/top_blog.png') }}" alt=""></a>
             <div class="blog-inner">
               <div class="blog-info">
                 <a href="{{ url('/blog/recommend') }}" class="blog-category btn">カテゴリ</a>
@@ -312,7 +312,7 @@
             </div>
           </div>
           <div class="blog-wrap">
-            <img src="{{ URL::asset('images/top_blog.png') }}" alt="">
+            <a href=""><img src="{{ URL::asset('images/top_blog.png') }}" alt=""></a>
             <div class="blog-inner">
               <div class="blog-info">
                 <a href="{{ url('/blog/recommend') }}" class="blog-category btn">カテゴリ</a>
