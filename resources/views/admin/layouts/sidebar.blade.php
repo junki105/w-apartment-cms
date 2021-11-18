@@ -105,8 +105,8 @@
             </li>
           </ul>
         </li>
-        <li class="{{(request()->is('admin/blogs*'))?'nav-item menu-is-opening menu-open':'nav-item'}}">
-            <a href="#" class="{{(request()->is('admin/blogs*'))?'nav-link active':'nav-link'}}">
+        <li class="{{(request()->is('admin/blog*'))?'nav-item menu-is-opening menu-open':'nav-item'}}">
+            <a href="#" class="{{(request()->is('admin/blog*'))?'nav-link active':'nav-link'}}">
               <i class="nav-icon far fa-fw fa fa-pen-nib"></i>
               <p>
                 ブログ
@@ -115,19 +115,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{url('/admin/blogs/create')}}" class="{{(request()->is('admin/blogs/create'))?'nav-link active':'nav-link'}}">
+                <a href="{{url('/admin/blog/create')}}" class="{{(request()->is('admin/blog/create'))?'nav-link active':'nav-link'}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>投稿</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{url('/admin/blogs')}}" class="{{(request()->is('admin/blogs/list'))?'nav-link active':'nav-link'}}">
+                <a href="{{url('/admin/blog')}}" class="{{(request()->is('admin/blog/list'))?'nav-link active':'nav-link'}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>ブログ一覧</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{url('/admin/blogs_category')}}" class="{{(request()->is('admin/blogs_category*'))?'nav-link active':'nav-link'}}">
+                <a href="{{url('/admin/blog_category')}}" class="{{(request()->is('admin/blog_category*'))?'nav-link active':'nav-link'}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>カテゴリ</p>
                 </a>

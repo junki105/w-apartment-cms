@@ -13,7 +13,7 @@
     });
     $.ajax({
       type: "DELETE",
-      url: "/admin/blogs"+'/'+delete_id,
+      url: "/admin/blog"+'/'+delete_id,
       success: function(data) {
         $('.deleteBlog').each(function() {
           var id = $(this).data("id");
@@ -32,7 +32,7 @@
   });
 </script>
 <div class="card-header">
-    <h6 class="card-title">お知らせ一覧</h6>
+    <h6 class="card-title">ブログ一覧</h6>
 
     <div class="float-right card-tools d-inline-flex"><span class="mt-1 mr-2">全<span class="count">{{$count}}</span>件</span>{{$blogs->links()}}</div>
 </div>
@@ -46,7 +46,7 @@
                 <th class="col-sm-2">著者名</th>
                 <th class="col-sm-2">カテゴリ</th>
                 <th class="col-sm-2">公開状能</th>
-                <th class="float-right col-sm-3"></th>カテゴリ
+                <th class="float-right col-sm-3"></th>
             </tr>
             </thead>
             <tbody id="blogrows">
@@ -55,7 +55,7 @@
                         <td class="col-sm-1">{{$blog->id}}</td>
                         <td class="col-sm-2">{{$blog->title}}</td>
                         <td class="col-sm-2">{{$blog->author_name}}</td>
-                        <td class="col-sm-2">dff</td>
+                        <td class="col-sm-2">{{$blog->category}}</td>
                         <td class="col-sm-2">
                         @if($blog->public_status=='0')
                             非公開
@@ -65,13 +65,13 @@
                         </td>
                         <td class="col-sm-3">
                             <div class="float-sm-right">
-                                <a href="/blogs/{{$blog->id}}" class="mr-2">
+                                <a href="/blog/{{$blog->id}}" class="mr-2">
                                     <button class="btn btn-primary btn-sm viewBlog" data-id="{{$blog->id}}"  type="button">
                                         <i class="fa fa-external-link-alt"></i>
                                         表示
                                     </button>
                                 </a>
-                                <a href="/admin/blogs/{{$blog->id}}/edit" class="mr-2">
+                                <a href="/admin/blog/{{$blog->id}}/edit" class="mr-2">
                                     <button class="btn btn-info btn-sm editBlog" type="button" data-id="{{$blog->id}}">
                                         <i class="ml-1 mr-1 fa fa-pencil-alt"></i>
                                         編集
@@ -89,12 +89,14 @@
     @else
     <table class="table table-striped">
         <thead>
-        <tr class="row">
-            <th class="col-sm-1">ID</th>
-            <th class="col-sm-3">タイトル</th>
-            <th class="col-sm-4">公開状能</th>
-            <th class="float-right col-sm-4"></th>
-        </tr>
+            <tr class="row">
+                <th class="col-sm-1">ID</th>
+                <th class="col-sm-2">タイトル</th>
+                <th class="col-sm-2">著者名</th>
+                <th class="col-sm-2">カテゴリ</th>
+                <th class="col-sm-2">公開状能</th>
+                <th class="float-right col-sm-3"></th>
+            </tr>
         </thead>
         <tbody>
         </tbody>

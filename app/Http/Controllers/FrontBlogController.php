@@ -12,22 +12,22 @@ class FrontBlogController extends Controller
     {
         $blog = Blog::where('id',$id)->first();
         $categories = Category::all();
-        return view('blog-single',compact('blog','categories'));
+        return view('blog-single', compact('blog','categories'));
 
     }
     public function index(){
         $blogs = Blog::latest()->paginate(10);
         $categories = Category::all();
-        return view('blogs',compact('blogs','categories'));
+        return view('blogs', compact('blogs','categories'));
     }
     public function recommend(){
         $blogs = Blog::where('recommended_flag','LIKE','1');
         $categories = Category::all();
-        return view('blogs',compact('blogs','categories'));
+        return view('blogs', compact('blogs','categories'));
     }
     public function category($id){
         $blogs = Blog::where('category','LIKE',$id)->paginate(10);
         $categories = Category::all();
-        return view('blogs',compact('blogs','categories'));
+        return view('blogs', compact('blogs','categories'));
     }
 }

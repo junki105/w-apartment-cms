@@ -134,7 +134,7 @@
           <p>{{$house->book}}</p>
           @foreach (explode(',' , $house->ow_image_urls) as $ow_url)
             <div class="img-content">
-              <img src="/{{ $ow_url }}" alt="">
+              <img src="{{ url($ow_url) }}" alt="">
             </div>
           @endforeach
         </div>
@@ -143,7 +143,7 @@
         <h1>GALLERY</h1>
         <div class="gallery-wrap-content">
           @foreach (explode(',' , $house->gallery_image_urls) as $gallery_url)
-            <img src="/{{ $gallery_url }}" alt="">
+            <img src="{{ url($gallery_url) }}" alt="">
           @endforeach
         </div>
       </section>

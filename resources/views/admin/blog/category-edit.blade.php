@@ -1,6 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('content')
+@include('admin.layouts.modal_delete')
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -38,7 +39,7 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <label for="category" class="col-sm-3 col-form-label"><strong>カテゴリ名</strong></label>
-                        <input type="text" class="col-sm-7 form-control ml-1" name="category" value="{{$category->name}}" id="category">
+                        <input type="text" class="ml-1 col-sm-7 form-control" name="category" value="{{$category->name}}" id="category">
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -51,7 +52,7 @@
               </div>
               <div class="card-body">
                 <div class=" d-flexs">
-                    <label style="color:red">削除する</label>
+                    <button class="btn btn-danger" id="category_delete" style="background-color:white;color:red;border:none">削除する</button>
                     <button  name='save' id='save' class="btn btn-sm btn-primary float-sm-right">更新</button>
                 </div>
               </div>
@@ -65,6 +66,28 @@
 </div>
 <script>
   $(document).ready(function() {
+    const current_category =<?php echo json_encode($category);?>;
+    $('#category_delete').click(function(e){
+      $('#deleteModal').modal();
+      $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
+    })
+    $('#deleteButton').click(function(e){
+      $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      $.ajax({
+        type: "DELETE",
+        url: "/admin/blog/category/delete"+'/'+current_category.id,
+        success: function (data) {
+            window.location = ('/admin/blog_category');
+        },
+        error: function (data) {
+            console.log('Error:', data);
+        }
+      })
+    });
     $('#save').click(function(e){
         let name = $('#category').val();
         console.log(name);
@@ -73,7 +96,6 @@
           $('#alert').css({'display':'block','border-left-color':'red','color':'red'});
         }
         else{
-          const current_category =<?php echo json_encode($category);?>;
           let formdata = new FormData();
           formdata.append('name',name);
           $.ajax({
@@ -81,7 +103,7 @@
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
               type:"POST",
-              url: '/admin/blogs/category/update/'+current_category.id,
+              url: '/admin/blog/category/update/'+current_category.id,
               data: formdata,
               cache:false,
               contentType:false,

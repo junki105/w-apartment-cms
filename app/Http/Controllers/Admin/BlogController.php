@@ -19,7 +19,7 @@ class BlogController extends Controller
         $blogs = Blog::latest()->paginate(5);
         $count = Blog::count();
         $categories = Category::all();
-        return view('admin.blogs.list',compact(['blogs','count','categories']));
+        return view('admin.blog.list',compact(['blogs','count','categories']));
     }
     public function updateOrder(Request $request){
         $datas = $request->order_list;
@@ -41,7 +41,7 @@ class BlogController extends Controller
     {
         //
         $categories = Category::all();
-        return view('admin.blogs.create',compact('categories'));
+        return view('admin.blog.create',compact('categories'));
     }
 
     /**
@@ -56,14 +56,14 @@ class BlogController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'content' => 'required',
-            'author_name' => 'required'
+            // 'author_name' => 'required'
         ]);
-         request()->validate([
-            'featured_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-         ]);
-         request()->validate([
-            'author_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-         ]);
+        //  request()->validate([
+        //     'featured_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        //  ]);
+        //  request()->validate([
+        //     'author_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        //  ]);
         $blog = new Blog;
         $blog->title = $request->title;
         $blog->content = $request->content;
@@ -79,20 +79,26 @@ class BlogController extends Controller
         }
         if($file = $request->file('featured_image')){
             $name = time().time().'.'.$file->getClientOriginalExtension();
-            $target_path = public_path('/uploads/blogs/featured-image');
+            $target_path = public_path('/uploads/blog/featured-image');
             if($file->move($target_path, $name)) {
-               $blog->featured_image_url = '/uploads/blogs/featured-image/'.$name;//If image saved success, image_url is assigned
+               $blog->featured_image_url = '/uploads/blog/featured-image/'.$name;//If image saved success, image_url is assigned
             }
+        }
+        else{
+            $blog->featured_image_url = '/uploads/no_image.png';
         }
         if($file = $request->file('author_image')){
             $name = time().time().'.'.$file->getClientOriginalExtension();
-            $target_path = public_path('/uploads/blogs/author-image');
+            $target_path = public_path('/uploads/blog/author-image');
             if($file->move($target_path, $name)) {
-               $blog->author_image_url = '/uploads/blogs/author-image/'.$name;//If image saved success, image_url is assigned
+               $blog->author_image_url = '/uploads/blog/author-image/'.$name;//If image saved success, image_url is assigned
             }
         }
+        else {
+            $blog->author_image_url = '/uploads/no_image.png';
+        }
         $blog->save();
-        $url = url('/blogs/'.$blog->id);
+        $url = url('/blog/'.$blog->id);
         return response()->json(['success'=>true,'url'=>$url,'id'=>$blog->id]);
     }
 
@@ -106,7 +112,7 @@ class BlogController extends Controller
         $blogs = Blog::latest()->paginate(5);
         $count = Blog::count();
         $categories = Category::all();
-        return view('admin.blogs.list',compact(['blogs','count','categories']));
+        return view('admin.blog.list',compact(['blogs','count','categories']));
     }
     public function search(Request $request)
     {
@@ -162,11 +168,11 @@ class BlogController extends Controller
         }
         // $blogs = Blog::latest()->paginate(5);
         $categories = Category::all();
-        return view('admin.blogs.pagination_data',compact('blogs','categories','count'));
+        return view('admin.blog.pagination_data',compact('blogs','categories','count'));
     }
     public function category(Request $request){
         $categories = Category::orderBy('order_index','ASC')->get();
-        return view('admin.blogs.category',compact('categories'));
+        return view('admin.blog.category',compact('categories'));
     }
     public function categoryAdd(Request $request){
         $this->validate($request,[
@@ -177,7 +183,7 @@ class BlogController extends Controller
         $category->order_index = $max_order + 1;
         $category->name = $request->name_input;
         $category->save();
-        return redirect('/admin/blogs_category');
+        return redirect('/admin/blog_category');
     }
     public function categoryUpdate(Request $request,$id){
         $category = Category::find($id);
@@ -191,7 +197,7 @@ class BlogController extends Controller
     }
     public function categoryEdit(Request $request,$id){
         $category = Category::where('id',$id)->first();
-        return view('admin.blogs.category-edit',compact('category'));
+        return view('admin.blog.category-edit',compact('category'));
     }
         /**
      * Show the form for editing the specified resource.
@@ -204,7 +210,7 @@ class BlogController extends Controller
         //
         $blog = Blog::where('id',$id)->first();
         $categories = Category::all();
-        return view('admin.blogs.edit',compact('blog','categories'));
+        return view('admin.blog.edit',compact('blog','categories'));
     }
 
     /**
@@ -232,9 +238,9 @@ class BlogController extends Controller
         }
         if($file = $request->file('featured_image')){
             $name = time().time().'.'.$file->getClientOriginalExtension();
-            $target_path = public_path('/uploads/blogs/featured-image');
+            $target_path = public_path('/uploads/blog/featured-image');
             if($file->move($target_path, $name)) {
-               $blog->featured_image_url = '/uploads/blogs/featured-image/'.$name;//If image saved success, image_url is assigned
+               $blog->featured_image_url = '/uploads/blog/featured-image/'.$name;//If image saved success, image_url is assigned
             }
         }
         else{
@@ -242,9 +248,9 @@ class BlogController extends Controller
         }
         if($file = $request->file('author_image')){
             $name = time().time().'.'.$file->getClientOriginalExtension();
-            $target_path = public_path('/uploads/blogs/author-image');
+            $target_path = public_path('/uploads/blog/author-image');
             if($file->move($target_path, $name)) {
-               $blog->author_image_url = '/uploads/blogs/author-image/'.$name;//If image saved success, image_url is assigned
+               $blog->author_image_url = '/uploads/blog/author-image/'.$name;//If image saved success, image_url is assigned
             }
         }
         else{

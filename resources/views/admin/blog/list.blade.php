@@ -38,7 +38,7 @@
           <h4 class="m-0">ブログ一覧</h4>
         </div>
         <div class="col-sm-3">
-            <a href="url(admin/blogs/create)">
+            <a href="{{url('admin/blog/create')}}">
                 <Button class="btn btn-primary">新規追加</Button>
             </a>
         </div><!-- /.col -->
@@ -74,7 +74,7 @@
                     <label for="check_type" class="col-sm-2 col-form-label">カテゴリ</label>
                     @foreach ($categories as $category)
                     <div class="ml-1 form-check form-check-inline" name="check_type">
-                        <input class="category_check" type="checkbox" id="{{$category->id}}" name="category"  value="{{$category->id}}">
+                        <input class="form-check-input category_check" type="checkbox" id="{{$category->id}}" name="category"  value="{{$category->id}}">
                         <label class="form-check-label">{{$category->name}}</label>
                     </div>
                     @endforeach
@@ -107,7 +107,7 @@
             </div>
         </div>
         <div class="card" id="table_card">
-        @include('admin.blogs.pagination_data')
+        @include('admin.blog.pagination_data')
         </div>
     </div>
   </div>
@@ -123,7 +123,7 @@ $(document).ready(function() {
     let public_status,recommended_flag;
     function fetch_data(page,search_word,author_name,category_query,public_status,recommended_flag)
     {
-        let url = "/admin/blogs/search?page="+page;
+        let url = "/admin/blog/search?page="+page;
         url=url+"&search_word=";
         ( typeof(search_word) ==='undefined'||search_word==='' ) ?  url=url+null : url=url+search_word;
         url=url+"&author_name=";
@@ -156,7 +156,7 @@ $(document).ready(function() {
         var id = $(this).data("id");
         $.ajax({
             type: "GET",
-            url: "/admin/blogs/edit/"+id,
+            url: "/admin/blog/edit/"+id,
         });
     })
     $('#searchButton').click(function(e){

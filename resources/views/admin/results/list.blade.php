@@ -38,7 +38,7 @@
           <h4 class="m-0"><strong>施工実績一覧</strong></h4>
         </div>
         <div class="col-sm-3">
-            <a href="http://localhost:8000/admin/blogs/create">
+            <a href="http://localhost:8000/admin/blog/create">
                 <Button class="btn btn-primary">新規追加</Button>
             </a>
         </div><!-- /.col -->

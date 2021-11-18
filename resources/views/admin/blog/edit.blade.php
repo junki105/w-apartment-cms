@@ -101,7 +101,7 @@
         </div><!-- /.col -->
       </div><!-- /.row -->
       <div class="mt-4 mb-2" id="url_string" style="display: none">
-        <span class="font-weight-bold mr-2 h6">リンク:
+        <span class="mr-2 font-weight-bold h6">リンク:
             <span id="created_url">
             </span>
         </span>
@@ -147,15 +147,15 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <label for="author_name" class="col-sm-3 col-form-label">著者名</label>
-                        <input type="text" class="col-sm-7 form-control ml-1" value="{{$blog->author_name}}" name="author_name" id="author_name">
+                        <input type="text" class="ml-1 col-sm-7 form-control" value="{{$blog->author_name}}" name="author_name" id="author_name">
                     </div>
                     <div class="form-group row">
                         <label for="author_profile" class="col-sm-3 col-form-label">著者プロフィール</label>
-                        <textarea rows="4" id="author_profile"  name="author_profile" class="col-sm-7 form-control ml-1" ></textarea>
+                        <textarea rows="4" id="author_profile"  name="author_profile" class="ml-1 col-sm-7 form-control" ></textarea>
                     </div>
                     <div class="form-group row">
                         <label for="author_image" id="author_image_preview" class="col-sm-3 col-form-label">著者プロフィール画像</label>
-                        <div class="dropzone-wrapper col-sm-7 ml-1">
+                        <div class="ml-1 dropzone-wrapper col-sm-7">
                             <div class="dropzone-desc">
                               <i class="fa fa-cloud-upload-alt"></i>
                               <span id="author_image_url"></span>
@@ -175,8 +175,8 @@
               </div>
               <div class="card-body">
                 <div class="form-group d-flex justify-content-between align-content-end">
-                  <label class="font-weight-normal mb-0 text-sm mt-1">公開状態</label>
-                  <select name="public_status" id="public_status" class="form-control col-3 form-control-sm p-1">
+                  <label class="mt-1 mb-0 text-sm font-weight-normal">公開状態</label>
+                  <select name="public_status" id="public_status" class="p-1 form-control col-3 form-control-sm">
                     <option value="1">公開</option>
                     <option value="0">非公開</option>
                   </select>
@@ -195,7 +195,7 @@
                 <div class="card-body">
                      <div class="form-group row">
                         @foreach ($categories as $category)
-                        <div class="form-check form-check-inline  ml-1" name="check_type">
+                        <div class="ml-1 form-check form-check-inline" name="check_type">
                             <input class="category_check" type="checkbox" id="{{$category->id}}" name="category"  value="{{$category->id}}">
                             <label class="form-check-label">{{$category->name}}</label>
                         </div>
@@ -300,7 +300,7 @@
         var formData = new FormData(this);
         $.ajax({
             type: "POST",
-            url: '/admin/blogs/update/'+blog_id,
+            url: '/admin/blog/update/'+blog_id,
             data:formData,
             cache:false,
             contentType:false,

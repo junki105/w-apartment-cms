@@ -458,7 +458,7 @@
                 $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
                 // $('#created_url').html('http://localhost:8000/results/'+data.id);
                 // $('#url_string').css('display','block');
-                // $('#link_url').attr('href','http://localhost:8000/blogs/'+data.id).css('display','inline');
+                // $('#link_url').attr('href','http://localhost:8000/blog/'+data.id).css('display','inline');
                 update_flag = true;
               }
             },

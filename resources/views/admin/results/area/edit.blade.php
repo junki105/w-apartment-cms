@@ -1,6 +1,8 @@
 @extends('admin.layouts.master')
 
 @section('content')
+@include('admin.layouts.modal_delete')
+
 <style>
   input:focus {
   outline-width: 1px;
@@ -64,7 +66,7 @@
               </div>
               <div class="card-body">
                 <div class=" d-flexs">
-                    <label style="color:red">削除する</label>
+                    <button id="delete_area" class="btn btn-sm btn-danger" style="background-color:white;color:red;border:none">削除する</label>
                     <button  name='save' id='save' class="btn btn-sm btn-primary float-sm-right">更新</button>
                 </div>
               </div>
@@ -78,6 +80,28 @@
 </div>
 <script>
   $(document).ready(function() {
+    const current_area =<?php echo json_encode($area);?>;
+    $('#delete_area').click(function(e){
+        $('#deleteModal').modal();
+        $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
+    });
+    $('#deleteButton').click(function(e){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "DELETE",
+            url: "/admin/results_area"+'/'+current_area.id,
+            success: function (data) {
+                window.location=("/admin/results_area/create")
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        })
+    });
     $('#save').click(function(e){
         let name = $('#area').val();
         if(name!==''){

@@ -47,3 +47,33 @@
   display: flex;
   justify-content: center;
 }
+
+@media (max-width: 1250px) {
+  .hover-spacing-btn {
+    width: 200rem;
+    height: 56rem;
+    border-radius: 28rem;
+    margin: 32rem 20rem 40rem;
+    font-size: 16rem;
+    img {
+      top: 24rem;
+      right: 24rem;
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  .hover-spacing-btn {
+    width: 200px;
+    height: 56px;
+    border-radius: 28px;
+    margin: 32px 20px 40px;
+    font-size: 16px;
+    transition: all 0.2s;
+    img {
+      top: 24px;
+      right: 24px;
+    }
+  }
+  
+}
