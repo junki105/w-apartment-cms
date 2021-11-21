@@ -118,7 +118,7 @@ class HousingController extends Controller
             $housing->ow_image_urls = $ow_urls;
             $housing->gallery_image_urls = $gallery_urls;
             $housing->save();
-            $url = url('/house/'.$housing->id);
+            $url = url('admin/house/'.$housing->id);
             return response()->json(['success'=>true,'url'=>$url,'id'=>$housing->id]);
         }
         catch(exception $e){

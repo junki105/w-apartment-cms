@@ -94,10 +94,15 @@
   <div class="content-header">
     <div class="container-fluid">
       <div class="mb-2 row">
-        <div class="col-sm-6">
-          <h4 class="m-0"><strong>商品住宅新規追加</strong></h4>
+        <div class="col-sm-2">
+          <h4 class="m-0"><strong id = "action_title">商品住宅新規追加</strong></h4>
         </div><!-- /.col -->
-        <div class="col-sm-6">
+        <div class="col-sm-3">
+          <a href="/admin/house/create" class="btn btn-primary" id = "new_house_btn">
+            新規追加
+          </a>
+        </div><!-- /.col -->
+        <div class="col-sm-7">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
             <li class="breadcrumb-item active">商品住宅新規追加</li>
@@ -232,6 +237,7 @@
 </div>
 <script>
   $(document).ready(function() {
+    $('#new_house_btn').hide()
     let current_id;
     let update_flag = false;
     var current_date = new Date();
@@ -305,7 +311,7 @@
           var formData = new FormData(this);
           $.ajax({
             type: 'POST',
-            url: '/admin/housing/update/'+current_id,
+            url: '/admin/house/update/'+current_id,
             data: formData,
             cache:false,
             contentType:false,
@@ -330,19 +336,22 @@
           var formData = new FormData(this);
           $.ajax({
             type: 'POST',
-            url: '/admin/housing',
+            url: '/admin/house',
             data: formData,
             cache:false,
             contentType:false,
             processData:false,
             success: function (data) {
               if(data.success){
+                window.location.href = data.url+"/edit";
                 $('#notify_string').html('追加しました。');
                 $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
                 $('#created_url').html(data.url);
                 $('#url_string').css('display','block');
                 $('#link_url').attr('href',data.url).css('display','inline');
                 $('#save').html('更新');
+                $('#new_house_btn').show()
+                $("#action_title").html("商品住宅編集")
                 update_flag = true;
                 current_id = data.id
               }

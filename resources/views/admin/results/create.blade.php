@@ -446,7 +446,7 @@
           type = 'post';
           $.ajax({
             type: type,
-            url: '/admin/results/update/'+current_id,
+            url: '/admin/case-study/update/'+current_id,
             data: formData,
             cache:false,
             contentType:false,
@@ -463,7 +463,8 @@
               }
             },
             error: function (data) {
-              console.log('Error:', data);
+              console.log('Error:');
+              console.log(data);
             }
           });
         }
@@ -478,7 +479,7 @@
           type = 'post';
           $.ajax({
             type: type,
-            url: '/admin/results',
+            url: '/admin/case-study',
             data: formData,
             cache:false,
             contentType:false,
@@ -486,6 +487,7 @@
             success: function (data) {
               console.log(data);
               if(data.success){
+                window.location.href = data.url+"/edit";
                 $('#notify_string').html('追加しました。');
                 $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
                 $('#created_url').html(data.url);

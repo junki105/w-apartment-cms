@@ -42,7 +42,7 @@ class HouseTypeController extends Controller
         $housetype->type = $request->new_type;
         $housetype->order_index = $max_order + 1;
         $housetype->save();
-        return redirect('/admin/results_housetype/create');
+        return redirect('/admin/case-study-housetype/create');
 
     }
 

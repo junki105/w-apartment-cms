@@ -21,13 +21,16 @@ class ResultController extends Controller
         $areas = Area::all();
         $amounts = Amount::all();
         $housetypes = HouseType::all();
-        $count = Result::count();
+       
         $results = DB::table('results')
             ->join('areas','results.area_id','=','areas.id')
             ->join('amounts','results.amount_id','=','amounts.id')
             ->join('house_types','results.housetype_id','=','house_types.id')
             ->select('results.id','areas.name','house_types.type','amounts.type','results.title','results.public_status')
             ->paginate(5);
+        $count = $results->count();
+       
+       
         return view('admin.results.list',compact('results','amounts','areas','housetypes','count'));
     }
 
@@ -77,48 +80,48 @@ class ResultController extends Controller
         
         if($file = $request->file('eyecatch_image')){
             $name = time().time().'.'.$file->getClientOriginalExtension();
-            $target_path = public_path('/uploads/results/eyecatch_images');
+            $target_path = public_path('/uploads/case-study/eyecatch_images');
             if($file->move($target_path, $name)) {
-               $result->eyecatch_image_url = '/uploads/results/eyecatch_images/'.$name;//If image saved success, image_url is assigned
+               $result->eyecatch_image_url = '/uploads/case-study/eyecatch_images/'.$name;//If image saved success, image_url is assigned
             }
         }
         if($file = $request->file('firstview')){
             $name = time().time().'.'.$file->getClientOriginalExtension();
-            $target_path = public_path('/uploads/results/firstviews');
+            $target_path = public_path('/uploads/case-study/firstviews');
             if($file->move($target_path, $name)) {
-               $result->firstview_url = '/uploads/results/firstviews/'.$name;//If image saved success, image_url is assigned
+               $result->firstview_url = '/uploads/case-study/firstviews/'.$name;//If image saved success, image_url is assigned
             }
         }
         if($file = $request->file('instruction_bg')){
             $name = time().time().'.'.$file->getClientOriginalExtension();
-            $target_path = public_path('/uploads/results/instruction_backgrounds');
+            $target_path = public_path('/uploads/case-study/instruction_backgrounds');
             if($file->move($target_path, $name)) {
-               $result->instruction_bg_url = '/uploads/results/instruction_backgrounds/'.$name;//If image saved success, image_url is assigned
+               $result->instruction_bg_url = '/uploads/case-study/instruction_backgrounds/'.$name;//If image saved success, image_url is assigned
             }
         }
         if($file = $request->file('choosing_reason_file')){
             $name = time().time().'.'.$file->getClientOriginalExtension();
-            $target_path = public_path('/uploads/results/choosing_reason_images');
+            $target_path = public_path('/uploads/case-study/choosing_reason_images');
             if($file->move($target_path, $name)) {
-               $result->choosing_reason_url = '/uploads/results/choosing_reason_images/'.$name;//If image saved success, image_url is assigned
+               $result->choosing_reason_url = '/uploads/case-study/choosing_reason_images/'.$name;//If image saved success, image_url is assigned
             }
         }
         if($file = $request->file('pi_image')){
             $name = time().time().'.'.$file->getClientOriginalExtension();
-            $target_path = public_path('/uploads/results/post_introduction_images');
+            $target_path = public_path('/uploads/case-study/post_introduction_images');
             if($file->move($target_path, $name)) {
-               $result->post_introduction_url = '/uploads/results/post_introduction_images/'.$name;//If image saved success, image_url is assigned
+               $result->post_introduction_url = '/uploads/case-study/post_introduction_images/'.$name;//If image saved success, image_url is assigned
             }
         }
         if($file = $request->file('download_material')){
             $name = time().time().'.'.$file->getClientOriginalExtension();
-            $target_path = public_path('/uploads/results/download_materials');
+            $target_path = public_path('/uploads/case-study/download_materials');
             if($file->move($target_path, $name)) {
-               $result->download_material_url = '/uploads/results/download_materials/'.$name;//If image saved success, image_url is assigned
+               $result->download_material_url = '/uploads/case-study/download_materials/'.$name;//If image saved success, image_url is assigned
             }
         }
         $result->save();
-        $url = url('/case_study/'.$result->id);
+        $url = url('admin/case-study/'.$result->id);
         return response()->json(['success'=>true,'id'=>$result->id,'url'=>$url]);
     }
 
@@ -182,44 +185,44 @@ class ResultController extends Controller
         
         if($file = $request->file('eyecatch_image')){
             $name = time().time().'.'.$file->getClientOriginalExtension();
-            $target_path = public_path('/uploads/results/eyecatch_images');
+            $target_path = public_path('/uploads/case-study/eyecatch_images');
             if($file->move($target_path, $name)) {
-               $result->eyecatch_image_url = '/uploads/results/eyecatch_images/'.$name;//If image saved success, image_url is assigned
+               $result->eyecatch_image_url = '/uploads/case-study/eyecatch_images/'.$name;//If image saved success, image_url is assigned
             }
         }
         if($file = $request->file('firstview')){
             $name = time().time().'.'.$file->getClientOriginalExtension();
-            $target_path = public_path('/uploads/results/firstviews');
+            $target_path = public_path('/uploads/case-study/firstviews');
             if($file->move($target_path, $name)) {
-               $result->firstview_url = '/uploads/results/firstviews/'.$name;//If image saved success, image_url is assigned
+               $result->firstview_url = '/uploads/case-study/firstviews/'.$name;//If image saved success, image_url is assigned
             }
         }
         if($file = $request->file('instruction_bg')){
             $name = time().time().'.'.$file->getClientOriginalExtension();
-            $target_path = public_path('/uploads/results/instruction_backgrounds');
+            $target_path = public_path('/uploads/case-study/instruction_backgrounds');
             if($file->move($target_path, $name)) {
-               $result->instruction_bg_url = '/uploads/results/instruction_backgrounds/'.$name;//If image saved success, image_url is assigned
+               $result->instruction_bg_url = '/uploads/case-study/instruction_backgrounds/'.$name;//If image saved success, image_url is assigned
             }
         }
         if($file = $request->file('choosing_reason_file')){
             $name = time().time().'.'.$file->getClientOriginalExtension();
-            $target_path = public_path('/uploads/results/choosing_reason_images');
+            $target_path = public_path('/uploads/case-study/choosing_reason_images');
             if($file->move($target_path, $name)) {
-               $result->choosing_reason_url = '/uploads/results/choosing_reason_images/'.$name;//If image saved success, image_url is assigned
+               $result->choosing_reason_url = '/uploads/case-study/choosing_reason_images/'.$name;//If image saved success, image_url is assigned
             }
         }
         if($file = $request->file('pi_image')){
             $name = time().time().'.'.$file->getClientOriginalExtension();
-            $target_path = public_path('/uploads/results/post_introduction_images');
+            $target_path = public_path('/uploads/case-study/post_introduction_images');
             if($file->move($target_path, $name)) {
-               $result->post_introduction_url = '/uploads/results/post_introduction_images/'.$name;//If image saved success, image_url is assigned
+               $result->post_introduction_url = '/uploads/case-study/post_introduction_images/'.$name;//If image saved success, image_url is assigned
             }
         }
         if($file = $request->file('download_material')){
             $name = time().time().'.'.$file->getClientOriginalExtension();
-            $target_path = public_path('/uploads/results/download_materials');
+            $target_path = public_path('/uploads/case-study/download_materials');
             if($file->move($target_path, $name)) {
-               $result->download_material_url = '/uploads/results/download_materials/'.$name;//If image saved success, image_url is assigned
+               $result->download_material_url = '/uploads/case-study/download_materials/'.$name;//If image saved success, image_url is assigned
             }
         }
         $result->save();

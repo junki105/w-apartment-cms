@@ -17,7 +17,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active"><a href='admin/results_amount'>カテゴリ</a></li>
+            <li class="breadcrumb-item active"><a href='admin/case-study-amount'>カテゴリ</a></li>
             <li class="breadcrumb-item">カテゴリ編集</li>
           </ol>
         </div><!-- /.col -->

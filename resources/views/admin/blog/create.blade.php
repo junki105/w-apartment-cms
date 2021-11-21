@@ -195,8 +195,8 @@
                 <div class="card-body">
                   @foreach ($categories as $category)
                     <div class="form-check">
-                      <input type="radio" class="form-check-input" name="category" value="{{$category->id}}">
-                      <label class="form-check-label" for="category">
+                      <input type="radio" class="form-check-input" name="category" id="{{$category->id}}" value="{{$category->id}}">
+                      <label class="form-check-label" for="{{$category->id}}">
                       {{$category->name}}
                     </div>
                   @endforeach
@@ -350,7 +350,10 @@
             contentType:false,
             processData:false,
             success: function (data) {
+
               if(data.success){
+                window.location.href = data.url+"/edit";
+                console.log(data.url)
                 $('#notify_string').html('追加しました。');
                 $('#alert').css('display','block');
                 $('#created_url').html(data.url);

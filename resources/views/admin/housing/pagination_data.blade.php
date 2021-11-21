@@ -13,7 +13,7 @@
     });
     $.ajax({
       type: "DELETE",
-      url: "/admin/housing" + '/' + delete_id,
+      url: "/admin/house" + '/' + delete_id,
       success: function(data) {
         $('.deleteHousing').each(function() {
           var id = $(this).data("id");
@@ -70,7 +70,7 @@
                 表示
               </button>
             </a>
-            <a href="/admin/housing/{{$housing->id}}/edit" class="mr-2">
+            <a href="/admin/house/{{$housing->id}}/edit" class="mr-2">
               <button class="btn btn-info btn-sm editHousing" type="button" data-id="{{$housing->id}}">
                 <i class="ml-1 mr-1 fa fa-pencil-alt"></i>
                 編集

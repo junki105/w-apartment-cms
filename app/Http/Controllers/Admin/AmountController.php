@@ -41,7 +41,7 @@ class AmountController extends Controller
         $amount->order_index = $max_order + 1;
         $amount->save();
         $amounts = Amount::all();
-        return redirect('/admin/results_amount/create');
+        return redirect('/admin/case-study-amount/create');
         //
     }
 

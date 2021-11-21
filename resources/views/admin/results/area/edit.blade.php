@@ -25,7 +25,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active"><a href="{{ url('/') }}">Home</a></li>
-            <li class="breadcrumb-item active"><a href='admin/results_area'>地域</li>
+            <li class="breadcrumb-item active"><a href='admin/case-study-area'>地域</li>
             <li class="breadcrumb-item">地域編集</li>
           </ol>
         </div><!-- /.col -->
@@ -93,9 +93,9 @@
         });
         $.ajax({
             type: "DELETE",
-            url: "/admin/results_area"+'/'+current_area.id,
+            url: "/admin/case-study-area"+'/'+current_area.id,
             success: function (data) {
-                window.location=("/admin/results_area/create")
+                window.location=("/admin/case-study-area/create")
             },
             error: function (data) {
                 console.log('Error:', data);
@@ -115,7 +115,7 @@
                   'X-HTTP-Method-Override': 'PATCH'
               },
               type:"POST",
-              url: '/admin/results_area/'+current_area.id,
+              url: '/admin/case-study-area/'+current_area.id,
               data: formdata,
               cache:false,
               contentType:false,

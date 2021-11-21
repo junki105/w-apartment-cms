@@ -18,7 +18,7 @@ class CreateBlogsTable extends Migration
             $table->string('title'); 
             $table->longText('content');
             $table->string('public_status');
-            $table->string('featured_image_url');
+            $table->text('featured_image_url');
             $table->boolean('recommended_flag');
             $table->string('author_name')->nullable();
             $table->longText('author_profile')->nullable();

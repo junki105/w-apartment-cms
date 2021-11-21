@@ -18,9 +18,12 @@ class CreateResultsTable extends Migration
             $table->string('title');
             $table->integer('public_status');
             $table->string('eyecatch_image_url');
-            $table->integer('area_id');
-            $table->integer('amount_id');
-            $table->integer('housetype_id');
+            $table->index('area_id');
+            $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
+            $table->index('amount_id');
+            $table->foreign('amount_id')->references('id')->on('amounts')->onDelete('cascade');
+            $table->index('housetype_id');
+            $table->foreign('housetype_id')->references('id')->on('house_types')->onDelete('cascade');
             $table->string('firstview_url');
             $table->string('instructor_name');
             $table->longText('instruction_summary');
@@ -46,5 +49,6 @@ class CreateResultsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('results');
+        
     }
 }

@@ -38,7 +38,7 @@
           <h4 class="m-0"><strong>施工実績一覧</strong></h4>
         </div>
         <div class="col-sm-3">
-            <a href="http://localhost:8000/admin/blog/create">
+            <a href="/admin/case-study/create">
                 <Button class="btn btn-primary">新規追加</Button>
             </a>
         </div><!-- /.col -->
@@ -119,7 +119,7 @@
             </div>
         </div>
         <div class="card" id="table_card">
-            @include('admin.results.pagination');
+            @include('admin.results.pagination')
         </div>
     </div>
   </div>
@@ -172,7 +172,7 @@
             var id = $(this).data("id");
             $.ajax({
                 type: "GET",
-                url: "/admin/results/"+id+"/edit",
+                url: "/admin/case-study/"+id+"/edit",
             });
         })
         var index =0;
@@ -209,7 +209,7 @@
         })  
         $('.form-check-input').click(function(){
             $('.form-check-input').not(this).prop('checked',false);
-        })
+        });
         $(document).on('click', '.pagination a', function(event){
         event.preventDefault(); 
         var page = $(this).attr('href').split('page=')[1];

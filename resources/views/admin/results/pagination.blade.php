@@ -13,7 +13,7 @@
     });
     $.ajax({
       type: "DELETE",
-      url: "/admin/results" + '/' + delete_id,
+      url: "/admin/case-study" + '/' + delete_id,
       success: function(data) {
         $('.deleteHousing').each(function() {
           var id = $(this).data("id");
@@ -75,7 +75,7 @@
                                         表示
                                     </button>
                                 </a>
-                                <a href="/admin/results/{{$result->id}}/edit" class="mr-2">
+                                <a href="/admin/case-study/{{$result->id}}/edit" class="mr-2">
                                     <button class="btn btn-info btn-sm editResult" type="button" data-id="{{$result->id}}">
                                         <i class="fa fa-pencil-alt ml-1 mr-1"></i>
                                         編集
@@ -88,6 +88,9 @@
                         </td>
                     </tr>
                 @endforeach
+                <div class="article-pagination">
+                    {!! $results->links('pagination') !!}
+                </div>
             </tbody>
         </table>
     @else
@@ -112,5 +115,5 @@
     @endif
 </div>
 <div class="card-footer">
-    <div class="card-tools float-right d-inline-flex"><span class="m-2">全<span class="count">{{$count}}</span>件</span>{{$results->links()}}</div>
+    <div class="card-tools float-right d-inline-flex"><span class="m-2">全<span class="count">{{$count}}</span>件</span>{!! $results->links('pagination') !!}</div>
 </div>

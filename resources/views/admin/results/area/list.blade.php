@@ -52,7 +52,7 @@ table td.sorter {cursor: move;}
             </div>
             <div class="cards">
                 <div class="card-header">
-                    <form action="/admin/results_area" id="form" method="POST">
+                    <form action="/admin/case-study-area" id="form" method="POST">
                     @csrf
                     <div class="form-group row">
                         <input type="text" class="col-sm-3 form-control ml-1 mr-3" name="name_input" id="name_input">
@@ -79,7 +79,7 @@ table td.sorter {cursor: move;}
                                         <td class="col-sm-3" id="td{{$area->id}}">{{$area->name}}</td>
                                         <td class="col-sm-6">
                                             <div class="float-sm-right">
-                                                <a href='/admin/results_area/{{$area->id}}/edit'>
+                                                <a href='/admin/case-study-area/{{$area->id}}/edit'>
                                                     <button class="btn btn-info btn-sm editArea" type="button" data-id="{{$area->id}}">
                                                         <i class="fa fa-pencil-alt ml-1 mr-1"></i>編集
                                                     </button>
@@ -156,7 +156,7 @@ table td.sorter {cursor: move;}
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
             type:'post',
-            url:'/admin/results_area/update/order',
+            url:'/admin/case-study-area/update/order',
             data:{
                 order_list : order_list
             },
@@ -191,7 +191,7 @@ table td.sorter {cursor: move;}
         });
         $.ajax({
             type: "DELETE",
-            url: "/admin/results_area"+'/'+delete_id,
+            url: "/admin/case-study-area"+'/'+delete_id,
             success: function (data) {
                 $('.deleteArea').each(function(){
                     var id = $(this).data("id");

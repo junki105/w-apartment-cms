@@ -18,7 +18,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active"><a href="{{ url('/') }}">Home</a></li>
-            <li class="breadcrumb-item active"><a href='admin/results_housetype'>間取り/</li>
+            <li class="breadcrumb-item active"><a href='admin/case-study-housetype'>間取り/</li>
             <li class="breadcrumb-item">間取り編集</li>
           </ol>
         </div><!-- /.col -->
@@ -86,9 +86,9 @@
         });
         $.ajax({
             type: "DELETE",
-            url: "/admin/results_housetype"+'/'+current_housetype.id,
+            url: "/admin/case-study-housetype"+'/'+current_housetype.id,
             success: function (data) {
-                window.location=("/admin/results_housetype/create")
+                window.location=("/admin/case-study-housetype/create")
             },
             error: function (data) {
                 console.log('Error:', data);
@@ -108,7 +108,7 @@
                 'X-HTTP-Method-Override': 'PATCH'
             },
             type:"POST",
-            url: '/admin/results_housetype/'+current_housetype.id,
+            url: '/admin/case-study-housetype/'+current_housetype.id,
             data: formdata,
             cache:false,
             contentType:false,

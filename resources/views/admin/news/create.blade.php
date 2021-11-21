@@ -223,6 +223,7 @@
             processData:false,
             success: function (data) {
               if(data.success){
+                  window.location.href = data.url+"/edit";
                   $('#notify_string').html('追加しました。');
                   $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
                   $('#created_url').html(data.url);

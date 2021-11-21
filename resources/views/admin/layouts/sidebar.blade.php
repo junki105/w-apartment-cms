@@ -18,8 +18,8 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
             with font-awesome or any other icon font library -->
-        <li class="{{(request()->is('admin/housing*'))?'nav-item menu-is-opening menu-open':'nav-item'}}">
-          <a href="#" class="{{(request()->is('admin/housing*'))?'nav-link active':'nav-link'}}">
+        <li class="{{(request()->is('admin/house*'))?'nav-item menu-is-opening menu-open':'nav-item'}}">
+          <a href="#" class="{{(request()->is('admin/house*'))?'nav-link active':'nav-link'}}">
             <i class="nav-icon far fa fa-home"></i>
             <p>
               商品住宅
@@ -27,22 +27,22 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="{{(request()->is('admin/housing/'))?'nav-item active':'nav-item'}}">
-              <a href="{{url('/admin/housing/create')}}" class="{{(request()->is('admin/housing/create'))?'nav-link active':'nav-link'}}">
+            <li class="{{(request()->is('admin/house/'))?'nav-item active':'nav-item'}}">
+              <a href="{{url('/admin/house/create')}}" class="{{(request()->is('admin/house/create'))?'nav-link active':'nav-link'}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>商品住宅登録</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{url('/admin/housing')}}" class="{{(request()->is('admin/housing'))?'nav-link active':'nav-link'}}">
+              <a href="{{url('/admin/house')}}" class="{{(request()->is('admin/house'))?'nav-link active':'nav-link'}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>商品住宅一覧</p>
               </a>
             </li>
           </ul>
         </li>
-        <li class="{{(request()->is('admin/results*'))?'nav-item menu-is-opening menu-open':'nav-item'}}">
-          <a href="#" class="{{(request()->is('admin/results*'))?'nav-link active':'nav-link'}}">
+        <li class="{{(request()->is('admin/case-study*'))?'nav-item menu-is-opening menu-open':'nav-item'}}">
+          <a href="#" class="{{(request()->is('admin/case-study*'))?'nav-link active':'nav-link'}}">
             <i class="nav-icon far fa-fw fa fa-signal"></i>
             <p>
               施工実績
@@ -51,31 +51,31 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{url('/admin/results/create')}}" class="{{(request()->is('admin/results/create'))?'nav-link active':'nav-link'}}">
+              <a href="{{url('/admin/case-study/create')}}" class="{{(request()->is('admin/case-study/create'))?'nav-link active':'nav-link'}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>施工実績登録</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{url('/admin/results/')}}" class="{{(request()->is('admin/results'))?'nav-link active':'nav-link'}}">
+              <a href="{{url('/admin/case-study/')}}" class="{{(request()->is('admin/case-study'))?'nav-link active':'nav-link'}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>施工実績一覧</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{url('/admin/results_area/create')}}" class="{{(request()->is('admin/results_area/create'))?'nav-link active':'nav-link'}}">
+              <a href="{{url('/admin/case-study-area/create')}}" class="{{(request()->is('admin/case-study-area/create'))?'nav-link active':'nav-link'}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>地域</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{url('/admin/results_amount/create')}}" class="{{(request()->is('admin/results_amount/create'))?'nav-link active':'nav-link'}}">
+              <a href="{{url('/admin/case-study-amount/create')}}" class="{{(request()->is('admin/case-study-amount/create'))?'nav-link active':'nav-link'}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>金額</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{url('/admin/results_housetype/create')}}" class="{{(request()->is('admin/results_housetype/create'))?'nav-link active':'nav-link'}}">
+              <a href="{{url('/admin/case-study-housetype/create')}}" class="{{(request()->is('admin/case-study-housetype/create'))?'nav-link active':'nav-link'}}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>間取り</p>
               </a>

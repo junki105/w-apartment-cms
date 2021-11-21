@@ -309,7 +309,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type: type,
-        url: '/admin/housing/update/'+housing.id,
+        url: '/admin/house/update/'+housing.id,
         data:formData,
         cache:false,
         contentType:false,
