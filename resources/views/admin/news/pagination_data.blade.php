@@ -61,13 +61,13 @@
         </td>
         <td class="col-sm-4">
           <div class="float-sm-right">
-            <a href="/news/{{$post->id}}" class="mr-2">
+            <a href="/news/{{$post->id}}" class="mr-2" target="_blank">
               <button class="btn btn-primary btn-sm viewPost" data-id="{{$post->id}}" type="button">
                 <i class="fa fa-external-link-alt"></i>
                 表示
               </button>
             </a>
-            <a href="/admin/news/edit/{{$post->id}}" class="mr-2">
+            <a href="/admin/news/{{$post->id}}/edit" class="mr-2">
               <button class="btn btn-info btn-sm editPost" type="button" data-id="{{$post->id}}">
                 <i class="ml-1 mr-1 fa fa-pencil-alt"></i>
                 編集

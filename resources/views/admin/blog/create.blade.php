@@ -90,7 +90,7 @@
   <div class="content-header">
     <div class="container-fluid">
       <div class="mb-2 row">
-        <div class="col-sm-6">
+        <div class="col-sm-6 align-self-center">
           <h4 class="m-0"><strong>ブログ新規追加</strong></h4>
         </div><!-- /.col -->
         <div class="col-sm-6">
@@ -105,7 +105,7 @@
             <span id="created_url">
             </span>
         </span>
-        <a id="link_url" class="btn btn-sm btn-default">表示</a>
+        <a id="link_url" class="btn btn-sm btn-default" target="_blank">表示</a>
       </div>
     </div><!-- /.container-fluid -->
   </div>
@@ -181,8 +181,8 @@
                     <option value="0">非公開</option>
                   </select>
                 </div>
-                <div class="mt-4 text-sm">公開日:<span id="created_at"></span></div>
-                <div class="mt-2 text-sm">更新日:<span id="updated_at"></span></div>
+                <div class="mt-4 text-sm">公開日: <span id="created_at"></span></div>
+                <div class="mt-2 text-sm">更新日: <span id="updated_at"></span></div>
                 <div class="mt-3 d-flex justify-content-end">
                   <button type="submit" name='save' id='save' class="btn btn-sm btn-primary">公開</button>
                 </div>

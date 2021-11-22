@@ -22,7 +22,7 @@
       @case('house')
         <title>W-Apartment - 商品住宅</title>
         @break
-
+        
       @case('contact')
         <title>W-Apartment - お問い合わせ</title>
         @break
@@ -189,7 +189,7 @@
             @case('house')
               LINEUP
               @break
-
+              
             @case('contact')
               REQUEST
               @break

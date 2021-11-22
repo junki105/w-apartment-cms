@@ -247,7 +247,6 @@ class HousingController extends Controller
      */
     public function destroy($id)
     {
-        //
         Housing::find($id)->delete();
         return response()->json(['success'=>true]);
     }

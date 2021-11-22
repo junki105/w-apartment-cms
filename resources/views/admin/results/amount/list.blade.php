@@ -29,7 +29,7 @@ table td.sorter {cursor: move;}
         <div class="content-header">
             <div class="container-fluid">
                 <div class="mb-2 row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 align-self-center">
                         <h4 class="m-0"><strong>金額</strong></h4>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
@@ -43,7 +43,7 @@ table td.sorter {cursor: move;}
                     <span class="mr-2 font-weight-bold h6">リンク:
                         <span id="created_url"></span>
                     </span>
-                    <a id="link_url" class="btn btn-sm btn-default">表示</a>
+                    <a id="link_url" class="btn btn-sm btn-default" target="_blank">表示</a>
                 </div>
             </div><!-- /.container-fluid -->
         </div>

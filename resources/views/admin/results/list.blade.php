@@ -34,7 +34,7 @@
   <div class="content-header">
     <div class="container-fluid">
       <div class="mb-2 row">
-        <div class="col-sm-2">
+        <div class="col-sm-2 align-self-center">
           <h4 class="m-0"><strong>施工実績一覧</strong></h4>
         </div>
         <div class="col-sm-3">
@@ -64,42 +64,42 @@
             <div class="card-body">
                 <div class="form-group row">
                     <label for="search_word" class="col-sm-2 col-form-label">フリーワード</label>
-                    <input type="text" class="col-sm-4 form-control ml-1" name="search_word" id="search_word">
+                    <input type="text" class="ml-1 col-sm-4 form-control" name="search_word" id="search_word">
                 </div>
                 <div class="form-group row">
                     <label for="instructor_name" class="col-sm-2 col-form-label">著者名</label>
-                    <input type="text" class="col-sm-4 form-control ml-1" name="instructor_name" id="instructor_name">
+                    <input type="text" class="ml-1 col-sm-4 form-control" name="instructor_name" id="instructor_name">
                 </div>
                 <div class="form-group row" id="areas">
                     <label for="areas_check" class="col-sm-2 col-form-label">地域</label>
                     @foreach ($areas as $area)
-                    <div class="form-check form-check-inline  ml-1" name="areas_check">
-                        <input class="area_check" type="checkbox" id="{{$area->id}}" name="area"  value="{{$area->id}}">
-                        <label class="form-check-label">{{$area->name}}</label>
+                    <div class="ml-1 form-check form-check-inline" name="areas_check">
+                        <input class="form-check-input area_check" type="checkbox" id="area{{$area->id}}" name="area"  value="{{$area->id}}"">
+                        <label class="form-check-label" for="area{{$area->id}}">{{$area->name}}</label>
                     </div>
                     @endforeach
                 </div>
                 <div class="form-group row" id="amounts">
                     <label for="amounts_check" class="col-sm-2 col-form-label">金額</label>
                     @foreach ($amounts as $amount)
-                    <div class="form-check form-check-inline  ml-1" name="amounts_check">
-                        <input class="amount_check" type="checkbox" id="{{$amount->id}}" name="amount"  value="{{$amount->id}}">
-                        <label class="form-check-label">{{$amount->type}}</label>
+                    <div class="ml-1 form-check form-check-inline" name="amounts_check">
+                        <input class="form-check-input amount_check" type="checkbox" id="amount{{$amount->id}}" name="amount"  value="{{$amount->id}}">
+                        <label class="form-check-label" for="amount{{$amount->id}}">{{$amount->type}}</label>
                     </div>
                     @endforeach
                 </div>
                 <div class="form-group row" id="housetypes">
                     <label for="housetypes_check" class="col-sm-2 col-form-label">間取り</label>
                     @foreach ($housetypes as $housetype)
-                    <div class="form-check form-check-inline  ml-1" name="housetypes_check">
-                        <input class="housetype_check" type="checkbox" id="{{$housetype->id}}" name="housetype"  value="{{$housetype->id}}">
-                        <label class="form-check-label">{{$housetype->type}}</label>
+                    <div class="ml-1 form-check form-check-inline" name="housetypes_check">
+                        <input class="form-check-input housetype_check" type="checkbox" id="housetype{{$housetype->id}}" name="housetype"  value="{{$housetype->id}}">
+                        <label class="form-check-label" for="housetype{{$housetype->id}}">{{$housetype->type}}</label>
                     </div>
                     @endforeach
                 </div>
                 <div class="form-group row">
                     <label for="check_type" class="col-sm-2 col-form-label">公開状態</label>
-                    <div class="form-check form-check-inline  ml-1" name="check_type">
+                    <div class="ml-1 form-check form-check-inline" name="check_type">
                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="public_status"  value="1">
                         <label class="form-check-label" for="inlineCheckbox1">公開</label>
                     </div>
@@ -109,10 +109,10 @@
                     </div>
                 </div>
                 <div class="form-group row ">
-                    <div class=" mx-auto">
-                    <button class="btn btn-block btn-primary px-5 pl-2 pr-4" id="searchButton">
+                    <div class="mx-auto ">
+                    <button class="px-5 pl-2 pr-4 btn btn-block btn-primary" id="searchButton">
                         検索
-                        <i class="fa fa-search ml-2 mr-3 "></i>
+                        <i class="ml-2 mr-3 fa fa-search "></i>
                     </button>
                     </div>
                 </div>

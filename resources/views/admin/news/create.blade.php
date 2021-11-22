@@ -34,7 +34,7 @@
   <div class="content-header">
     <div class="container-fluid">
       <div class="mb-2 row">
-        <div class="col-sm-6">
+        <div class="col-sm-6 align-self-center">
           <h4 class="m-0"><strong>お知らせ新規追加</strong></h4>
         </div><!-- /.col -->
         <div class="col-sm-6">
@@ -44,13 +44,6 @@
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
-      <div class="mt-4 mb-2" id="url_string" style="display: none">
-        <span class="mr-2 font-weight-bold h6">リンク:
-            <span id="created_url">
-            </span>
-        </span>
-        <a id="link_url" class="btn btn-sm btn-default">表示</a>
-      </div>
     </div><!-- /.container-fluid -->
   </div>
   <!-- /.content-header -->
@@ -96,8 +89,8 @@
                       <option value="0">非公開</option>
                     </select>
                   </div>
-                  <div class="mt-4 text-sm">公開日:<span id="created_at"></span></div>
-                  <div class="mt-2 text-sm">更新日:<span id="updated_at"></span></div>
+                  <div class="mt-4 text-sm">公開日: <span id="created_at"></span></div>
+                  <div class="mt-2 text-sm">更新日: <span id="updated_at"></span></div>
                   <div class="mt-3 d-flex justify-content-end">
                     <button type="submit" name='post_save' id='post_save' class="btn btn-sm btn-primary">公開</button>
                   </div>

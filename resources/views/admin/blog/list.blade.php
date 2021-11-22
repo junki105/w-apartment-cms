@@ -34,7 +34,7 @@
   <div class="content-header">
     <div class="container-fluid">
       <div class="mb-2 row">
-        <div class="col-sm-2">
+        <div class="col-sm-2 align-self-center">
           <h4 class="m-0">ブログ一覧</h4>
         </div>
         <div class="col-sm-3">
@@ -74,8 +74,8 @@
                     <label for="check_type" class="col-sm-2 col-form-label">カテゴリ</label>
                     @foreach ($categories as $category)
                     <div class="ml-1 form-check form-check-inline" name="check_type">
-                        <input class="form-check-input category_check" type="checkbox" id="{{$category->id}}" name="category"  value="{{$category->id}}">
-                        <label class="form-check-label">{{$category->name}}</label>
+                        <input class="form-check-input category_check" type="checkbox" id="category{{$category->id}}" name="category"  value="{{$category->id}}">
+                        <label class="form-check-label" for="category{{$category->id}}">{{$category->name}}</label>
                     </div>
                     @endforeach
                 </div>

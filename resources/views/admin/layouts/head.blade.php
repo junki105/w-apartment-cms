@@ -1,12 +1,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<title>W-Apartment - Admin</title>
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
+<!-- Site fevicon icons -->
+<link rel="icon" href="{{ URL::asset('images/favicon.png') }}" sizes="32x32" />
+<link rel="icon" href="{{ URL::asset('images/favicon.png') }}" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="{{ URL::asset('images/favicon.png') }}" />
+<meta name="msapplication-TileImage" content="{{ URL::asset('images/favicon.png') }}" />
 <!-- jQuery -->
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->

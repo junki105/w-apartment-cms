@@ -63,5 +63,24 @@
       });
     </script>
     @endif
+    @if ((request()->route()->getName()) === 'house-single')
+      $(document).ready(function() {
+        house = <?php echo json_encode($house)?>;
+        var ow_image_urls=house.ow_image_urls
+        var ow_image_array = ow_image_urls.split(',');
+        var gallery_image_array = house.gallery_image_urls.split(',');
+        let ow_section = ''
+        ow_image_array.map(ow_img=>{
+          ow_section += '<div class="img-content">'+'<img src="'+ow_img+'" alt=""></div>';
+        })
+        $('#ow_images').html(ow_section);
+        let gallery_section = '';
+        gallery_image_array.map(ga_img=>{
+          gallery_section += '<div class="img-content">'+'<img src="'+ga_img+'" alt=""></div>';
+        });
+        $('.gallery-wrap').html(gallery_section);
+      });
+    </script>
+    @endif
   </body>
 </html>

@@ -12,7 +12,7 @@
   <div class="content-header">
     <div class="container-fluid">
       <div class="mb-2 row">
-        <div class="col-sm-6">
+        <div class="col-sm-6 align-self-center">
           <h4 class="m-0"><strong>間取り編集</strong></h4>
         </div><!-- /.col -->
         <div class="col-sm-6">
@@ -24,11 +24,11 @@
         </div><!-- /.col -->
       </div><!-- /.row -->
       <div class="mt-4 mb-2" id="url_string" style="display: none">
-        <span class="font-weight-bold mr-2 h6">リンク:
+        <span class="mr-2 font-weight-bold h6">リンク:
             <span id="created_url">
             </span>
         </span>
-        <a id="link_url" class="btn btn-sm btn-default">表示</a>
+        <a id="link_url" class="btn btn-sm btn-default" target="_blank">表示</a>
       </div>
     </div><!-- /.container-fluid -->
   </div>
@@ -46,7 +46,7 @@
                 <div class="card-body">
                     <div class=" row">
                         <label for="housetype" class="col-sm-3 col-form-label">間取り</label>
-                        <input type="text" class="col-sm-7 form-control ml-1" name="housetype" value="{{$housetype->type}}" id="housetype">
+                        <input type="text" class="ml-1 col-sm-7 form-control" name="housetype" value="{{$housetype->type}}" id="housetype">
                     </div>
                 </div>
                 <!-- /.card-body -->
