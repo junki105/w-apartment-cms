@@ -29,7 +29,7 @@ table td.sorter {cursor: move;}
         <div class="content-header">
             <div class="container-fluid">
                 <div class="mb-2 row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 align-self-center">
                         <h4 class="m-0"><strong>間取り</strong></h4>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
@@ -50,7 +50,7 @@ table td.sorter {cursor: move;}
             </div>
             <div class="card">
                 <div class="card-header">
-                    <form action="/admin/results_housetype" id="form" method="POST">
+                    <form action="/admin/case-study-housetype" id="form" method="POST">
                             @csrf
                         <div class="form-group row">
                             <input type="text" class="ml-1 mr-3 col-sm-3 form-control" name="new_type" id="new_type">
@@ -77,7 +77,7 @@ table td.sorter {cursor: move;}
                                         <td class="col-sm-3" id="td{{$housetype->id}}">{{$housetype->type}}</td>
                                         <td class="col-sm-6">
                                             <div class="float-sm-right">
-                                                <a href='/admin/results_housetype/{{$housetype->id}}/edit'>
+                                                <a href='/admin/case-study-housetype/{{$housetype->id}}/edit'>
                                                     <button class="btn btn-info btn-sm editHousetype" type="button" data-id="{{$housetype->id}}">
                                                         <i class="ml-1 mr-1 fa fa-pencil-alt"></i>編集
                                                     </button>
@@ -161,7 +161,7 @@ table td.sorter {cursor: move;}
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
             type:'post',
-            url:'/admin/results_housetype/update/order',
+            url:'/admin/case-study-housetype/update/order',
             data:{
                 order_list : order_list
             },
@@ -186,7 +186,7 @@ table td.sorter {cursor: move;}
         });
         $.ajax({
             type: "DELETE",
-            url: "/admin/results_housetype"+'/'+delete_id,
+            url: "/admin/case-study-housetype"+'/'+delete_id,
             success: function (data) {
                 $('.deleteHousetype').each(function(){
                     var id = $(this).data("id");

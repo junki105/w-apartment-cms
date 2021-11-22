@@ -261,66 +261,23 @@
       <div class="content">
         <h2 class="sec-ttl">ブログ</h2>
         <div class="blog-content">
-          <div class="blog-wrap">
-            <a href=""><img src="{{ URL::asset('images/top_blog.png') }}" alt=""></a>
+        @foreach ($blogs as $blog)
+        <div class="blog-wrap">
+          <a href=""><img src="{{ URL::asset('/').$blog->featured_image_url }}" alt=""></a>
             <div class="blog-inner">
               <div class="blog-info">
-                <a href="{{ url('/blog/recommend') }}" class="blog-category btn">カテゴリ</a>
-                <div class="blog-date">2021-07-01</div>
+                <a href="{{ url('/blog/category').'/'.$blog->category_id }}" class="blog-category btn">{{$blog->category_name}}</a>
+                <div class="blog-date">{{$blog->created_at}}</div>
               </div>
-              <a href="{{ url('/blog/') }}" class="blog-ttl">ブログタイトルテキストテキストテキストテキスト</a>
+              <a href="{{ url('/blog/') }}" class="blog-ttl">{{$blog->title}}</a>
             </div>
-          </div>
-          <div class="blog-wrap">
-            <a href=""><img src="{{ URL::asset('images/top_blog.png') }}" alt=""></a>
-            <div class="blog-inner">
-              <div class="blog-info">
-                <a href="{{ url('/blog/recommend') }}" class="blog-category btn">カテゴリ</a>
-                <div class="blog-date">2021-07-01</div>
-              </div>
-              <a href="{{ url('/blog/') }}" class="blog-ttl">ブログタイトルテキストテキストテキストテキスト</a>
-            </div>
-          </div>
-          <div class="blog-wrap">
-            <a href=""><img src="{{ URL::asset('images/top_blog.png') }}" alt=""></a>
-            <div class="blog-inner">
-              <div class="blog-info">
-                <a href="{{ url('/blog/recommend') }}" class="blog-category btn">カテゴリ</a>
-                <div class="blog-date">2021-07-01</div>
-              </div>
-              <a href="{{ url('/blog/') }}" class="blog-ttl">ブログタイトルテキストテキストテキストテキスト</a>
-            </div>
-          </div>
-          <div class="blog-wrap">
-            <a href=""><img src="{{ URL::asset('images/top_blog.png') }}" alt=""></a>
-            <div class="blog-inner">
-              <div class="blog-info">
-                <a href="{{ url('/blog/recommend') }}" class="blog-category btn">カテゴリ</a>
-                <div class="blog-date">2021-07-01</div>
-              </div>
-              <a href="{{ url('/blog/') }}" class="blog-ttl">ブログタイトルテキストテキストテキストテキスト</a>
-            </div>
-          </div>
-          <div class="blog-wrap">
-            <a href=""><img src="{{ URL::asset('images/top_blog.png') }}" alt=""></a>
-            <div class="blog-inner">
-              <div class="blog-info">
-                <a href="{{ url('/blog/recommend') }}" class="blog-category btn">カテゴリ</a>
-                <div class="blog-date">2021-07-01</div>
-              </div>
-              <a href="{{ url('/blog/') }}" class="blog-ttl">ブログタイトルテキストテキストテキストテキスト</a>
-            </div>
-          </div>
-          <div class="blog-wrap">
-            <a href=""><img src="{{ URL::asset('images/top_blog.png') }}" alt=""></a>
-            <div class="blog-inner">
-              <div class="blog-info">
-                <a href="{{ url('/blog/recommend') }}" class="blog-category btn">カテゴリ</a>
-                <div class="blog-date">2021-07-01</div>
-              </div>
-              <a href="{{ url('/blog/') }}" class="blog-ttl">ブログタイトルテキストテキストテキストテキスト</a>
-            </div>
-          </div>
+        </div>
+        @endforeach
+
+          
+          
+         
+
         </div>
         <a href="{{ url('/blog/') }}" class="btn sec-link-btn"><img src="{{ URL::asset('images/ico_arrow-right.png') }}" alt=""></a>
       </div>

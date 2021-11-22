@@ -11,13 +11,13 @@
         <strong id="notify_string"></strong>
       </div>
       <div class="mb-2 row">
-        <div class="col-sm-6">
+        <div class="col-sm-6 align-self-center">
           <h4 class="m-0"><strong>カテゴリ編集</strong></h4>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active"><a href='admin/results_amount'>カテゴリ</a></li>
+            <li class="breadcrumb-item active"><a href='admin/case-study-amount'>カテゴリ</a></li>
             <li class="breadcrumb-item">カテゴリ編集</li>
           </ol>
         </div><!-- /.col -->

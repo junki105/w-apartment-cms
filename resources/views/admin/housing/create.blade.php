@@ -94,23 +94,17 @@
   <div class="content-header">
     <div class="container-fluid">
       <div class="mb-2 row">
-        <div class="col-sm-6">
-          <h4 class="m-0"><strong>商品住宅新規追加</strong></h4>
+        <div class="col-sm-2 align-self-center">
+          <h4 class="m-0"><strong id = "action_title">商品住宅新規追加</strong></h4>
         </div><!-- /.col -->
-        <div class="col-sm-6">
+        
+        <div class="col-sm-10">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
             <li class="breadcrumb-item active">商品住宅新規追加</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
-      <div class="mt-4 mb-2" id="url_string" style="display: none">
-        <span class="mr-2 font-weight-bold h6">リンク:
-            <span id="created_url">
-            </span>
-        </span>
-        <a id="link_url" class="btn btn-sm btn-default">表示</a>
-      </div>
     </div><!-- /.container-fluid -->
   </div>
   <!-- /.content-header -->
@@ -206,8 +200,8 @@
                     <option value="0">非公開</option>
                   </select>
                 </div>
-                <div class="mt-4 text-sm">公開日:<span id="created_at"></span></div>
-                <div class="mt-2 text-sm">更新日:<span id="updated_at"></span></div>
+                <div class="mt-4 text-sm">公開日: <span id="created_at"></span></div>
+                <div class="mt-2 text-sm">更新日: <span id="updated_at"></span></div>
                 <div class="mt-3 d-flex justify-content-end">
                   <button type="submit" name='save' id='save' class="btn btn-sm btn-primary">公開</button>
                 </div>
@@ -232,6 +226,7 @@
 </div>
 <script>
   $(document).ready(function() {
+   
     let current_id;
     let update_flag = false;
     var current_date = new Date();
@@ -305,7 +300,7 @@
           var formData = new FormData(this);
           $.ajax({
             type: 'POST',
-            url: '/admin/housing/update/'+current_id,
+            url: '/admin/house/update/'+current_id,
             data: formData,
             cache:false,
             contentType:false,
@@ -330,19 +325,22 @@
           var formData = new FormData(this);
           $.ajax({
             type: 'POST',
-            url: '/admin/housing',
+            url: '/admin/house',
             data: formData,
             cache:false,
             contentType:false,
             processData:false,
             success: function (data) {
               if(data.success){
+                window.location.href = data.url+"/edit";
                 $('#notify_string').html('追加しました。');
                 $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
                 $('#created_url').html(data.url);
                 $('#url_string').css('display','block');
                 $('#link_url').attr('href',data.url).css('display','inline');
                 $('#save').html('更新');
+                
+                $("#action_title").html("商品住宅編集")
                 update_flag = true;
                 current_id = data.id
               }

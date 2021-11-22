@@ -12,23 +12,23 @@
   <div class="content-header">
     <div class="container-fluid">
       <div class="mb-2 row">
-        <div class="col-sm-6">
+        <div class="col-sm-6 align-self-center">
           <h4 class="m-0"><strong>金額編集</strong></h4>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active"><a href="{{ url('/') }}">Home</a></li>
-            <li class="breadcrumb-item active"><a href='admin/results_amount'>地域/</li>
+            <li class="breadcrumb-item active"><a href='admin/case-study-amount'>地域/</li>
             <li class="breadcrumb-item">金額編集</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
       <div class="mt-4 mb-2" id="url_string" style="display: none">
-        <span class="font-weight-bold mr-2 h6">リンク:
+        <span class="mr-2 font-weight-bold h6">リンク:
             <span id="created_url">
             </span>
         </span>
-        <a id="link_url" class="btn btn-sm btn-default">表示</a>
+        <a id="link_url" class="btn btn-sm btn-default" target="_blank">表示</a>
       </div>
     </div><!-- /.container-fluid -->
   </div>
@@ -46,7 +46,7 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <label for="amount" class="col-sm-3 col-form-label"><strong>金額</strong></label>
-                        <input type="text" class="col-sm-7 form-control ml-1" name="amount" value="{{$amount->type}}" id="amount">
+                        <input type="text" class="ml-1 col-sm-7 form-control" name="amount" value="{{$amount->type}}" id="amount">
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -86,9 +86,9 @@
         });
         $.ajax({
             type: "DELETE",
-            url: "/admin/results_amount"+'/'+current_amount.id,
+            url: "/admin/case-study-amount"+'/'+current_amount.id,
             success: function (data) {
-                window.location=("/admin/results_amount/create")
+                window.location=("/admin/case-study-amount/create")
             },
             error: function (data) {
                 console.log('Error:', data);
@@ -108,7 +108,7 @@
                 'X-HTTP-Method-Override': 'PATCH'
             },
             type:"POST",
-            url: '/admin/results_amount/'+current_amount.id,
+            url: '/admin/case-study-amount/'+current_amount.id,
             data: formdata,
             cache:false,
             contentType:false,

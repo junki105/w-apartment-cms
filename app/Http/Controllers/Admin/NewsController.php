@@ -98,7 +98,7 @@ class NewsController extends Controller
             $news->image_url = '/images/lineup01.png';
         }
         $news->save();
-        $url = url('/news/'.$news->id);
+        $url = url('admin/news/'.$news->id);
         return response()->json(['success'=>true,'url'=>$url,'id'=>$news->id]);
     }
     public function search(Request $request){

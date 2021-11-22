@@ -90,22 +90,26 @@
   <div class="content-header">
     <div class="container-fluid">
       <div class="mb-2 row">
-        <div class="col-sm-6">
-          <h4 class="m-0"><strong>ブログ新規追加</strong></h4>
+        <div class="col-sm-2 align-self-center">
+          <h4 class="m-0"><strong>ブログ編集</strong></h4>
+        </div><!-- /.col -->
+        <div class="col-sm-4">
+          <a href="/admin/blog/create" class="btn btn-primary" id="new_house_btn">
+            新規追加
+          </a>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-            <li class="breadcrumb-item active">お知らせ新規追加</li>
+            <li class="breadcrumb-item active">ブログ編集</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
-      <div class="mt-4 mb-2" id="url_string" style="display: none">
+      <div class="mt-4 mb-2" id="url_string">
         <span class="mr-2 font-weight-bold h6">リンク:
-            <span id="created_url">
-            </span>
+            <span id="created_url">{{url("/blog/")."/".$blog->id}}</span>
         </span>
-        <a id="link_url" class="btn btn-sm btn-default">表示</a>
+        <a href='{{url("/blog/")."/".$blog->id}}'id="link_url" class="btn btn-sm btn-default" target="_blank">表示</a>
       </div>
     </div><!-- /.container-fluid -->
   </div>
@@ -181,10 +185,10 @@
                     <option value="0">非公開</option>
                   </select>
                 </div>
-                <div class="mt-4 text-sm">公開日:<span id="created_at"></span></div>
-                <div class="mt-2 text-sm">更新日:<span id="updated_at"></span></div>
+                <div class="mt-4 text-sm">公開日: <span id="created_at"></span></div>
+                <div class="mt-2 text-sm">更新日: <span id="updated_at"></span></div>
                 <div class="mt-3 d-flex justify-content-end">
-                  <button type="submit" name='post_save' id='post_save' class="btn btn-sm btn-primary">公開</button>
+                  <button type="submit" name='post_save' id='post_save' class="btn btn-sm btn-primary">更新</button>
                 </div>
               </div>
             </div>
@@ -193,14 +197,12 @@
                   <h6 class="card-title"><strong>カテゴリ</strong></h6>
                 </div>
                 <div class="card-body">
-                     <div class="form-group row">
-                        @foreach ($categories as $category)
-                        <div class="ml-1 form-check form-check-inline" name="check_type">
-                            <input class="category_check" type="checkbox" id="{{$category->id}}" name="category"  value="{{$category->id}}">
-                            <label class="form-check-label">{{$category->name}}</label>
-                        </div>
-                        @endforeach
-                    </div>
+                  @foreach ($categories as $category)
+                  <div class="form-check" name="check_type">
+                      <input class="form-check-input category_check" type="checkbox" id="category{{$category->id}}" name="category"  value="{{$category->id}}">
+                      <label class="form-check-label" for="category{{$category->id}}">{{$category->name}}</label>
+                  </div>
+                  @endforeach
                 </div>
             </div>
             <div class="card">
@@ -208,7 +210,9 @@
                   <h6 class="card-title"><strong>おすすめ</strong></h6>
                 </div>
                 <div class="card-body">
-                    <input type="checkbox" checked="{{$blog->recommended_flag}}" name="recommended_flag" id="recommended_flag">おすすめに登録する
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" checked="{{$blog->recommended_flag}}" name="recommended_flag" id="recommended_flag">おすすめに登録する
+                  </div>
                 </div>
             </div>
             <div class="card">

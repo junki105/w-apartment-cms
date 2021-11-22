@@ -96,8 +96,13 @@
   <div class="content-header">
     <div class="container-fluid">
       <div class="mb-2 row">
-        <div class="col-sm-6">
+        <div class="col-sm-2 align-self-center">
           <h4 class="m-0"><strong>商品住宅編集</strong></h4>
+        </div><!-- /.col -->
+        <div class="col-sm-4">
+          <a href="/admin/house/create" class="btn btn-primary" id="new_house_btn">
+            新規追加
+          </a>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -106,12 +111,11 @@
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
-      <div class="mt-4 mb-2" id="url_string" style="display: none">
+      <div class="mt-4 mb-2" id="url_string">
         <span class="mr-2 font-weight-bold h6">リンク:
-            <span id="created_url">
-            </span>
+            <span id="created_url">{{url("/house/")."/".$housing->id}}</span>
         </span>
-        <a id="link_url" class="btn btn-sm btn-default">表示</a>
+        <a href='{{url("/house/")."/".$housing->id}}'id="link_url" class="btn btn-sm btn-default" target="_blank">表示</a>
       </div>
     </div><!-- /.container-fluid -->
   </div>
@@ -213,8 +217,8 @@
                     <option value="0">非公開</option>
                   </select>
                 </div>
-                <div class="mt-4 text-sm">公開日:<span id="created_at"></span></div>
-                <div class="mt-2 text-sm">更新日:<span id="updated_at"></span></div>
+                <div class="mt-4 text-sm">公開日: <span id="created_at"></span></div>
+                <div class="mt-2 text-sm">更新日: <span id="updated_at"></span></div>
                 <div class="mt-3 d-flex justify-content-end">
                   <button type="submit" name='post_save' id='post_save' class="btn btn-sm btn-primary">更新</button>
                 </div>
@@ -309,7 +313,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type: type,
-        url: '/admin/housing/update/'+housing.id,
+        url: '/admin/house/update/'+housing.id,
         data:formData,
         cache:false,
         contentType:false,

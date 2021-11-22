@@ -17,13 +17,13 @@ class CreateHousingsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->integer('public_status');
-            $table->string('featured_image_url');
-            $table->string('video_url');
-            $table->string('ow_image_urls');
+            $table->text('featured_image_url');
+            $table->text('video_url');
+            $table->text('ow_image_urls');
             $table->longText('book');
-            $table->string('gallery_image_urls');
-            $table->string('voice_url');
-            $table->string('url');
+            $table->text('gallery_image_urls');
+            $table->text('voice_url');
+            $table->text('url');
             $table->timestamps();
         });
     }

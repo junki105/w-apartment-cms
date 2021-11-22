@@ -32,7 +32,7 @@
   <div class="content-header">
     <div class="container-fluid">
       <div class="mb-2 row">
-        <div class="col-sm-2">
+        <div class="col-sm-2 align-self-center">
           <h4 class="m-0"><strong>お知らせ一覧</strong></h4>
         </div>
         <div class="col-sm-3">

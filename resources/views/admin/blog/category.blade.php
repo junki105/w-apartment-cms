@@ -13,7 +13,7 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="mb-2 row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 align-self-center">
                         <h4 class="m-0"><strong>カテゴリ</strong></h4>
                     </div><!-- /.col -->
                 <div class="col-sm-6">

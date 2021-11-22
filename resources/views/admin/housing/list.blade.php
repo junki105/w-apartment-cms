@@ -34,11 +34,11 @@
   <div class="content-header">
     <div class="container-fluid">
       <div class="mb-2 row">
-        <div class="col-sm-2">
+        <div class="col-sm-2 align-self-center">
           <h4 class="m-0"><strong>商品住宅一覧</strong></h4>
         </div>
         <div class="col-sm-3">
-          <a href="/admin/housing/create" class="btn btn-primary">
+          <a href="/admin/house/create" class="btn btn-primary">
             新規追加
           </a>
         </div><!-- /.col -->
@@ -104,7 +104,7 @@ function fetch_data(page, search_word, public_status) {
     public_status = null;
   }
   $.ajax({
-    url: "/admin/housing_search?page=" + page + "&search_word=" + search_word + "&public_status=" + public_status,
+    url: "/admin/house_search?page=" + page + "&search_word=" + search_word + "&public_status=" + public_status,
     method: "GET",
     success: function(data) {
       $('#table_card').html(data);

@@ -41,7 +41,7 @@ class AreaController extends Controller
         $max_order = Area::max('order_index');
         $area->order_index = $max_order + 1;
         $area->save();
-        return redirect('/admin/results_area/create');
+        return redirect('/admin/case-study-area/create');
         //
     }
     public function updateOrder(Request $request)

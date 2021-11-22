@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>w-apartment</title>
+    <title>W-Apartment - {{$house->title}}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.css" integrity="sha512-4rPgyv5iG0PZw8E+oRdfN/Gq+yilzt9rQ8Yci2jJ15rAyBmF0HBE4wFjBkoB72cxBeg63uobaj1UcNt/scV93w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -96,7 +96,7 @@
         </div>
       </div>
       <div class="minimal-header-content">
-        <h1>MINIMAL</h1>
+        <h1>{{$house->title}}</h1>
       </div>
       <video id="background-video" autoplay loop muted poster="https://assets.codepen.io/6093409/river.jpg">
         <source src="{{$house->video_url}}" type="video/mp4">
@@ -112,7 +112,7 @@
             <div></div>
           </div>
           <div class="line"></div>
-          <div id="num" class="slide-number">MINIMAL</div>
+          <div id="num" class="slide-number">{{$house->title}}</div>
         </div>
         <div class="header-aside">
           <a href="{{'/admin'}}" class="login-btn"><img src="{{ URL::asset('images/ico_login.png') }}" alt=""></a>

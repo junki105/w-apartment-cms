@@ -65,7 +65,7 @@
                         </td>
                         <td class="col-sm-3">
                             <div class="float-sm-right">
-                                <a href="/blog/{{$blog->id}}" class="mr-2">
+                                <a href="/blog/{{$blog->id}}" class="mr-2" target="_blank">
                                     <button class="btn btn-primary btn-sm viewBlog" data-id="{{$blog->id}}"  type="button">
                                         <i class="fa fa-external-link-alt"></i>
                                         表示

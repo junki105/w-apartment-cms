@@ -22,7 +22,7 @@
       @case('house')
         <title>W-Apartment - 商品住宅</title>
         @break
-
+        
       @case('contact')
         <title>W-Apartment - お問い合わせ</title>
         @break
@@ -48,7 +48,7 @@
         @break
 
       @case('case-study-single')
-        <title>W-Apartment - 事例 - </title>
+        <title>W-Apartment - 事例 - {{$result->id}}</title>
         @break
 
       @case('blog')
@@ -56,15 +56,15 @@
         @break
 
       @case('blog-single')
-        <title>W-Apartment - ブログ - </title>
+        <title>W-Apartment - ブログ - {{$blog->id}}</title>
         @break
 
       @case('blog-recommend')
         <title>W-Apartment - ブログ - おすすめ記事</title>
         @break
 
-      @case('blog-single')
-        <title>W-Apartment - ブログ - </title>
+      @case('blog-category')
+        <title>W-Apartment - ブログ - {{$activitad_category_name}}</title>
         @break
 
       @case('philosophy')
@@ -76,7 +76,7 @@
         @break
 
       @case('news-single')
-        <title>W-Apartment - News - </title>
+        <title>W-Apartment - {{$post->title}}</title>
         @break
 
       @default
@@ -189,7 +189,7 @@
             @case('house')
               LINEUP
               @break
-
+              
             @case('contact')
               REQUEST
               @break

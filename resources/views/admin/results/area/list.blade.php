@@ -30,7 +30,7 @@ table td.sorter {cursor: move;}
         <div class="content-header">
             <div class="container-fluid">
                 <div class="mb-2 row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 align-self-center">
                         <h4 class="m-0"><strong>地域</strong></h4>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
@@ -52,10 +52,10 @@ table td.sorter {cursor: move;}
             </div>
             <div class="cards">
                 <div class="card-header">
-                    <form action="/admin/results_area" id="form" method="POST">
+                    <form action="/admin/case-study-area" id="form" method="POST">
                     @csrf
                     <div class="form-group row">
-                        <input type="text" class="col-sm-3 form-control ml-1 mr-3" name="name_input" id="name_input">
+                        <input type="text" class="ml-1 mr-3 col-sm-3 form-control" name="name_input" id="name_input">
                         <button id="areaAdd" type="submit" class="btn btn-md" style="border:1px solid;">新規作成</button>
                     </div>
                     </form>
@@ -68,7 +68,7 @@ table td.sorter {cursor: move;}
                                 <th class="col-sm-1"></th>
                                 <th class="col-sm-2">ID</th>
                                 <th class="col-sm-3">地域</th>
-                                <th class="col-sm-6 float-right"></th>
+                                <th class="float-right col-sm-6"></th>
                             </tr>
                             </thead>
                             <tbody id="area_table">
@@ -79,13 +79,13 @@ table td.sorter {cursor: move;}
                                         <td class="col-sm-3" id="td{{$area->id}}">{{$area->name}}</td>
                                         <td class="col-sm-6">
                                             <div class="float-sm-right">
-                                                <a href='/admin/results_area/{{$area->id}}/edit'>
+                                                <a href='/admin/case-study-area/{{$area->id}}/edit'>
                                                     <button class="btn btn-info btn-sm editArea" type="button" data-id="{{$area->id}}">
-                                                        <i class="fa fa-pencil-alt ml-1 mr-1"></i>編集
+                                                        <i class="ml-1 mr-1 fa fa-pencil-alt"></i>編集
                                                     </button>
                                                 </a>
                                                 <button  class="btn btn-danger btn-sm deleteArea"  data-id="{{$area->id}}">
-                                                    <i class="fa fa-trash ml-1 mr-1"></i>削除
+                                                    <i class="ml-1 mr-1 fa fa-trash"></i>削除
                                                 </button>
                                             </div>
                                         </td>
@@ -100,7 +100,7 @@ table td.sorter {cursor: move;}
                                 <th class="col-sm-1"></th>
                                 <th class="col-sm-2">ID</th>
                                 <th class="col-sm-3">地域</th>
-                                <th class="col-sm-6 float-right"></th>
+                                <th class="float-right col-sm-6"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -156,7 +156,7 @@ table td.sorter {cursor: move;}
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
             type:'post',
-            url:'/admin/results_area/update/order',
+            url:'/admin/case-study-area/update/order',
             data:{
                 order_list : order_list
             },
@@ -191,7 +191,7 @@ table td.sorter {cursor: move;}
         });
         $.ajax({
             type: "DELETE",
-            url: "/admin/results_area"+'/'+delete_id,
+            url: "/admin/case-study-area"+'/'+delete_id,
             success: function (data) {
                 $('.deleteArea').each(function(){
                     var id = $(this).data("id");

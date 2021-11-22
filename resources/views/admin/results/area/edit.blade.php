@@ -19,23 +19,23 @@
   <div class="content-header">
     <div class="container-fluid">
       <div class="mb-2 row">
-        <div class="col-sm-6">
+        <div class="col-sm-6 align-self-center">
           <h4 class="m-0"><strong>地域編集</strong></h4>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active"><a href="{{ url('/') }}">Home</a></li>
-            <li class="breadcrumb-item active"><a href='admin/results_area'>地域</li>
+            <li class="breadcrumb-item active"><a href='admin/case-study-area'>地域</li>
             <li class="breadcrumb-item">地域編集</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
       <div class="mt-4 mb-2" id="url_string" style="display: none">
-        <span class="font-weight-bold mr-2 h6">リンク:
+        <span class="mr-2 font-weight-bold h6">リンク:
             <span id="created_url">
             </span>
         </span>
-        <a id="link_url" class="btn btn-sm btn-default">表示</a>
+        <a id="link_url" class="btn btn-sm btn-default" target="_blank">表示</a>
       </div>
     </div><!-- /.container-fluid -->
   </div>
@@ -53,7 +53,7 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <label for="area" class="col-sm-3 col-form-label">地域</label>
-                        <input type="text" class="col-sm-7 form-control ml-1" name="area" value="{{$area->name}}" id="area">
+                        <input type="text" class="ml-1 col-sm-7 form-control" name="area" value="{{$area->name}}" id="area">
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -93,9 +93,9 @@
         });
         $.ajax({
             type: "DELETE",
-            url: "/admin/results_area"+'/'+current_area.id,
+            url: "/admin/case-study-area"+'/'+current_area.id,
             success: function (data) {
-                window.location=("/admin/results_area/create")
+                window.location=("/admin/case-study-area/create")
             },
             error: function (data) {
                 console.log('Error:', data);
@@ -115,7 +115,7 @@
                   'X-HTTP-Method-Override': 'PATCH'
               },
               type:"POST",
-              url: '/admin/results_area/'+current_area.id,
+              url: '/admin/case-study-area/'+current_area.id,
               data: formdata,
               cache:false,
               contentType:false,

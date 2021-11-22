@@ -98,7 +98,7 @@ class BlogController extends Controller
             $blog->author_image_url = '/uploads/no_image.png';
         }
         $blog->save();
-        $url = url('/blog/'.$blog->id);
+        $url = url('admin/blog/'.$blog->id);
         return response()->json(['success'=>true,'url'=>$url,'id'=>$blog->id]);
     }
 

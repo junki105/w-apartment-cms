@@ -16,18 +16,26 @@ class FrontBlogController extends Controller
 
     }
     public function index(){
-        $blogs = Blog::latest()->paginate(10);
+        $blogs = Blog::latest()->join('categories','blogs.category','=','categories.id')->select(["blogs.*","categories.id as category_id","categories.name as category_name"])->paginate(10);
         $categories = Category::all();
-        return view('blogs', compact('blogs','categories'));
+        $activitad_category_name = "新着一覧";
+        return view('blogs', compact('blogs','categories','activitad_category_name'));
     }
     public function recommend(){
-        $blogs = Blog::where('recommended_flag','LIKE','1');
+  
+        $blogs=  Blog::join('categories','blogs.category','=','categories.id')->where('blogs.recommended_flag','LIKE',1)->select(["blogs.*","categories.id as category_id","categories.name as category_name"])->paginate(10);
+
         $categories = Category::all();
-        return view('blogs', compact('blogs','categories'));
+        $activitad_category_name = 'おすすめ';
+        return view('blogs', compact('blogs','categories','activitad_category_name'));
     }
     public function category($id){
-        $blogs = Blog::where('category','LIKE',$id)->paginate(10);
+       
+        
+        $blogs=  Blog::join('categories','blogs.category','=','categories.id')->where('blogs.category','LIKE',$id)->select(["blogs.*","categories.id as category_id","categories.name as category_name"])->paginate(10);
+
         $categories = Category::all();
-        return view('blogs', compact('blogs','categories'));
+        $activitad_category_name = Category::where("id" ,"=",$id) ->select(["name"])->get()[0]->name;
+        return view('blogs', compact('blogs','categories','activitad_category_name'));
     }
 }

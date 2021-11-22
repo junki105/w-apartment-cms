@@ -13,7 +13,7 @@
     });
     $.ajax({
       type: "DELETE",
-      url: "/admin/results" + '/' + delete_id,
+      url: "/admin/case-study" + '/' + delete_id,
       success: function(data) {
         $('.deleteHousing').each(function() {
           var id = $(this).data("id");
@@ -32,9 +32,9 @@
   });
 </script>
 <div class="card-header">
-    <h6 class="card-title">お知らせ一覧</h6>
+    <h6 class="card-title">施工実績一覧</h6>
 
-    <div class="card-tools float-right"><span class="mt-1 mr-2">全<span class="count">{{$count}}</span>件</span>
+    <div class="float-right card-tools"><span class="mt-1 mr-2">全<span class="count">{{$count}}</span>件</span>
     {{$results->links()}}
     </div>
 </div>
@@ -49,7 +49,7 @@
                 <th class="col-sm-2">金額</th>
                 <th class="col-sm-1">間取り</th>
                 <th class="col-sm-2">公開状態</th>
-                <th class="col-sm-3 float-right">カテゴリ</th>
+                <th class="float-right col-sm-3"></th>
             </tr>
             </thead>
             <tbody id="resultrows">
@@ -75,19 +75,22 @@
                                         表示
                                     </button>
                                 </a>
-                                <a href="/admin/results/{{$result->id}}/edit" class="mr-2">
+                                <a href="/admin/case-study/{{$result->id}}/edit" class="mr-2">
                                     <button class="btn btn-info btn-sm editResult" type="button" data-id="{{$result->id}}">
-                                        <i class="fa fa-pencil-alt ml-1 mr-1"></i>
+                                        <i class="ml-1 mr-1 fa fa-pencil-alt"></i>
                                         編集
                                     </button>
                                 </a>
                                 <button  class="btn btn-danger btn-sm deleteResult" onClick="deleteResult({{$result->id}})" id="deleteresult" data-id="{{$result->id}}">
-                                    <i class="fa fa-trash ml-1 mr-1"></i>削除
+                                    <i class="ml-1 mr-1 fa fa-trash"></i>削除
                                 </button>
                             </div>
                         </td>
                     </tr>
                 @endforeach
+                <div class="article-pagination">
+                    {!! $results->links('pagination') !!}
+                </div>
             </tbody>
         </table>
     @else
@@ -100,7 +103,7 @@
             <th class="col-sm-2">金額</th>
             <th class="col-sm-1">間取り</th>
             <th class="col-sm-2">公開状態</th>
-            <th class="col-sm-3 float-right">カテゴリ</th>
+            <th class="float-right col-sm-3"></th>
         </tr>
         </thead>
         <tbody>
@@ -112,5 +115,5 @@
     @endif
 </div>
 <div class="card-footer">
-    <div class="card-tools float-right d-inline-flex"><span class="m-2">全<span class="count">{{$count}}</span>件</span>{{$results->links()}}</div>
+    <div class="float-right card-tools d-inline-flex"><span class="m-2">全<span class="count">{{$count}}</span>件</span>{!! $results->links('pagination') !!}</div>
 </div>

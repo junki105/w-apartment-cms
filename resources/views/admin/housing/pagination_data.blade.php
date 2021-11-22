@@ -13,8 +13,9 @@
     });
     $.ajax({
       type: "DELETE",
-      url: "/admin/housing" + '/' + delete_id,
+      url: "/admin/house" + '/' + delete_id,
       success: function(data) {
+        window.location.reload()
         $('.deleteHousing').each(function() {
           var id = $(this).data("id");
           if (id === delete_id) {
@@ -64,13 +65,13 @@
         </td>
         <td class="col-sm-4">
           <div class="float-sm-right">
-            <a href="/house/{{$housing->id}}" class="mr-2">
+            <a href="/house/{{$housing->id}}" class="mr-2" target="_blank">
               <button class="btn btn-primary btn-sm viewHousing" data-id="{{$housing->id}}" type="button">
                 <i class="fa fa-external-link-alt"></i>
                 表示
               </button>
             </a>
-            <a href="/admin/housing/{{$housing->id}}/edit" class="mr-2">
+            <a href="/admin/house/{{$housing->id}}/edit" class="mr-2">
               <button class="btn btn-info btn-sm editHousing" type="button" data-id="{{$housing->id}}">
                 <i class="ml-1 mr-1 fa fa-pencil-alt"></i>
                 編集

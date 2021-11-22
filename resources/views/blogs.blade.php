@@ -4,18 +4,18 @@
     <div class="blog-list-ttl">
       <h1>ブログ</h1>
       <div class="category-group">
-        <a href="{{ url('/blog') }}" class="active">新着</a>
+        <a href="{{ url('/blog') }}" class = "{{($activitad_category_name == '新着一覧')?'active':''}}" >新着</a>
         <span></span>
         <a href="{{url('/blog/recommend')}}">おすすめ</a>
         @foreach ($categories as $category)
           <span></span>
-          <a href="{{url('/blog/category/'.$category->id)}}" id="{{$category->id}}">{{$category->name}}</a>
+          <a href="{{url('/blog/category/'.$category->id)}}" class = "{{($category->name == $activitad_category_name)?'active':''}}"  id="{{$category->id}}">{{$category->name}}</a>
         @endforeach
       </div>
     </div>
   </section>
   <section class="content search-result">
-    <h1>新着一覧</h1>
+    <h1>{{$activitad_category_name}}</h1>
     <div class="result-content">
       @foreach ($blogs as $blog)
         <article>
@@ -25,8 +25,8 @@
           </div>
           <div class="article-right">
               <div class="article-date">{{$blog->created_at}}</div>
-              <div class="investment article-blog-category">{{$blog->category}}</div>
-              <p>{{$blog->content}}
+              <div class="investment article-blog-category"><a href="{{ url('/blog/category').'/'.$blog->category_id }}" class="blog-category btn">{{$blog->category_name}}</a></div>
+              <p>{!!$blog->content!!}
               </p>
               <a href="{{url('/blog/'.$blog->id)}}" class="btn sec-link-btn"><img src="{{ URL::asset('images/ico_arrow-right.png') }}" alt=""></a>
           </div>

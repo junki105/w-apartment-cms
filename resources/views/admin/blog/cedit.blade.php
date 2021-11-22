@@ -11,13 +11,13 @@
   <div class="content-header">
     <div class="container-fluid">
       <div class="mb-2 row">
-        <div class="col-sm-6">
+        <div class="col-sm-6 align-self-center">
           <h4 class="m-0"><strong>カテゴリ編集</strong></h4>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active"><a href='admin/results_amount'>カテゴリ</a></li>
+            <li class="breadcrumb-item active"><a href='admin/case-study-amount'>カテゴリ</a></li>
             <li class="breadcrumb-item">カテゴリ編集</li>
           </ol>
         </div><!-- /.col -->
@@ -39,7 +39,7 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <label for="category" class="col-sm-3 col-form-label"><strong>カテゴリ名</strong></label>
-                        <input type="text" class="col-sm-7 form-control ml-1" name="category" value="{{$category->name}}" id="category">
+                        <input type="text" class="ml-1 col-sm-7 form-control" name="category" value="{{$category->name}}" id="category">
                     </div>
                 </div>
                 <!-- /.card-body -->s

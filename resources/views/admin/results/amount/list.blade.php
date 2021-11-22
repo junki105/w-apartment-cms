@@ -29,7 +29,7 @@ table td.sorter {cursor: move;}
         <div class="content-header">
             <div class="container-fluid">
                 <div class="mb-2 row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 align-self-center">
                         <h4 class="m-0"><strong>金額</strong></h4>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
@@ -43,7 +43,7 @@ table td.sorter {cursor: move;}
                     <span class="mr-2 font-weight-bold h6">リンク:
                         <span id="created_url"></span>
                     </span>
-                    <a id="link_url" class="btn btn-sm btn-default">表示</a>
+                    <a id="link_url" class="btn btn-sm btn-default" target="_blank">表示</a>
                 </div>
             </div><!-- /.container-fluid -->
         </div>
@@ -60,7 +60,7 @@ table td.sorter {cursor: move;}
             </div>
             <div class="card">
                 <div class="card-header">
-                    <form action="/admin/results_amount" id="form" method="POST">
+                    <form action="/admin/case-study-amount" id="form" method="POST">
                         @csrf
                         <div class="form-group row">
                             <input type="text" class="ml-1 mr-3 col-sm-3 form-control" name="type_input" id="type_input">
@@ -87,7 +87,7 @@ table td.sorter {cursor: move;}
                                         <td class="col-sm-3" id="td{{$amount->id}}">{{$amount->type}}</td>
                                         <td class="col-sm-6">
                                             <div class="float-sm-right">
-                                            <a href='/admin/results_amount/{{$amount->id}}/edit'>
+                                            <a href='/admin/case-study-amount/{{$amount->id}}/edit'>
                                                     <button class="btn btn-info btn-sm editAmount" type="button" data-id="{{$amount->id}}">
                                                         <i class="ml-1 mr-1 fa fa-pencil-alt"></i>編集
                                                     </button>
@@ -171,7 +171,7 @@ table td.sorter {cursor: move;}
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
             type:'post',
-            url:'/admin/results_amount/update/order',
+            url:'/admin/case-study-amount/update/order',
             data:{
                 order_list : order_list
             },
@@ -197,7 +197,7 @@ table td.sorter {cursor: move;}
         });
         $.ajax({
             type: "DELETE",
-            url: "/admin/results_amount"+'/'+delete_id,
+            url: "/admin/case-study-amount"+'/'+delete_id,
             success: function (data) {
                 $('.deleteamount').each(function(){
                     var id = $(this).data("id");
