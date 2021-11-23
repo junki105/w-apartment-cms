@@ -125,13 +125,7 @@
             type: "DELETE",
             url: "/admin/blog/category/delete"+'/'+delete_id,
             success: function (data) {
-                $('.deleteCategory').each(function(){
-                    var id = $(this).data("id");
-                    if(id===delete_id){
-                        $(this).parents("tr").remove();
-                    }
-                })
-                $('#deleteModal').modal("hide");
+                window. eload();
             },
             error: function (data) {
                 console.log('Error:', data);

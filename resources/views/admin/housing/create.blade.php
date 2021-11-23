@@ -291,32 +291,6 @@
         $('#url_input').css('border-color','');
       }
       if(validation_flag){
-        if(update_flag){
-          $.ajaxSetup({
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-          });
-          var formData = new FormData(this);
-          $.ajax({
-            type: 'POST',
-            url: '/admin/house/update/'+current_id,
-            data: formData,
-            cache:false,
-            contentType:false,
-            processData:false,
-            success: function (data) {
-              if(data.success){
-                $('#notify_string').html('更新しました。');
-                $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
-              }
-            },
-            error: function (data) {
-              console.log('Error:', data);
-            }
-          });
-        }
-        else{
           $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -333,23 +307,12 @@
             success: function (data) {
               if(data.success){
                 window.location.href = data.url+"/edit";
-                $('#notify_string').html('追加しました。');
-                $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
-                $('#created_url').html(data.url);
-                $('#url_string').css('display','block');
-                $('#link_url').attr('href',data.url).css('display','inline');
-                $('#save').html('更新');
-                
-                $("#action_title").html("商品住宅編集")
-                update_flag = true;
-                current_id = data.id
               }
             },
             error: function (data) {
               console.log('Error:', data);
             }
           });
-        }
       }
       else{
         $('#notify_string').html('入力内容でエラーがあります。');

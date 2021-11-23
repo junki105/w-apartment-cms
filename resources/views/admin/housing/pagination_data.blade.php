@@ -16,15 +16,6 @@
       url: "/admin/house" + '/' + delete_id,
       success: function(data) {
         window.location.reload()
-        $('.deleteHousing').each(function() {
-          var id = $(this).data("id");
-          if (id === delete_id) {
-            $(this).parents("tr").remove();
-          }
-        })
-        $('#deleteModal').modal("hide");
-        count--;
-        $('.count').html(count);
       },
       error: function(data) {
         console.log('Error:', data);

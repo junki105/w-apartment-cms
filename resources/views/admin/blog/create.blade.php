@@ -232,7 +232,6 @@
 <script>
   $(document).ready(function() {
     let current_id;
-    let update_flag = false;
     let validation_flag = true;
     $('#summernote').summernote({
       height: 450,
@@ -299,41 +298,6 @@
         validation_flag = true;
       }
       if(validation_flag){
-        if(update_flag){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        e.preventDefault();
-        var formData = new FormData(this);
-        $.ajax({
-          type: "POST",
-          url: '/admin/blog/update/'+current_id,
-          data: formData,
-          cache:false,
-          contentType:false,
-          processData:false,
-          success: function (data) {
-            if(data.success){
-              $('#notify_string').html('更新しました。');
-              $('#alert').css('display','block');
-              var current_date = new Date();
-              var current_year = String(current_date.getFullYear());
-              var current_month = current_date.getMonth() + 1;
-              current_month<10?current_month = '0' + String(current_month) : current_month = String(current_month);
-              var current_day = current_date.getDate();
-              current_day<10?current_day = '0' + String(current_day) : current_day = String(current_day);
-              let updated_at = current_year + '/' + current_month + '/' + current_day;
-              $('#updated_at').html(updated_at);
-            }
-            },
-            error: function (data) {
-                console.log('Error:', data);
-            }
-          });
-        }
-        else{
           $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -350,30 +314,14 @@
             contentType:false,
             processData:false,
             success: function (data) {
-
               if(data.success){
                 window.location.href = data.url+"/edit";
-                console.log(data.url)
-                $('#notify_string').html('追加しました。');
-                $('#alert').css('display','block');
-                $('#created_url').html(data.url);
-                $('#url_string').css('display','block');
-                $('#link_url').attr('href',data.url).css('display','inline');
-                update_flag = true;
-                current_id = data.id;
-                $('#save').html('更新');
               }
             },
             error: function (data) {
                 console.log('Error:', data);
             }
           });
-        }
-      }
-     else{
-
-     }
-        
     })
     function upload_files_list(input) {
         let list_string = '';

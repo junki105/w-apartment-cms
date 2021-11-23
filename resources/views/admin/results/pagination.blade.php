@@ -15,15 +15,9 @@
       type: "DELETE",
       url: "/admin/case-study" + '/' + delete_id,
       success: function(data) {
-        $('.deleteHousing').each(function() {
-          var id = $(this).data("id");
-          if (id === delete_id) {
-            $(this).parents("tr").remove();
-          }
-        })
-        $('#deleteModal').modal("hide");
-        count--;
-        $('.count').html(count);
+      
+         window.location.reload()
+    
       },
       error: function(data) {
         console.log('Error:', data);

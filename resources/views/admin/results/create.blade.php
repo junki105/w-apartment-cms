@@ -433,41 +433,8 @@
       else{
         $('#url').css('border-color','');
       }
-      if(validation_flag){
-        if(update_flag){
-          $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-          });
-          e.preventDefault();
-          var formData = new FormData(this);
-          type = 'post';
-          $.ajax({
-            type: type,
-            url: '/admin/case-study/update/'+current_id,
-            data: formData,
-            cache:false,
-            contentType:false,
-            processData:false,
-            success: function (data) {
-              console.log(data);
-              if(data.success){
-                $('#notify_string').html('更新しました。');
-                $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
-                // $('#created_url').html('http://localhost:8000/results/'+data.id);
-                // $('#url_string').css('display','block');
-                // $('#link_url').attr('href','http://localhost:8000/blog/'+data.id).css('display','inline');
-                update_flag = true;
-              }
-            },
-            error: function (data) {
-              console.log('Error:');
-              console.log(data);
-            }
-          });
-        }
-        else{
+      if(validation_flag)
+        {
           $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -502,7 +469,7 @@
               console.log('Error:', data);
             }
           });
-        }
+        
       }
       else{
         $('#notify_string').html('入力内容でエラーがあります。');
