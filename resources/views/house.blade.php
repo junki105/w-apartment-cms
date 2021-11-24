@@ -2,9 +2,8 @@
 <main class="container feature lineup">
   <section class="content lineup-hero sec-hero">
     <h1>商品住宅一覧</h1>
-    <p>ショルダーコピーショルダーコピーショルダーコピー<br>
-      ショルダーコピーショルダーコピー<br>
-      ショルダーコピーショルダーコピーショルダーコピーショルダーコピー
+    <p>
+      W-apartmentシリーズが誇る商品住宅一覧です
     </p>
     <div class="lineup-content">
       @foreach ($houses as $house)

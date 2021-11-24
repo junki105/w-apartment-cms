@@ -68,39 +68,40 @@
     display: none;
   }
 }
-
 .hero {
-  position: relative;
-  .slide-content {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    width: 823px;
-    height: 140.5px;
-    position: absolute;
-    top: 660px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    z-index: 200;
-    h1 {
-      font-size: 32px;
-      letter-spacing: 0.05em;
-      line-height: 48px;
-      text-align: right;
-      @include font-ud(demibold);
-      padding-right: 80px;
-      border-right: 1px solid #00000025;
-      width: 50%;
-    }
-    p {
-      font-size: 13px;
-      letter-spacing: 0.1em;
-      line-height: 28px;
-      text-align: left;
-      padding-left: 80px;
-      width: 50%;
-      @include font-ud(regular);
+  .slide {
+    position: relative;
+    &-content {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      width: 890px;
+      height: 140.5px;
+      position: absolute;
+      top: 660px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      z-index: 200;
+      h1 {
+        font-size: 32px;
+        letter-spacing: 0.05em;
+        line-height: 48px;
+        text-align: right;
+        @include font-ud(demibold);
+        padding-right: 80px;
+        border-right: 1px solid #00000025;
+        width: 50%;
+      }
+      p {
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        line-height: 28px;
+        text-align: left;
+        padding-left: 80px;
+        width: 50%;
+        @include font-ud(regular);
+      }
     }
   }
 
@@ -108,18 +109,20 @@
 
 @media (max-width: 1400px) {
   .hero {
-    .slide-content {
-      width: 823rem;
-      height: 140.5rem;
-      h1 {
-        font-size: 32rem;
-        line-height: 48rem;
-        padding-right: 80rem;
-      }
-      p {
-        font-size: 13rem;
-        line-height: 28rem;
-        padding-left: 80rem;
+    .slide {
+      &-content {
+        width: 900rem;
+        height: 140.5rem;
+        h1 {
+          font-size: 32rem;
+          line-height: 48rem;
+          padding-right: 80rem;
+        }
+        p {
+          font-size: 13rem;
+          line-height: 28rem;
+          padding-left: 80rem;
+        }
       }
     }
   }
@@ -157,20 +160,32 @@
   }
   
   .hero {
-    .slide-content {
-      width: 500rem;
-      height: unset;
-      top: 340rem;
-      h1 {
-        font-size: 64rem;
-        line-height: 96rem;
-        padding-right: 0;
-        width: 100%;
-        border: unset;
-        text-align: center;
+    .slide {
+      &-content {
+        width: 500rem;
+        height: unset;
+        top: 340rem;
+        h1 {
+          font-size: 64rem;
+          line-height: 96rem;
+          padding-right: 0;
+          width: 100%;
+          border: unset;
+          text-align: center;
+        }
+        p {
+          display: none;
+        }
       }
-      p {
-        display: none;
+      &:nth-child(3) {
+        .slide-content {
+          top: 60vh;
+        }
+      }
+      &:nth-child(4) {
+        .slide-content {
+          top: 60vh;
+        }
       }
     }
   }
@@ -197,17 +212,21 @@
 }
 .philosophy {
   background-image: url(../../images/bg_top_philosophy.png);
+  .content {
+    display: flex;
+  }
   .sec-ttl {
-    font-family: 'felix';
+    @include font-ud(demibold);
     font-weight: normal;
     font-size: 32px;
     color: $white;
+    width: 50%;
   }
   &-content {
     width: 50%;
     float: right;
     clear: right;
-    padding: 76px 0 0 30px;
+    padding: 0 0 0 30px;
     h3 {
       font-size: 22px;
       letter-spacing: 0.1em;
@@ -218,8 +237,12 @@
       font-size: 13px;
       letter-spacing: 0.1em;
       line-height: 28px;
-      font-family: 'felix';
+      @include font-ud(regular);
       margin-top: 13px;
+    }
+    .sec-link-btn {
+      margin-right: 0!important;
+      margin-top: 50px!important;
     }
   }
 
@@ -246,6 +269,27 @@
       }
     }
   }
+  .philosophy {
+    .sec-ttl {
+      font-size: 32rem;
+    }
+    &-content {
+      padding: 0 0 0 30rem;
+      h3 {
+        font-size: 22rem;
+        line-height: 36rem;
+      }
+      p {
+        font-size: 13rem;
+        line-height: 28rem;
+        margin-top: 13rem;
+      }
+      .sec-link-btn {
+        margin-top: 50rem!important;
+      }
+    }
+  
+  }
 }
 @media (max-width: 750px) {
   .support {
@@ -262,16 +306,20 @@
   .philosophy {
     background-image: url(../../images/bg_top_philosophy_sp.png);
     background-size: 100% 100%;
+    .content {
+      display: block;
+    }
     .sec-ttl {
-      font-size: 28px;
+      font-size: 24px;
       text-align: center;
       margin-top: 40px;
+      width: 100%;
     }
     &-content {
       width: 100%;
       float: unset;
       clear: unset;
-      padding: 120px 60px 0;
+      padding: 120px 0 0;
       h3 {
         font-size: 20px;
         line-height: 32px;
@@ -281,6 +329,9 @@
         font-size: 13px;
         line-height: 28px;
         margin-top: 29px;
+      }
+      .sec-link-btn {
+        margin-top: 88px!important;
       }
     }
   
@@ -519,14 +570,23 @@
   &-content {
     margin-top: 47px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
     flex: 1 0 21%;
-    img {
+    a {
+      margin-right: 21px;
+      margin-top: 21px;
       width: 214px;
       height: 214px;
-      object-fit: cover;
-      margin-top: 21px;
+      display: inline-flex;
+      &:nth-child(4), &:last-child {
+        margin-right: 0;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
 }
@@ -565,7 +625,7 @@
   }
   &-wrap {
     width: 240px;
-    height: 340px;
+    height: 355px;
     border-radius: 8px;
     background: #fff;
     padding: 0 40px;
@@ -598,11 +658,25 @@
     display: flex;
     flex-wrap: wrap;
     flex: 1 0 33%;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
   &-wrap {
     width: 240px;
-    margin: 40px 0;
+    margin: 40px 88px 0 0;
+    &:nth-child(3), &:nth-child(6) {
+      margin-right: 0;
+    }
+    .img-wrap {
+      width: 100%;
+      height: 172px;
+      display: inline-flex;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        -o-object-fit: cover;
+      }
+    }
     .blog-inner {
       background-image: url(../../images/top_blog_border.png);
       background-position-x: left;
@@ -613,8 +687,9 @@
     .blog-info {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       .blog-category {
-        width: 58px;
+        width: 68px;
         height: 26px;
         border-radius: 0px 4px 4px 0px;
         background: #4c92d9;
@@ -651,10 +726,14 @@
     background-position: bottom;
     &-content {
       margin-top: 47rem;
-      img {
+      a {
+        margin-right: 21rem;
+        margin-top: 21rem;
         width: 214rem;
         height: 214rem;
-        margin-top: 21rem;
+        &:nth-child(4), &:last-child {
+          margin-right: 0;
+        }
       }
     }
   }
@@ -668,7 +747,7 @@
     }
     &-wrap {
       width: 240rem;
-      height: 340rem;
+      height: 355rem;
       border-radius: 8rem;
       padding: 0 40rem;
       h3 {
@@ -690,7 +769,13 @@
     }
     &-wrap {
       width: 240rem;
-      margin: 40rem 0;
+      margin: 40rem 88rem 0 0;
+      &:nth-child(3), &:nth-child(6) {
+        margin-right: 0;
+      }
+      .img-wrap {
+        height: 172rem;
+      }
       .blog-inner {
         margin-top: 24rem;
         height: 89rem;
@@ -698,7 +783,7 @@
       }
       .blog-info {
         .blog-category {
-          width: 58rem;
+          width: 68rem;
           height: 26rem;
           border-radius: 0rem 4rem 4rem 0rem;
           font-size: 12rem;
@@ -726,10 +811,11 @@
       width: 214px;
       margin-left: auto;
       margin-right: auto;
-      img {
+      a {
+        margin-right: 0;
+        margin-top: 24px;
         width: 100%;
         height: 214px;
-        margin-top: 24px;
       }
     }
   }
@@ -753,7 +839,7 @@
     }
     &-wrap {
       width: 100%;
-      height: 340px;
+      height: 355px;
       border-radius: 8px;
       background: #fff;
       padding: 0 40px;
@@ -791,6 +877,10 @@
     &-wrap {
       width: 100%;
       margin: 20px 0;
+      .img-wrap {
+        width: 100%;
+        height: 172px;
+      }
       .blog-inner {
         margin-top: 24px;
         height: 89px;
@@ -800,7 +890,7 @@
         display: flex;
         justify-content: space-between;
         .blog-category {
-          width: 58px;
+          width: 68px;
           height: 26px;
           border-radius: 0px 4px 4px 0px;
           background: #4c92d9;

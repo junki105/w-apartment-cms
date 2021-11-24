@@ -127,18 +127,18 @@ table td.sorter {cursor: move;}
     let current_area;
     var table = document.getElementById("dnd");
     RowSorter('table[attr-sample=thetable]', {
-    handler: 'td.sorter',
-    stickFirstRow : false,
-    stickLastRow  : false,
-    onDragStart: function(tbody, row, index)
-    {
-       
-    },
-    onDrop: function(tbody, row, new_index, old_index)
-    {
-       
-    }
-});
+        handler: 'td.sorter',
+        stickFirstRow : false,
+        stickLastRow  : false,
+        onDragStart: function(tbody, row, index)
+        {
+        
+        },
+        onDrop: function(tbody, row, new_index, old_index)
+        {
+        
+        }
+    });
     $('#ordersave').click(function(){
         let table_data = $('#area_table');
         let rows_data = table_data[0].children;

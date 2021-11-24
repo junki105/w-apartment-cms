@@ -58,7 +58,7 @@
       position: absolute;
       top: 50%;
       @include transform(translateY(-50%));
-      span {
+      a {
         font-family: tbudgothic-std, sans-serif;
         font-style: normal;
         font-weight: 400;

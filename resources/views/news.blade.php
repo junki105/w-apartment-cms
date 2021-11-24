@@ -5,13 +5,14 @@
     <div class="news-list-content">
       <table>
         @foreach ($posts as $post)
-            <tr>
-              <td>{{substr($post->created_at,0,10)}}</td>
-              <td><a href='{{url('/news/'.$post->id)}}'><span>{{$post->title}}</span></a></td>
-            <tr>
+          <tr>
+            <td>{{ date('Y.m.d', strtotime($post->created_at)) }}</td>
+            <td>
+              <a href="{{url('/news/'.$post->id)}}"><span>{{$post->title}}</span></a>
+            </td>
+          <tr>
         @endforeach
       </table>
-
       <div class="article-pagination">
         {!! $posts->links('pagination') !!}
       </div>

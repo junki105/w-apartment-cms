@@ -254,9 +254,9 @@
       <div class="header-aside" id="aside_right">
         <a href="{{'/admin'}}" class="login-btn"><img src="{{ URL::asset('images/ico_login.png') }}" alt="" id="login_img"></a>
         <div class="header-aside-txt">
-          <span class="btn">説明会情報</span>
+          <a href="{{'/contact'}}" class="btn">説明会情報</a>
           <img src="{{ URL::asset('images/side_link.png') }}" alt="" id="side_link">
-          <span class="btn">資料請求</span>
+          <a href="{{'/document-request'}}" class="btn">資料請求</a>
         </div>
         <div class="copyright">
           © W-APARTMENT
@@ -275,15 +275,13 @@
         <div class="site-menu-left">
           <ul>
             <li><a href="{{url('/philosophy')}}" class="btn"><span>01</span>理念</a></li>
-            <li><a href="{{url('/#support')}}" class="btn"><span>02</span>住宅/経営支援</a></li>
-            <li><a href="{{url('/philosophy')}}" class="btn"><span>03</span>部材共有</a></li>
+            <li><a href="{{url('/document-request')}}" class="btn"><span>02</span>住宅/経営支援</a></li>
+            <li><a href="{{url('/document-request')}}" class="btn"><span>03</span>部材共有</a></li>
             <li><a href="{{url('/house')}}" class="btn"><span>04</span>商品住宅</a></li>
             <li><a href="{{url('/feature')}}" class="btn"><span>05</span>特徴</a></li>
-            <li><a href="{{url('/#philosophy')}}" class="btn"><span>06</span>料金</a></li>
-            <li><a href="{{url('/case-study')}}" class="btn"><span>07</span>施工実績</a></li>
-            <li><a href="{{url('/#flow')}}" class="btn"><span>08</span>プロモーション</a></li>
-            <li><a href="{{url('/news')}}" class="btn"><span>09</span>NEWS</a></li>
-            <li><a href="{{url('/company-profile')}}" class="btn"><span>10</span>会社概要</a></li>
+            <li><a href="{{url('/case-study')}}" class="btn"><span>06</span>施工実績</a></li>
+            <li><a href="{{url('/news')}}" class="btn"><span>07</span>NEWS</a></li>
+            <li><a href="{{url('/company-profile')}}" class="btn"><span>08</span>会社概要</a></li>
           </ul>
         </div>
         <div class="menu-content-line"></div>

@@ -24,7 +24,7 @@ use App\Http\Controllers\ContactController;
 })->name('top');*/
 Route::get('/','HomeController@index')->name('top');
 //Route::view('/news', 'news');
-Route::view('/philosophy', 'philosophy')->name('philosophy');
+Route::get('/philosophy', 'PhilosophyController@index')->name('philosophy');
 Route::get('/case-study', 'ResultController@search')->name('case-study');
 Route::get('/case-study/{id}','ResultController@show')->name('case-study-single');
 Route::view('/feature', 'feature')->name('feature');

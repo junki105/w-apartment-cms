@@ -1,7 +1,7 @@
 @include('layouts.header')
 <main class="container request">
   <section class="content sec-hero">
-    <h1>お問い合わせ</h1>
+    <h1>資料請求</h1>
     <p>
         弊社に興味を持って頂き<br class="hidden sm:block">ありがとうございます。<br>
     商談やサービスのご利用について<br class="hidden sm:block">下記のフォームより<br class="hidden sm:block">お問い合わせください。<br>
