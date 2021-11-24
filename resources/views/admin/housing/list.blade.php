@@ -2,33 +2,6 @@
 
 @section('content')
 
-<style>
-#upload-image {
-  opacity: 0;
-  position: absolute;
-  z-index: -1;
-  display: none;
-}
-
-#preview {
-  cursor: pointer;
-  width: 100%;
-  height: 150px;
-  background-color: rgb(156, 150, 150);
-  color: #333;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#preview img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-
-</style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
@@ -55,7 +28,7 @@
 
   <!-- Main content -->
   <div class="content">
-  @include('admin.layouts.modal_delete')
+    @include('admin.layouts.modal_delete')
     <div class="container-fluid">
       <div class="card">
         <div class="card-header">
@@ -96,49 +69,54 @@
   </div>
 </div>
 <script>
-function fetch_data(page, search_word, public_status) {
-  if(search_word ===undefined||search_word===''){
-    search_word = null;
-  }
-  if(public_status ===undefined||public_status===''){
-    public_status = null;
-  }
-  $.ajax({
-    url: "/admin/house_search?page=" + page + "&search_word=" + search_word + "&public_status=" + public_status,
-    method: "GET",
-    success: function(data) {
-      $('#table_card').html(data);
-    },
-    error: function(err) {
-      console.log(err);
+  function fetch_data(page, search_word, public_status) {
+    if(search_word ===undefined||search_word==='') {
+      search_word = null;
     }
-  })
-}
-$(document).ready(function() {
-  let page = 1;
-  let search_word, public_status;
+    
+    if(public_status ===undefined||public_status==='') {
+      public_status = null;
+    }
+    
+    $.ajax({
+      url: "/admin/house_search?page=" + page + "&search_word=" + search_word + "&public_status=" + public_status,
+      method: "GET",
+      
+      success: function(data) {
+        $('#table_card').html(data);
+      },
+      
+      error: function(err) {
+        console.log(err);
+      }
+    })
+  }
+  $(document).ready(function() {
+    let page = 1;
+    let search_word, public_status;
 
-  $('#search_form').on('submit', function() {
-    let formData = new FormData(this);
-    search_word = formData.get('search_word');
-    public_status = formData.get('public_status');
-    page = 1;
-    fetch_data(page, search_word, public_status);
-  })
- 
-  $('.form-check-input').click(function() {
-    $('.form-check-input').not(this).prop('checked', false);
-  });
-  $(document).on('click', '.pagination a', function(event) {
-    event.preventDefault();
-    var test = $(this).attr('href');
-    var page = $(this).attr('href').split('page=')[1];
-    fetch_data(page, search_word, public_status);
-  });
+    $('#search_form').on('submit', function() {
+      let formData = new FormData(this);
+      search_word = formData.get('search_word');
+      public_status = formData.get('public_status');
+      page = 1;
+      fetch_data(page, search_word, public_status);
+    })
   
-  let delete_id=0;
-  let count=0;
-});
+    $('.form-check-input').click(function() {
+      $('.form-check-input').not(this).prop('checked', false);
+    });
+    
+    $(document).on('click', '.pagination a', function(event) {
+      event.preventDefault();
+      var test = $(this).attr('href');
+      var page = $(this).attr('href').split('page=')[1];
+      fetch_data(page, search_word, public_status);
+    });
+    
+    let delete_id=0;
+    let count=0;
+  });
 </script>
 
 @endsection

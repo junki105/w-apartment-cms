@@ -3,30 +3,6 @@
 @section('content')
 
 <style>
-
-  #featured_image {
-    opacity: 0;
-    position: absolute;
-    z-index: -1;
-    display: none;
-  }
-  #author_image {
-    opacity: 0;
-    position: absolute;
-    z-index: -1;
-    display: none;
-  }
-
-  #preview {
-    cursor: pointer;
-    width: 100%;
-    height: 150px;
-    background-color: rgb(156, 150, 150);
-    color: #333;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-  }
   #author_img_preview {
     cursor: pointer;
     width: 100%;
@@ -36,11 +12,6 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-  }
-  #preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
   .dropzone-wrapper {
   border: 2px dashed #91b0b3;
@@ -262,39 +233,39 @@
     $("#featured_image").change(function () {
       imagePreview(this);
     });
-    $('#blogform').on('submit',function(e){
+    $('#blogform').on('submit',function(e) {
       $('#alert').css('display','none');
       if($('#title').val()==='')
       {
         $('#title').css('border-color','red');
         validation_flag = false;
       }
-      else{
+      else {
         $('#title').css('border-color','');
       }
-      if($('#author_name').val()===''){
+      if($('#author_name').val()==='') {
         $('#author_name').css('border-color','red')
         validation_flag = false;
       }
-      else{
+      else {
         $('#author_name').css('border-color','');
       }
-      if($('#author_profile').val()===''){
+      if($('#author_profile').val()==='') {
         $('#author_profile').css('border-color','red');
 
         validation_flag = false;
       }
-      else{
+      else {
         $('#author_profile').css('border-color','');
       }
       if($('#summernote').summernote('code')==='<p><br></p>') {
         $('.note-editor').css('border-color','red');
         validation_flag=false;
       }
-      else{
+      else {
         $('.note-editor').css('border-color','');
       }
-      if(validation_flag){
+      if(validation_flag) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -310,7 +281,7 @@
             contentType:false,
             processData:false,
             success: function (data) {
-                if(data.success){
+                if(data.success) {
                   console.log(data.success);
                   $('#notify_string').html('更新しました。');
                   $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
@@ -329,7 +300,7 @@
                 }
         });
       }
-      else{
+      else {
         $('#notify_string').html('入力内容でエラーがあります。');
         $('#alert').css('display','block');
         $('#alert').css('border-left-color','red');
@@ -346,7 +317,7 @@
         reader.readAsDataURL(input.files[0]);
     }
     }
-    $('.category_check').click(function(){
+    $('.category_check').click(function() {
             $('.category_check').not(this).prop('checked',false);
         });
 

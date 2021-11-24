@@ -2,31 +2,6 @@
 
 @section('content')
 
-<style>
-#upload-image {
-  opacity: 0;
-  position: absolute;
-  z-index: -1;
-  display: none;
-}
-
-#preview {
-  cursor: pointer;
-  width: 100%;
-  height: 150px;
-  background-color: rgb(156, 150, 150);
-  color: #333;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#preview img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-</style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">

@@ -7,14 +7,14 @@ use Mail;
 
 class ContactController extends Controller
 {
-    public function contact(){
+    public function contact() {
         return view('contact');
     }
-    public function document_request(){
+    public function document_request() {
         return view('document-request');
     }
 
-    public function document_requestPost(Request $request){
+    public function document_requestPost(Request $request) {
         $this->validate($request, [
                         'name' => 'required',
                         'email' => 'required|email',
@@ -41,7 +41,7 @@ class ContactController extends Controller
 
     }
 
-    public function contactPost(Request $request){
+    public function contactPost(Request $request) {
         $this->validate($request, [
                         'name' => 'required',
                         'email' => 'required|email',

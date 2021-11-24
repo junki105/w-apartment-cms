@@ -2,75 +2,6 @@
 
 @section('content')
 
-<style>
-
-  #eyecatch_image {
-    opacity: 0;
-    position: absolute;
-    z-index: -1;
-    display: none;
-  }
-
-  #preview {
-    cursor: pointer;
-    width: 100%;
-    height: 150px;
-    background-color: rgb(156, 150, 150);
-    color: #333;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-  }
-  #preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .dropzone-wrapper {
-    border: 2px dashed #91b0b3;
-    color: #92b0b3;
-    width: inherit;
-    display: flex;
-    height: 70px;
-    border-radius: 2px;
-  }
-
-  .dropzone-desc {
-    margin: auto;
-    font-size: 16px;
-  }
-
-  .dropzone,
-  .dropzone:focus {
-    position: absolute;
-    outline: none !important;
-    width: 100%;
-    height: 150px;
-    cursor: pointer;
-    opacity: 0;
-  }
-
-  .dropzone-wrapper:hover,
-  .dropzone-wrapper.dragover {
-    background: #ecf0f5;
-  }
-
-  .preview-zone {
-    text-align: center;
-  }
-
-  .preview-zone .box {
-    box-shadow: none;
-    border-radius: 0;
-    margin-bottom: 0;
-  }
-  .custom-file-input:lang(en) ~ .custom-file-label::after {
-    content: "参照";
-  }
-  .custom-file-label::after {
-    content: "参照";
-  }
-</style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
@@ -343,11 +274,11 @@
     function upload_files_list(input) {
         let list_string = '';
         let temp_index = 0;
-        for(file of input.files){
-            if(temp_index>0){
+        for(file of input.files) {
+            if(temp_index>0) {
                 list_string = list_string +','+file.name;
             }
-            else{
+            else {
                 list_string = file.name;
             }
             temp_index++;
@@ -366,7 +297,7 @@
     $("#eyecatch_image").change(function () {
       imagePreview(this);
     });
-    $('#resultsform').on('submit',function(e){
+    $('#resultsform').on('submit',function(e) {
       let validation_flag = true;
       $('#alert').css('display','none');
       if($('#title').val()==='')
@@ -374,63 +305,63 @@
         $('#title').css('border-color','red');
         validation_flag = false;
       }
-      else{
+      else {
         $('#title').css('border-color','');
       }
-      if($('#instructor_name').val()===''){
+      if($('#instructor_name').val()==='') {
         $('#instructor_name').css('border-color','red')
         validation_flag = false;
       }
-      else{
+      else {
         $('#instructor_name').css('border-color','');
       }
-      if($('#instruction_summary').val()===''){
+      if($('#instruction_summary').val()==='') {
         $('#instruction_summary').css('border-color','red');
         validation_flag = false;
       }
-      else{
+      else {
         $('#instruction_summary').css('border-color','');
       }
-      if($('#instruction_effects').val()===''){
+      if($('#instruction_effects').val()==='') {
         $('#instruction_effects').css('border-color','red');
         validation_flag = false;
       }
-      else{
+      else {
         $('#instruction_effects').css('border-color','');
       }
-      if($('#instruction_details').val()===''){
+      if($('#instruction_details').val()==='') {
         $('#instruction_details').css('border-color','red');
         validation_flag = false;
       }
-      else{
+      else {
         $('#instruction_details').css('border-color','');
       }
-      if($('#choosing_reason').val()===''){
+      if($('#choosing_reason').val()==='') {
         $('#choosing_reason').css('border-color','red');
         validation_flag = false;
       }
-      else{
+      else {
         $('#choosing_reason').css('border-color','');
       }
-      if($('#post_introduction_details').val()===''){
+      if($('#post_introduction_details').val()==='') {
         $('#post_introduction_details').css('border-color','red');
         validation_flag = false;
       }
-      else{
+      else {
         $('#post_introduction_details').css('border-color','');
       }
-      if($('#future_outlook_details').val()===''){
+      if($('#future_outlook_details').val()==='') {
         $('#future_outlook_details').css('border-color','red');
         validation_flag = false;
       }
-      else{
+      else {
         $('#future_outlook_details').css('border-color','');
       }
-      if($('#url').val()===''){
+      if($('#url').val()==='') {
         $('#url').css('border-color','red');
         validation_flag = false;
       }
-      else{
+      else {
         $('#url').css('border-color','');
       }
       if(validation_flag)
@@ -452,7 +383,7 @@
             processData:false,
             success: function (data) {
               console.log(data);
-              if(data.success){
+              if(data.success) {
                 window.location.href = data.url+"/edit";
                 $('#notify_string').html('追加しました。');
                 $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
@@ -471,7 +402,7 @@
           });
         
       }
-      else{
+      else {
         $('#notify_string').html('入力内容でエラーがあります。');
         $('#alert').css('display','block');
         $('#alert').css('border-left-color','red');
@@ -494,7 +425,7 @@
         $('#pi_image_url').html(upload_files_list(this));
         $('#pi_upload_button').css('display','none');
     });
-    $('#download_material').change(function(){
+    $('#download_material').change(function() {
         $('#download_material_url').html(upload_files_list(this));
     });
     $('.dropzone-wrapper').on('dragover', function(e) {

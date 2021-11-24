@@ -81,11 +81,11 @@
 <script>
   $(document).ready(function() {
     const current_area =<?php echo json_encode($area);?>;
-    $('#delete_area').click(function(e){
+    $('#delete_area').click(function(e) {
         $('#deleteModal').modal();
         $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
     });
-    $('#deleteButton').click(function(e){
+    $('#deleteButton').click(function(e) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -102,9 +102,9 @@
             }
         })
     });
-    $('#save').click(function(e){
+    $('#save').click(function(e) {
         let name = $('#area').val();
-        if(name!==''){
+        if(name!=='') {
           const current_area =<?php echo json_encode($area);?>;
           let formdata = new FormData();
           formdata.append('name',name);
@@ -130,7 +130,7 @@
               }
           });
         }
-        else{
+        else {
           console.log('df');
           $('#area').css('border-color','#dc3545');
         }

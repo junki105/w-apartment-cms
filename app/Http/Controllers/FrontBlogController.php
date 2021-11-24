@@ -15,13 +15,13 @@ class FrontBlogController extends Controller
         return view('blog-single', compact('blog','categories'));
 
     }
-    public function index(){
+    public function index() {
         $blogs = Blog::latest()->join('categories','blogs.category','=','categories.id')->select(["blogs.*","categories.id as category_id","categories.name as category_name"])->paginate(10);
         $categories = Category::all();
         $activitad_category_name = "新着一覧";
         return view('blogs', compact('blogs','categories','activitad_category_name'));
     }
-    public function recommend(){
+    public function recommend() {
   
         $blogs=  Blog::join('categories','blogs.category','=','categories.id')->where('blogs.recommended_flag','LIKE',1)->select(["blogs.*","categories.id as category_id","categories.name as category_name"])->paginate(10);
 
@@ -29,7 +29,7 @@ class FrontBlogController extends Controller
         $activitad_category_name = 'おすすめ';
         return view('blogs', compact('blogs','categories','activitad_category_name'));
     }
-    public function category($id){
+    public function category($id) {
        
         
         $blogs=  Blog::join('categories','blogs.category','=','categories.id')->where('blogs.category','LIKE',$id)->select(["blogs.*","categories.id as category_id","categories.name as category_name"])->paginate(10);

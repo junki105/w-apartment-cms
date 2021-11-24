@@ -90,7 +90,7 @@
     <tbody>
     </tbody>
   </table>
-  <div style="height: 200px; width:inherit;display: flex;justify-content: center;align-items: center;">
+  <div class="no-data">
     <div>データがありません。</div>
   </div>
   @endif

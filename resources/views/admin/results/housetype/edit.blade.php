@@ -74,11 +74,11 @@
 <script>
   $(document).ready(function() {
     const current_housetype =<?php echo json_encode($housetype);?>;
-    $('#delete_housetype').click(function(e){
+    $('#delete_housetype').click(function(e) {
         $('#deleteModal').modal();
         $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
     });
-    $('#deleteButton').click(function(e){
+    $('#deleteButton').click(function(e) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -95,7 +95,7 @@
             }
         })
     });
-    $('#save').click(function(e){
+    $('#save').click(function(e) {
         let type = $('#housetype').val();
         console.log(type);
         const current_housetype =<?php echo json_encode($housetype);?>;

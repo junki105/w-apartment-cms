@@ -2,21 +2,26 @@
   function deleteHousing(id) {
     count = <?php echo json_encode($row_count)?>;
     delete_id = id;
+    
     $('#deleteModal').modal();
     $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
   }
+  
   $('#deleteButton').click(function(e) {
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
+    
     $.ajax({
       type: "DELETE",
       url: "/admin/house" + '/' + delete_id,
+      
       success: function(data) {
         window.location.reload()
       },
+      
       error: function(data) {
         console.log('Error:', data);
       }
@@ -25,10 +30,10 @@
 </script>
 
 <div class="card-header">
-  <h6 class="card-title"><strong>商品住宅一覧</strong></h6>
+  <h6 class="mt-1 card-title"><strong>商品住宅一覧</strong></h6>
   <div class="float-right card-tools d-inline-flex">
-    <span class="mt-1 mr-2">全<span
-        class="count">{{$row_count}}</span>件</span>{{$housings->links()}}
+    <span class="mt-1 mr-2">全<span class="count">{{$row_count}}</span>件</span>
+    {{$housings->links()}}
   </div>
 </div>
 <div class="card-body">
@@ -90,13 +95,14 @@
     <tbody>
     </tbody>
   </table>
-  <div style="height: 200px; width:inherit;display: flex;justify-content: center;align-items: center;">
+  <div class="no-data">
     <div>データがありません。</div>
   </div>
   @endif
 </div>
 <div class="card-footer">
-  <div class="float-right card-tools d-inline-flex"><span class="m-2">全<span
-        class="count">{{$row_count}}</span>件</span>{{$housings->links()}}
+  <div class="float-right card-tools d-inline-flex">
+    <span class="m-2">全<span class="count">{{$row_count}}</span>件</span>
+    {{$housings->links()}}
   </div>
 </div>

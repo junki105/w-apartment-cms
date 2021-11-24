@@ -2,89 +2,6 @@
 
 @section('content')
 
-<style>
-
-  #featured_image {
-    opacity: 0;
-    position: absolute;
-    z-index: -1;
-    display: none;
-  }
-  #author_image {
-    opacity: 0;
-    position: absolute;
-    z-index: -1;
-    display: none;
-  }
-
-  #preview {
-    cursor: pointer;
-    width: 100%;
-    height: 150px;
-    background-color: rgb(156, 150, 150);
-    color: #333;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-  }
-  #author_img_preview {
-    cursor: pointer;
-    width: 100%;
-    height: 150px;
-    background-color: rgb(156, 150, 150);
-    color: #333;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-  }
-  #preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .dropzone-wrapper {
-  border: 2px dashed #91b0b3;
-  color: #92b0b3;
-  width: inherit;
-  display: flex;
-  height: 70px;
-  border-radius: 2px;
-}
-#author_image_upload_button{
-    border: 1px solid;
-    border-radius: 2px;
-}
-
-.dropzone-desc {
-  margin: auto;
-  font-size: 16px;
-}
-
-.dropzone,
-.dropzone:focus {
-  position: absolute;
-  outline: none !important;
-  width: 100%;
-  height: 150px;
-  cursor: pointer;
-  opacity: 0;
-}
-
-.dropzone-wrapper:hover,
-.dropzone-wrapper.dragover {
-  background: #ecf0f5;
-}
-
-.preview-zone {
-  text-align: center;
-}
-
-.preview-zone .box {
-  box-shadow: none;
-  border-radius: 0;
-  margin-bottom: 0;
-}
-</style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
@@ -233,18 +150,26 @@
   $(document).ready(function() {
     let current_id;
     let validation_flag = true;
+    
     $('#summernote').summernote({
       height: 450,
     });
+    
     var current_date = new Date();
     var current_year = String(current_date.getFullYear());
     var current_month = current_date.getMonth() + 1;
+    
     current_month<10?current_month = '0' + String(current_month) : current_month = String(current_month);
+    
     var current_day = current_date.getDate();
+
     current_day<10?current_day = '0' + String(current_day) : current_day = String(current_day);
+    
     let created_at = current_year + '/' + current_month + '/' + current_day;
+    
     $('#created_at').html(created_at);
     $('#updated_at').html(created_at);
+    
     function imagePreview(fileInput) {
       if (fileInput.files && fileInput.files[0]) {
         var fileReader = new FileReader();
@@ -254,37 +179,40 @@
         fileReader.readAsDataURL(fileInput.files[0]);
       }
     }
+    
     $("#featured_image").change(function () {
       imagePreview(this);
     });
-    $('#title').change(function(event){
+    
+    $('#title').change(function(event) {
         title = event.target.value;
     })
-    $('#blogform').on('submit',function(e){
+    
+    $('#blogform').on('submit',function(e) {
       $('#alert').css('display','none');
-      if($('#title').val()==='')
-      {
+      
+      if($('#title').val()==='') {
         $('#title').css('border-color','red');
         validation_flag = false;
       }
-      else{
+      else {
         $('#title').css('border-color','');
         validation_flag = true;
       }
-      // if($('#author_name').val()===''){
+      // if($('#author_name').val()==='') {
       //   $('#author_name').css('border-color','red')
       //   validation_flag = false;
       // }
-      // else{
+      // else {
       //   $('#author_name').css('border-color','');
       //   validation_flag = true;
       // }
-      // if($('#author_profile').val()===''){
+      // if($('#author_profile').val()==='') {
       //   $('#author_profile').css('border-color','red');
 
       //   validation_flag = false;
       // }
-      // else{
+      // else {
       //   $('#author_profile').css('border-color','');
       //   validation_flag = true;
       // }
@@ -293,59 +221,68 @@
         validation_flag=false;
       }
       
-      else{
+      else {
         $('.note-editor').css('border-color','');
         validation_flag = true;
       }
-      if(validation_flag){
-          $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      if(validation_flag) {
+        $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        
+        e.preventDefault();
+
+        var formData = new FormData(this);
+
+        type = 'post';
+        
+        $.ajax({
+          type: type,
+          url: '/admin/blog',
+          data: formData,
+          cache:false,
+          contentType:false,
+          processData:false,
+          success: function (data) {
+            if(data.success) {
+              window.location.href = data.url+"/edit";
             }
-          });
-          e.preventDefault();
-          var formData = new FormData(this);
-          type = 'post';
-          $.ajax({
-            type: type,
-            url: '/admin/blog',
-            data: formData,
-            cache:false,
-            contentType:false,
-            processData:false,
-            success: function (data) {
-              if(data.success){
-                window.location.href = data.url+"/edit";
-              }
-            },
-            error: function (data) {
-                console.log('Error:', data);
-            }
-          });
-    })
+          },
+          error: function (data) {
+            console.log('Error:', data);
+          }
+        });
+      }
+    });
     function upload_files_list(input) {
-        let list_string = '';
-        let temp_index = 0;
-        for(file of input.files){
-            if(temp_index>0){
-                list_string = list_string +','+file.name;
-            }
-            else{
-                list_string = file.name;
-            }
-            temp_index++;
+      let list_string = '';
+      let temp_index = 0;
+
+      for(file of input.files) {
+        if(temp_index>0) {
+          list_string = list_string +','+file.name;
         }
-        return list_string;
+        else {
+          list_string = file.name;
+        }
+        
+        temp_index++;
+      }
+      return list_string;
     }
     function readFile(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-            };
-            $('#author_image_url').html(input.files[0].name);
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function(e) {
+        };
+        
+        $('#author_image_url').html(input.files[0].name);
 
-            reader.readAsDataURL(input.files[0]);
-        }
+        reader.readAsDataURL(input.files[0]);
+      }
     }
     $(".dropzone").change(function() {
       $('#author_image_upload_button').css('display','none');
@@ -362,7 +299,7 @@
         e.stopPropagation();
         $(this).removeClass('dragover');
     });
-});
+  });
 </script>
 
 @endsection

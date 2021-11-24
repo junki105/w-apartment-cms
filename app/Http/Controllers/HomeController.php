@@ -9,7 +9,7 @@ use App\Housing;
 use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
-    public function index(){
+    public function index() {
         $blogs = Blog::all()->take(10);
         $categories = Category::all();
         $blogs = $blogs->concat($categories);

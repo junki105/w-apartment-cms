@@ -2,33 +2,6 @@
 
 @section('content')
 
-<style>
-
-  #upload-image {
-    opacity: 0;
-    position: absolute;
-    z-index: -1;
-    display: none;
-  }
-
-  #preview {
-    cursor: pointer;
-    width: 100%;
-    height: 150px;
-    background-color: rgb(156, 150, 150);
-    color: #333;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-</style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
@@ -142,25 +115,25 @@
     $("#upload-image").change(function () {
       imagePreview(this);
     });
-    $('#title').change(function(event){
+    $('#title').change(function(event) {
       title = event.target.value;
     })
-    $('#postform').on('submit',function(e){
-      if($('#title').val()===''){
+    $('#postform').on('submit',function(e) {
+      if($('#title').val()==='') {
         $('#title').css('border-color','red');
         validation = false;
       }
-      else{
+      else {
         $('#title').css('border-color','');
       }
       if($('#summernote').summernote('code')==='<p><br></p>') {
         $('.note-editor').css('border-color','red');
         validation = false;
       }
-      else{
+      else {
         $('.note-editor').css('border-color','');
       }
-      if(validation){
+      if(validation) {
         $('#title').css('border-color','');
         $('.note-editor').css('border-color','');
         $('#alert').css('display','none');
@@ -181,7 +154,7 @@
             contentType:false,
             processData:false,
             success: function (data) {
-              if(data.success){
+              if(data.success) {
                   window.location.href = data.url+"/edit";
               }
             },
@@ -190,7 +163,7 @@
             }
           });
       }
-      else{
+      else {
         $('#notify_string').html('入力内容でエラーがあります。');
         $('#alert').css({'display':'block','border-left-color':'red','color':'red'});
       }

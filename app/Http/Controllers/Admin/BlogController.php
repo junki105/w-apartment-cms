@@ -21,9 +21,9 @@ class BlogController extends Controller
         $categories = Category::all();
         return view('admin.blog.list',compact(['blogs','count','categories']));
     }
-    public function updateOrder(Request $request){
+    public function updateOrder(Request $request) {
         $datas = $request->order_list;
-        foreach ($datas as $data){
+        foreach ($datas as $data) {
             $id = $data["id"];
             $row = Category::find($id);
             $order_index = $data["order_index"];
@@ -71,23 +71,23 @@ class BlogController extends Controller
         $blog->author_name = $request->author_name;
         $blog->author_profile = $request->author_profile;
         $blog->category = $request->category;
-        if($request->recommended_flag=='on'){
+        if($request->recommended_flag=='on') {
             $blog->recommended_flag = true;
         }
-        else{
+        else {
             $blog->recommended_flag = false;
         }
-        if($file = $request->file('featured_image')){
+        if($file = $request->file('featured_image')) {
             $name = time().time().'.'.$file->getClientOriginalExtension();
             $target_path = public_path('/uploads/blog/featured-image');
             if($file->move($target_path, $name)) {
                $blog->featured_image_url = '/uploads/blog/featured-image/'.$name;//If image saved success, image_url is assigned
             }
         }
-        else{
+        else {
             $blog->featured_image_url = '/uploads/no_image.png';
         }
-        if($file = $request->file('author_image')){
+        if($file = $request->file('author_image')) {
             $name = time().time().'.'.$file->getClientOriginalExtension();
             $target_path = public_path('/uploads/blog/author-image');
             if($file->move($target_path, $name)) {
@@ -108,7 +108,7 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request){
+    public function show(Request $request) {
         $blogs = Blog::latest()->paginate(5);
         $count = Blog::count();
         $categories = Category::all();
@@ -119,62 +119,62 @@ class BlogController extends Controller
         $blogs = null;
         $count = 0;
         $category_lists = [];
-        if($request->category_query!="null"){
+        if($request->category_query!="null") {
             $category_lists = explode(',',$request->category_query);
         }
-        if( $request->search_word!="null" ){
+        if( $request->search_word!="null" ) {
             $blogs = Blog::where("title","LIKE","%$request->search_word%");
         }
-        if( $request->author_name!="null" ){
+        if( $request->author_name!="null" ) {
             if( $blogs == null ) {
                 $blogs = Blog::where('author_name',"LIKE","%$request->author_name%");
             }
-            else{
+            else {
                 $blogs = $blogs->where('author_name',"LIKE","%$request->author_name%");
             }
         }
-        if(count($category_lists)>0){
-            if($blogs == null){
+        if(count($category_lists)>0) {
+            if($blogs == null) {
                 $blogs = Blog::whereIn('category',$category_lists);
             }
-            else{
+            else {
                 $blogs = $blogs->whereIn('category',$category_lists);
             }
         }
-        if( $request->recommended_flag!="null" ){
+        if( $request->recommended_flag!="null" ) {
             if( $blogs == null ) {
                 $blogs = Blog::where('recommended_flag',"=",$request->recommended_flag);
             }
-            else{
+            else {
                 $blogs = $blogs->where('recommended_flag',"=",$request->recommended_flag);
             }
         }
         
-        if($request->public_status!="null"){
-            if( $blogs == null ){
+        if($request->public_status!="null") {
+            if( $blogs == null ) {
                 $blogs = Blog::where('public_status',"=",$request->public_status);
             }
-            else{
+            else {
                 $blogs = $blogs->where('public_status',"=",$request->public_status);
             }
         }
-        if( $blogs == null ){
+        if( $blogs == null ) {
             $count = Blog::count();
             $blogs = Blog::latest()->paginate(5);
         }
-        else{
+        else {
             $count = $blogs->count();
-            $blogs = $blogs->latest()->paginate(5);
+            $blogs = $blogs->orderBy('updated_at','DESC')->paginate(5);
         }
         // $blogs = Blog::latest()->paginate(5);
         $categories = Category::all();
         return view('admin.blog.pagination_data',compact('blogs','categories','count'));
     }
-    public function category(Request $request){
+    public function category(Request $request) {
         $categories = Category::orderBy('order_index','ASC')->get();
         return view('admin.blog.category',compact('categories'));
     }
-    public function categoryAdd(Request $request){
+    public function categoryAdd(Request $request) {
         $this->validate($request,[
             'name_input'=>'required'
         ]);
@@ -185,17 +185,17 @@ class BlogController extends Controller
         $category->save();
         return redirect('/admin/blog_category');
     }
-    public function categoryUpdate(Request $request,$id){
+    public function categoryUpdate(Request $request,$id) {
         $category = Category::find($id);
         $category->name = $request->name;
         $category->save();
         return response()->json(['success'=>true,'name'=>$category->name]);
     }
-    public function categoryDelete(Request $request,$id){
+    public function categoryDelete(Request $request,$id) {
         Category::find($id)->delete();
         return response()->json(['success'=>true]);
     }
-    public function categoryEdit(Request $request,$id){
+    public function categoryEdit(Request $request,$id) {
         $category = Category::where('id',$id)->first();
         return view('admin.blog.category-edit',compact('category'));
     }
@@ -230,30 +230,30 @@ class BlogController extends Controller
         $blog->author_name = $request->author_name;
         $blog->author_profile = $request->author_profile;
         $blog->category = $request->category;
-        if($request->recommended_flag=='on'){
+        if($request->recommended_flag=='on') {
             $blog->recommended_flag = '1';
         }
-        else{
+        else {
             $blog->recommended_flag = '0';
         }
-        if($file = $request->file('featured_image')){
+        if($file = $request->file('featured_image')) {
             $name = time().time().'.'.$file->getClientOriginalExtension();
             $target_path = public_path('/uploads/blog/featured-image');
             if($file->move($target_path, $name)) {
                $blog->featured_image_url = '/uploads/blog/featured-image/'.$name;//If image saved success, image_url is assigned
             }
         }
-        else{
+        else {
             $blog->featured_image_url = $blog->featured_image_url;
         }
-        if($file = $request->file('author_image')){
+        if($file = $request->file('author_image')) {
             $name = time().time().'.'.$file->getClientOriginalExtension();
             $target_path = public_path('/uploads/blog/author-image');
             if($file->move($target_path, $name)) {
                $blog->author_image_url = '/uploads/blog/author-image/'.$name;//If image saved success, image_url is assigned
             }
         }
-        else{
+        else {
             $blog->author_image_url = $blog->author_image_url;
         }
         $blog->save();
