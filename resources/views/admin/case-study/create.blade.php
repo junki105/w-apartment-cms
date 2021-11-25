@@ -54,15 +54,15 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="form-group row">
-                    <label for="firstview" class="col-sm-4 col-form-label">画像(ファーストビュー)</label>
-                    <div class="ml-1 dropzone-wrapper col-sm-7">
-                        <div class="dropzone-desc">
-                          <i class="fa fa-cloud-upload-alt"></i>
-                          <span id="firstview_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
-                          <button id="firstview_upload_button">ファイルを選捉</button>
-                        </div>
-                        <input type="file" name="firstview" id="firstview_dropzone" class="dropzone">
+                  <label for="firstview" class="col-sm-4 col-form-label">画像(ファーストビュー)</label>
+                  <div class="ml-1 dropzone-wrapper col-sm-7" id="firstview_dropzone_wrap">
+                    <div class="dropzone-desc">
+                      <i class="fa fa-cloud-upload-alt"></i>
+                      <span id="firstview_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
+                      <button id="firstview_upload_button">ファイルを選捉</button>
                     </div>
+                    <input type="file" name="firstview" id="firstview_dropzone" class="dropzone">
+                  </div>
                 </div>
                 <div class="form-group row">
                   <label for="instructor_name" class="col-sm-4 col-form-label">導入者氏名</label>
@@ -89,15 +89,15 @@
                   <input type="text" class="ml-1 col-sm-7 form-control" name="instruction_details" id="instruction_details">
                 </div>
                 <div class="form-group row">
-                    <label for="instructioin_bg" class="col-sm-4 col-form-label">画像(ファーストビュー)</label>
-                    <div class="ml-1 dropzone-wrapper col-sm-7">
-                        <div class="dropzone-desc">
-                          <i class="fa fa-cloud-upload-alt"></i>
-                          <span id="instruction_bg_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
-                          <button id="instruction_bg_upload_button">ファイルを選捉</button>
-                        </div>
-                        <input type="file" name="instruction_bg" id="instruction_bg_dropzone" class="dropzone">
+                  <label for="instructioin_bg" class="col-sm-4 col-form-label">導入の背景（詳細•画像）</label>
+                  <div class="ml-1 dropzone-wrapper col-sm-7" id="instruction_bg_dropzone_wrap">
+                    <div class="dropzone-desc">
+                      <i class="fa fa-cloud-upload-alt"></i>
+                      <span id="instruction_bg_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
+                      <button id="instruction_bg_upload_button">ファイルを選捉</button>
                     </div>
+                    <input type="file" name="instruction_bg" id="instruction_bg_dropzone" class="dropzone">
+                  </div>
                 </div>
               </div>
             </div>
@@ -112,15 +112,15 @@
                   <input type="text" class="ml-1 col-sm-7 form-control" name="choosing_reason" id="choosing_reason">
                 </div>
                 <div class="form-group row">
-                    <label for="choosing_reason" class="col-sm-4 col-form-label">選んだ理由（詳細•画像）</label>
-                    <div class="ml-1 dropzone-wrapper col-sm-7">
-                        <div class="dropzone-desc">
-                          <i class="fa fa-cloud-upload-alt"></i>
-                          <span id="choosing_reason_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
-                          <button id="choosing_reason_upload_button">ファイルを選捉</button>
-                        </div>
-                        <input type="file" name="choosing_reason_file" id="choosing_reason_dropzone" class="dropzone">
+                  <label for="choosing_reason" class="col-sm-4 col-form-label">選んだ理由（詳細•画像）</label>
+                  <div class="ml-1 dropzone-wrapper col-sm-7" id="choosing_reason_dropzone_wrap">
+                    <div class="dropzone-desc">
+                      <i class="fa fa-cloud-upload-alt"></i>
+                      <span id="choosing_reason_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
+                      <button id="choosing_reason_upload_button">ファイルを選捉</button>
                     </div>
+                    <input type="file" name="choosing_reason_file" id="choosing_reason_dropzone" class="dropzone">
+                  </div>
                 </div>
               </div>
             </div>
@@ -135,15 +135,15 @@
                   <input type="text" class="ml-1 col-sm-7 form-control" name="post_introduction_details" id="post_introduction_details">
                 </div>
                 <div class="form-group row">
-                    <label for="pi_image" class="col-sm-4 col-form-label">導入後の効果（詳細•画像）</label>
-                    <div class="ml-1 dropzone-wrapper col-sm-7">
-                        <div class="dropzone-desc">
-                          <i class="fa fa-cloud-upload-alt"></i>
-                          <span id="pi_image_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
-                          <button id="pi_upload_button">ファイルを選捉</button>
-                        </div>
-                        <input type="file" name="pi_image" id="pi_image_dropzone" class="dropzone">
+                  <label for="pi_image" class="col-sm-4 col-form-label">導入後の効果（詳細•画像）</label>
+                  <div class="ml-1 dropzone-wrapper col-sm-7" id="pi_image_dropzone_wrap">
+                    <div class="dropzone-desc">
+                      <i class="fa fa-cloud-upload-alt"></i>
+                      <span id="pi_image_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
+                      <button id="pi_upload_button">ファイルを選捉</button>
                     </div>
+                    <input type="file" name="pi_image" id="pi_image_dropzone" class="dropzone">
+                  </div>
                 </div>
               </div>
             </div>
@@ -320,6 +320,46 @@
         $('#title').css('border-color','');
       }
       
+      if($('#firstview_dropzone').val()==='') {
+        $('#firstview_dropzone_wrap').css('border-color','red');
+        validation_flag = false;
+      }
+      else {
+        $('#firstview_dropzone_wrap').css('border-color','');
+      }
+      
+      if($('#instruction_bg_dropzone').val()==='') {
+        $('#instruction_bg_dropzone_wrap').css('border-color','red');
+        validation_flag = false;
+      }
+      else {
+        $('#instruction_bg_dropzone_wrap').css('border-color','');
+      }
+      
+      if($('#choosing_reason_dropzone').val()==='') {
+        $('#choosing_reason_dropzone_wrap').css('border-color','red');
+        validation_flag = false;
+      }
+      else {
+        $('#choosing_reason_dropzone_wrap').css('border-color','');
+      }
+      
+      if($('#pi_image_dropzone').val()==='') {
+        $('#pi_image_dropzone_wrap').css('border-color','red');
+        validation_flag = false;
+      }
+      else {
+        $('#pi_image_dropzone_wrap').css('border-color','');
+      }
+      
+      if($('#download_material').val()==='') {
+        $('#download_material_url').css('border-color','red');
+        validation_flag = false;
+      }
+      else {
+        $('#download_material_url').css('border-color','');
+      }
+      
       if($('#instructor_name').val()==='') {
         $('#instructor_name').css('border-color','red')
         validation_flag = false;
@@ -388,7 +428,7 @@
       {
         $.ajaxSetup({
           headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
         });
         
@@ -405,18 +445,8 @@
           processData: false,
           
           success: function (data) {
-            console.log(data);
             if(data.success) {
               window.location.href = data.url+"/edit";
-              $('#notify_string').html('追加しました。');
-              $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
-              $('#created_url').html(data.url);
-              $('#url_string').css('display','block');
-              $('#link_url').attr('href',data.url).css('display','inline');
-              $('#save').html('更新');
-              update_flag = true;
-              current_id = data.id;
-              $('#save').html('更新');
             }
           },
           error: function (data) {

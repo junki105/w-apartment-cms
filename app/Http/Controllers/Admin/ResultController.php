@@ -91,6 +91,10 @@ class ResultController extends Controller
           $result->eyecatch_image_url = '/uploads/case-study/eyecatch_images/'.$name;//If image saved success, image_url is assigned
       }
     }
+    else {
+      $result->eyecatch_image_url = '/uploads/no_image.png';
+    }
+    
     if($file = $request->file('firstview')) {
       $name = time().time().'.'.$file->getClientOriginalExtension();
       $target_path = public_path('/uploads/case-study/firstviews');
@@ -98,6 +102,7 @@ class ResultController extends Controller
           $result->firstview_url = '/uploads/case-study/firstviews/'.$name;//If image saved success, image_url is assigned
       }
     }
+
     if($file = $request->file('instruction_bg')) {
       $name = time().time().'.'.$file->getClientOriginalExtension();
       $target_path = public_path('/uploads/case-study/instruction_backgrounds');
@@ -105,6 +110,7 @@ class ResultController extends Controller
           $result->instruction_bg_url = '/uploads/case-study/instruction_backgrounds/'.$name;//If image saved success, image_url is assigned
       }
     }
+
     if($file = $request->file('choosing_reason_file')) {
       $name = time().time().'.'.$file->getClientOriginalExtension();
       $target_path = public_path('/uploads/case-study/choosing_reason_images');
@@ -112,6 +118,7 @@ class ResultController extends Controller
           $result->choosing_reason_url = '/uploads/case-study/choosing_reason_images/'.$name;//If image saved success, image_url is assigned
       }
     }
+
     if($file = $request->file('pi_image')) {
       $name = time().time().'.'.$file->getClientOriginalExtension();
       $target_path = public_path('/uploads/case-study/post_introduction_images');
@@ -119,6 +126,7 @@ class ResultController extends Controller
           $result->post_introduction_url = '/uploads/case-study/post_introduction_images/'.$name;//If image saved success, image_url is assigned
       }
     }
+
     if($file = $request->file('download_material')) {
       $name = time().time().'.'.$file->getClientOriginalExtension();
       $target_path = public_path('/uploads/case-study/download_materials');
@@ -126,8 +134,10 @@ class ResultController extends Controller
           $result->download_material_url = '/uploads/case-study/download_materials/'.$name;//If image saved success, image_url is assigned
       }
     }
+
     $result->save();
     $url = url('admin/case-study/'.$result->id);
+    
     return response()->json(['success'=>true,'id'=>$result->id,'url'=>$url]);
   }
 
