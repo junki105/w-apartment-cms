@@ -315,7 +315,7 @@ class ResultController extends Controller
                     ->select('results.id','areas.name','house_types.type','amounts.type','results.title','results.public_status')
                     ->paginate(5);
         }
-        // $Results = Result::latest()->paginate(5);
+        // $Results = Result::orderBy('updated_at','DESC')->paginate(5);
         // $categories = Category::all();s
         return view('admin.results.pagination_data',compact('results','count'));
     }

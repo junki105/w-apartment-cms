@@ -53,15 +53,14 @@
             </div>
         </div>
         <div class="col-sm-4">
-            <div class="card">
-              <div class="card-header">
-                <h6 class="card-title"><strong>ステータス</strong></h6>
-              </div>
-              <div class="card-body">
-                <div class=" d-flexs">
-                    <button id="delete_amount" style="background-color:white;color:red;border:none" class="btn btn-sm btn-danger">削除する</label>
-                    <button  name='save' id='save' class="btn btn-sm btn-primary float-sm-right">更新</button>
-                </div>
+          <div class="card">
+            <div class="card-header">
+              <h6 class="card-title"><strong>ステータス</strong></h6>
+            </div>
+            <div class="card-body">
+              <div class="d-flex">
+                  <button id="delete_amount" style="background-color:white;color:red;border:none" class="btn btn-sm btn-danger">削除する</label>
+                  <button  name='save' id='save' class="btn btn-sm btn-primary float-sm-right">更新</button>
               </div>
             </div>
           </div>

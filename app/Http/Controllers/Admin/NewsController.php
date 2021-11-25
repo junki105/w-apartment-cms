@@ -16,7 +16,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->paginate(5);
+        $posts = Post::orderBy('updated_at','DESC')->paginate(5);
         $count = Post::count();
         return view('admin.news.show',compact('posts','count'));
     }
@@ -65,7 +65,7 @@ class NewsController extends Controller
                         ->orwhere("content","LIKE","%$request->search_word%")->count();
             }
             else {
-                $posts = Post::latest()->paginate(5);
+                $posts = Post::orderBy('updated_at','DESC')->paginate(5);
                 $count = Post::count();
             }
         }
@@ -109,7 +109,7 @@ class NewsController extends Controller
                 return view('admin.news.show',compact('$posts'));
             }
             else {
-                $posts = Post::latest()->paginate(5);
+                $posts = Post::orderBy('updated_at','DESC')->paginate(5);
                 return view('admin.news.show',compact('$posts'));
             }
         }

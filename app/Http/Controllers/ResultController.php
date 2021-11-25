@@ -39,7 +39,7 @@ class ResultController extends Controller
             }
         }
         if( $results == null ) {
-            $results = Result::latest()->paginate(5);
+            $results = Result::orderBy('updated_at','DESC')->paginate(5);
         }
         else {
             $count = $results->count();

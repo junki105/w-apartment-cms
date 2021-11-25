@@ -16,7 +16,7 @@ class FrontBlogController extends Controller
 
     }
     public function index() {
-        $blogs = Blog::latest()->join('categories','blogs.category','=','categories.id')->select(["blogs.*","categories.id as category_id","categories.name as category_name"])->paginate(10);
+        $blogs = Blog::orderBy('updated_at','DESC')->join('categories','blogs.category','=','categories.id')->select(["blogs.*","categories.id as category_id","categories.name as category_name"])->paginate(10);
         $categories = Category::all();
         $activitad_category_name = "新着一覧";
         return view('blogs', compact('blogs','categories','activitad_category_name'));

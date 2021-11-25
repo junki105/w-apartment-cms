@@ -2,60 +2,6 @@
 
 @section('content')
 
-<style>
-  #author_img_preview {
-    cursor: pointer;
-    width: 100%;
-    height: 150px;
-    background-color: rgb(156, 150, 150);
-    color: #333;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .dropzone-wrapper {
-  border: 2px dashed #91b0b3;
-  color: #92b0b3;
-  width: inherit;
-  display: flex;
-  height: 70px;
-  border-radius: 2px;
-}
-#author_image_upload_button{
-    border: 1px solid;
-    border-radius: 2px;
-}
-
-.dropzone-desc {
-  margin: auto;
-  font-size: 16px;
-}
-
-.dropzone,
-.dropzone:focus {
-  position: absolute;
-  outline: none !important;
-  width: 100%;
-  height: 150px;
-  cursor: pointer;
-  opacity: 0;
-}
-
-.dropzone-wrapper:hover,
-.dropzone-wrapper.dragover {
-  background: #ecf0f5;
-}
-
-.preview-zone {
-  text-align: center;
-}
-
-.preview-zone .box {
-  box-shadow: none;
-  border-radius: 0;
-  margin-bottom: 0;
-}
-</style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
@@ -85,24 +31,17 @@
     </div><!-- /.container-fluid -->
   </div>
   <!-- /.content-header -->
-
-  <!-- alert-->
-
-
   <!-- Main content -->
-
   <div class="content">
-
     <div class="container-fluid">
-        <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>追加しました。</strong>
-        </div>
-        <form id="blogform" action="javascript:void(0)" enctype="multipart/form-data">
+      <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong id="notify_string">更新しました。</strong>
+      </div>
+      <form id="blogform" action="javascript:void(0)" enctype="multipart/form-data">
         @csrf
         <div class="row">
           <div class="col-sm-9">
-
             <div class="card">
               <div class="card-header">
                 <h5 class="card-title">タイトル</h5>
@@ -115,33 +54,33 @@
             </div>
             <textarea id="summernote" name="content"></textarea>
             <div class="card">
-                <div class="card-header">
-                  <h5 class="card-title"><strong>著者情報</strong></h5>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <div class="form-group row">
-                        <label for="author_name" class="col-sm-3 col-form-label">著者名</label>
-                        <input type="text" class="ml-1 col-sm-7 form-control" value="{{$blog->author_name}}" name="author_name" id="author_name">
-                    </div>
-                    <div class="form-group row">
-                        <label for="author_profile" class="col-sm-3 col-form-label">著者プロフィール</label>
-                        <textarea rows="4" id="author_profile"  name="author_profile" class="ml-1 col-sm-7 form-control" ></textarea>
-                    </div>
-                    <div class="form-group row">
-                        <label for="author_image" id="author_image_preview" class="col-sm-3 col-form-label">著者プロフィール画像</label>
-                        <div class="ml-1 dropzone-wrapper col-sm-7">
-                            <div class="dropzone-desc">
-                              <i class="fa fa-cloud-upload-alt"></i>
-                              <span id="author_image_url"></span>
-                              <button id="author_image_upload_button">ファイルを選捉</button>
-                            </div>
-                            <input type="file" name="author_image" class="dropzone">
-                        </div>
-                    </div>
-                </div>
-                <!-- /.card-body -->
+              <div class="card-header">
+                <h5 class="card-title"><strong>著者情報</strong></h5>
               </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="author_name" class="col-sm-3 col-form-label">著者名</label>
+                  <input type="text" class="ml-1 col-sm-7 form-control" value="{{$blog->author_name}}" name="author_name" id="author_name">
+                </div>
+                <div class="form-group row">
+                  <label for="author_profile" class="col-sm-3 col-form-label">著者プロフィール</label>
+                  <textarea rows="4" id="author_profile"  name="author_profile" class="ml-1 col-sm-7 form-control" ></textarea>
+                </div>
+                <div class="form-group row">
+                  <label for="author_image" id="author_image_preview" class="col-sm-3 col-form-label">著者プロフィール画像</label>
+                  <div class="ml-1 dropzone-wrapper col-sm-7">
+                    <div class="dropzone-desc">
+                      <i class="fa fa-cloud-upload-alt"></i>
+                      <span id="author_image_url"></span>
+                      <button id="author_image_upload_button">ファイルを選捉</button>
+                    </div>
+                    <input type="file" name="author_image" class="dropzone">
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
           </div>
           <div class="col-sm-3">
             <div class="card">
@@ -205,59 +144,72 @@
 </div>
 <script>
   $(document).ready(function() {
-    let validation_flag = true;
+
     $('#summernote').summernote({
       height: 450,
     });
+
     blog = <?php echo json_encode($blog)?>;
+
     $('#summernote').summernote('pasteHTML',blog.content);
     $('#preview').html('<img src="'+blog.featured_image_url+'"/>');
     $('#public_status').val(blog.public_status);
+    
     var created_at = blog.created_at.substr(0,10);
     var updated_at = blog.updated_at.substr(0,10);
+    
     $('#created_at').html(created_at);
     $('#updated_at').html(updated_at);
     $('#author_profile').html(blog.author_profile);
     $('#author_image_url').html(blog.author_image_url);
+
     var blog_id = blog.id;
+    
     $("input[name=category][value=" + blog.category + "]").prop('checked', true);
+    
     function imagePreview(fileInput) {
       if (fileInput.files && fileInput.files[0]) {
         var fileReader = new FileReader();
+
         fileReader.onload = function (event) {
             $('#preview').html('<img src="'+event.target.result+'"/>');
         };
+        
         fileReader.readAsDataURL(fileInput.files[0]);
       }
     }
+    
     $("#featured_image").change(function () {
       imagePreview(this);
     });
+    
     $('#blogform').on('submit',function(e) {
+      let validation_flag = true;
       $('#alert').css('display','none');
-      if($('#title').val()==='')
-      {
+      
+      if($('#title').val()==='') {
         $('#title').css('border-color','red');
         validation_flag = false;
       }
       else {
         $('#title').css('border-color','');
       }
-      if($('#author_name').val()==='') {
-        $('#author_name').css('border-color','red')
-        validation_flag = false;
-      }
-      else {
-        $('#author_name').css('border-color','');
-      }
-      if($('#author_profile').val()==='') {
-        $('#author_profile').css('border-color','red');
+      // if($('#author_name').val()==='') {
+      //   $('#author_name').css('border-color','red')
+      //   validation_flag = false;
+      // }
+      // else {
+      //   $('#author_name').css('border-color','');
+      // }
+      // if($('#author_profile').val()==='') {
+      //   $('#author_profile').css('border-color','red');
 
-        validation_flag = false;
-      }
-      else {
-        $('#author_profile').css('border-color','');
-      }
+      //   validation_flag = false;
+      // }
+      // else {
+      //   $('#author_profile').css('border-color','');
+      // }
+
       if($('#summernote').summernote('code')==='<p><br></p>') {
         $('.note-editor').css('border-color','red');
         validation_flag=false;
@@ -265,39 +217,47 @@
       else {
         $('.note-editor').css('border-color','');
       }
+      
       if(validation_flag) {
         $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
         });
         e.preventDefault();
+        
         var formData = new FormData(this);
+        
         $.ajax({
-            type: "POST",
-            url: '/admin/blog/update/'+blog_id,
-            data:formData,
-            cache:false,
-            contentType:false,
-            processData:false,
-            success: function (data) {
-                if(data.success) {
-                  console.log(data.success);
-                  $('#notify_string').html('更新しました。');
-                  $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
-                    var current_date = new Date();
-                    var current_year = String(current_date.getFullYear());
-                    var current_month = current_date.getMonth() + 1;
-                    current_month<10?current_month = '0' + String(current_month) : current_month = String(current_month);
-                    var current_day = current_date.getDate();
-                    current_day<10?current_day = '0' + String(current_day) : current_day = String(current_day);
-                    let updated_at = current_year + '/' + current_month + '/' + current_day;
-                    $('#updated_at').html(updated_at);
-                }
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                }
+          type: "POST",
+          url: '/admin/blog/update/'+blog_id,
+          data:formData,
+          cache:false,
+          contentType:false,
+          processData:false,
+          success: function (data) {
+            if(data.success) {            
+              $('#notify_string').html('更新しました。');
+              $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
+              
+              var current_date = new Date();
+              var current_year = String(current_date.getFullYear());
+              var current_month = current_date.getMonth() + 1;
+              
+              current_month<10?current_month = '0' + String(current_month) : current_month = String(current_month);
+              
+              var current_day = current_date.getDate();
+              
+              current_day<10?current_day = '0' + String(current_day) : current_day = String(current_day);
+
+              let updated_at = current_year + '/' + current_month + '/' + current_day;
+              
+              $('#updated_at').html(updated_at);
+            }
+          },
+          error: function (data) {
+            console.log('Error:', data);
+          }
         });
       }
       else {
@@ -307,36 +267,40 @@
         $('#alert').css('color','red');
       }
     })
+    
     function readFile(input) {
-    if (input.files && input.files[0]) {
+      if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function(e) {
         };
+        
         $('#author_image_url').html(input.files[0].name);
+        
         reader.readAsDataURL(input.files[0]);
+      }
     }
-    }
+    
     $('.category_check').click(function() {
-            $('.category_check').not(this).prop('checked',false);
-        });
+      $('.category_check').not(this).prop('checked',false);
+    });
 
     $(".dropzone").change(function() {
-        readFile(this);
+      readFile(this);
     });
 
     $('.dropzone-wrapper').on('dragover', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $(this).addClass('dragover');
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).addClass('dragover');
     });
 
     $('.dropzone-wrapper').on('dragleave', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $(this).removeClass('dragover');
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).removeClass('dragover');
     });
-});
+  });
 </script>
 
 @endsection

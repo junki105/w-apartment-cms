@@ -69,13 +69,11 @@
     height: auto!important;
     border-radius: 2px;
   }
-
   .dropzone-desc {
     margin: auto;
     font-size: 16px;
     width: 100%;
   }
-
   .dropzone,
   .dropzone:focus {
     position: absolute;
@@ -85,16 +83,13 @@
     cursor: pointer;
     opacity: 0;
   }
-
   .dropzone-wrapper:hover,
   .dropzone-wrapper.dragover {
     background: #ecf0f5;
   }
-
   .preview-zone {
     text-align: center;
   }
-
   .preview-zone .box {
     box-shadow: none;
     border-radius: 0;
