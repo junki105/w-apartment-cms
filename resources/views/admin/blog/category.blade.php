@@ -90,7 +90,7 @@
                     <tbody>
                     </tbody>
                 </table>
-                <div style="height: 200px; width:inherit;display: flex;justify-content: center;align-items: center;">
+                <div class="no-data">
                     <div>データがありません。</div>
                 </div>
                 @endif
@@ -110,12 +110,12 @@
     let delete_id;
     let update_flag = false;
     let current_category;
-    $('.deleteCategory').click(function(e){
+    $('.deleteCategory').click(function(e) {
         delete_id = $(this).data("id");
         $('#deleteModal').modal();
         $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
     });
-    $('#deleteButton').click(function(e){
+    $('#deleteButton').click(function(e) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -125,22 +125,16 @@
             type: "DELETE",
             url: "/admin/blog/category/delete"+'/'+delete_id,
             success: function (data) {
-                $('.deleteCategory').each(function(){
-                    var id = $(this).data("id");
-                    if(id===delete_id){
-                        $(this).parents("tr").remove();
-                    }
-                })
-                $('#deleteModal').modal("hide");
+                window. eload();
             },
             error: function (data) {
                 console.log('Error:', data);
             }
         })
     });
-    $('#form').on('submit',function(e){
+    $('#form').on('submit',function(e) {
         let new_name = $('#name_input').val();
-        if(new_name === ''){
+        if(new_name === '') {
             $('#notify_string').html('入力内容でエラーがあります。');
             $('#alert').css('display','block');
             $('#alert').css('border-left-color','red');
@@ -160,7 +154,7 @@
         
         }
     });
-    $('#ordersave').click(function(){
+    $('#ordersave').click(function() {
         let table_data = $('#category_table');
         let rows_data = table_data[0].children;
         let rows_array = Array.from(rows_data);
@@ -180,11 +174,11 @@
             data:{
                 order_list : order_list
             },
-            success:function(data){
+            success:function(data) {
                 $('#notify_string').html('項目の順番を更新しました。');
                 $('#alert').css('display','block');
             }
-            ,error:function(error){
+            ,error:function(error) {
                 console.log(error);
             }
         })

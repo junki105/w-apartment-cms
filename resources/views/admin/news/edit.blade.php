@@ -4,29 +4,7 @@
 
 <style>
 
-  #upload-image {
-    opacity: 0;
-    position: absolute;
-    z-index: -1;
-    display: none;
-  }
 
-  #preview {
-    cursor: pointer;
-    width: 100%;
-    height: 150px;
-    background-color: rgb(156, 150, 150);
-    color: #333;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
 
 </style>
 <div class="content-wrapper">
@@ -147,12 +125,12 @@
       imagePreview(this);
     });
     let validation = true;
-    $('#postform').on('submit',function(e){
-      if($('#title').val()===''){
+    $('#postform').on('submit',function(e) {
+      if($('#title').val()==='') {
         $('#title').css('border-color','red');
         validation = false;
       }
-      else{
+      else {
         $('#title').css('border-color','');
         validatioin = true;
       }
@@ -160,11 +138,11 @@
         $('.note-editor').css('border-color','red');
         validation=false;
       }
-      else{
+      else {
         $('.note-editor').css('border-color','');
         validation = true
       }
-      if(validation){
+      if(validation) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -180,7 +158,7 @@
             contentType:false,
             processData:false,
             success: function (data) {
-                if(data.success){
+                if(data.success) {
                     $('#alert').css('display','block');
                     var current_date = new Date();
                     var current_year = String(current_date.getFullYear());

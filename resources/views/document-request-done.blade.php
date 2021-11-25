@@ -4,13 +4,10 @@
     <h1>資料請求</h1>
     <p>
       弊社のサービスに興味を持って頂きありがとうございます<br>
-      資料は下記のボタン、またはメールよりダウンロードください
+      資料はメールにてお送りいたしますので今しばらくお待ち下さい。
     </p>
   </section>
   <section class="content">
-    <div class="btn-container">
-      <a href="" class="btn hover-spacing-btn">資料をダウンロード<img src="{{ URL::asset('images/ico_triangle.png') }}" alt=""></a>
-    </div>
     <div class="request-banner">
       <a href="" class="btn">
         <h1>サービス紹介</h1>

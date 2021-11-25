@@ -106,7 +106,7 @@ table td.sorter {cursor: move;}
                             <tbody>
                             </tbody>
                         </table>
-                        <div style="height: 200px; width:inherit;display: flex;justify-content: center;align-items: center;">
+                        <div class="no-data">
                             <div>データがありません。</div>
                         </div>
                     @endif
@@ -127,19 +127,19 @@ table td.sorter {cursor: move;}
     let current_area;
     var table = document.getElementById("dnd");
     RowSorter('table[attr-sample=thetable]', {
-    handler: 'td.sorter',
-    stickFirstRow : false,
-    stickLastRow  : false,
-    onDragStart: function(tbody, row, index)
-    {
-       
-    },
-    onDrop: function(tbody, row, new_index, old_index)
-    {
-       
-    }
-});
-    $('#ordersave').click(function(){
+        handler: 'td.sorter',
+        stickFirstRow : false,
+        stickLastRow  : false,
+        onDragStart: function(tbody, row, index)
+        {
+        
+        },
+        onDrop: function(tbody, row, new_index, old_index)
+        {
+        
+        }
+    });
+    $('#ordersave').click(function() {
         let table_data = $('#area_table');
         let rows_data = table_data[0].children;
         console.log(rows_data);
@@ -160,17 +160,17 @@ table td.sorter {cursor: move;}
             data:{
                 order_list : order_list
             },
-            success:function(data){
+            success:function(data) {
                 $('#notify_string').html('項目の順番を更新しました。');
                 $('#alert').css('display','block');            }
-            ,error:function(error){
+            ,error:function(error) {
                 console.log(error);
             }
         })
     });
-    $('#form').on('submit',function(e){
+    $('#form').on('submit',function(e) {
         let new_name = $('#name_input').val();
-        if(new_name === ''){
+        if(new_name === '') {
             $('#notify_string').html('入力内容でエラーがあります。');
             $('#alert').css('display','block');
             $('#alert').css('border-left-color','red');
@@ -178,12 +178,12 @@ table td.sorter {cursor: move;}
             e.preventDefault();
         }
     });
-    $('.deleteArea').click(function(e){
+    $('.deleteArea').click(function(e) {
         delete_id = $(this).data("id");
         $('#deleteModal').modal();
         $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
     });
-    $('#deleteButton').click(function(e){
+    $('#deleteButton').click(function(e) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -193,9 +193,9 @@ table td.sorter {cursor: move;}
             type: "DELETE",
             url: "/admin/case-study-area"+'/'+delete_id,
             success: function (data) {
-                $('.deleteArea').each(function(){
+                $('.deleteArea').each(function() {
                     var id = $(this).data("id");
-                    if(id===delete_id){
+                    if(id===delete_id) {
                         $(this).parents("tr").remove();
                     }
                 })

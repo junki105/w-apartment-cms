@@ -12,6 +12,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.css" integrity="sha512-4rPgyv5iG0PZw8E+oRdfN/Gq+yilzt9rQ8Yci2jJ15rAyBmF0HBE4wFjBkoB72cxBeg63uobaj1UcNt/scV93w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
+    <link rel="icon" href="{{ URL::asset('images/favicon.png') }}" sizes="32x32" />
+    <link rel="icon" href="{{ URL::asset('images/favicon.png') }}" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="{{ URL::asset('images/favicon.png') }}" />
+    <meta name="msapplication-TileImage" content="{{ URL::asset('images/favicon.png') }}" />
     <script>
       (function(d) {
         var config = {
@@ -19,7 +23,7 @@
           scriptTimeout: 3000,
           async: true
         },
-        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+        h=d.documentElement,t=setTimeout(function() {h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function() {a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e) {}};s.parentNode.insertBefore(tk,s)
       })(document);
     </script>
     <style>
@@ -40,9 +44,9 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <header class="header minimal-header">
-      <h1 class="logo"><a href="{{ url('/') }}"><img src="{{ URL::asset('images/logo_white.png') }}" alt=""></a></h1>
-      <div class="header-aside">
+    <header class="header feature-header minimal-origin-header">
+      <h1 class="logo"><a href="{{ url('/') }}"><img src="{{ URL::asset('images/logo.png') }}" alt=""></a></h1>
+      <div class="header-aside" id="aside_left">
         <div class="menu-btn" id="menu_btn">
           <div></div>
           <div></div>
@@ -52,34 +56,28 @@
         <div id="num" class="slide-number">{{$house->title}}</div>
       </div>
       <div class="header-aside">
-        <a href="{{'/admin'}}" class="login-btn"><img src="{{ URL::asset('images/ico_login_white.png') }}" alt=""></a>
+        <a href="{{'/admin'}}" class="login-btn"><img src="{{ URL::asset('images/ico_login.png') }}" alt=""></a>
         <div class="header-aside-txt">
-          <span class="btn">説明会情報</span>
-          <img src="{{ URL::asset('images/side_link_white.png') }}" alt="">
-          <span class="btn">資料請求</span>
+          <a href="{{'/contact'}}" class="btn">説明会情報</a>
+          <img src="{{ URL::asset('images/side_link.png') }}" alt="" id="side_link">
+          <a href="{{'/document-request'}}" class="btn">資料請求</a>
         </div>
         <div class="copyright">
           © W-APARTMENT
         </div>
         <div class="line"></div>
       </div>
-      <a href="#list" id="moveDown" class="btn scroll-btn">
-        SCROLL
-        <img src="{{ URL::asset('images/ico_arrow_down_brown.png') }}" alt="">
-      </a>
       <div class="site-menu" id="site_menu">
         <div class="site-menu-left">
           <ul>
             <li><a href="{{url('/philosophy')}}" class="btn"><span>01</span>理念</a></li>
-            <li><a href="{{url('/#support')}}" class="btn"><span>02</span>住宅/経営支援</a></li>
-            <li><a href="{{url('/philosophy')}}" class="btn"><span>03</span>部材共有</a></li>
+            <li><a href="{{url('/document-request')}}" class="btn"><span>02</span>住宅/経営支援</a></li>
+            <li><a href="{{url('/document-request')}}" class="btn"><span>03</span>部材共有</a></li>
             <li><a href="{{url('/house')}}" class="btn"><span>04</span>商品住宅</a></li>
             <li><a href="{{url('/feature')}}" class="btn"><span>05</span>特徴</a></li>
-            <li><a href="{{url('/#philosophy')}}" class="btn"><span>06</span>料金</a></li>
-            <li><a href="{{url('/case-study')}}" class="btn"><span>07</span>施工実績</a></li>
-            <li><a href="{{url('/#flow')}}" class="btn"><span>08</span>プロモーション</a></li>
-            <li><a href="{{url('/news')}}" class="btn"><span>09</span>NEWS</a></li>
-            <li><a href="{{url('/company-profile')}}" class="btn"><span>10</span>会社概要</a></li>
+            <li><a href="{{url('/case-study')}}" class="btn"><span>06</span>施工実績</a></li>
+            <li><a href="{{url('/news')}}" class="btn"><span>07</span>NEWS</a></li>
+            <li><a href="{{url('/company-profile')}}" class="btn"><span>08</span>会社概要</a></li>
           </ul>
         </div>
         <div class="menu-content-line"></div>
@@ -95,37 +93,67 @@
           </div>
         </div>
       </div>
-      <div class="minimal-header-content">
-        <h1>{{$house->title}}</h1>
-      </div>
-      <video id="background-video" autoplay loop muted poster="https://assets.codepen.io/6093409/river.jpg">
-        <source src="{{$house->video_url}}" type="video/mp4">
-      </video>
     </header>
     <main class="container minimal">
-      <header class="header feature-header minimal-origin-header">
-        <h1 class="logo"><a href="{{ url('/') }}"><img src="{{ URL::asset('images/logo.png') }}" alt=""></a></h1>
-        <div class="header-aside">
-          <div class="menu-btn" id="menu_btn">
+      <header class="header minimal-header">
+        <h1 class="logo"><a href="{{ url('/') }}"><img src="{{ URL::asset('images/logo_white.png') }}" alt=""></a></h1>
+        <div class="header-aside" id="aside_left_house">
+          <div class="menu-btn" id="house_menu_btn">
             <div></div>
             <div></div>
             <div></div>
           </div>
           <div class="line"></div>
-          <div id="num" class="slide-number">{{$house->title}}</div>
+          <div id="num_house" class="slide-number">{{$house->title}}</div>
         </div>
         <div class="header-aside">
-          <a href="{{'/admin'}}" class="login-btn"><img src="{{ URL::asset('images/ico_login.png') }}" alt=""></a>
+          <a href="{{'/admin'}}" class="login-btn"><img src="{{ URL::asset('images/ico_login_white.png') }}" alt=""></a>
           <div class="header-aside-txt">
-            <span class="btn">説明会情報</span>
-            <img src="{{ URL::asset('images/side_link.png') }}" alt="">
-            <span class="btn">資料請求</span>
+            <a href="{{'/contact'}}" class="btn">説明会情報</a>
+            <img src="{{ URL::asset('images/side_link_white.png') }}" alt="" id="side_link">
+            <a href="{{'/document-request'}}" class="btn">資料請求</a>
           </div>
           <div class="copyright">
             © W-APARTMENT
           </div>
           <div class="line"></div>
         </div>
+        <a href="#list" id="moveDown" class="btn scroll-btn">
+          SCROLL
+          <img src="{{ URL::asset('images/ico_arrow_down_brown.png') }}" alt="">
+        </a>
+        <div class="site-menu" id="house_site_menu">
+          <div class="site-menu-left">
+            <ul>
+              <li><a href="{{url('/philosophy')}}" class="btn"><span>01</span>理念</a></li>
+              <li><a href="{{url('/document-request')}}" class="btn"><span>02</span>住宅/経営支援</a></li>
+              <li><a href="{{url('/document-request')}}" class="btn"><span>03</span>部材共有</a></li>
+              <li><a href="{{url('/house')}}" class="btn"><span>04</span>商品住宅</a></li>
+              <li><a href="{{url('/feature')}}" class="btn"><span>05</span>特徴</a></li>
+              <li><a href="{{url('/case-study')}}" class="btn"><span>06</span>施工実績</a></li>
+              <li><a href="{{url('/news')}}" class="btn"><span>07</span>NEWS</a></li>
+              <li><a href="{{url('/company-profile')}}" class="btn"><span>08</span>会社概要</a></li>
+            </ul>
+          </div>
+          <div class="menu-content-line"></div>
+          <div class="site-menu-right">
+            <ul>
+              <li><span>CONTACT</span></li>
+              <li><a href="{{url('/contact')}}">お問い合わせ</a></li>
+              <li><a href="{{url('/document-request')}}">資料請求</a></li>
+            </ul>
+            <div class="phone">
+              <a href="tel: 0123-456-7890" class="btn"><img src="{{ URL::asset('images/ico_phone.png') }}" alt="">0123-456-7890</a>
+              <div>平日 00:00-00:00</div>
+            </div>
+          </div>
+        </div>
+        <div class="minimal-header-content">
+          <h1 id="minimal_title">{{$house->title}}</h1>
+        </div>
+        <video id="background-video" autoplay loop muted poster="https://assets.codepen.io/6093409/river.jpg">
+          <source src="{{$house->video_url}}" type="video/mp4">
+        </video>
       </header>
       <section class="content minimal-content">
         <h1>{{$house->title}}</h1>
@@ -150,12 +178,15 @@
       <section class="content voice-content">
         <h1>OWNER’S VOICE</h1>
         <div class="voice-wrap">
-          <iframe src="{{ $house->voice_url }}" frameborder="0"></iframe>
+          <video controls>
+            <source src="{{ $house->voice_url }}" type="video/mp4">
+          </video>
         </div>
       </section>
-      <!-- <section class="official-content">
-        <h1>Minimal Official Site</h1>
-      </section> -->
+      <section class="official-content">
+        <h1>{{$house->title}} Official Site</h1>
+        <a href="{{ url($house->url) }}" target="_blank" class="btn hover-spacing-btn official-link">CLICK HERE<img src="{{ URL::asset('images/ico_triangle.png') }}" alt=""></a>
+      </section>
       <footer class="footer">
         <div class="footer-content">
           <h1>W-apartment</h1>

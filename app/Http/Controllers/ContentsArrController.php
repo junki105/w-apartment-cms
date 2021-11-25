@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function createContents(){
+    public function createContents() {
         $contents_arr = \App\ContentsArr::create([
             'arr_text1' => ['Toni Abbah','Anastacia Mast','Soji Igbonna'],
             'arr_text2' => ['username'=>'torah','name'=>'Toni Abbah']

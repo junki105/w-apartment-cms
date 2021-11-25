@@ -67,14 +67,14 @@
 <script>
   $(document).ready(function() {
     var category = 
-    $('#save').click(function(e){
+    $('#save').click(function(e) {
         let name = $('#category').val();
         console.log(name);
-        if(name === ''){
+        if(name === '') {
           $('#notify_string').html('入力内容でエラーがあります。');
           $('#alert').css({'display':'block','border-left-color':'red','color':'red'});
         }
-        else{
+        else {
           let formdata = new FormData();
           formdata.append('name',name);
           $.ajax({
@@ -96,12 +96,12 @@
           });
         }
     });
-    $('#category_delete').click(function(e){
+    $('#category_delete').click(function(e) {
         delete_id = $(this).data("id");
         $('#deleteModal').modal();
         $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
     });
-    $('#deleteButton').click(function(e){
+    $('#deleteButton').click(function(e) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -111,13 +111,7 @@
             type: "DELETE",
             url: "/admin/blog/category/delete"+'/'+delete_id,
             success: function (data) {
-                $('.deleteCategory').each(function(){
-                    var id = $(this).data("id");
-                    if(id===delete_id){
-                        $(this).parents("tr").remove();
-                    }
-                })
-                $('#deleteModal').modal("hide");
+                window.location.reload;
             },
             error: function (data) {
                 console.log('Error:', data);

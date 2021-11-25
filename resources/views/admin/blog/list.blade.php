@@ -2,33 +2,6 @@
 
 @section('content')
 
-<style>
-
-  #upload-image {
-    opacity: 0;
-    position: absolute;
-    z-index: -1;
-    display: none;
-  }
-
-  #preview {
-    cursor: pointer;
-    width: 100%;
-    height: 150px;
-    background-color: rgb(156, 150, 150);
-    color: #333;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-</style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
@@ -137,29 +110,29 @@ $(document).ready(function() {
         $.ajax({
             url: url,
             method:"GET",
-            success:function(data){
+            success:function(data) {
                 $('#table_card').html(data);
                 },
-            error:function(err){
+            error:function(err) {
                 console.log(err);
                 }
         })
     }
-    $('.viewBlog').click(function(e){
+    $('.viewBlog').click(function(e) {
         var id = $(this).data("id");
         $.ajax({
             type: "GET",
             url: "/news"+'/'+id,
         });
     })
-    $('.editBlog').click(function(e){
+    $('.editBlog').click(function(e) {
         var id = $(this).data("id");
         $.ajax({
             type: "GET",
             url: "/admin/blog/edit/"+id,
         });
     })
-    $('#searchButton').click(function(e){
+    $('#searchButton').click(function(e) {
         var index = 0;
         search_word = $('#search_word').val();
         author_name = $('#author_name').val();
@@ -168,19 +141,19 @@ $(document).ready(function() {
             selected.push(this.value);
         });
         category_query = selected.toString();        
-        $('.form-check-input:checked').each(function(){
+        $('.form-check-input:checked').each(function() {
             public_status = $(this).val();
         }); 
-        $('.recommended_flag:checked').each(function(){
+        $('.recommended_flag:checked').each(function() {
             recommended_flag = $(this).val();
         });
         page = 1;
         fetch_data(page,search_word,author_name,category_query,public_status,recommended_flag)
     })
-    $('.form-check-input').click(function(){
+    $('.form-check-input').click(function() {
         $('.form-check-input').not(this).prop('checked',false);
     })
-    $(document).on('click', '.pagination a', function(event){
+    $(document).on('click', '.pagination a', function(event) {
         event.preventDefault(); 
         var page = $(this).attr('href').split('page=')[1];
         fetch_data(page,search_word,author_name,category_query,public_status,recommended_flag);

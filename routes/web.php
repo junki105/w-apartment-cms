@@ -17,20 +17,23 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FrontBlogController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\ContactController;
 /*Route::get('/', function () {
   $blogs = [];
   return view('index',compact('blogs'));
 })->name('top');*/
 Route::get('/','HomeController@index')->name('top');
 //Route::view('/news', 'news');
-Route::view('/philosophy', 'philosophy')->name('philosophy');
+Route::get('/philosophy', 'PhilosophyController@index')->name('philosophy');
 Route::get('/case-study', 'ResultController@search')->name('case-study');
 Route::get('/case-study/{id}','ResultController@show')->name('case-study-single');
 Route::view('/feature', 'feature')->name('feature');
-Route::view('/document-request', 'document-request')->name('document-request');
+
+Route::get('/document-request','ContactController@document_request')->name('document-request');
+Route::post('/document-request', 'ContactController@document_requestPost')->name('document-requestPost');
 Route::view('/document-request/done/', 'document-request-done')->name('document-request-done');
-Route::view('/contact', 'contact')->name('contact');
+Route::get('/contact','ContactController@contact')->name('contact');
+Route::post('/contact','ContactController@contactPost')->name('contactPost');
 Route::view('/contact/done/', 'contact-done')->name('contact-done');
 Route::view('/company-profile', 'company-profile')->name('company');
 Route::get('/news','NewsController@index')->name('news');

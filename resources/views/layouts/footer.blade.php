@@ -21,29 +21,29 @@
         $.ajax({
             url:url,
             method:"GET",
-            success:function(data){
+            success:function(data) {
               $('.content search-result').html(data);
             },
-            error:function(err){
+            error:function(err) {
               console.log(err);
             }
         })
       }
-      $('#searchButton').click(function(e){      
+      $('#searchButton').click(function(e) {      
         var index = 0;
         $("#areas input[type=radio]:checked").each(function () {
           console.log(this.value)
         });
-        $("#amounts input[type=radio]:checked").each(function(){
+        $("#amounts input[type=radio]:checked").each(function() {
           console.log(this.value)
         })
-        $('#housetypes input[type=radio]:checked').each(function(){
+        $('#housetypes input[type=radio]:checked').each(function() {
           console.log(this.value)
         });
         page = 1;
         fetch_data(page,area,amount,housetype);
       })  
-      $(document).on('click', 'a .btn', function(event){
+      $(document).on('click', 'a .btn', function(event) {
         event.preventDefault(); 
         var page = $(this).attr('href').split('page=')[1];
         fetch_data(page,area,amount,housetype);

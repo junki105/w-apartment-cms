@@ -74,11 +74,11 @@
 <script>
   $(document).ready(function() {
     const current_amount =<?php echo json_encode($amount);?>;
-    $('#delete_amount').click(function(e){
+    $('#delete_amount').click(function(e) {
         $('#deleteModal').modal();
         $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
     });
-    $('#deleteButton').click(function(e){
+    $('#deleteButton').click(function(e) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -95,7 +95,7 @@
             }
         })
     });
-    $('#save').click(function(e){
+    $('#save').click(function(e) {
         let type = $('#amount').val();
         console.log(type);
         const current_amount =<?php echo json_encode($amount);?>;

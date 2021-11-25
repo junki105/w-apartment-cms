@@ -87,7 +87,7 @@ class AmountController extends Controller
     public function updateOrder(Request $request)
     {
         $datas = $request->order_list;
-        foreach ($datas as $data){
+        foreach ($datas as $data) {
             $id = $data["id"];
             $row = Amount::find($id);
             $order_index = $data["order_index"];

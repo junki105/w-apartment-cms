@@ -15,15 +15,9 @@
       type: "DELETE",
       url: "/admin/case-study" + '/' + delete_id,
       success: function(data) {
-        $('.deleteHousing').each(function() {
-          var id = $(this).data("id");
-          if (id === delete_id) {
-            $(this).parents("tr").remove();
-          }
-        })
-        $('#deleteModal').modal("hide");
-        count--;
-        $('.count').html(count);
+      
+         window.location.reload()
+    
       },
       error: function(data) {
         console.log('Error:', data);
@@ -109,7 +103,7 @@
         <tbody>
         </tbody>
     </table>
-    <div style="height: 200px; width:inherit;display: flex;justify-content: center;align-items: center;">
+    <div class="no-data">
         <div>データがありません。</div>
     </div>
     @endif

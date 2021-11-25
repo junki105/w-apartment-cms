@@ -31,12 +31,12 @@
   h1 {
     font-size: 32px;
     letter-spacing: 0.05em;
-    font-family: 'felix';
+    @include font-ud(demibold);
   }
   p {
     font-size: 13px;
     letter-spacing: 0.1em;
-    font-family: 'felix';
+    @include font-ud(regular);
     margin-top: 15px;
     line-height: 28px;
   }

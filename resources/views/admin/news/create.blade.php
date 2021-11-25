@@ -2,33 +2,6 @@
 
 @section('content')
 
-<style>
-
-  #upload-image {
-    opacity: 0;
-    position: absolute;
-    z-index: -1;
-    display: none;
-  }
-
-  #preview {
-    cursor: pointer;
-    width: 100%;
-    height: 150px;
-    background-color: rgb(156, 150, 150);
-    color: #333;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-</style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
@@ -142,63 +115,29 @@
     $("#upload-image").change(function () {
       imagePreview(this);
     });
-    $('#title').change(function(event){
+    $('#title').change(function(event) {
       title = event.target.value;
     })
-    $('#postform').on('submit',function(e){
-      if($('#title').val()===''){
+    $('#postform').on('submit',function(e) {
+      if($('#title').val()==='') {
         $('#title').css('border-color','red');
         validation = false;
       }
-      else{
+      else {
         $('#title').css('border-color','');
       }
       if($('#summernote').summernote('code')==='<p><br></p>') {
         $('.note-editor').css('border-color','red');
         validation = false;
       }
-      else{
+      else {
         $('.note-editor').css('border-color','');
       }
-      if(validation){
+      if(validation) {
         $('#title').css('border-color','');
         $('.note-editor').css('border-color','');
         $('#alert').css('display','none');
-        if(update_flag){
-          $.ajaxSetup({
-              headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-          });
-          e.preventDefault();
-          var formData = new FormData(this);
-          $.ajax({
-            type: 'post',
-            url: '/admin/news/update/'+current_id,
-            data: formData,
-            cache:false,
-            contentType:false,
-            processData:false,
-            success: function (data) {
-              if(data.success){
-                $('#notify_string').html('更新しました。');
-                $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
-                var current_date = new Date();
-                var current_year = String(current_date.getFullYear());
-                var current_month = current_date.getMonth() + 1;
-                current_month<10?current_month = '0' + String(current_month) : current_month = String(current_month);
-                var current_day = current_date.getDate();
-                current_day<10?current_day = '0' + String(current_day) : current_day = String(current_day);
-                let created_at = current_year + '/' + current_month + '/' + current_day;
-                $('#updated_at').html(created_at);
-              }
-            },
-            error: function (data) {
-              console.log('Error:', data);
-            }
-          });
-        }
-        else{
+       
           $.ajaxSetup({
               headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -215,25 +154,16 @@
             contentType:false,
             processData:false,
             success: function (data) {
-              if(data.success){
+              if(data.success) {
                   window.location.href = data.url+"/edit";
-                  $('#notify_string').html('追加しました。');
-                  $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
-                  $('#created_url').html(data.url);
-                  $('#url_string').css('display','block');
-                  $('#link_url').attr('href',data.url).css('display','inline');
-                  $('#post_save').html('更新');
-                  update_flag = true;
-                  current_id = data.id
               }
             },
             error: function (data) {
               console.log('Error:', data);
             }
           });
-        }
       }
-      else{
+      else {
         $('#notify_string').html('入力内容でエラーがあります。');
         $('#alert').css({'display':'block','border-left-color':'red','color':'red'});
       }

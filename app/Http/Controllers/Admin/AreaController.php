@@ -47,7 +47,7 @@ class AreaController extends Controller
     public function updateOrder(Request $request)
     {
         $datas = $request->order_list;
-        foreach ($datas as $data){
+        foreach ($datas as $data) {
             $id = $data["id"];
             $row = Area::find($id);
             $order_index = $data["order_index"];
