@@ -269,9 +269,9 @@
             type: 'POST',
             url: '/admin/house',
             data: formData,
-            cache:false,
-            contentType:false,
-            processData:false,
+            cache: false,
+            contentType: false,
+            processData: false,
             success: function (data) {
               if(data.success) {
                 window.location.href = data.url+"/edit";

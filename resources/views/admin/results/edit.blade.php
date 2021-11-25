@@ -339,9 +339,9 @@
             type: 'POST',
             url: '/admin/case-study/update/'+result.id,
             data: formData,
-            cache:false,
-            contentType:false,
-            processData:false,
+            cache: false,
+            contentType: false,
+            processData: false,
             success: function (data) {
                 if(data.success) {
                     $('#alert').css('display','block');

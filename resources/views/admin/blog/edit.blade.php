@@ -185,6 +185,7 @@
     
     $('#blogform').on('submit',function(e) {
       let validation_flag = true;
+      
       $('#alert').css('display','none');
       
       if($('#title').val()==='') {
@@ -232,11 +233,11 @@
           type: "POST",
           url: '/admin/blog/update/'+blog_id,
           data:formData,
-          cache:false,
-          contentType:false,
-          processData:false,
+          cache: false,
+          contentType: false,
+          processData: false,
           success: function (data) {
-            if(data.success) {            
+            if(data.success) {
               $('#notify_string').html('更新しました。');
               $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
               

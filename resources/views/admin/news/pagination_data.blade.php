@@ -5,20 +5,19 @@
     $('#deleteModal').modal();
     $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
   }
+  
   $('#deleteButton').click(function(e) {
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
+    
     $.ajax({
       type: "DELETE",
       url: "/admin/news" + '/' + delete_id,
       success: function(data) {
-       
-          window.location.reload();
-     
-      
+          window.location.reload();      
       },
       error: function(data) {
         console.log('Error:', data);
@@ -28,8 +27,10 @@
 </script>
 <div class="card-header">
   <h6 class="card-title"><strong>お知らせ一覧</strong></h6>
-  <div class="float-right card-tools d-inline-flex"><span class="mt-1 mr-2">全<span
-        class="count">{{$count}}</span>件</span>{{$posts->links()}}</div>
+  <div class="float-right card-tools d-inline-flex">
+    <span class="mt-1 mr-2">全<span class="count">{{$count}}</span>件</span>
+    {{$posts->links()}}
+  </div>
 </div>
 <div class="card-body">
   @if(count($posts)>0)
@@ -96,6 +97,8 @@
   @endif
 </div>
 <div class="card-footer">
-  <div class="float-right card-tools d-inline-flex"><span class="m-2">全<span
-        class="count">{{$count}}</span>件</span>{{$posts->links()}}</div>
+  <div class="float-right card-tools d-inline-flex">
+    <span class="m-2">全<span class="count">{{$count}}</span>件</span>
+    {{$posts->links()}}
+  </div>
 </div>

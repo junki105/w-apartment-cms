@@ -104,9 +104,9 @@
           type:"POST",
           url: '/admin/blog/category/update/'+current_category.id,
           data: formdata,
-          cache:false,
-          contentType:false,
-          processData:false,
+          cache: false,
+          contentType: false,
+          processData: false,
           
           success: function (data) {
               $('#notify_string').html('更新しました。');

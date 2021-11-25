@@ -41,8 +41,8 @@
   <div class="content">
     <div class="container-fluid">
       <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
-          <button type="button" class="close" data-dismiss="alert">×</button>
-          <strong>更新しました。</strong>
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong id="notify_string">更新しました。</strong>
       </div>
       <form id="postform" action="javascript:void(0)" enctype="multipart/form-data">
         @csrf
@@ -102,80 +102,110 @@
     $('#summernote').summernote({
       height: 450,
     });
+    
     var post = <?php echo json_encode($post);?>;
     var url = '<?php echo $url;?>';
+    
     $('#summernote').summernote('pasteHTML', post.content);
     $('#preview').html('<img src="'+post.image_url+'"/>');
     $('#state').val(post.state);
+    
     var created_at = post.created_at.substr(0,10);
     var updated_at = post.updated_at.substr(0,10);
+    
     $('#created_at').html(created_at);
     $('#updated_at').html(updated_at);
     $('#state').val(post.state);
+    
     function imagePreview(fileInput) {
       if (fileInput.files && fileInput.files[0]) {
         var fileReader = new FileReader();
+
         fileReader.onload = function (event) {
-            $('#preview').html('<img src="'+event.target.result+'"/>');
+          $('#preview').html('<img src="'+event.target.result+'"/>');
         };
+        
         fileReader.readAsDataURL(fileInput.files[0]);
       }
     }
+    
     $("#upload-image").change(function () {
       imagePreview(this);
     });
-    let validation = true;
+
+    
     $('#postform').on('submit',function(e) {
+
+      let validation = true;
+      
+      $('#alert').css('display','none');
+      
       if($('#title').val()==='') {
         $('#title').css('border-color','red');
         validation = false;
       }
       else {
         $('#title').css('border-color','');
-        validatioin = true;
       }
+      
       if($('#summernote').summernote('code')==='<p><br></p>') {
         $('.note-editor').css('border-color','red');
         validation=false;
       }
       else {
         $('.note-editor').css('border-color','');
-        validation = true
       }
+      
       if(validation) {
         $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
         });
+
         e.preventDefault();
+
         var formData = new FormData(this);
+        
         $.ajax({
-            type: 'post',
-            url: '/admin/news/update/'+post.id,
-            data: formData,
-            cache:false,
-            contentType:false,
-            processData:false,
-            success: function (data) {
-                if(data.success) {
-                    $('#alert').css('display','block');
-                    var current_date = new Date();
-                    var current_year = String(current_date.getFullYear());
-                    var current_month = current_date.getMonth() + 1;
-                    current_month<10?current_month = '0' + String(current_month) : current_month = String(current_month);
-                    var current_day = current_date.getDate();
-                    current_day<10?current_day = '0' + String(current_day) : current_day = String(current_day);
-                    let created_at = current_year + '/' + current_month + '/' + current_day;
-                    $('#updated_at').html(created_at);
-                }
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                }
+          type: 'post',
+          url: '/admin/news/update/'+post.id,
+          data: formData,
+          cache: false,
+          contentType: false,
+          processData: false,
+          
+          success: function (data) {
+            if(data.success) {
+              $('#notify_string').html('更新しました。');
+              $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
+              
+              var current_date = new Date();
+              var current_year = String(current_date.getFullYear());
+              var current_month = current_date.getMonth() + 1;
+              
+              current_month<10?current_month = '0' + String(current_month) : current_month = String(current_month);
+              
+              var current_day = current_date.getDate();
+
+              current_day<10?current_day = '0' + String(current_day) : current_day = String(current_day);
+
+              let created_at = current_year + '/' + current_month + '/' + current_day;
+              
+              $('#updated_at').html(created_at);
+            }
+          },
+          error: function (data) {
+            console.log('Error:', data);
+          }
         });
       }
-       
+      else {
+        $('#notify_string').html('入力内容でエラーがあります。');
+        $('#alert').css('display','block');
+        $('#alert').css('border-left-color','red');
+        $('#alert').css('color','red');
+      }
     })
   });
 </script>

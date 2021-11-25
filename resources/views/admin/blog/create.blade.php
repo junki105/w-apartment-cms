@@ -141,7 +141,6 @@
 <script>
   $(document).ready(function() {
     let current_id;
-    let validation_flag = true;
     
     $('#summernote').summernote({
       height: 450,
@@ -181,6 +180,7 @@
     })
     
     $('#blogform').on('submit',function(e) {
+      let validation_flag = true;
       $('#alert').css('display','none');
       
       if($('#title').val()==='') {
@@ -234,9 +234,9 @@
           type: type,
           url: '/admin/blog',
           data: formData,
-          cache:false,
-          contentType:false,
-          processData:false,
+          cache: false,
+          contentType: false,
+          processData: false,
           success: function (data) {
             if(data.success) {
               window.location.href = data.url+"/edit";

@@ -65,58 +65,66 @@
       <div class="card" id="table_card">
         @include('admin.news.pagination_data')
       </div>
-
     </div>
   </div>
 </div>
 <script>
-$(document).ready(function() {
-  function fetch_data(page, search_word, state) {
-    if (search_word === undefined || search_word === '') {
-      search_word = null;
-    }
-    if (state === undefined || state === '') {
-      state = null;
-    }
-    $.ajax({
-      url: "/admin/news/show?page=" + page + "&search_word=" + search_word + "&state=" + state,
-      method: "GET",
-      success: function(data) {
-        $('#table_card').html(data);
-      },
-      error: function(err) {
-        console.log(err);
+  $(document).ready(function() {
+    function fetch_data(page, search_word, state) {
+      if (search_word === undefined || search_word === '') {
+        search_word = null;
       }
+      
+      if (state === undefined || state === '') {
+        state = null;
+      }
+      
+      $.ajax({
+        url: "/admin/news/show?page=" + page + "&search_word=" + search_word + "&state=" + state,
+        method: "GET",
+        success: function(data) {
+          $('#table_card').html(data);
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      })
+    }
+
+    let search_word = null;
+    let state = null;
+    
+    $('.viewPost').click(function(e) {
+      var id = $(this).data("id");
+      $.ajax({
+        type: "GET",
+        url: "/news" + '/' + id,
+      });
     })
-  }
-  let search_word = null;
-  let state = null;
-  $('.viewPost').click(function(e) {
-    var id = $(this).data("id");
-    $.ajax({
-      type: "GET",
-      url: "/news" + '/' + id,
+
+    $('.form-check-input').click(function() {
+      $('.form-check-input').not(this).prop('checked', false);
+    })
+    
+    $('#search_form').on('submit', function() {
+      let formData = new FormData(this);
+      search_word = formData.get('search_word');
+      state = formData.get('state');
+      page = 1;
+      fetch_data(page, search_word, state);
+    })
+    
+    $(document).on('click', '.pagination a', function(event) {
+      event.preventDefault();
+      var test = $(this).attr('href');
+      var page = $(this).attr('href').split('page=')[1];
+      fetch_data(page, search_word, state);
     });
-  })
-  $('.form-check-input').click(function() {
-    $('.form-check-input').not(this).prop('checked', false);
-  })
-  $('#search_form').on('submit', function() {
-    let formData = new FormData(this);
-    search_word = formData.get('search_word');
-    state = formData.get('state');
-    page = 1;
-    fetch_data(page, search_word, state);
-  })
-  $(document).on('click', '.pagination a', function(event) {
-    event.preventDefault();
-    var test = $(this).attr('href');
-    var page = $(this).attr('href').split('page=')[1];
-    fetch_data(page, search_word, state);
   });
-});
-let delete_id = 0;
-let count = 0;
+
+  let delete_id = 0;
+  let count = 0;
+
 </script>
 
 @endsection

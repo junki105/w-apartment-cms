@@ -378,9 +378,9 @@
             type: type,
             url: '/admin/case-study',
             data: formData,
-            cache:false,
-            contentType:false,
-            processData:false,
+            cache: false,
+            contentType: false,
+            processData: false,
             success: function (data) {
               console.log(data);
               if(data.success) {
