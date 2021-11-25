@@ -38,8 +38,8 @@
     <thead>
       <tr class="row">
         <th class="col-sm-1">ID</th>
-        <th class="col-sm-3">タイトル</th>
-        <th class="col-sm-4">公開状能</th>
+        <th class="col-sm-5">タイトル</th>
+        <th class="col-sm-2">公開状能</th>
         <th class="float-right col-sm-4"></th>
       </tr>
     </thead>
@@ -47,8 +47,8 @@
       @foreach ($posts as $post)
       <tr class="row" id="{{$post->id}}">
         <td class="col-sm-1">{{$post->id}}</td>
-        <td class="col-sm-3">{{$post->title}}</td>
-        <td class="col-sm-4">
+        <td class="col-sm-5">{{$post->title}}</td>
+        <td class="col-sm-2">
           @if($post->state=='0')
           非公開
           @else

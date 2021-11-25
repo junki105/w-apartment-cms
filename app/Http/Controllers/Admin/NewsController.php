@@ -19,7 +19,7 @@ class NewsController extends Controller
     $posts = Post::orderBy('updated_at','DESC')->paginate(5);
     $count = Post::count();
 
-    return view('admin.news.show',compact('posts','count'));
+    return view('admin.news.list',compact('posts','count'));
   }
 
   /**
@@ -119,11 +119,11 @@ class NewsController extends Controller
       if($request->search_word!=null) {
         $posts = Post::where('title','LIKE','%'.$request->title.'%')->orwhere('content','LIKE','%'.$request->content.'%').paginate(5);
 
-        return view('admin.news.show',compact('$posts'));
+        return view('admin.news.list',compact('$posts'));
       }
       else {
         $posts = Post::orderBy('updated_at','DESC')->paginate(5);
-        return view('admin.news.show',compact('$posts'));
+        return view('admin.news.list',compact('$posts'));
       }
     }
   }

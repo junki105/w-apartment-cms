@@ -315,7 +315,7 @@
             <div class="blog-inner">
               <div class="blog-info">
                 <a href="{{ url('/blog/category').'/'.$blog->category_id }}" class="blog-category btn">{{$blog->category_name}}</a>
-                <div class="blog-date">{{ date('Y-m-d', strtotime($blog->created_at)) }}</div>
+                <div class="blog-date">{{ date('Y-m-d', strtotime($blog->updated_at)) }}</div>
               </div>
               <a href="{{ url('/blog/') }}" class="blog-ttl">{{$blog->title}}</a>
             </div>
