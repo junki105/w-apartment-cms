@@ -17,7 +17,7 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
             <li class="breadcrumb-item active">施⼯実績編集</li>
           </ol>
         </div><!-- /.col -->

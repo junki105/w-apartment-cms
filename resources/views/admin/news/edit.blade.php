@@ -22,7 +22,7 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
             <li class="breadcrumb-item active">お知らせ編集</li>
           </ol>
         </div><!-- /.col -->
@@ -40,10 +40,10 @@
   <!-- Main content -->
   <div class="content">
     <div class="container-fluid">
-        <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>更新しました。</strong>
-        </div>
+      <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <strong>更新しました。</strong>
+      </div>
       <form id="postform" action="javascript:void(0)" enctype="multipart/form-data">
         @csrf
         <div class="row">
