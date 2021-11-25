@@ -31,20 +31,14 @@
     </div><!-- /.container-fluid -->
   </div>
   <!-- /.content-header -->
-
-  <!-- alert-->
-
-
   <!-- Main content -->
-
   <div class="content">
-
     <div class="container-fluid">
-        <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>追加しました。</strong>
-        </div>
-        <form id="resultsform" action="javascript:void(0)" enctype="multipart/form-data">
+      <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <strong>追加しました。</strong>
+      </div>
+      <form id="resultsform" action="javascript:void(0)" enctype="multipart/form-data">
         @csrf
         <div class="row">
           <div class="col-sm-9">
@@ -182,89 +176,88 @@
               </div>
             </div>
           </div>
-        <div class="col-sm-3">
-          <div class="card">
-            <div class="card-header">
-              <h6 class="card-title">ステータス</h6>
-            </div>
-            <div class="card-body">
-              <div class="form-group d-flex justify-content-between align-content-end">
-                <label class="mt-1 mb-0 text-sm font-weight-normal">公開状態</label>
-                <select name="public_status" id="public_status" class="p-1 form-control col-3 form-control-sm">
-                  <option value="1">公開</option>
-                  <option value="0">非公開</option>
-                </select>
+          <div class="col-sm-3">
+            <div class="card">
+              <div class="card-header">
+                <h6 class="card-title">ステータス</h6>
               </div>
-              <div class="mt-4 text-sm">公開日: <span id="created_at"></span></div>
-              <div class="mt-2 text-sm">更新日: <span id="updated_at"></span></div>
-              <div class="mt-3 d-flex justify-content-end">
-                <button type="submit" name='post_save' id='post_save' class="btn btn-sm btn-primary">公開</button>
+              <div class="card-body">
+                <div class="form-group d-flex justify-content-between align-content-end">
+                  <label class="mt-1 mb-0 text-sm font-weight-normal">公開状態</label>
+                  <select name="public_status" id="public_status" class="p-1 form-control col-3 form-control-sm">
+                    <option value="1">公開</option>
+                    <option value="0">非公開</option>
+                  </select>
+                </div>
+                <div class="mt-4 text-sm">公開日: <span id="created_at"></span></div>
+                <div class="mt-2 text-sm">更新日: <span id="updated_at"></span></div>
+                <div class="mt-3 d-flex justify-content-end">
+                  <button type="submit" name='post_save' id='post_save' class="btn btn-sm btn-primary">公開</button>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                  <h6 class="card-title">地域</h6>
+              </div>
+              <div class="card-body">
+                @foreach ($areas as $area)
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" name="area" value="{{$area->id}}" id="area{{$area->id}}">
+                    <label class="form-check-label" for="area{{$area->id}}">
+                    {{$area->name}}
+                  </div>
+                @endforeach
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <h6 class="card-title">金額</h6>
+              </div>
+              <div class="card-body">
+                @foreach ($amounts as $amount)
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" name="amount" value="{{$amount->id}}" id="amount{{$amount->id}}">
+                    <label class="form-check-label" for="amount{{$amount->id}}">
+                    {{$amount->type}}
+                  </div>
+                @endforeach
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                  <h6 class="card-title">間取り</h6>
+              </div>
+              <div class="card-body">
+                @foreach ($housetypes as $housetype)
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" name="housetype" value="{{$housetype->id}}" id="housetype{{$housetype->id}}">
+                    <label class="form-check-label" for="housetype{{$housetype->id}}">
+                    {{$housetype->type}}
+                  </div>
+                @endforeach
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                  <h6 class="card-title">アイキャッチ画像</h6>
+              </div>
+              <div class="card-body">
+                  <label for="eyecatch_image" id="preview">アイキャッチ画像を設定</label>
+                  <input type="file" name ="eyecatch_image" id="eyecatch_image">
               </div>
             </div>
           </div>
-          <div class="card">
-            <div class="card-header">
-                <h6 class="card-title">地域</h6>
-            </div>
-            <div class="card-body">
-              @foreach ($areas as $area)
-                <div class="form-check">
-                  <input type="radio" class="form-check-input" name="area" value="{{$area->id}}" id="area{{$area->id}}">
-                  <label class="form-check-label" for="area{{$area->id}}">
-                  {{$area->name}}
-                </div>
-              @endforeach
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header">
-              <h6 class="card-title">金額</h6>
-            </div>
-            <div class="card-body">
-              @foreach ($amounts as $amount)
-                <div class="form-check">
-                  <input type="radio" class="form-check-input" name="amount" value="{{$amount->id}}" id="amount{{$amount->id}}">
-                  <label class="form-check-label" for="amount{{$amount->id}}">
-                  {{$amount->type}}
-                </div>
-              @endforeach
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header">
-                <h6 class="card-title">間取り</h6>
-            </div>
-            <div class="card-body">
-              @foreach ($housetypes as $housetype)
-                <div class="form-check">
-                  <input type="radio" class="form-check-input" name="housetype" value="{{$housetype->id}}" id="housetype{{$housetype->id}}">
-                  <label class="form-check-label" for="housetype{{$housetype->id}}">
-                  {{$housetype->type}}
-                </div>
-              @endforeach
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header">
-                <h6 class="card-title">アイキャッチ画像</h6>
-            </div>
-            <div class="card-body">
-                <label for="eyecatch_image" id="preview">アイキャッチ画像を設定</label>
-                <input type="file" name ="eyecatch_image" id="eyecatch_image">
-            </div>
-            </div>
         </div>
-      </div>
-    </form>
-      <!-- /.row -->
+      </form>
     </div><!-- /.container-fluid -->
-  </div>
-  <!-- /.content -->
+  </div><!-- /.content -->
 </div>
 <script>
   $(document).ready(function() {
+    
     let result = <?php echo json_encode($result)?>;
-    console.log(result);
+    
     $('#title').val(result.title);
     $('#firstview_url').html(result.firstview_url);
     $('#firstview_upload_button').css('display','none');
@@ -289,103 +282,123 @@
     $("input[name=area][value=" + result.area_id + "]").prop('checked', true);
     $("input[name=amount][value=" + result.amount_id + "]").prop('checked', true);
     $("input[name=housetype][value=" + result.housetype_id + "]").prop('checked',true);
+    
     var created_at = result.created_at.substr(0,10);
     var updated_at = result.updated_at.substr(0,10);
+    
     $('#created_at').html(created_at);
     $('#updated_at').html(updated_at);
+    
     $('.dropzone-wrapper').on('dragover', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $(this).addClass('dragover');
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).addClass('dragover');
     });
     $('.dropzone-wrapper').on('dragleave', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $(this).removeClass('dragover');
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).removeClass('dragover');
     });
     function upload_files_list(input) {
-        let list_string = '';
-        let temp_index = 0;
-        for(file of input.files) {
-            if(temp_index>0) {
-                list_string = list_string +','+file.name;
-            }
-            else {
-                list_string = file.name;
-            }
-            temp_index++;
+      let list_string = '';
+      let temp_index = 0;
+      
+      for(file of input.files) {
+        if(temp_index>0) {
+            list_string = list_string +','+file.name;
         }
-        return list_string;
+        else {
+            list_string = file.name;
+        }
+        
+        temp_index++;
+      }
+
+      return list_string;
+      
     }
     function imagePreview(fileInput) {
       if (fileInput.files && fileInput.files[0]) {
         var fileReader = new FileReader();
+        
         fileReader.onload = function (event) {
             $('#preview').html('<img src="'+event.target.result+'"/>');
         };
+
         fileReader.readAsDataURL(fileInput.files[0]);
       }
     }
+    
     $("#eyecatch_image").change(function () {
       imagePreview(this);
     });
+
     $('#resultsform').on('submit',function(e) {
-        e.preventDefault();
-        var formData = new FormData(this);
-        $.ajax({
-          headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            type: 'POST',
-            url: '/admin/case-study/update/'+result.id,
-            data: formData,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (data) {
-                if(data.success) {
-                    $('#alert').css('display','block');
-                    // $('#created_url').html('http://localhost:8000/blog/'+data.id);
-                    // $('#url_string').css('display','block');
-                    // $('#link_url').attr('href','http://localhost:8000/blog/'+data.id).css('display','inline');
-                }
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                }
-        });
+      e.preventDefault();
+      
+      var formData = new FormData(this);
+      
+      $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'POST',
+        url: '/admin/case-study/update/'+result.id,
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        
+        success: function (data) {
+          if(data.success) {
+            $('#alert').css('display','block');
+            // $('#created_url').html('http://localhost:8000/blog/'+data.id);
+            // $('#url_string').css('display','block');
+            // $('#link_url').attr('href','http://localhost:8000/blog/'+data.id).css('display','inline');
+          }
+        },
+        error: function (data) {
+          console.log('Error:', data);
+        }
+      });
     })
 
     $("#firstview_dropzone").change(function() {
-        $('#firstview_url').html(upload_files_list(this));
-        $('#firstview_upload_button').css('display','none');
+      $('#firstview_url').html(upload_files_list(this));
+      $('#firstview_upload_button').css('display','none');
     });
+    
      $("#instruction_bg_dropzone").change(function() {
-        $('#instruction_bg_url').html(upload_files_list(this));
-        $('#instruction_bg_upload_button').css('display','none');
+      $('#instruction_bg_url').html(upload_files_list(this));
+      $('#instruction_bg_upload_button').css('display','none');
     });
+
     $("#choosing_reason_dropzone").change(function() {
-        $('#choosing_reason_url').html(upload_files_list(this));
-        $('#choosing_reason_upload_button').css('display','none');
+      $('#choosing_reason_url').html(upload_files_list(this));
+      $('#choosing_reason_upload_button').css('display','none');
     });
+    
     $("#pi_image_dropzone").change(function() {
-        $('#pi_image_url').html(upload_files_list(this));
-        $('#pi_upload_button').css('display','none');
+      $('#pi_image_url').html(upload_files_list(this));
+      $('#pi_upload_button').css('display','none');
     });
+    
     $('#download_material').change(function() {
-        $('#download_material_url').html(upload_files_list(this));
+      $('#download_material_url').html(upload_files_list(this));
     });
+    
     $('.dropzone-wrapper').on('dragover', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $(this).addClass('dragover');
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).addClass('dragover');
     });
+    
     $('.dropzone-wrapper').on('dragleave', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $(this).removeClass('dragover');
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).removeClass('dragover');
     });
-});
+  });
 </script>
 
 @endsection

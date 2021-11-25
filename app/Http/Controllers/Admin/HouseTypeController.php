@@ -14,7 +14,7 @@ class HouseTypeController extends Controller
     {
         //
         $housetypes = HouseType::all();
-        return view('admin.results.housetype.list',compact('housetypes'));
+        return view('admin.case-study.housetype.list',compact('housetypes'));
     }
 
     /**
@@ -26,7 +26,7 @@ class HouseTypeController extends Controller
     {
         //
         $housetypes = HouseType::orderBy('order_index','ASC')->get();
-        return view('admin.results.housetype.list',compact('housetypes'));
+        return view('admin.case-study.housetype.list',compact('housetypes'));
     }
 
     /**
@@ -67,7 +67,7 @@ class HouseTypeController extends Controller
     {
         //
         $housetype = Housetype::where('id',$id)->first();
-        return view('admin.results.housetype.edit',compact(['housetype']));
+        return view('admin.case-study.housetype.edit',compact(['housetype']));
     }
 
     /**

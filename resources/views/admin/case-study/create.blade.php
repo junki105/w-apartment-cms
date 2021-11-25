@@ -19,29 +19,22 @@
       </div><!-- /.row -->
       <div class="mt-4 mb-2" id="url_string" style="display: none">
         <span class="mr-2 font-weight-bold h6">リンク:
-            <span id="created_url">
-            </span>
+          <span id="created_url"></span>
         </span>
         <a id="link_url" class="btn btn-sm btn-default" target="_blank">表示</a>
       </div>
     </div><!-- /.container-fluid -->
   </div>
   <!-- /.content-header -->
-
-  <!-- alert-->
-
-
   <!-- Main content -->
-
   <div class="content">
-
     <div class="container-fluid">
       <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
-          <button type="button" class="close" data-dismiss="alert">×</button>
-          <strong id="notify_string"></strong>
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong id="notify_string"></strong>
       </div>
       <form id="resultsform" action="javascript:void(0)" enctype="multipart/form-data">
-      @csrf
+        @csrf
         <div class="row">
           <div class="col-sm-9">
             <div class="card">
@@ -262,44 +255,62 @@
     let current_id;
     let update_flag = false;
     let validation_flag = true;
+    
     var current_date = new Date();
     var current_year = String(current_date.getFullYear());
     var current_month = current_date.getMonth() + 1;
+    
     current_month<10?current_month = '0' + String(current_month) : current_month = String(current_month);
+    
     var current_day = current_date.getDate();
+
     current_day<10?current_day = '0' + String(current_day) : current_day = String(current_day);
+
     let created_at = current_year + '/' + current_month + '/' + current_day;
+    
     $('#created_at').html(created_at);
     $('#updated_at').html(created_at);
+    
     function upload_files_list(input) {
-        let list_string = '';
-        let temp_index = 0;
-        for(file of input.files) {
-            if(temp_index>0) {
-                list_string = list_string +','+file.name;
-            }
-            else {
-                list_string = file.name;
-            }
-            temp_index++;
+      let list_string = '';
+      let temp_index = 0;
+      
+      for(file of input.files) {
+        if(temp_index>0) {
+            list_string = list_string +','+file.name;
         }
-        return list_string;
+        else {
+            list_string = file.name;
+        }
+        
+        temp_index++;
+      }
+      
+      return list_string;
     }
+    
     function imagePreview(fileInput) {
       if (fileInput.files && fileInput.files[0]) {
         var fileReader = new FileReader();
+        
         fileReader.onload = function (event) {
             $('#preview').html('<img src="'+event.target.result+'"/>');
         };
+        
         fileReader.readAsDataURL(fileInput.files[0]);
       }
     }
+
     $("#eyecatch_image").change(function () {
       imagePreview(this);
     });
+    
     $('#resultsform').on('submit',function(e) {
+      
       let validation_flag = true;
+      
       $('#alert').css('display','none');
+
       if($('#title').val()==='')
       {
         $('#title').css('border-color','red');
@@ -308,6 +319,7 @@
       else {
         $('#title').css('border-color','');
       }
+      
       if($('#instructor_name').val()==='') {
         $('#instructor_name').css('border-color','red')
         validation_flag = false;
@@ -315,6 +327,7 @@
       else {
         $('#instructor_name').css('border-color','');
       }
+      
       if($('#instruction_summary').val()==='') {
         $('#instruction_summary').css('border-color','red');
         validation_flag = false;
@@ -322,6 +335,7 @@
       else {
         $('#instruction_summary').css('border-color','');
       }
+      
       if($('#instruction_effects').val()==='') {
         $('#instruction_effects').css('border-color','red');
         validation_flag = false;
@@ -329,6 +343,7 @@
       else {
         $('#instruction_effects').css('border-color','');
       }
+      
       if($('#instruction_details').val()==='') {
         $('#instruction_details').css('border-color','red');
         validation_flag = false;
@@ -336,6 +351,7 @@
       else {
         $('#instruction_details').css('border-color','');
       }
+      
       if($('#choosing_reason').val()==='') {
         $('#choosing_reason').css('border-color','red');
         validation_flag = false;
@@ -343,6 +359,7 @@
       else {
         $('#choosing_reason').css('border-color','');
       }
+      
       if($('#post_introduction_details').val()==='') {
         $('#post_introduction_details').css('border-color','red');
         validation_flag = false;
@@ -350,6 +367,7 @@
       else {
         $('#post_introduction_details').css('border-color','');
       }
+      
       if($('#future_outlook_details').val()==='') {
         $('#future_outlook_details').css('border-color','red');
         validation_flag = false;
@@ -357,6 +375,7 @@
       else {
         $('#future_outlook_details').css('border-color','');
       }
+      
       if($('#url').val()==='') {
         $('#url').css('border-color','red');
         validation_flag = false;
@@ -364,42 +383,46 @@
       else {
         $('#url').css('border-color','');
       }
+      
       if(validation_flag)
-        {
-          $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      {
+        $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        
+        e.preventDefault();
+        
+        var formData = new FormData(this);
+        
+        $.ajax({
+          type: 'post',
+          url: '/admin/case-study',
+          data: formData,
+          cache: false,
+          contentType: false,
+          processData: false,
+          
+          success: function (data) {
+            console.log(data);
+            if(data.success) {
+              window.location.href = data.url+"/edit";
+              $('#notify_string').html('追加しました。');
+              $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
+              $('#created_url').html(data.url);
+              $('#url_string').css('display','block');
+              $('#link_url').attr('href',data.url).css('display','inline');
+              $('#save').html('更新');
+              update_flag = true;
+              current_id = data.id;
+              $('#save').html('更新');
             }
-          });
-          e.preventDefault();
-          var formData = new FormData(this);
-          type = 'post';
-          $.ajax({
-            type: type,
-            url: '/admin/case-study',
-            data: formData,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (data) {
-              console.log(data);
-              if(data.success) {
-                window.location.href = data.url+"/edit";
-                $('#notify_string').html('追加しました。');
-                $('#alert').css({'display':'block','border-left-color':'#00a32a', 'color':'black'});
-                $('#created_url').html(data.url);
-                $('#url_string').css('display','block');
-                $('#link_url').attr('href',data.url).css('display','inline');
-                $('#save').html('更新');
-                update_flag = true;
-                current_id = data.id;
-                $('#save').html('更新');
-              }
-            },
-            error: function (data) {
-              console.log('Error:', data);
-            }
-          });
+          },
+          error: function (data) {
+            console.log('Error:', data);
+          }
+        });
         
       }
       else {
@@ -409,36 +432,43 @@
         $('#alert').css('color','red');
       }
     })
+    
     $("#firstview_dropzone").change(function() {
-        $('#firstview_url').html(upload_files_list(this));
-        $('#firstview_upload_button').css('display','none');
+      $('#firstview_url').html(upload_files_list(this));
+      $('#firstview_upload_button').css('display','none');
     });
-     $("#instruction_bg_dropzone").change(function() {
-        $('#instruction_bg_url').html(upload_files_list(this));
-        $('#instruction_bg_upload_button').css('display','none');
+    
+    $("#instruction_bg_dropzone").change(function() {
+      $('#instruction_bg_url').html(upload_files_list(this));
+      $('#instruction_bg_upload_button').css('display','none');
     });
+
     $("#choosing_reason_dropzone").change(function() {
-        $('#choosing_reason_url').html(upload_files_list(this));
-        $('#choosing_reason_upload_button').css('display','none');
+      $('#choosing_reason_url').html(upload_files_list(this));
+      $('#choosing_reason_upload_button').css('display','none');
     });
+    
     $("#pi_image_dropzone").change(function() {
-        $('#pi_image_url').html(upload_files_list(this));
-        $('#pi_upload_button').css('display','none');
+      $('#pi_image_url').html(upload_files_list(this));
+      $('#pi_upload_button').css('display','none');
     });
+
     $('#download_material').change(function() {
-        $('#download_material_url').html(upload_files_list(this));
+      $('#download_material_url').html(upload_files_list(this));
     });
+    
     $('.dropzone-wrapper').on('dragover', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $(this).addClass('dragover');
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).addClass('dragover');
     });
+    
     $('.dropzone-wrapper').on('dragleave', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $(this).removeClass('dragover');
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).removeClass('dragover');
     });
-});
+  });
 </script>
 
 @endsection

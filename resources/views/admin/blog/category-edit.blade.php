@@ -51,7 +51,7 @@
             </div>
             <div class="card-body">
               <div>
-                <button class="btn btn-danger" id="category_delete" style="background-color:white;color:red;border:none">削除する</button>
+                <button class="btn btn-danger" id="category_delete" style="background-color:white;color:red;border:none"><strong>削除する</strong></button>
                 <button  name='save' id='save' class="btn btn-sm btn-primary float-sm-right">更新</button>
               </div>
             </div>
