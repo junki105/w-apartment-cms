@@ -26,7 +26,7 @@
   });
 </script>
 <div class="card-header">
-  <h6 class="card-title"><strong>お知らせ一覧</strong></h6>
+  <h6 class="mt-1 card-title"><strong>お知らせ一覧</strong></h6>
   <div class="float-right card-tools d-inline-flex">
     <span class="mt-1 mr-2">全<span class="count">{{$count}}</span>件</span>
     {{$posts->links()}}

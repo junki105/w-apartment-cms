@@ -146,11 +146,11 @@ class NewsController extends Controller
     $post->state = $request->state;
     
     if($file = $request->file('upload-image')) {
-        $name = time().time().'.'.$file->getClientOriginalExtension();
-        $target_path = public_path('/uploads/');
-        if($file->move($target_path, $name)) {
-            $post->image_url = '/uploads/'.$name;
-        }
+      $name = time().time().'.'.$file->getClientOriginalExtension();
+      $target_path = public_path('/uploads/');
+      if($file->move($target_path, $name)) {
+          $post->image_url = '/uploads/'.$name;
+      }
     }
 
     $post->timestamps = true;

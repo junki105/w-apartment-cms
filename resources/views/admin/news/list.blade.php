@@ -80,7 +80,7 @@
       }
       
       $.ajax({
-        url: "/admin/news/show?page=" + page + "&search_word=" + search_word + "&state=" + state,
+        url: "/admin/news/list?page=" + page + "&search_word=" + search_word + "&state=" + state,
         method: "GET",
         success: function(data) {
           $('#table_card').html(data);
