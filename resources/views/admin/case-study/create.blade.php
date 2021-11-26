@@ -70,11 +70,11 @@
                 </div>
                 <div class="form-group row">
                   <label for="instruction_summary" class="col-sm-4 col-form-label">導入の背景（要約）</label>
-                  <input type="text" class="ml-1 col-sm-7 form-control" name="instruction_summary" id="instruction_summary">
+                  <textarea row="3" class="ml-1 col-sm-7 form-control" name="instruction_summary" id="instruction_summary"></textarea>
                 </div>
                 <div class="form-group row">
                   <label for="instruction_effects" class="col-sm-4 col-form-label">導入後の効果(要約)</label>
-                  <input type="text" class="ml-1 col-sm-7 form-control" name="instruction_effects" id="instruction_effects">
+                  <textarea row="3" class="ml-1 col-sm-7 form-control" name="instruction_effects" id="instruction_effects"></textarea>
                 </div>
               </div>
             </div>
@@ -86,7 +86,7 @@
               <div class="card-body">
                 <div class="form-group row">
                   <label for="instruction_details" class="col-sm-4 col-form-label">導入の背景（詳細•テキスト）</label>
-                  <input type="text" class="ml-1 col-sm-7 form-control" name="instruction_details" id="instruction_details">
+                  <textarea row="3" class="ml-1 col-sm-7 form-control" name="instruction_details" id="instruction_details"></textarea>
                 </div>
                 <div class="form-group row">
                   <label for="instructioin_bg" class="col-sm-4 col-form-label">導入の背景（詳細•画像）</label>
@@ -109,7 +109,7 @@
               <div class="card-body">
                 <div class="form-group row">
                   <label for="choosing_reason" class="col-sm-4 col-form-label">選んだ理由（詳細•テキスト）</label>
-                  <input type="text" class="ml-1 col-sm-7 form-control" name="choosing_reason" id="choosing_reason">
+                  <textarea row="3" class="ml-1 col-sm-7 form-control" name="choosing_reason" id="choosing_reason"></textarea>
                 </div>
                 <div class="form-group row">
                   <label for="choosing_reason" class="col-sm-4 col-form-label">選んだ理由（詳細•画像）</label>
@@ -132,7 +132,7 @@
               <div class="card-body">
                 <div class="form-group row">
                   <label for="post_introduction_details" class="col-sm-4 col-form-label">導入後の効果（詳細•テキスト）</label>
-                  <input type="text" class="ml-1 col-sm-7 form-control" name="post_introduction_details" id="post_introduction_details">
+                  <textarea row="3" class="ml-1 col-sm-7 form-control" name="post_introduction_details" id="post_introduction_details"></textarea>
                 </div>
                 <div class="form-group row">
                   <label for="pi_image" class="col-sm-4 col-form-label">導入後の効果（詳細•画像）</label>
@@ -155,7 +155,7 @@
               <div class="card-body">
                 <div class="form-group row">
                   <label for="future_outlook_details" class="col-sm-4 col-form-label">今後の展望（詳細•テキスト）</label>
-                  <input type="text" class="ml-1 col-sm-7 form-control" name="future_outlook_details" id="future_outlook_details">
+                  <textarea row="3" class="ml-1 col-sm-7 form-control" name="future_outlook_details" id="future_outlook_details"></textarea>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-4 col-form-label">資料ダウンロード</label>

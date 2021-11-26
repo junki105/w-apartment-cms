@@ -36,7 +36,7 @@
     <div class="container-fluid">
       <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
           <button type="button" class="close" data-dismiss="alert">×</button>
-          <strong>追加しました。</strong>
+          <strong>更新しました。</strong>
       </div>
       <form id="resultsform" action="javascript:void(0)" enctype="multipart/form-data">
         @csrf
@@ -59,15 +59,15 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="form-group row">
-                    <label for="firstview" class="col-sm-4 col-form-label">画像(ファーストビュー)</label>
-                    <div class="ml-1 dropzone-wrapper col-sm-7">
-                        <div class="dropzone-desc">
-                          <i class="fa fa-cloud-upload-alt"></i>
-                          <span id="firstview_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
-                          <button id="firstview_upload_button">ファイルを選捉</button>
-                        </div>
-                        <input type="file" name="firstview" id="firstview_dropzone" class="dropzone">
+                  <label for="firstview" class="col-sm-4 col-form-label">画像(ファーストビュー)</label>
+                  <div class="ml-1 dropzone-wrapper col-sm-7">
+                    <div class="dropzone-desc">
+                      <i class="fa fa-cloud-upload-alt"></i>
+                      <span id="firstview_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
+                      <button id="firstview_upload_button">ファイルを選捉</button>
                     </div>
+                    <input type="file" name="firstview" id="firstview_dropzone" class="dropzone">
+                  </div>
                 </div>
                 <div class="form-group row">
                   <label for="instructor_name" class="col-sm-4 col-form-label">導入者氏名</label>
@@ -75,11 +75,11 @@
                 </div>
                 <div class="form-group row">
                   <label for="instruction_summary" class="col-sm-4 col-form-label">導入の背景（要約）</label>
-                  <input type="text" class="ml-1 col-sm-7 form-control" name="instruction_summary" id="instruction_summary">
+                  <textarea row="3" class="ml-1 col-sm-7 form-control" name="instruction_summary" id="instruction_summary"></textarea>
                 </div>
                 <div class="form-group row">
                   <label for="instruction_effects" class="col-sm-4 col-form-label">導入後の効果(要約)</label>
-                  <input type="text" class="ml-1 col-sm-7 form-control" name="instruction_effects" id="instruction_effects">
+                  <textarea row="3" class="ml-1 col-sm-7 form-control" name="instruction_effects" id="instruction_effects"></textarea>
                 </div>
               </div>
             </div>
@@ -91,18 +91,18 @@
               <div class="card-body">
                 <div class="form-group row">
                   <label for="instruction_details" class="col-sm-4 col-form-label">導入の背景（詳細•テキスト）</label>
-                  <input type="text" class="ml-1 col-sm-7 form-control" name="instruction_details" id="instruction_details">
+                  <textarea row="3" class="ml-1 col-sm-7 form-control" name="instruction_details" id="instruction_details"></textarea>
                 </div>
                 <div class="form-group row">
-                    <label for="instruction_bg" class="col-sm-4 col-form-label">画像(ファーストビュー)</label>
-                    <div class="ml-1 dropzone-wrapper col-sm-7">
-                        <div class="dropzone-desc">
-                          <i class="fa fa-cloud-upload-alt"></i>
-                          <span id="instruction_bg_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
-                          <button id="instruction_bg_upload_button">ファイルを選捉</button>
-                        </div>
-                        <input type="file" name="instruction_bg" id="instruction_bg_dropzone" class="dropzone">
+                  <label for="instruction_bg" class="col-sm-4 col-form-label">画像(ファーストビュー)</label>
+                  <div class="ml-1 dropzone-wrapper col-sm-7">
+                    <div class="dropzone-desc">
+                      <i class="fa fa-cloud-upload-alt"></i>
+                      <span id="instruction_bg_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
+                      <button id="instruction_bg_upload_button">ファイルを選捉</button>
                     </div>
+                    <input type="file" name="instruction_bg" id="instruction_bg_dropzone" class="dropzone">
+                  </div>
                 </div>
               </div>
             </div>
@@ -114,18 +114,18 @@
               <div class="card-body">
                 <div class="form-group row">
                   <label for="choosing_reason" class="col-sm-4 col-form-label">選んだ理由（詳細•テキスト）</label>
-                  <input type="text" class="ml-1 col-sm-7 form-control" name="choosing_reason" id="choosing_reason">
+                  <textarea row="3" class="ml-1 col-sm-7 form-control" name="choosing_reason" id="choosing_reason"></textarea>
                 </div>
                 <div class="form-group row">
-                    <label for="choosing_reason" class="col-sm-4 col-form-label">選んだ理由（詳細•画像）</label>
-                    <div class="ml-1 dropzone-wrapper col-sm-7">
-                        <div class="dropzone-desc">
-                          <i class="fa fa-cloud-upload-alt"></i>
-                          <span id="choosing_reason_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
-                          <button id="choosing_reason_upload_button">ファイルを選捉</button>
-                        </div>
-                        <input type="file" name="choosing_reason_file" id="choosing_reason_dropzone" class="dropzone">
+                  <label for="choosing_reason" class="col-sm-4 col-form-label">選んだ理由（詳細•画像）</label>
+                  <div class="ml-1 dropzone-wrapper col-sm-7">
+                    <div class="dropzone-desc">
+                      <i class="fa fa-cloud-upload-alt"></i>
+                      <span id="choosing_reason_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
+                      <button id="choosing_reason_upload_button">ファイルを選捉</button>
                     </div>
+                    <input type="file" name="choosing_reason_file" id="choosing_reason_dropzone" class="dropzone">
+                  </div>
                 </div>
               </div>
             </div>
@@ -137,18 +137,18 @@
               <div class="card-body">
                 <div class="form-group row">
                   <label for="post_introduction_details" class="col-sm-4 col-form-label">導入後の効果（詳細•テキスト）</label>
-                  <input type="text" class="ml-1 col-sm-7 form-control" name="post_introduction_details" id="post_introduction_details">
+                  <textarea row="3" class="ml-1 col-sm-7 form-control" name="post_introduction_details" id="post_introduction_details"></textarea>
                 </div>
                 <div class="form-group row">
-                    <label for="pi_image" class="col-sm-4 col-form-label">導入後の効果（詳細•画像）</label>
-                    <div class="ml-1 dropzone-wrapper col-sm-7">
-                        <div class="dropzone-desc">
-                          <i class="fa fa-cloud-upload-alt"></i>
-                          <span id="pi_image_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
-                          <button id="pi_upload_button">ファイルを選捉</button>
-                        </div>
-                        <input type="file" name="pi_image" id="pi_image_dropzone" class="dropzone">
+                  <label for="pi_image" class="col-sm-4 col-form-label">導入後の効果（詳細•画像）</label>
+                  <div class="ml-1 dropzone-wrapper col-sm-7">
+                    <div class="dropzone-desc">
+                      <i class="fa fa-cloud-upload-alt"></i>
+                      <span id="pi_image_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
+                      <button id="pi_upload_button">ファイルを選捉</button>
                     </div>
+                    <input type="file" name="pi_image" id="pi_image_dropzone" class="dropzone">
+                  </div>
                 </div>
               </div>
             </div>
@@ -160,18 +160,18 @@
               <div class="card-body">
                 <div class="form-group row">
                   <label for="future_outlook_details" class="col-sm-4 col-form-label">今後の展望（詳細•テキスト）</label>
-                  <input type="text" class="ml-1 col-sm-7 form-control" name="future_outlook_details" id="future_outlook_details">
+                  <textarea row="3" class="ml-1 col-sm-7 form-control" name="future_outlook_details" id="future_outlook_details"></textarea>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-4 col-form-label">資料ダウンロード</label>
                   <div class="ml-1 custom-file col-sm-7">
-                      <input type="file" class="custom-file-input" id="download_material" name="download_material">
-                      <label class="custom-file-label" id="download_material_url" for="download_material">資料をアップロード</label>
+                    <input type="file" class="custom-file-input" id="download_material" name="download_material">
+                    <label class="custom-file-label" id="download_material_url" for="download_material">資料をアップロード</label>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="url" class="col-sm-4 col-form-label">URL</label>
-                  <input type="text" class="ml-1 col-sm-7 form-control" name="url" id="url">
+                  <textarea row="3" class="ml-1 col-sm-7 form-control" name="url" id="url"></textarea>
                 </div>
               </div>
             </div>
@@ -259,20 +259,27 @@
     let result = <?php echo json_encode($result)?>;
     
     $('#title').val(result.title);
+
     $('#firstview_url').html(result.firstview_url);
     $('#firstview_upload_button').css('display','none');
+    
     $('#instruction_bg_url').html(result.instruction_bg_url);
     $('#instruction_bg_upload_button').css('display','none');
+    
     $('#instructor_name').val(result.instructor_name);
     $('#instruction_summary').val(result.instruction_summary);
     $('#instruction_effects').val(result.instruction_effects);
     $('#instruction_details').val(result.instruction_details);
     $('#choosing_reason').val(result.choosing_reason);
+
     $('#choosing_reason_url').html(result.choosing_reason_url);
     $('#choosing_reason_upload_button').css('display','none');
+    
     $('#post_introduction_details').val(result.post_introduction_details);
+
     $('#pi_image_url').html(result.post_introduction_url);
     $('#pi_upload_button').css('display','none');
+    
     $('#future_outlook_details').val(result.future_outlook_details);
     $('#download_material_url').html(result.download_material_url);
     $('#public_status').val(result.public_status);

@@ -208,9 +208,9 @@
       
     });
     
-    $('.form-check-input').click(function() {
-      $('.form-check-input').not(this).prop('checked',false);
-    });
+    // $('.form-check-input').click(function() {
+    //   $('.form-check-input').not(this).prop('checked',false);
+    // });
     
     $(document).on('click', '.pagination a', function(event) {
       event.preventDefault(); 

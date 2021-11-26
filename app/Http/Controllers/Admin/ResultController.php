@@ -64,9 +64,9 @@ class ResultController extends Controller
       'title' => 'required'
     ]);
 
-    request()->validate([
-      'firstview' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-    ]);
+    // request()->validate([
+    //   'firstview' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+    // ]);
 
     $result = new Result;
 
@@ -137,7 +137,7 @@ class ResultController extends Controller
 
     $result->save();
     $url = url('admin/case-study/'.$result->id);
-    
+
     return response()->json(['success'=>true,'id'=>$result->id,'url'=>$url]);
   }
 
@@ -181,9 +181,9 @@ class ResultController extends Controller
         'title' => 'required'
     ]);
 
-    request()->validate([
-      'firstview' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-    ]);
+    // request()->validate([
+    //   'firstview' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+    // ]);
 
     $result = Result::find($id);
     $result->title = $request->title;
