@@ -2208,6 +2208,10 @@ a:hover {
   font-style: normal;
   text-align: left;
   margin-left: 120px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .home-article-left img {
@@ -2257,6 +2261,16 @@ a:hover {
 
 .home-article-right .article-content {
   margin-top: 20px;
+  height: 170px;
+  overflow-y: hidden;
+  font-size: 16px;
+}
+
+.home-article-right .article-content p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .home-article-right .article-content div {
@@ -2328,6 +2342,8 @@ a:hover {
 
   .home-article-right .article-content {
     margin-top: 20rem;
+    height: 170rem;
+    font-size: 16rem;
   }
 
   .home-article-right .article-content div {
@@ -2418,6 +2434,8 @@ a:hover {
 
   .home-article-right .article-content {
     margin-top: 20px;
+    height: 170px;
+    font-size: 16px;
   }
 
   .home-article-right .article-content div {

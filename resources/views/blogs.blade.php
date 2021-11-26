@@ -24,7 +24,7 @@
             <img src="{{ URL::asset($blog->featured_image_url) }}" alt="">
           </div>
           <div class="article-right">
-              <div class="article-date">{{$blog->created_at}}</div>
+              <div class="article-date">{{ date('Y-m-d', strtotime($blog->updated_at)) }}</div>
               <div class="investment article-blog-category"><a href="{{ url('/blog/category').'/'.$blog->category_id }}" class="blog-category btn">{{$blog->category_name}}</a></div>
               <p>{!!$blog->content!!}
               </p>

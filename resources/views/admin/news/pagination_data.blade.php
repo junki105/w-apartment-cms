@@ -5,20 +5,19 @@
     $('#deleteModal').modal();
     $('#deleteButton').html('<a class="btn btn-danger">削除</a>');
   }
+  
   $('#deleteButton').click(function(e) {
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
+    
     $.ajax({
       type: "DELETE",
       url: "/admin/news" + '/' + delete_id,
       success: function(data) {
-       
-          window.location.reload();
-     
-      
+          window.location.reload();      
       },
       error: function(data) {
         console.log('Error:', data);
@@ -27,9 +26,11 @@
   });
 </script>
 <div class="card-header">
-  <h6 class="card-title"><strong>お知らせ一覧</strong></h6>
-  <div class="float-right card-tools d-inline-flex"><span class="mt-1 mr-2">全<span
-        class="count">{{$count}}</span>件</span>{{$posts->links()}}</div>
+  <h6 class="mt-1 card-title"><strong>お知らせ一覧</strong></h6>
+  <div class="float-right card-tools d-inline-flex">
+    <span class="mt-1 mr-2">全<span class="count">{{$count}}</span>件</span>
+    {{$posts->links()}}
+  </div>
 </div>
 <div class="card-body">
   @if(count($posts)>0)
@@ -37,8 +38,8 @@
     <thead>
       <tr class="row">
         <th class="col-sm-1">ID</th>
-        <th class="col-sm-3">タイトル</th>
-        <th class="col-sm-4">公開状能</th>
+        <th class="col-sm-5">タイトル</th>
+        <th class="col-sm-2">公開状能</th>
         <th class="float-right col-sm-4"></th>
       </tr>
     </thead>
@@ -46,8 +47,8 @@
       @foreach ($posts as $post)
       <tr class="row" id="{{$post->id}}">
         <td class="col-sm-1">{{$post->id}}</td>
-        <td class="col-sm-3">{{$post->title}}</td>
-        <td class="col-sm-4">
+        <td class="col-sm-5">{{$post->title}}</td>
+        <td class="col-sm-2">
           @if($post->state=='0')
           非公開
           @else
@@ -96,6 +97,8 @@
   @endif
 </div>
 <div class="card-footer">
-  <div class="float-right card-tools d-inline-flex"><span class="m-2">全<span
-        class="count">{{$count}}</span>件</span>{{$posts->links()}}</div>
+  <div class="float-right card-tools d-inline-flex">
+    <span class="m-2">全<span class="count">{{$count}}</span>件</span>
+    {{$posts->links()}}
+  </div>
 </div>

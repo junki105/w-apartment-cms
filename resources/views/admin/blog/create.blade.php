@@ -12,39 +12,31 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
             <li class="breadcrumb-item active">ブログ新規追加</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
       <div class="mt-4 mb-2" id="url_string" style="display: none">
         <span class="mr-2 font-weight-bold h6">リンク:
-            <span id="created_url">
-            </span>
+          <span id="created_url"></span>
         </span>
         <a id="link_url" class="btn btn-sm btn-default" target="_blank">表示</a>
       </div>
     </div><!-- /.container-fluid -->
   </div>
   <!-- /.content-header -->
-
-  <!-- alert-->
-
-
   <!-- Main content -->
-
   <div class="content">
-
     <div class="container-fluid">
-        <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong id="notify_string"></strong>
-        </div>
-        <form id="blogform" action="javascript:void(0)" enctype="multipart/form-data">
+      <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong id="notify_string"></strong>
+      </div>
+      <form id="blogform" action="javascript:void(0)" enctype="multipart/form-data">
         @csrf
         <div class="row">
           <div class="col-sm-9">
-
             <div class="card">
               <div class="card-header">
                 <h5 class="card-title">タイトル</h5>
@@ -149,7 +141,6 @@
 <script>
   $(document).ready(function() {
     let current_id;
-    let validation_flag = true;
     
     $('#summernote').summernote({
       height: 450,
@@ -185,10 +176,11 @@
     });
     
     $('#title').change(function(event) {
-        title = event.target.value;
+      title = event.target.value;
     })
     
     $('#blogform').on('submit',function(e) {
+      let validation_flag = true;
       $('#alert').css('display','none');
       
       if($('#title').val()==='') {
@@ -228,7 +220,7 @@
       if(validation_flag) {
         $.ajaxSetup({
           headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
         });
         
@@ -242,9 +234,9 @@
           type: type,
           url: '/admin/blog',
           data: formData,
-          cache:false,
-          contentType:false,
-          processData:false,
+          cache: false,
+          contentType: false,
+          processData: false,
           success: function (data) {
             if(data.success) {
               window.location.href = data.url+"/edit";
@@ -256,6 +248,7 @@
         });
       }
     });
+    
     function upload_files_list(input) {
       let list_string = '';
       let temp_index = 0;
@@ -272,6 +265,7 @@
       }
       return list_string;
     }
+    
     function readFile(input) {
       if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -284,16 +278,19 @@
         reader.readAsDataURL(input.files[0]);
       }
     }
+
     $(".dropzone").change(function() {
       $('#author_image_upload_button').css('display','none');
 
         readFile(this);
     });
+
     $('.dropzone-wrapper').on('dragover', function(e) {
         e.preventDefault();
         e.stopPropagation();
         $(this).addClass('dragover');
     });
+    
     $('.dropzone-wrapper').on('dragleave', function(e) {
         e.preventDefault();
         e.stopPropagation();

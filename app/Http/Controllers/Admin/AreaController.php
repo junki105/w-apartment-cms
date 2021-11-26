@@ -25,7 +25,7 @@ class AreaController extends Controller
     {
         //
         $areas = Area::orderBy('order_index','ASC')->get();
-        return view('admin.results.area.list',compact('areas'));
+        return view('admin.case-study.area.list',compact('areas'));
     }
 
     /**
@@ -77,7 +77,7 @@ class AreaController extends Controller
     {
         //
         $area = Area::where('id',$id)->first();
-        return view('admin.results.area.edit',compact(['area']));
+        return view('admin.case-study.area.edit',compact(['area']));
     }
 
     /**

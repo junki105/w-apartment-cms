@@ -61,21 +61,27 @@
     display: none;
   }
   .dropzone-wrapper {
-    border: 2px dashed #91b0b3;
-    color: #92b0b3;
+    border: 2px dashed #ced4da;
+    color: #495057;
     width: inherit;
     display: flex;
     min-height: 70px;
     height: auto!important;
     border-radius: 2px;
   }
-
   .dropzone-desc {
     margin: auto;
     font-size: 16px;
     width: 100%;
+    text-align: center;
   }
-
+  .dropzone-desc button {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    outline: none;
+    background: white;
+    padding: 5px 10px;
+  }
   .dropzone,
   .dropzone:focus {
     position: absolute;
@@ -85,16 +91,13 @@
     cursor: pointer;
     opacity: 0;
   }
-
   .dropzone-wrapper:hover,
   .dropzone-wrapper.dragover {
     background: #ecf0f5;
   }
-
   .preview-zone {
     text-align: center;
   }
-
   .preview-zone .box {
     box-shadow: none;
     border-radius: 0;
@@ -137,5 +140,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  #firstview_upload_button {
+
   }
 </style>

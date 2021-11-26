@@ -315,7 +315,7 @@ class HousingController extends Controller
           $row_count = Housing::where("title","LIKE","%$request->search_word%")->count();
         }
         else {
-          $housings = Housing::latest()->paginate(5);
+          $housings = Housing::orderBy('updated_at','DESC')->paginate(5);
           $row_count = Housing::count();
         }
       }

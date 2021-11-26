@@ -97,86 +97,26 @@
       <div class="content">
         <h2 class="sec-ttl">NEWS</h2>
         <div class="news-content">
+          @foreach ($posts as $post)
           <article class="home-article">
             <div class="home-article-left">
-              <h3>売上が100%向上。</h3>
+              <h3>{{ $post->title }}</h3>
               <figure>
-                <img src="{{ URL::asset('images/top_news.png') }}" alt="">
+                <img src="{{ url( $post->image_url ) }}" alt="">
               </figure>
             </div>
             <div class="home-article-right">
-              <div class="news-date">2021.01.01</div>
-              <div class="article-logo">
+              <div class="news-date">{{ date('Y.m.d', strtotime($post->updated_at)) }}</div>
+              <!-- <div class="article-logo">
                 <img src="{{ URL::asset('images/business_logo.png') }}" alt="">
                 <span>株式会社〇〇〇〇〇〇〇〇〇</span>
-              </div>
+              </div> -->
               <div class="article-content">
-                <div><span>業種○○○</span></div>
-                <div><span>従業員数○○○○○</span></div>
-                <div><span>課題○○○○○○○○○○○○○○</span></div>
+                {!! $post->content !!}
               </div>
             </div>
           </article>
-          <article class="home-article">
-            <div class="home-article-left">
-              <h3>売上が100%向上。</h3>
-              <figure>
-                <img src="{{ URL::asset('images/top_news.png') }}" alt="">
-              </figure>
-            </div>
-            <div class="home-article-right">
-              <div class="news-date">2021.01.01</div>
-              <div class="article-logo">
-                <img src="{{ URL::asset('images/business_logo.png') }}" alt="">
-                <span>株式会社〇〇〇〇〇〇〇〇〇</span>
-              </div>
-              <div class="article-content">
-                <div><span>業種○○○</span></div>
-                <div><span>従業員数○○○○○</span></div>
-                <div><span>課題○○○○○○○○○○○○○○</span></div>
-              </div>
-            </div>
-          </article>
-          <article class="home-article">
-            <div class="home-article-left">
-              <h3>売上が100%向上。</h3>
-              <figure>
-                <img src="{{ URL::asset('images/top_news.png') }}" alt="">
-              </figure>
-            </div>
-            <div class="home-article-right">
-              <div class="news-date">2021.01.01</div>
-              <div class="article-logo">
-                <img src="{{ URL::asset('images/business_logo.png') }}" alt="">
-                <span>株式会社〇〇〇〇〇〇〇〇〇</span>
-              </div>
-              <div class="article-content">
-                <div><span>業種○○○</span></div>
-                <div><span>従業員数○○○○○</span></div>
-                <div><span>課題○○○○○○○○○○○○○○</span></div>
-              </div>
-            </div>
-          </article>
-          <article class="home-article">
-            <div class="home-article-left">
-              <h3>売上が100%向上。</h3>
-              <figure>
-                <img src="{{ URL::asset('images/top_news.png') }}" alt="">
-              </figure>
-            </div>
-            <div class="home-article-right">
-              <div class="news-date">2021.01.01</div>
-              <div class="article-logo">
-                <img src="{{ URL::asset('images/business_logo.png') }}" alt="">
-                <span>株式会社〇〇〇〇〇〇〇〇〇</span>
-              </div>
-              <div class="article-content">
-                <div><span>業種○○○</span></div>
-                <div><span>従業員数○○○○○</span></div>
-                <div><span>課題○○○○○○○○○○○○○○</span></div>
-              </div>
-            </div>
-          </article>
+          @endforeach
           <a href="{{ url('/news') }}" class="btn sec-link-btn"><img src="{{ URL::asset('images/ico_arrow-right.png') }}" alt=""></a>
         </div>
       </div>
@@ -197,82 +137,26 @@
       <div class="content">
         <h2 class="sec-ttl">事例</h2>
         <div class="news-content">
+          @foreach ($results as $result)
           <article class="home-article">
             <div class="home-article-left">
-              <h3>売上が100%向上。</h3>
+              <h3>{{ $result->title }}</h3>
               <figure>
-                <img src="{{ URL::asset('images/top_news.png') }}" alt="">
+                <img src="{{ url( $result->eyecatch_image_url ) }}" alt="">
               </figure>
             </div>
             <div class="home-article-right">
-              <div class="article-logo">
+              <div class="news-date">{{ date('Y.m.d', strtotime($result->updated_at)) }}</div>
+              <!-- <div class="article-logo">
                 <img src="{{ URL::asset('images/business_logo.png') }}" alt="">
                 <span>株式会社〇〇〇〇〇〇〇〇〇</span>
-              </div>
+              </div> -->
               <div class="article-content">
-                <div><span>業種○○○</span></div>
-                <div><span>従業員数○○○○○</span></div>
-                <div><span>課題○○○○○○○○○○○○○○</span></div>
+                <p>{{ $result->instruction_summary }}</p>
               </div>
             </div>
           </article>
-          <article class="home-article">
-            <div class="home-article-left">
-              <h3>売上が100%向上。</h3>
-              <figure>
-                <img src="{{ URL::asset('images/top_news.png') }}" alt="">
-              </figure>
-            </div>
-            <div class="home-article-right">
-              <div class="article-logo">
-                <img src="{{ URL::asset('images/business_logo.png') }}" alt="">
-                <span>株式会社〇〇〇〇〇〇〇〇〇</span>
-              </div>
-              <div class="article-content">
-                <div><span>業種○○○</span></div>
-                <div><span>従業員数○○○○○</span></div>
-                <div><span>課題○○○○○○○○○○○○○○</span></div>
-              </div>
-            </div>
-          </article>
-          <article class="home-article">
-            <div class="home-article-left">
-              <h3>売上が100%向上。</h3>
-              <figure>
-                <img src="{{ URL::asset('images/top_news.png') }}" alt="">
-              </figure>
-            </div>
-            <div class="home-article-right">
-              <div class="article-logo">
-                <img src="{{ URL::asset('images/business_logo.png') }}" alt="">
-                <span>株式会社〇〇〇〇〇〇〇〇〇</span>
-              </div>
-              <div class="article-content">
-                <div><span>業種○○○</span></div>
-                <div><span>従業員数○○○○○</span></div>
-                <div><span>課題○○○○○○○○○○○○○○</span></div>
-              </div>
-            </div>
-          </article>
-          <article class="home-article">
-            <div class="home-article-left">
-              <h3>売上が100%向上。</h3>
-              <figure>
-                <img src="{{ URL::asset('images/top_news.png') }}" alt="">
-              </figure>
-            </div>
-            <div class="home-article-right">
-              <div class="article-logo">
-                <img src="{{ URL::asset('images/business_logo.png') }}" alt="">
-                <span>株式会社〇〇〇〇〇〇〇〇〇</span>
-              </div>
-              <div class="article-content">
-                <div><span>業種○○○</span></div>
-                <div><span>従業員数○○○○○</span></div>
-                <div><span>課題○○○○○○○○○○○○○○</span></div>
-              </div>
-            </div>
-          </article>
+          @endforeach
           <a href="{{ url('/case-study') }}" class="btn sec-link-btn"><img src="{{ URL::asset('images/ico_arrow-right.png') }}" alt=""></a>
         </div>
       </div>
@@ -315,7 +199,7 @@
             <div class="blog-inner">
               <div class="blog-info">
                 <a href="{{ url('/blog/category').'/'.$blog->category_id }}" class="blog-category btn">{{$blog->category_name}}</a>
-                <div class="blog-date">{{ date('Y-m-d', strtotime($blog->created_at)) }}</div>
+                <div class="blog-date">{{ date('Y-m-d', strtotime($blog->updated_at)) }}</div>
               </div>
               <a href="{{ url('/blog/') }}" class="blog-ttl">{{$blog->title}}</a>
             </div>

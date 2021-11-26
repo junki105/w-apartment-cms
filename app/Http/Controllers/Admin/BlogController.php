@@ -16,8 +16,8 @@ class BlogController extends Controller
     {
         //
         
-        $blogs = Blog::latest()->paginate(5);
         $count = Blog::count();
+        $blogs = Blog::orderBy('updated_at','DESC')->join('categories','blogs.category','=','categories.id')->select(["blogs.*","categories.id as category_id","categories.name as category_name"])->paginate(5);
         $categories = Category::all();
         return view('admin.blog.list',compact(['blogs','count','categories']));
     }
@@ -109,7 +109,7 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request) {
-        $blogs = Blog::latest()->paginate(5);
+        $blogs = Blog::orderBy('updated_at','DESC')->join('categories','blogs.category','=','categories.id')->select(["blogs.*","categories.id as category_id","categories.name as category_name"])->paginate(5);
         $count = Blog::count();
         $categories = Category::all();
         return view('admin.blog.list',compact(['blogs','count','categories']));
@@ -160,13 +160,13 @@ class BlogController extends Controller
         }
         if( $blogs == null ) {
             $count = Blog::count();
-            $blogs = Blog::latest()->paginate(5);
+            $blogs = Blog::orderBy('updated_at','DESC');
         }
         else {
             $count = $blogs->count();
-            $blogs = $blogs->orderBy('updated_at','DESC')->paginate(5);
+            $blogs = $blogs->orderBy('updated_at','DESC');
         }
-        // $blogs = Blog::latest()->paginate(5);
+        $blogs = $blogs->join('categories','blogs.category','=','categories.id')->select(["blogs.*","categories.id as category_id","categories.name as category_name"])->paginate(5);
         $categories = Category::all();
         return view('admin.blog.pagination_data',compact('blogs','categories','count'));
     }

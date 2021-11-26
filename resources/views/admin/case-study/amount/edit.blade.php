@@ -5,10 +5,6 @@
 
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
-  <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong id="notify_string"></strong>
-    </div>
   <div class="content-header">
     <div class="container-fluid">
       <div class="mb-2 row">
@@ -17,55 +13,52 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item active"><a href="{{ url('/') }}">Home</a></li>
-            <li class="breadcrumb-item active"><a href='admin/case-study-amount'>地域/</li>
+            <li class="breadcrumb-item active"><a href="{{ url('/admin') }}">Home</a></li>
+            <li class="breadcrumb-item active"><a href="{{ url('/admin/case-study-amount/create') }}">地域</a></li>
             <li class="breadcrumb-item">金額編集</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
-      <div class="mt-4 mb-2" id="url_string" style="display: none">
-        <span class="mr-2 font-weight-bold h6">リンク:
-            <span id="created_url">
-            </span>
-        </span>
-        <a id="link_url" class="btn btn-sm btn-default" target="_blank">表示</a>
-      </div>
     </div><!-- /.container-fluid -->
   </div>
   <!-- /.content-header -->
   <!-- Main content -->
   <div class="content">
     <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-8">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title"><strong>金額編集</strong></h5>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <div class="form-group row">
-                        <label for="amount" class="col-sm-3 col-form-label"><strong>金額</strong></label>
-                        <input type="text" class="ml-1 col-sm-7 form-control" name="amount" value="{{$amount->type}}" id="amount">
-                    </div>
-                </div>
-                <!-- /.card-body -->
+      <div class="alert alert-dismissible" id="alert" style="background-color: white;display:none; border-left-color: #00a32a;">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong id="notify_string"></strong>
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title"><strong>金額編集</strong></h5>
             </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="form-group row">
+                <label for="amount" class="col-sm-3 col-form-label"><strong>金額</strong></label>
+                <input type="text" class="ml-1 col-sm-7 form-control" name="amount" value="{{$amount->type}}" id="amount">
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
         </div>
         <div class="col-sm-4">
-            <div class="card">
-              <div class="card-header">
-                <h6 class="card-title"><strong>ステータス</strong></h6>
-              </div>
-              <div class="card-body">
-                <div class=" d-flexs">
-                    <button id="delete_amount" style="background-color:white;color:red;border:none" class="btn btn-sm btn-danger">削除する</label>
-                    <button  name='save' id='save' class="btn btn-sm btn-primary float-sm-right">更新</button>
-                </div>
+          <div class="card">
+            <div class="card-header">
+              <h6 class="card-title"><strong>ステータス</strong></h6>
+            </div>
+            <div class="card-body">
+              <div>
+                <button id="delete_amount" style="background-color:white;color:red;border:none" class="btn btn-sm btn-danger"><strong>削除する</strong></button>
+                <button  name='save' id='save' class="btn btn-sm btn-primary float-sm-right">更新</button>
               </div>
             </div>
           </div>
         </div>
+      </div>
       <!-- /.row -->
     </div><!--/.container-fluid -->
   </div>
@@ -110,9 +103,9 @@
             type:"POST",
             url: '/admin/case-study-amount/'+current_amount.id,
             data: formdata,
-            cache:false,
-            contentType:false,
-            processData:false,
+            cache: false,
+            contentType: false,
+            processData: false,
             success: function (data) {
                 $('#notify_string').html('更新しました。');
                 $('#alert').css('display','block');

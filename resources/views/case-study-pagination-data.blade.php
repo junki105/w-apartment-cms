@@ -4,10 +4,10 @@
     <article>
     <div class="article-left">
         <h2>{{$result->title}}</h2>
-        <img src="{{URL::asset('').$result->eyecatch_image_url}}" alt="">
+        <img src="{{ url($result->eyecatch_image_url) }}" alt="">
     </div>
     <div class="article-right">
-        <div class="article-date">{{$result->updated_at}}</div>
+        <div class="article-date">{{ date('Y.m.d', strtotime($result->updated_at)) }}</div>
         <div class="investment">{{$result->instructor_name}}</div>
         <p>{!!$result->instruction_summary!!}
         </p>

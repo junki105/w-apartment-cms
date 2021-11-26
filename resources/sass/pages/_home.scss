@@ -372,6 +372,10 @@
       @include font-ud(demibold);
       text-align: left;
       margin-left: 120px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     img {
       width: 260px;
@@ -408,6 +412,15 @@
     }
     .article-content {
       margin-top: 20px;
+      height: 170px;
+      overflow-y: hidden;
+      font-size: 16px;
+      p {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
       div {
         margin-top: 8px;
         span {
@@ -470,6 +483,8 @@
       }
       .article-content {
         margin-top: 20rem;
+        height: 170rem;
+        font-size: 16rem;
         div {
           margin-top: 8rem;
           span {
@@ -546,6 +561,8 @@
       }
       .article-content {
         margin-top: 20px;
+        height: 170px;
+        font-size: 16px;
         div {
           margin-top: 8px;
           span {

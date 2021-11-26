@@ -24,7 +24,7 @@ class AmountController extends Controller
     {
         //
         $amounts = Amount::orderBy('order_index','ASC')->get();
-        return view('admin.results.amount.list',compact('amounts'));
+        return view('admin.case-study.amount.list',compact('amounts'));
     }
 
     /**
@@ -66,7 +66,7 @@ class AmountController extends Controller
     {
         //
         $amount = Amount::where('id',$id)->first();
-        return view('admin.results.amount.edit',compact(['amount'])); 
+        return view('admin.case-study.amount.edit',compact(['amount'])); 
     }
 
     /**

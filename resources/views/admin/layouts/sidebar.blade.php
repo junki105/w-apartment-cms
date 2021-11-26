@@ -41,7 +41,7 @@
             </li>
           </ul>
         </li>
-        <li class="{{(request()->is('admin/case-study*'))?'nav-item menu-is-opening menu-open':'nav-item'}}">
+        <li class="{{(request()->is('admin/case-study*'))?'nav-item menu-is-opening menu-open':'nav-item'}} mt-3">
           <a href="#" class="{{(request()->is('admin/case-study*'))?'nav-link active':'nav-link'}}">
             <i class="nav-icon far fa-fw fa fa-signal"></i>
             <p>
@@ -82,7 +82,7 @@
             </li>
           </ul>
         </li>
-        <li class="{{(request()->is('admin/news*'))?'nav-item menu-is-opening menu-open':'nav-item'}}">
+        <li class="{{(request()->is('admin/news*'))?'nav-item menu-is-opening menu-open':'nav-item'}} mt-3">
           <a href="#" class="{{(request()->is('admin/news*'))?'nav-link active':'nav-link'}}">
             <i class="nav-icon fa fa-bell"></i>
             <p>
@@ -105,7 +105,7 @@
             </li>
           </ul>
         </li>
-        <li class="{{(request()->is('admin/blog*'))?'nav-item menu-is-opening menu-open':'nav-item'}}">
+        <li class="{{(request()->is('admin/blog*'))?'nav-item menu-is-opening menu-open':'nav-item'}} mt-3">
             <a href="#" class="{{(request()->is('admin/blog*'))?'nav-link active':'nav-link'}}">
               <i class="nav-icon far fa-fw fa fa-pen-nib"></i>
               <p>

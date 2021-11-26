@@ -6,7 +6,7 @@
       <table>
         @foreach ($posts as $post)
           <tr>
-            <td>{{ date('Y.m.d', strtotime($post->created_at)) }}</td>
+            <td>{{ date('Y.m.d', strtotime($post->updated_at)) }}</td>
             <td>
               <a href="{{url('/news/'.$post->id)}}"><span>{{$post->title}}</span></a>
             </td>
