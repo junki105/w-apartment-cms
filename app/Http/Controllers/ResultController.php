@@ -39,11 +39,11 @@ class ResultController extends Controller
             }
         }
         if( $results == null ) {
-            $results = Result::orderBy('updated_at','DESC')->paginate(5);
+            $results = Result::where('public_status', '=' ,'1')->orderBy('updated_at','DESC')->paginate(5);
         }
         else {
             $count = $results->count();
-            $results = $results->orderBy('updated_at','DESC')->paginate(5);
+            $results = $results->where('public_status', '=' ,'1')->orderBy('updated_at','DESC')->paginate(5);
         }
         return view('case-study', compact('amounts','areas','housetypes','results'));
     }

@@ -117,7 +117,7 @@ class NewsController extends Controller
   public function search(Request $request) {
     if($request->state!=null) {
       if($request->search_word!=null) {
-        $posts = Post::where('title','LIKE','%'.$request->title.'%')->orwhere('content','LIKE','%'.$request->content.'%').paginate(5);
+        $posts = Post::where('title','LIKE','%'.$request->title.'%')->orwhere('content','LIKE','%'.$request->content.'%')->orderBy('updated_at','DESC')->paginate(5);
 
         return view('admin.news.list',compact('$posts'));
       }
