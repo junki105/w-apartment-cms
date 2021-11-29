@@ -18,7 +18,7 @@ class NewsController extends Controller
   {
     $posts = Post::orderBy('updated_at','DESC')->paginate(5);
     $count = Post::count();
-
+    
     return view('admin.news.list',compact('posts','count'));
   }
 
@@ -37,7 +37,6 @@ class NewsController extends Controller
     $search_word = $request->search_word;
     $posts;
     $count;
-
     if($request->state!="null") {
       if($request->search_word !="null") {
         $posts = Post::where([
@@ -46,7 +45,7 @@ class NewsController extends Controller
                 ])->orwhere([
                     ["content","LIKE","%$request->search_word%"],
                     ['state','=',$request->state]
-                ])->paginate(5);
+                ])->orderBy('updated_at','DESC')->paginate(5);
         $count = Post::where([
                       ["title","LIKE","%$request->search_word%"],
                       ['state','=',$request->state]
@@ -63,7 +62,7 @@ class NewsController extends Controller
     else {
       if($request->search_word !="null") {
         $posts = Post::where("title","LIKE","%$request->search_word%")
-                ->orwhere("content","LIKE","%$request->search_word%")->paginate(5);
+                ->orwhere("content","LIKE","%$request->search_word%")->orderBy('updated_at','DESC')->paginate(5);
         $count = Post::where("title","LIKE","%$request->search_word%")
                   ->orwhere("content","LIKE","%$request->search_word%")->count();
       }
