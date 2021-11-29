@@ -19,14 +19,23 @@
           <td>導入の背景：</td>
           <td>{{ $result->instruction_summary }}</td>
         </tr>
-        <tr>
-          <td>導入後の効果１：</td>
-          <td>{{ $result->instruction_effects }}</td>
-        </tr>
-        <tr>
-          <td>導入後の効果２：</td>
-          <td>{{ $result->instruction_effects }}</td>
-        </tr>
+        @if ($result->instruction_effects != "")
+          @php
+            $i = 1;
+            $delimeter = '';
+            $delimeter .= chr(1);
+            $instruction_effects = explode($delimeter, $result->instruction_effects);
+          @endphp
+          @foreach($instruction_effects as $instruction_effect)
+            <tr>
+              <td>導入後の効果{{ $i }}：</td>
+              <td>{{ $instruction_effect }}</td>
+            </tr>
+            @php
+              $i++;
+            @endphp
+          @endforeach
+        @endif
       </table>
     </div>
   </section>

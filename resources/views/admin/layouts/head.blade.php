@@ -144,4 +144,22 @@
   #firstview_upload_button {
 
   }
+  #add_input_btn, #remove_input_btn {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: bolder;
+    color: white;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  #add_input_btn {
+    background: #007bff;
+  }
+  #remove_input_btn {
+    background: red;
+  }
 </style>

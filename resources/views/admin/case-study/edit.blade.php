@@ -78,8 +78,14 @@
                   <textarea row="3" class="ml-1 col-sm-7 form-control" name="instruction_summary" id="instruction_summary"></textarea>
                 </div>
                 <div class="form-group row">
-                  <label for="instruction_effects" class="col-sm-4 col-form-label">導入後の効果(要約)</label>
-                  <textarea row="3" class="ml-1 col-sm-7 form-control" name="instruction_effects" id="instruction_effects"></textarea>
+                  <div class="col-sm-4">
+                    <label for="instruction_effects" class="col-form-label">導入後の効果(要約)</label>
+                    <span id="add_input_btn">+</span>
+                    <span id="remove_input_btn">×</span>
+                  </div>
+                  <div class="p-0 ml-1 col-sm-7" id="new_chq">
+                  </div>
+                  <input type="hidden" value="2" id="total_chq">
                 </div>
               </div>
             </div>
@@ -192,7 +198,7 @@
                 <div class="mt-4 text-sm">公開日: <span id="created_at"></span></div>
                 <div class="mt-2 text-sm">更新日: <span id="updated_at"></span></div>
                 <div class="mt-3 d-flex justify-content-end">
-                  <button type="submit" name='post_save' id='post_save' class="btn btn-sm btn-primary">公開</button>
+                  <button type="submit" name='post_save' id='post_save' class="btn btn-sm btn-primary">更新</button>
                 </div>
               </div>
             </div>
@@ -268,7 +274,44 @@
     
     $('#instructor_name').val(result.instructor_name);
     $('#instruction_summary').val(result.instruction_summary);
-    $('#instruction_effects').val(result.instruction_effects);
+
+    
+    var instruction_effects = result.instruction_effects;
+    var delimeter = String.fromCharCode(1);
+    var instruction_effects_list = instruction_effects.split(delimeter)
+    
+    $('#total_chq').val(instruction_effects_list.length);
+    
+    for (var i = 0; i < instruction_effects_list.length; i++)
+    {
+      new_input = "<textarea row='3' class='mt-2 form-control instruction_effects' name='instruction_effects' id='instruction_effects_" + (i+1) + "'>";
+      $('#new_chq').append(new_input);
+      $('#instruction_effects_' + (i + 1)).val(instruction_effects_list[i])
+    }
+   
+
+    $('#add_input_btn').on('click', addInputField);
+    $('#remove_input_btn').on('click', removeInputField);
+
+    function addInputField() {
+      var new_chq_no = parseInt($('#total_chq').val()) + 1;
+      var new_input = "<textarea row='3' class='mt-2 form-control instruction_effects' name='instruction_effects' id='instruction_effects_" + new_chq_no + "'>";
+      
+      $('#new_chq').append(new_input);
+
+      $('#total_chq').val(new_chq_no);
+    }
+
+    function removeInputField() {
+      var last_chq_no = $('#total_chq').val();
+
+      if (last_chq_no > 1) {
+        $('#instruction_effects_' + last_chq_no).remove();
+        $('#total_chq').val(last_chq_no - 1);
+      }
+    }
+
+    
     $('#instruction_details').val(result.instruction_details);
     $('#choosing_reason').val(result.choosing_reason);
 
@@ -301,11 +344,13 @@
       e.stopPropagation();
       $(this).addClass('dragover');
     });
+    
     $('.dropzone-wrapper').on('dragleave', function(e) {
       e.preventDefault();
       e.stopPropagation();
       $(this).removeClass('dragover');
     });
+    
     function upload_files_list(input) {
       let list_string = '';
       let temp_index = 0;
@@ -345,6 +390,23 @@
       
       var formData = new FormData(this);
       
+      new_instruction_value = ""
+      
+      var instruction_effects = $(".instruction_effects")
+      for (var i = 0; i < instruction_effects.length; i++ ) {
+        
+        var i_effects = $(instruction_effects[i]);
+        
+        if(i < instruction_effects.length - 1)
+          new_instruction_value += i_effects.val() + String.fromCharCode(1);
+        else
+          new_instruction_value += i_effects.val()
+        
+      }
+      
+      var formData = new FormData(this);
+      formData.set("instruction_effects", new_instruction_value);
+        
       $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

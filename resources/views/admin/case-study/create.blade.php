@@ -61,7 +61,7 @@
                       <span id="firstview_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
                       <button id="firstview_upload_button">ファイルを選捉</button>
                     </div>
-                    <input type="file" name="firstview" id="firstview_dropzone" class="dropzone">
+                    <input type="file" name="firstview" accept="image/*" id="firstview_dropzone" class="dropzone">
                   </div>
                 </div>
                 <div class="form-group row">
@@ -73,8 +73,15 @@
                   <textarea row="3" class="ml-1 col-sm-7 form-control" name="instruction_summary" id="instruction_summary"></textarea>
                 </div>
                 <div class="form-group row">
-                  <label for="instruction_effects" class="col-sm-4 col-form-label">導入後の効果(要約)</label>
-                  <textarea row="3" class="ml-1 col-sm-7 form-control" name="instruction_effects" id="instruction_effects"></textarea>
+                  <div class="col-sm-4">
+                    <label for="instruction_effects" class="col-form-label">導入後の効果(要約)</label>
+                    <span id="add_input_btn">+</span>
+                    <span id="remove_input_btn">×</span>
+                  </div>
+                  <div class="p-0 ml-1 col-sm-7" id="new_chq">
+                    <textarea row="3" class="form-control instruction_effects" name="instruction_effects" id="instruction_effects_1"></textarea>
+                  </div>
+                  <input type="hidden" value="2" id="total_chq">
                 </div>
               </div>
             </div>
@@ -96,7 +103,7 @@
                       <span id="instruction_bg_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
                       <button id="instruction_bg_upload_button">ファイルを選捉</button>
                     </div>
-                    <input type="file" name="instruction_bg" id="instruction_bg_dropzone" class="dropzone">
+                    <input type="file" accept="image/*" name="instruction_bg" id="instruction_bg_dropzone" class="dropzone">
                   </div>
                 </div>
               </div>
@@ -119,7 +126,7 @@
                       <span id="choosing_reason_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
                       <button id="choosing_reason_upload_button">ファイルを選捉</button>
                     </div>
-                    <input type="file" name="choosing_reason_file" id="choosing_reason_dropzone" class="dropzone">
+                    <input type="file" accept="image/*" name="choosing_reason_file" id="choosing_reason_dropzone" class="dropzone">
                   </div>
                 </div>
               </div>
@@ -142,7 +149,7 @@
                       <span id="pi_image_url"style="position: relative;">画像をドラッグ&ドロップまたは</span>
                       <button id="pi_upload_button">ファイルを選捉</button>
                     </div>
-                    <input type="file" name="pi_image" id="pi_image_dropzone" class="dropzone">
+                    <input type="file" accept="image/*" name="pi_image" id="pi_image_dropzone" class="dropzone">
                   </div>
                 </div>
               </div>
@@ -197,7 +204,7 @@
               </div>
               <div class="card-body">
                 @foreach ($areas as $area)
-                  <div class="form-check">
+                  <div class="form-check area-check">
                     <input type="radio" class="form-check-input" name="area" value="{{$area->id}}" id="area{{$area->id}}">
                     <label class="form-check-label" for="area{{$area->id}}">
                     {{$area->name}}
@@ -211,7 +218,7 @@
               </div>
               <div class="card-body">
                 @foreach ($amounts as $amount)
-                  <div class="form-check">
+                  <div class="form-check amount-check">
                     <input type="radio" class="form-check-input" name="amount" value="{{$amount->id}}" id="amount{{$amount->id}}">
                     <label class="form-check-label" for="amount{{$amount->id}}">
                     {{$amount->type}}
@@ -225,7 +232,7 @@
               </div>
               <div class="card-body">
                 @foreach ($housetypes as $housetype)
-                  <div class="form-check">
+                  <div class="form-check housetype-check">
                     <input type="radio" class="form-check-input" name="housetype" value="{{$housetype->id}}" id="housetype{{$housetype->id}}">
                     <label class="form-check-label" for="housetype{{$housetype->id}}">
                     {{$housetype->type}}
@@ -376,12 +383,20 @@
         $('#instruction_summary').css('border-color','');
       }
       
-      if($('#instruction_effects').val()==='') {
-        $('#instruction_effects').css('border-color','red');
-        validation_flag = false;
-      }
-      else {
-        $('#instruction_effects').css('border-color','');
+      var instruction_effects = $(".instruction_effects");
+      
+      for (var i = 0; i < instruction_effects.length; i++ ) {
+        
+        var i_effects = $(instruction_effects[i]);
+        
+        if(i_effects.val()==='') {
+          i_effects.css('border-color','red');
+          validation_flag = false;
+        }
+        else {
+          i_effects.css('border-color','');
+        }
+        
       }
       
       if($('#instruction_details').val()==='') {
@@ -434,7 +449,21 @@
         
         e.preventDefault();
         
+        new_instruction_value = ""
+        var instruction_effects = $(".instruction_effects")
+        for (var i = 0; i < instruction_effects.length; i++ ) {
+          
+          var i_effects = $(instruction_effects[i]);
+          
+          if(i < instruction_effects.length - 1)
+            new_instruction_value += i_effects.val() + String.fromCharCode(1);
+          else
+            new_instruction_value += i_effects.val()
+          
+        }
+        
         var formData = new FormData(this);
+        formData.set("instruction_effects", new_instruction_value);
         
         $.ajax({
           type: 'post',
@@ -498,7 +527,35 @@
       e.stopPropagation();
       $(this).removeClass('dragover');
     });
+
+    $('#add_input_btn').on('click', addInputField);
+    $('#remove_input_btn').on('click', removeInputField);
+
+    function addInputField() {
+      var new_chq_no = parseInt($('#total_chq').val()) + 1;
+      var new_input = "<textarea row='3' class='mt-2 form-control instruction_effects' name='instruction_effects' id='instruction_effects_" + new_chq_no + "'>";
+      
+      $('#new_chq').append(new_input);
+
+      $('#total_chq').val(new_chq_no);
+    }
+
+    function removeInputField() {
+      var last_chq_no = $('#total_chq').val();
+
+      if (last_chq_no > 1) {
+        $('#instruction_effects_' + last_chq_no).remove();
+        $('#total_chq').val(last_chq_no - 1);
+      }
+    }
+
+    $('.area-check:first-child>input').prop('checked', 'checked');
+    $('.amount-check:first-child>input').prop('checked', 'checked');
+    $('.housetype-check:first-child>input').prop('checked', 'checked');
+
   });
+
+
 </script>
 
 @endsection
