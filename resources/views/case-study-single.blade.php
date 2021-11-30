@@ -65,7 +65,7 @@
         <img src="{{ url( $result->post_introduction_url ) }}" alt="">
       </div>
       <div class="article-right">
-        <h1>導入の背景</h1>
+        <h1>導入後の効果</h1>
         <!-- <h2>テキストテキストテキストテキストテキストテキスト</h2> -->
         <p>{{ $result->post_introduction_details }}</p>
       </div>
