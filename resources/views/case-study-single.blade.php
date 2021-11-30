@@ -82,7 +82,6 @@
     <div class="social-link-wrap">
       {!! $social_share !!}
     </div>
-    <!-- <img src="{{ URL::asset('images/social.png') }}" alt=""> -->
   </section>
   @include('layouts.footer-sub')
 </main>
