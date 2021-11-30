@@ -13,8 +13,8 @@ class ResultController extends Controller
     public function show($id) {
         $result = Result::find($id);
         $url = route('case-study');
-        $url .= '/'.$id; 
-        $social_share = \Share::page($url, 'W-Apartment')
+        $url .= '/'.$id;
+        $social_share = \Share::page($url, $result->title)
         ->facebook()
         ->reddit()
         ->twitter();

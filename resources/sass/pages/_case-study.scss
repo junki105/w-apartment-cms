@@ -142,6 +142,55 @@
         }
       }
     }
+    .social-link-wrap {
+      margin-top: 50px;
+      ul {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        li {
+          margin-right: 4px;
+          a {
+            height: 20px;
+            background: #305097;
+            font-family: 'Yu Gothic';
+            font-weight: bold;
+            font-size: 10px;
+            text-align: left;
+            color: #fff;
+            border-radius: 3px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            vertical-align: middle;
+          }
+          &:first-child {
+            a {
+              width: 90px;
+              img {
+                width: 11.26px;
+                margin-right: 4.7px;
+              }
+            }
+          }
+          &:nth-child(2) {
+            a {
+              width: 44px;
+            }
+          }
+          &:last-child {
+            a {
+              width: 61px;
+              background: #00aced;
+              img {
+                width: 10.8px;
+                margin-right: 4px;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -376,6 +425,9 @@
             margin-top: 20px;
           }
         }
+      }
+      .social-link-wrap {
+        margin-top: 100px;
       }
     }
   }

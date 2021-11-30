@@ -53,11 +53,15 @@
     @if ((request()->route()->getName()) === 'case-study-single')
     <script>
       $(document).ready(function() {
+        var url = window.location.origin;
         let result = <?php echo json_encode($result)?>;
         $('#firstview').html('<img src="'+result.firstview_url+'"/>');
         $('#instruction_bg').html('<img src="'+result.instruction_bg_url+'"/>');
         $('#post_introduction_bg').html('<img src="'+result.post_introduction_url+'"/>');
         $('#eyecatch_image').html('<img src="'+result.eyecatch_image_url+'"/>');
+        $('#social-links>ul>li:first-child>a').html('<img src="'+ url + '/images/ico_facebook.png" alt="">いいね！ 100');
+        $('#social-links>ul>li:nth-child(2)>a').html('シェア');
+        $('#social-links>ul>li:last-child>a').html('<img src="'+ url + '/images/ico_twitter.png" alt="">Tweet');
       });
     </script>
     @endif

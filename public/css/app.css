@@ -6154,6 +6154,58 @@ a:hover {
   letter-spacing: 0.12em;
 }
 
+.works-social .social-link-wrap {
+  margin-top: 50px;
+}
+
+.works-social .social-link-wrap ul {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.works-social .social-link-wrap ul li {
+  margin-right: 4px;
+}
+
+.works-social .social-link-wrap ul li a {
+  height: 20px;
+  background: #305097;
+  font-family: "Yu Gothic";
+  font-weight: bold;
+  font-size: 10px;
+  text-align: left;
+  color: #fff;
+  border-radius: 3px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.works-social .social-link-wrap ul li:first-child a {
+  width: 90px;
+}
+
+.works-social .social-link-wrap ul li:first-child a img {
+  width: 11.26px;
+  margin-right: 4.7px;
+}
+
+.works-social .social-link-wrap ul li:nth-child(2) a {
+  width: 44px;
+}
+
+.works-social .social-link-wrap ul li:last-child a {
+  width: 61px;
+  background: #00aced;
+}
+
+.works-social .social-link-wrap ul li:last-child a img {
+  width: 10.8px;
+  margin-right: 4px;
+}
+
 @media (max-width: 1250px) {
   .works-sec {
     width: 736rem !important;
@@ -6436,6 +6488,10 @@ a:hover {
 
   .works-social .link-group a:last-child {
     margin-top: 20px;
+  }
+
+  .works-social .social-link-wrap {
+    margin-top: 100px;
   }
 }
 
