@@ -176,7 +176,7 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="url" class="col-sm-4 col-form-label">URL</label>
+                  <label for="url" class="col-sm-4 col-form-label">詳細URL</label>
                   <textarea row="3" class="ml-1 col-sm-7 form-control" name="url" id="url"></textarea>
                 </div>
               </div>
