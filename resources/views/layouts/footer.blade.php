@@ -54,12 +54,10 @@
     <script>
       $(document).ready(function() {
         let result = <?php echo json_encode($result)?>;
-        console.log(result);
         $('#firstview').html('<img src="'+result.firstview_url+'"/>');
         $('#instruction_bg').html('<img src="'+result.instruction_bg_url+'"/>');
         $('#post_introduction_bg').html('<img src="'+result.post_introduction_url+'"/>');
         $('#eyecatch_image').html('<img src="'+result.eyecatch_image_url+'"/>');
-        
       });
     </script>
     @endif
