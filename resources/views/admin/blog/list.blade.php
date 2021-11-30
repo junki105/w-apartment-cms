@@ -55,11 +55,11 @@
           <div class="form-group row">
             <label for="check_type" class="col-sm-2 col-form-label">公開状態</label>
             <div class="ml-1 form-check form-check-inline" name="check_type">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="public_status"  value="1">
+              <input class="form-check-input public-check" type="checkbox" id="inlineCheckbox1" name="public_status"  value="1">
               <label class="form-check-label" for="inlineCheckbox1">公開</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="public_status" value="0">
+              <input class="form-check-input public-check" type="checkbox" id="inlineCheckbox2" name="public_status" value="0">
               <label class="form-check-label" for="inlineCheckbox2">非公開</label>
             </div>
           </div>
@@ -160,7 +160,7 @@
       
       category_query = selected.toString();       
        
-      $('.form-check-input:checked').each(function() {
+      $('.public-check:checked').each(function() {
           public_status = $(this).val();
       }); 
 
@@ -172,9 +172,9 @@
       
       fetch_data(page,search_word,author_name,category_query,public_status,recommended_flag);
     })
-    // $('.form-check-input').click(function() {
-    //     $('.form-check-input').not(this).prop('checked',false);
-    // })
+    $('.public-check').click(function() {
+        $('.public-check').not(this).prop('checked',false);
+    })
     $(document).on('click', '.pagination a', function(event) {
       event.preventDefault(); 
 

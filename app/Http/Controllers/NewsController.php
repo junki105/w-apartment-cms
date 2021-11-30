@@ -15,7 +15,7 @@ class NewsController extends Controller
 
     public function index(Request $request)
     {
-        $posts=Post::paginate(10);
+        $posts=Post::where('state', '=' ,'1')->orderBy('updated_at','DESC')->paginate(10);
         return view('news',compact('posts'))->with('i', ($request->input('page', 1) - 1) *10);
     }
 

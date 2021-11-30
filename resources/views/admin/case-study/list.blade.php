@@ -92,7 +92,7 @@
         </div>
       </div>
       <div class="card" id="table_card">
-        @include('admin.case-study.pagination')
+        @include('admin.case-study.pagination_data')
       </div>
     </div>
   </div>

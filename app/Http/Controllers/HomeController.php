@@ -15,7 +15,7 @@ class HomeController extends Controller
         $blogs = Blog::all()->take(10);
         $categories = Category::all();
         $blogs = $blogs->concat($categories);
-        $blogs=  Blog::join('categories','blogs.category','=','categories.id')->take(10)->get(["blogs.*","categories.id as category_id","categories.name as category_name"]);
+        $blogs=  Blog::join('categories','blogs.category','=','categories.id')->where('blogs.public_status','LIKE', 1)->take(10)->get(["blogs.*","categories.id as category_id","categories.name as category_name"]);
         $houses = Housing::orderBy('updated_at','DESC')->paginate(8);
         $posts = Post::orderBy('updated_at','DESC')->paginate(4);
         $results = Result::orderBy('updated_at','DESC')->paginate(4);
