@@ -12,7 +12,14 @@ class ResultController extends Controller
     //
     public function show($id) {
         $result = Result::find($id);
-        return view('case-study-single', compact('result'));
+        $url = route('case-study');
+        $url .= '/'.$id; 
+        $social_share = \Share::page($url, 'W-Apartment')
+        ->facebook()
+        ->reddit()
+        ->twitter();
+
+        return view('case-study-single', compact('result', 'social_share'));
     }
     public function search(Request $request) {
         $results = null;

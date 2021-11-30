@@ -79,6 +79,9 @@
       <a href="{{ url( $result->download_material_url ) }}" download class="btn hover-spacing-btn">資料ダウンロード<img src="{{ URL::asset('images/ico_triangle.png') }}" alt=""></a>
       <a href="{{ url( $result->url ) }}" target="_blank" class="btn hover-spacing-btn">詳細<img src="{{ URL::asset('images/ico_triangle.png') }}" alt=""></a>
     </div>
+    <div class="social-link-wrap">
+      {!! $social_share !!}
+    </div>
     <!-- <img src="{{ URL::asset('images/social.png') }}" alt=""> -->
   </section>
   @include('layouts.footer-sub')
