@@ -60,7 +60,7 @@
         <p>{{ $result->choosing_reason }}</p>
       </div>
     </article>
-    <article class="article">
+  <article class="article">
       <div class="article-left" id="eyecatch_image">
         <img src="{{ url( $result->post_introduction_url ) }}" alt="">
       </div>
@@ -72,10 +72,14 @@
     </article>
   </section>
   <section class="content works-social">
-    <h1>導入後の効果</h1>
+    <h1>今後の展望</h1>
     <!-- <h2>テキストテキストテキストテキストテキストテキスト</h2> -->
     <p>{{ $result->future_outlook_details }}</p>
-    <img src="{{ URL::asset('images/social.png') }}" alt="">
+    <div class="link-group">
+      <a href="{{ url( $result->download_material_url ) }}" download class="btn hover-spacing-btn">資料ダウンロード<img src="{{ URL::asset('images/ico_triangle.png') }}" alt=""></a>
+      <a href="{{ url( $result->url ) }}" target="_blank" class="btn hover-spacing-btn">詳細<img src="{{ URL::asset('images/ico_triangle.png') }}" alt=""></a>
+    </div>
+    <!-- <img src="{{ URL::asset('images/social.png') }}" alt=""> -->
   </section>
   @include('layouts.footer-sub')
 </main>
