@@ -125,6 +125,10 @@
   }
 }
 
+.text-danger {
+  color: red;
+}
+
 .request-thanks {
   .sec-hero {
     p {
@@ -271,6 +275,10 @@
       margin-top: 48rem;
     }
   }
+  
+  .text-danger {
+    font-size: 16rem;
+  }
 
   .request-thanks {
     .content {
@@ -314,6 +322,10 @@
     .content {
       width: 100%;
     }
+  }
+
+  .text-danger {
+    font-size: 16px;
   }
 
   .request-address {

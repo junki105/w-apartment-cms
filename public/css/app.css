@@ -4228,6 +4228,10 @@ a:hover {
   margin-top: 48px;
 }
 
+.text-danger {
+  color: red;
+}
+
 .request-thanks .sec-hero p {
   font-family: fot-udkakugo-large-pr6n, sans-serif;
   font-weight: 500;
@@ -4398,6 +4402,10 @@ a:hover {
     margin-top: 48rem;
   }
 
+  .text-danger {
+    font-size: 16rem;
+  }
+
   .request-thanks .content {
     width: 900rem;
   }
@@ -4441,6 +4449,10 @@ a:hover {
 
   .request .content {
     width: 100%;
+  }
+
+  .text-danger {
+    font-size: 16px;
   }
 
   .request-address {
