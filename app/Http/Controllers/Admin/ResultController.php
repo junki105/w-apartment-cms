@@ -26,11 +26,11 @@ class ResultController extends Controller
       ->join('areas','results.area_id','=','areas.id')
       ->join('amounts','results.amount_id','=','amounts.id')
       ->join('house_types','results.housetype_id','=','house_types.id')
-      ->select('results.id','areas.name','house_types.type','amounts.type','results.title','results.public_status')
+      ->select('results.id','areas.name','house_types.type AS house_type','amounts.type AS amount_type','results.title','results.public_status')
       ->paginate(5);
     
     $count = $results->count();
-
+    
     return view('admin.case-study.list',compact('results','amounts','areas','housetypes','count'));
 
   }
