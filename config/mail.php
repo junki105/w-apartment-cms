@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+    'host' => env('MAIL_HOST', 'smtp16.gmoserver.jp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -132,5 +132,6 @@ return [
     */
 
     'log_channel' => env('MAIL_LOG_CHANNEL'),
+    'authentication' => 'plain',
 
 ];

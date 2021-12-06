@@ -31,7 +31,7 @@ class ContactController extends Controller
     $title = "title";
     $content = $request->content;
 
-    \Mail::send('visitor_email', ['name' => $name, 'email' => $email, 'title' => $title, 'content' => $content], function ($message) {
+    \Mail::send('visitor_email', ['name' => $name, 'email' => "info@e-shinwa.net", 'title' => $title, 'content' => $content], function ($message) {
 
         $message->to('testuserxxx923@gmail.com')->subject('Subject of the message!');
 
