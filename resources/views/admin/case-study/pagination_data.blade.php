@@ -51,8 +51,8 @@
             <td class="col-sm-1">{{$result->id}}</td>
             <td class="col-sm-2">{{$result->title}}</td>
             <td class="col-sm-1">{{$result->name}}</td>
-            <td class="col-sm-2">{{$result->type}}</td>
-            <td class="col-sm-1">{{$result->type}}</td>
+            <td class="col-sm-2">{{$result->amount_type}}</td>
+            <td class="col-sm-1">{{$result->house_type}}</td>
             <td class="col-sm-2">
               @if($result->public_status=='0')
                 非公開
