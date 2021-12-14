@@ -31,10 +31,10 @@ Route::view('/feature', 'feature')->name('feature');
 
 Route::get('/document-request','ContactController@document_request')->name('document-request');
 Route::post('/document-request', 'ContactController@document_requestPost')->name('document-requestPost');
-Route::view('/document-request/done/', 'document-request-done')->name('document-request-done');
+Route::view('/document-request/done', 'document-request-done')->name('document-request-done');
 Route::get('/contact','ContactController@contact')->name('contact');
 Route::post('/contact','ContactController@contactPost')->name('contactPost');
-Route::view('/contact/done/', 'contact-done')->name('contact-done');
+Route::view('/contact/done', 'contact-done')->name('contact-done');
 Route::view('/company-profile', 'company-profile')->name('company');
 Route::get('/news','NewsController@index')->name('news');
 Route::get('/news/{id}','NewsController@show')->name('news-single');

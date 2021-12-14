@@ -14,7 +14,7 @@
       <span>0123-456-7890</span>
       <span>平日  00:00~00:00</span>
     </div>
-    <form  class="request-form" method="POST" action="/contact">
+    <form  class="request-form" method="POST" action="/document-request">
     @csrf
       <div class="input-group">
         <label for="">会社名*</label>
