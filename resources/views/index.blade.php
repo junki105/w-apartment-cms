@@ -1,4 +1,7 @@
 @include('layouts.header')
+  <div id="splash">
+    <div id="splash_text"></div>
+  </div>
   <div id="fullpage" class="home">
     <div class="section hero">
       <div class="slide">
